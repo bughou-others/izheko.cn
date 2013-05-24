@@ -1,0 +1,4 @@
+#!/bin/bash
+eval $(egrep -v '^;' $(dirname $0)/../config/db.ini)
+mysql -h$host -u$user -p$password $database
+

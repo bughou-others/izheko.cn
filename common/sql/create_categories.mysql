@@ -1,0 +1,41 @@
+#!/bin/bash
+eval $(egrep -v '^;' config/db.ini)
+cmd="mysql -t -h$host -u$user -p$password"
+
+$cmd <<SQL_BLOCK
+#{{{{{{{{{{{
+set names utf8;
+create database if not exists \`$database\` default charset=utf8;
+#}}}}}}}}}}}
+SQL_BLOCK
+
+$cmd "$database"<<"SQL_BLOCK"
+#{{{{{{{{{{{
+set names utf8;
+
+drop   table if     exists `categories`;
+create table if not exists `categories`
+(
+ `id`            int     unsigned not null auto_increment,
+ `cid`           bigint  unsigned not null,
+ `name`          varchar(100)     not null default '',
+ `parent_cid`    int unsigned     not null,
+ `type_id`       int unsigned,
+ `is_parent`     tinyint unsigned not null,
+ `create_time`   datetime         not null,
+ `update_time`   datetime,       
+ primary key (`id`),
+ unique  key `cid` (`cid`)
+) engine=InnoDB default charset=utf8; 
+
+drop   table if     exists `types`;
+create table if not exists `types`
+(
+ `id`            int     unsigned not null auto_increment,
+ `name`          varchar(10)      not null,
+ `create_time`   datetime         not null,
+ primary key (`id`)
+) engine=InnoDB default charset=utf8; 
+#}}}}}}}}}}}
+SQL_BLOCK
+

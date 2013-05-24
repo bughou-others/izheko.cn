@@ -1,0 +1,101 @@
+<?php
+require_once APP_ROOT . '/common/taobao_api.php';
+require_once APP_ROOT . '/common/grab/curl.php';
+require_once APP_ROOT . '/common/string/json.php';
+require_once APP_ROOT . '/common/string/string.php';
+
+class TaobaoItem
+{
+    static function get_vip_price($num_iid)
+    {
+        static $curl;
+        if (! $curl) $curl = new Curl();
+        $refer='http://detail.tmall.com/item.htm?id=' . $num_iid;
+        $url='http://mdskip.taobao.com/core/initItemDetail.htm?itemId=' . $num_iid;
+        $response = $curl->get($url, $refer);
+
+        $data = decode_json(iconv('GBK', 'UTF-8', $response->body));
+        $vip_price = null;
+        if ( isset($data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
+            ($price_info = $data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
+            is_array($price_info)
+        ) foreach ($price_info as $sku)
+        {
+            if ( isset($sku['promotionList']) && ($promo_list = $sku['promotionList']) &&
+                is_array($promo_list)
+            ) foreach($promo_list as $promo)
+            {
+                if (is_array($promo) &&
+                    isset($promo['type']) && $promo['type'] === 'VIP价格' &&
+                    isset($promo['price']) && ($price = parse_price($promo['price'])) &&
+                    (is_null($vip_price) || $price < $vip_price)
+                ) $vip_price = $price;
+            }
+        }
+        return $vip_price;
+    }
+
+    static function get_vip_price2($num_iid)
+    {
+        static $curl;
+        if (! $curl) $curl = new Curl();
+        $refer = 'http://item.taobao.com/item.htm?id=' . $num_iid;
+        $url   = 'http://ajax.tbcdn.cn/json/umpStock.htm?itemId=' . $num_iid . '&p=1&rcid=28&sts=341317634,1170940438677291012,1225260582244974720,1166502676530463747&chnl=pc&price=9990&sellerId=10142375&shopId=&cna=M5sSCm8Hwi0CAbaW6nJssBNK&ref=&buyerId=174294739&nick=bughou&tg=1316864&tg2=67108872&tg3=1224979098644774912&tg4=4573968373776384&tg6=0';
+        $response = $curl->get($url, $refer);
+        if (! preg_match('/TB\.PromoData\s*=\s*({.*})/s', $response->body, $matches))
+        {
+            fputs(STDERR, 'unexpected response:' . $response->body . PHP_EOL);
+            return;
+        }
+        $data = decode_json(iconv('GBK', 'UTF-8', $matches[1]));
+        $vip_price = null;
+        if (is_array($data)) foreach($data as $sku)
+            if (is_array($sku)) foreach($sku as $promo)
+                if (is_array($promo) &&
+                    isset($promo['type']) && $promo['type'] === 'VIP价格' &&
+                    isset($promo['price']) && ($price = parse_price($promo['price'])) &&
+                    (is_null($vip_price) || $price < $vip_price)
+                ) $vip_price = $price;
+        return $vip_price;
+    }
+
+    static function get_item_info($num_iid)
+    {
+        $result = TaobaoApi::item_get($num_iid);
+        $item_info = @$result['item_get_response']['item'];
+        if (isset($item_info['price']))
+            $item_info['price'] = parse_price($item_info['price']);
+        $item_info['vip_price'] = self::get_vip_price($num_iid);
+        if (($result = TaobaoApi::ump_promotion_get($num_iid)) &&
+            ($promo_info =  @$result['ump_promotion_get_response']['promotions']
+            ['promotion_in_item']['promotion_in_item'][0])
+        )
+        {
+            $item_info['promo_price'] = parse_price($promo_info['item_promo_price']);
+            $item_info['promo_start'] = $promo_info['start_time'];
+            $item_info['promo_end']   = $promo_info['end_time'];
+        }
+        if (($result = TaobaoApi::taobaoke_items_detail_get($num_iid)) &&
+            ($click_url = @$result['taobaoke_items_detail_get_response']['taobaoke_item_details']
+            ['taobaoke_item_detail'][0]['click_url'])
+        )
+        {
+            $item_info['click_url'] = $click_url;
+        }
+        return $item_info;
+    }
+
+    static function get_click_urls($num_iid_array)
+    {
+        if (! $result = TaobaoApi::taobaoke_items_detail_get(implode(',', $num_iid_array)))return;
+        if (! $info = @$result['taobaoke_items_detail_get_response']['taobaoke_item_details']['taobaoke_item_detail']) return;
+        $click_urls = array();
+        foreach ($info as $one)
+        {
+            $click_urls[$one['item']['num_iid']] = $one['click_url'];
+        }
+        return $click_urls;
+    }
+}
+
+

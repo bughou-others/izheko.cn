@@ -1,0 +1,7 @@
+#!/bin/bash
+src="$(dirname $0)/../.."
+dest=~/weiyun/izheko.cn/$(date '+%m%d')
+
+#cp -pvr $src $dest
+rsync -avr --exclude-from $src/.gitignore $src/ $dest
+
