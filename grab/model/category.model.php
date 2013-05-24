@@ -1,12 +1,13 @@
 <?php
-require_once APP_ROOT . '/common/db.php';
-require_once APP_ROOT . '/app/model/taobao_api.model.php';
+require_once APP_ROOT . '/../common/db.php';
+require_once APP_ROOT . '/model/taobao_api.model.php';
 
 class Category
 {
     static function get_type_id($cid)
     { 
-        while ( ($category = self::get($cid)) && ! $categroy['type_id'] &&
+        while ( ($category = self::get($cid)) &&
+            !(isset($category['type_id']) && $category['type_id'] > 0) &&
             ($parent_cid = $category['parent_cid']) > 0 
         ) $cid = $parent_cid;
         if(isset($category['type_id'])) return $category['type_id'];
@@ -16,7 +17,7 @@ class Category
     {
         $sql = "select name,parent_cid,type_id from categories where cid=$cid limit 1";
         $category = self::db()->query($sql)->fetch_assoc();
-        if (! $category) $category = get_from_api($cid);
+        if (! $category) $category = self::get_from_api($cid);
         return $category;
     }
 

@@ -1,7 +1,7 @@
 <?php
-require_once APP_ROOT . '/app/model/item.php';
-require_once APP_ROOT . '/app/model/taobao_item.php';
-require_once APP_ROOT . '/app/model/category.php';
+require_once APP_ROOT . '/model/taobao_item.model.php';
+require_once APP_ROOT . '/model/category.model.php';
+require_once APP_ROOT . '/../common/model/item_base.model.php';
 
 class ItemUpdate
 {
@@ -42,7 +42,7 @@ class ItemUpdate
         $detail_url  = $db->escape_string($info['detail_url']);
         $click_url   = isset($info['click_url']) ? $db->escape_string($info['click_url']) : '';
         $pic_url     = $db->escape_string($info['pic_url']);
-        $flags_operation = self::bits_update(Item::FLAGS_MASK_POSTAGE_FREE,
+        $flags_operation = self::bits_update(ItemBase::FLAGS_MASK_POSTAGE_FREE,
             $info['freight_payer'] === 'seller' ||
             $info['post_fee']      === '0.00' ||
             $info['express_fee']   === '0.00' ||

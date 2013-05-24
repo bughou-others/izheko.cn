@@ -1,5 +1,5 @@
 #!/bin/bash
-eval $(egrep -v '^;' config/db.ini)
+eval $(egrep -v '^;' $(dirname $0)/../config/db.ini)
 cmd="mysql -t -h$host -u$user -p$password"
 
 $cmd <<SQL_BLOCK
@@ -24,8 +24,8 @@ create table if not exists `items`
  `title`         varchar(100)     not null default '',
  `flags`         tinyint unsigned not null default 0,
  `cid`           int unsigned,
- `tpye_id`       int unsigned,
- `ref_price`     int unsigned,
+ `type_id`       int unsigned,
+ `ref_price`     int unsigned     not null,
  `price`         int unsigned,
  `vip_price`     int unsigned,
  `promo_price`   int unsigned,
@@ -36,7 +36,7 @@ create table if not exists `items`
  `detail_url`    varchar(1024)    not null default '',
  `click_url`     varchar(1024)    not null default '',
  `pic_url`       varchar(1024)    not null default '',
- `ref_url`    varchar(1024)    not null default '',
+ `ref_url`       varchar(1024)    not null default '',
  primary key (`id`),
  unique  key `num_iid` (`num_iid`)
 ) engine=InnoDB default charset=utf8; 

@@ -19,18 +19,30 @@ class ItemGrab
 
     function grab()
     {
+        global $argv;
+        $target = isset($argv[1]) ? $argv[1] : null;
+        if ($target === null || $target === 'tomorrow')
+            $url = 'http://ju.jiukuaiyou.com/r/'. strftime('%Y%m%d', strtotime('tomorrow'));
+        elseif ($target === 'today')
+            $url = 'http://ju.jiukuaiyou.com/jiu/all/today/new/all';
+        elseif ($target === 'jiu')
+            $url = null;
+        elseif ($target === 'shijiu')
+            $url = 'http://ju.jiukuaiyou.com/shijiu';
+        else
+        {
+            fputs(STDERR, "unknown $target \nusage: {$argv[0]} [tomorow|today|jiu|shijiu]\n");
+            return;
+        }
+
         $refer = 'http://www.jiukuaiyou.com/';
-        $this->curl->get($refer);
-        $url = 'http://ju.jiukuaiyou.com/jiu/all/today/new/all';
-        # $url = 'http://ju.jiukuaiyou.com/r/'. strftime('%Y%m%d', strtotime('tomorrow'));
-        $page = $this->curl->get($url, $refer);
-        $this->get_all_item($page);
+        $page = $this->curl->get($refer);
+        if ($url) $page = $this->curl->get($url, $refer);
 
         $xpath = '//div[@class="main"]//div[@class="page"]/div[@class="pageNav"]/a[@class="pg_next"]/@href';
-        while ($page = $page->get($xpath))
-        {
+        do {
             $this->get_all_item($page);
-        }
+        } while ($page = $page->get($xpath));
     }
 
     function get_all_item($page)
