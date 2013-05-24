@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/app/model/category.model.php';
+require_once APP_ROOT . '/model/category.model.php';
 
 class CategoryCmd
 {

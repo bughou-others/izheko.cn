@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/app/model/taobao_item.model.php';
+require_once APP_ROOT . '/model/taobao_item.model.php';
 
 class TaobaoItemCmd
 {
