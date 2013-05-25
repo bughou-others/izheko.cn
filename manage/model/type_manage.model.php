@@ -22,15 +22,20 @@ class TypeManage
     static function update($id, $name)
     {
         $name = self::db()->escape_string($name);
-        $sql = "update ignore types set name='$name', update_time=now() where id = $id ";
-        return self::db()->query($sql);
+        $sql = "update ignore types set name='$name', update_time=now()
+            where id = $id and name != '$name'";
+        if (self::db()->query($sql))
+            return self::db()->affected_rows;
+        else return false;
     }
 
     static function insert($name)
     {
         $name = self::db()->escape_string($name);
         $sql  = "insert ignore into types (name, create_time) values ('$name', now())";
-        return self::db()->query($sql);
+        if (self::db()->query($sql))
+            return self::db()->insert_id;
+        else return false;
     }
 
     static function delete($id)

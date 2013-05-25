@@ -67,7 +67,7 @@
             var tr = $(this).parent('td').parent('tr');
             var origin = tr.children('td:nth-child(2) > input:text').attr('origin')
             if(origin !== undefined || !confirm('确定删除: ' + origin)) return; 
-            var id = $.trim(tr.children('td:first-child').html();
+            var id = $.trim(tr.children('td:first-child').html());
             if ( id === '') { tr.remove(); return; };
             $.post(location.pathname, {
                 'delete': id 
