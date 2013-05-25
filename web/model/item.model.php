@@ -1,12 +1,8 @@
 <?php
 require_once APP_ROOT . '/../common/db.php';
 
-class ItemBase
+class Item extends ItemBase
 {
-    const FLAGS_MASK_REF_CLICK_URL = 1;
-    const FLAGS_MASK_REF_PRICE_VIP = 2;
-    const FLAGS_MASK_POSTAGE_FREE  = 4;
-
     static function select($offset = 0, $limit = 30)
     {
         static $db;

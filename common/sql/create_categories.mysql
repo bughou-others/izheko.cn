@@ -1,5 +1,5 @@
 #!/bin/bash
-eval $(egrep -v '^;' config/db.ini)
+eval $(egrep -v '^;' $(dirname $0)/../config/db.ini)
 cmd="mysql -t -h$host -u$user -p$password"
 
 $cmd <<SQL_BLOCK
@@ -34,7 +34,9 @@ create table if not exists `types`
  `id`            int     unsigned not null auto_increment,
  `name`          varchar(10)      not null,
  `create_time`   datetime         not null,
- primary key (`id`)
+ `update_time`   datetime         default null,
+ primary key (`id`),
+ unique  key `name` (`name`)
 ) engine=InnoDB default charset=utf8; 
 #}}}}}}}}}}}
 SQL_BLOCK

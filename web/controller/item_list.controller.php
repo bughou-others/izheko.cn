@@ -1,14 +1,14 @@
 <?php
-require_once APP_ROOT . '/app/model/item.php';
+require_once APP_ROOT . '/model/item.model.php';
 
-class ItemList
+class ItemListController
 {
     static function index()
     {
         $items = Item::select(0, 60);
-        require_once APP_ROOT . '/app/view/item_list.view.php';
+        require_once APP_ROOT . '/view/item_list.view.php';
     }
 }
 
-ItemList::index();
+ItemListController::index();
 
