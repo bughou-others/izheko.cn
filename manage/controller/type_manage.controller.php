@@ -22,7 +22,8 @@ class TypeManageController
     static function index()
     {
         $types = TypeManage::select();
-        require_once APP_ROOT . '/view/type_manage.view.php';
+        $target_view = 'type_manage';
+        require_once APP_ROOT . '/view/layout.view.php';
     }
 
     static function save()

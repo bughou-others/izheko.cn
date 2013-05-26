@@ -1,22 +1,25 @@
 <table>
 <tbody id="type_tbody">
 <tr>
-    <th>类型ID</th>
+    <th>ID</th>
+    <th>CID</th>
     <th>名称</th>
+    <th>父CID</th>
+    <th>is_parent</th>
+    <th>爱折扣分类</th>
     <th>创建时间</th>
     <th>更新时间</th>
-    <th> <button id="create_button">新建</button> </th>
 </tr>
-<?php foreach($types as $type) { ?>
+<?php foreach($categories as $category) { ?>
 <tr>
-    <td><?= $type['id'] ?></td>
-    <td><input type="text" origin="<?= $type['name'] ?>" value="<?= $type['name'] ?>" /></td>
-    <td><?= $type['create_time'] ?></td>
-    <td><?= $type['update_time'] ?></td>
-    <td>
-        <button class="save_button" disabled>更新</button>
-        <button class="delete_button">删除</button>
-    </td>
+    <td><?= $category['id'] ?></td>
+    <td><?= $category['cid'] ?></td>
+    <td><?= $category['name'] ?></td>
+    <td><?= $category['parent_cid'] ?></td>
+    <td><?= $category['is_parent'] ? '是' : '否' ?></td>
+    <td><?= $category['type_id'] ?></td>
+    <td><?= $category['create_time'] ?></td>
+    <td><?= $category['update_time'] ?></td>
 </tr>
 <?php } ?>
 </tbody>
