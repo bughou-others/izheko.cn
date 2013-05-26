@@ -10,7 +10,9 @@ class App
     {
         if (!isset($_SERVER['DOCUMENT_URI']) || !($target = $_SERVER['DOCUMENT_URI']))
         {
-            header("HTTP/1.0 404 Not Found");
+            #header("HTTP/1.0 404 Not Found");
+            header("X-Accel-Redirect: =404");
+            error_log('no DOCUMENT_URI given');
             return;
         }
             
@@ -26,10 +28,12 @@ class App
         }
         $target = APP_ROOT . "/controller/$target.controller.php";
         if (file_exists($target)) require_once $target;
-        else header("HTTP/1.0 404 Not Found");
+        else {
+            header("X-Accel-Redirect: =404");
+            error_log('controller not exist: ' . $target);
+        }
     }
 }
-
 App::run_controller();
 
 

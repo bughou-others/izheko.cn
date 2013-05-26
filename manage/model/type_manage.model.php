@@ -21,6 +21,11 @@ class TypeManage
 
     static function update($id, $name)
     {
+        if (!($id = trim($id)) ||
+            !(preg_match('/^\d+$/', $id)) ||
+            !($name = trim($name))
+        ) return;
+
         $name = self::db()->escape_string($name);
         $sql = "update ignore types set name='$name', update_time=now()
             where id = $id and name != '$name'";
@@ -31,6 +36,7 @@ class TypeManage
 
     static function insert($name)
     {
+        if (! $name = trim($name)) return;
         $name = self::db()->escape_string($name);
         $sql  = "insert ignore into types (name, create_time) values ('$name', now())";
         if (self::db()->query($sql))
@@ -40,8 +46,13 @@ class TypeManage
 
     static function delete($id)
     {
+        if (!($id = trim($id)) ||
+            !(preg_match('/^\d+$/', $id))
+        ) return;
         $sql = "delete from types where id = $id";
-        return self::db()->query($sql);
+        if (self::db()->query($sql))
+            return self::db()->affected_rows;
+        else return false;
     }
 
     function __construct($data)
