@@ -1,5 +1,5 @@
 <table>
-<tbody id="type_tbody">
+<tbody>
 <tr>
     <th>ID</th>
     <th>CID</th>
@@ -10,14 +10,23 @@
     <th>创建时间</th>
     <th>更新时间</th>
 </tr>
-<?php foreach($categories as $category) { ?>
+<?php
+foreach($categories as $category) {
+    if(($type_id = $category['type_id']) > 0)
+    {
+       if (isset($types[$type_id]))
+           $type_name = $types[$type_id];
+       else $type_name = "<red>不存在的ID: $type_id </red>";
+    }
+    else $type_name = '';
+?>
 <tr>
     <td><?= $category['id'] ?></td>
     <td><?= $category['cid'] ?></td>
     <td><?= $category['name'] ?></td>
     <td><?= $category['parent_cid'] ?></td>
-    <td><?= $category['is_parent'] ? '是' : '否' ?></td>
-    <td><?= $category['type_id'] ?></td>
+    <td><?= $category['is_parent'] ? '是' : '' ?></td>
+    <td><?= $type_name ?><button class="change_type">修改</button></td>
     <td><?= $category['create_time'] ?></td>
     <td><?= $category['update_time'] ?></td>
 </tr>

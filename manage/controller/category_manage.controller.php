@@ -1,5 +1,6 @@
 <?php
 require_once APP_ROOT . '/model/category_manage.model.php';
+require_once APP_ROOT . '/model/type_manage.model.php';
 
 class CategoryManageController
 {
@@ -20,6 +21,7 @@ class CategoryManageController
     static function index()
     {
         $categories = CategoryManage::select();
+        $types = TypeManage::select();
         $target_view = 'category_manage';
         require_once APP_ROOT . '/view/layout.view.php';
     }

@@ -4,12 +4,8 @@
     <meta charset="utf-8"/>
     <title>爱折扣--管理系统</title>
     <style>
-        html {
-            height: 100%;
-        }
         body {
-            margin: 0;
-            height: 100%;
+            margin: 0 0 2em 0;
             text-align: center;
             font-size: 16px;
         }
@@ -20,6 +16,7 @@
             color: white;
             text-decoration: none;
             background-color: gray;
+            padding: 0.3em;
             border: 1px dotted gray;
             -moz-border-radius: 0.3em;
             -webkit-border-radius: 0.3em;

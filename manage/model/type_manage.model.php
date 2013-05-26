@@ -19,6 +19,16 @@ class TypeManage
         return self::db()->query($sql)->fetch_all(MYSQLI_ASSOC);
     }
 
+    static function get_types()
+    {
+        $sql = "select id, name from types ";
+        $result = self::db()->query($sql);
+        $types = array();
+        while($row = $result->fetch_assoc())
+            $types[$row['id']] = $row['name'];
+        return $types;
+    }
+
     static function update($id, $name)
     {
         if (!($id = trim($id)) ||
