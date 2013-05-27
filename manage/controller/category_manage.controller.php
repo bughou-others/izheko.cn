@@ -21,7 +21,7 @@ class CategoryManageController
     static function index()
     {
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-        $page_size = 2;
+        $page_size = 20;
         list($categories, $total_count) = CategoryManage::select($page, $page_size);
         $types = TypeManage::get_types();
         $target_view = 'category_manage';

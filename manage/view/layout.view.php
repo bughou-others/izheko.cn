@@ -48,8 +48,9 @@
             padding: 0.5em 0.8em;
         }
         .pagination > a, .pagination > span.current_page {
-
             border: 1px solid #ccc;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
             border-radius: 2px;
             filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=white,endColorstr=#f0f0f0);
             background-image: -moz-linear-gradient(top,#fff,#f0f0f0);
