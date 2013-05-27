@@ -20,8 +20,10 @@ class CategoryManageController
 
     static function index()
     {
-        $categories = CategoryManage::select();
-        $types = TypeManage::select();
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $page_size = 2;
+        list($categories, $total_count) = CategoryManage::select($page, $page_size);
+        $types = TypeManage::get_types();
         $target_view = 'category_manage';
         require_once APP_ROOT . '/view/layout.view.php';
     }

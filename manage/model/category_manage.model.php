@@ -9,14 +9,13 @@ class CategoryManage
         if (! $db) $db = DB::connect();
         return $db;
     }
-    static function select($id = null)
+    static function select($page, $limit)
     {
-        $sql = "select * from categories ";
-        if ($id) {
-            $sql .= " where id = $id" ;
-            return self::db()->query($sql)->fetch_assoc();
-        }
-        return self::db()->query($sql)->fetch_all(MYSQLI_ASSOC);
+        $offset = $page >= 1 ? ($page - 1) * $limit : 0;
+        $sql = "select SQL_CALC_FOUND_ROWS * from categories limit $offset, $limit";
+        $data = self::db()->query($sql)->fetch_all(MYSQLI_ASSOC);
+        $row  = self::db()->query('select found_rows()')->fetch_row();
+        return array($data, $row[0]);
     }
 
     static function update($id, $type_id)
