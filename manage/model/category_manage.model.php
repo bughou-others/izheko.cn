@@ -27,7 +27,7 @@ class CategoryManage
         ) return;
 
         $sql = "update categories set type_id='$type_id', update_time=now()
-            where id = $id and type_id != '$type_id'";
+            where id = $id";
         return self::db()->query($sql);
     }
 }

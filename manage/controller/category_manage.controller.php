@@ -35,7 +35,7 @@ class CategoryManageController
             !($type_id = trim($_POST['type_id']))
         ) return;
 
-        if ($r = CategoryManage::update($id, $type_id))
+        if (CategoryManage::update($id, $type_id))
             echo 'ok'; 
         else
             echo '更新失败';

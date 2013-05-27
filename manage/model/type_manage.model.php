@@ -38,7 +38,7 @@ class TypeManage
 
         $name = self::db()->escape_string($name);
         $sql = "update ignore types set name='$name', update_time=now()
-            where id = $id and name != '$name'";
+            where id = $id";
         if (self::db()->query($sql))
             return self::db()->affected_rows;
         else return false;
