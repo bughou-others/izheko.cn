@@ -8,6 +8,7 @@
             margin: 0 0 2em 0;
             text-align: center;
             font-size: 16px;
+            font-weight: normal;
         }
         #navigator {
             margin: 1em 0;
