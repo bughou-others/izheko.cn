@@ -17,7 +17,7 @@
     <td><?= $category['cid'] ?></td>
     <td>
 <?php if($category['parent_cid']) { ?>
-        <a href="<?= "/category_manage.do?traceup={$category['parent_cid']}" ?>"><?= $category['name'] ?></a>
+        <a href="<?= "/category_manage.do?traceup={$category['cid']}" ?>"><?= $category['name'] ?></a>
 <?php } else
     echo $category['name'];
 ?>
@@ -75,13 +75,15 @@ $(function(){
 
     $('#category_tbody').on('click', 'button.save_type', function(){
         var $this = $(this);
+        var td = $this.parent('td');
         $.post(location.pathname, {
-            'update': $.trim($this.parent('td').siblings('td:first-child').text()),
+            'update': $.trim(td.siblings('td:first-child').text()),
             'type_id': $.trim($this.siblings('select.type_select').val()),
         }, function(response){
-            if(response === 'ok') $this.attr('disabled', true);
-            else alert(response);
-        }, 'text');
+            if(response.error) { alert(response.error); return; };
+            td.siblings('td:last-child').text(response.data);
+            $this.attr('disabled', true);
+        }, 'json');
     });
 });
 </script>

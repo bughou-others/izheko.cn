@@ -21,12 +21,12 @@ create table if not exists `categories`
  `name`          varchar(100)     not null default '',
  `parent_cid`    int unsigned     not null,
  `is_parent`     tinyint unsigned not null,
- `type_id`       int unsigned,
+ `type_id`       int unsigned     not null default 0,
  `create_time`   datetime         not null,
  `update_time`   datetime,       
  primary key (`id`),
  unique  key `cid` (`cid`)
-) engine=InnoDB default charset=utf8; 
+) engine=InnoDB default charset=utf8;
 
 drop   table if     exists `types`;
 create table if not exists `types`

@@ -1,6 +1,5 @@
 <?php
 require_once APP_ROOT . '/../common/db.php';
-require_once APP_ROOT . '/../common/model/category.model.php';
 
 class CategoryManage
 {
@@ -34,6 +33,7 @@ class CategoryManage
 
     static function traceup($cid)
     {
+        require_once APP_ROOT . '/../common/model/category.model.php';
         $data = array();
         while($cid && ($category = Category::get($cid)))
         {
@@ -85,8 +85,19 @@ class CategoryManage
             $type_id <= 0
         ) return;
 
-        $sql = "update categories set type_id='$type_id', update_time=now()
-            where id = $id";
-        return self::db()->query($sql);
+        $sql = "update categories set type_id=$type_id, update_time=now()
+            where id = $id and type_id != $type_id";
+        if (self::db()->query($sql))
+            if($a = self::db()->affected_rows)
+                return self::get_update_time($id);
+            else return $a;
+        else return false;
+    }
+
+    static function get_update_time($id)
+    {
+        $sql = "select update_time from categories where id = $id";
+        $row = self::db()->query($sql)->fetch_assoc();
+        return $row['update_time'];
     }
 }
