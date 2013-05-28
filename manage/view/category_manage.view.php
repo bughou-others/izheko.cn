@@ -22,7 +22,8 @@
     echo $category['name'];
 ?>
     </td>
-    <td><?= isset($category['parent_name']) ? $category['parent_name'] : $category['parent_cid'] ?></td>
+    <td><?= (isset($category['parent_name']) ? $category['parent_name'] : '') .
+    "({$category['parent_cid']})" ?></td>
     <td>
 <?php if($category['is_parent']) { ?>
         <a href="<?= "/category_manage.do?parent={$category['cid']}" ?>">子分类</a>
