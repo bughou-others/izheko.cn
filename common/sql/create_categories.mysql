@@ -38,6 +38,20 @@ create table if not exists `types`
  primary key (`id`),
  unique  key `name` (`name`)
 ) engine=InnoDB default charset=utf8; 
+
+insert into `types` (name, create_time)
+values 
+("女装", now()),
+("男装", now()),
+("居家", now()),
+("母婴", now()),
+("鞋包", now()),
+("配饰", now()),
+("美食", now()),
+("数码家电", now()),
+("化妆品", now()),
+("文体", now())
+;
 #}}}}}}}}}}}
 SQL_BLOCK
 
