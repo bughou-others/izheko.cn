@@ -36,12 +36,16 @@
 <?php
 $type_id = $category['type_id'];
 if ($type_id > 0)
+{
     $type_name = isset($types[$type_id]) ? $types[$type_id] : "未知ID: $type_id";
-else $type_name = '';
-
-echo <<<EOT
+    echo <<<EOT
             <option value="$type_id">$type_name</option>
 EOT;
+}
+else $type_name = '';
+
+echo '<option value="0"></option>
+';
 foreach($types as $key => $name) {
     if ($key != $type_id) echo <<<EOT
             <option value="$key">$name</option>
