@@ -1,5 +1,6 @@
 <?php
 require_once APP_ROOT . '/../common/db.php';
+require_once APP_ROOT . '/../common/model/category.model.php';
 
 class CategoryManage
 {
@@ -13,7 +14,7 @@ class CategoryManage
     {
         if (isset($condition['traceup']) &&
             ($traceup = $condition['traceup']) &&
-            preg_match('/^\d+$/', $trace)
+            preg_match('/^\d+$/', $traceup)
         ) return self::traceup($traceup);
 
         $where = (isset($condition['parent']) &&
@@ -33,6 +34,15 @@ class CategoryManage
 
     static function traceup($cid)
     {
+        $data = array();
+        while($cid && ($category = Category::get($cid)))
+        {
+            if($count = count($data))
+                $data[$count - 1]['parent_name'] = $category['name'];
+            $data[] = $category;
+            $cid = $category['parent_cid'];
+        }
+        return array($data, count($data));
     }
 
     static function add_parent_name($result)
@@ -48,7 +58,7 @@ class CategoryManage
         foreach($data as &$category)
         {
             $cid = $category['parent_cid'];
-            $category['parent_name'] = isset($names[$cid]) ? $names[$cid] : $cid;
+            if(isset($names[$cid])) $category['parent_name'] = $names[$cid];
         }
         return $data;
     }

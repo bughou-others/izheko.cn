@@ -1,13 +1,13 @@
 <?php
 require_once APP_ROOT . '/../common/db.php';
-require_once APP_ROOT . '/model/taobao_api.model.php';
+require_once APP_ROOT . '/../common/model/taobao_api.model.php';
 
 class Category
 {
     static function get_type_id($cid)
     { 
-        while ( ($category = self::get($cid)) &&
-            !(isset($category['type_id']) && $category['type_id'] > 0) &&
+        while( ($category = self::get($cid)) &&
+            (!isset($category['type_id']) || $category['type_id'] <= 0) &&
             ($parent_cid = $category['parent_cid']) > 0 
         ) $cid = $parent_cid;
         if(isset($category['type_id'])) return $category['type_id'];
@@ -15,13 +15,20 @@ class Category
 
     static function get($cid)
     {
-        $sql = "select name,parent_cid,type_id from categories where cid=$cid limit 1";
-        $category = self::db()->query($sql)->fetch_assoc();
-        if (! $category) $category = self::get_from_api($cid);
+        $category = self::get_from_db($cid);
+        if (!$category && self::fetch($cid)) {
+            $category = self::get_from_db($cid);
+        }
         return $category;
     }
 
-    static function get_from_api($cid)
+    static function get_from_db($cid)
+    {
+        $sql = "select * from categories where cid=$cid limit 1";
+        return self::db()->query($sql)->fetch_assoc();
+    }
+
+    static function fetch($cid)
     {
         $response = TaobaoApi::itemcats_get($cid);
         if (!isset($response['itemcats_get_response']['item_cats']['item_cat'][0]) ||
@@ -32,7 +39,6 @@ class Category
             return;
         }
         self::save($category);
-        return $category;
     }
 
     static function save($category)
