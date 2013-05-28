@@ -4,8 +4,9 @@
     <th>ID</th>
     <th>CID</th>
     <th>名称</th>
-    <th>父CID</th>
-    <th>is_parent</th>
+    <th>父分类</th>
+    <th>子分类</th>
+    <th>兄弟分类</th>
     <th>爱折扣分类</th>
     <th>创建时间</th>
     <th>更新时间</th>
@@ -14,9 +15,22 @@
 <tr>
     <td><?= $category['id'] ?></td>
     <td><?= $category['cid'] ?></td>
-    <td><?= $category['name'] ?></td>
-    <td><?= $category['parent_cid'] ?></td>
-    <td><?= $category['is_parent'] ? '是' : '' ?></td>
+    <td>
+<?php if($category['parent_cid']) { ?>
+        <a href="<?= "/category_manage.do?traceup={$category['parent_cid']}" ?>"><?= $category['name'] ?></a>
+<?php } else
+    echo $category['name'];
+?>
+    </td>
+    <td><?= $category['parent_name'] ?></td>
+    <td>
+<?php if($category['is_parent']) { ?>
+        <a href="<?= "/category_manage.do?parent={$category['cid']}" ?>">子分类</a>
+<?php } ?>
+    </td>
+    <td>
+        <a href="<?= "/category_manage.do?parent={$category['parent_cid']}" ?>">兄弟分类</a>
+    </td>
     <td>
         <select class="type_select">
 <?php
