@@ -31,6 +31,7 @@ class Category
             fputs(STDERR, "get category failed: $cid \n");
             return;
         }
+        self::save($category);
         return $category;
     }
 
@@ -55,5 +56,16 @@ class Category
         static $db;
         if (! $db) $db = DB::connect();
         return $db;
+    }
+
+    static function get_children_from_api($cid)
+    {
+        $response = TaobaoApi::itemcats_children_get($cid);
+        if (isset($response['itemcats_get_response']['item_cats']['item_cat']) &&
+            is_array($categories = $response['itemcats_get_response']['item_cats']['item_cat'])
+        )
+        {
+            return $categories;
+        }
     }
 }
