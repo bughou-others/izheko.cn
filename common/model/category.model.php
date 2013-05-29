@@ -74,4 +74,14 @@ class Category
             return $categories;
         }
     }
+    static function fetch_children($cid)
+    {
+        $categories = Category::get_children_from_api($cid);
+        if(!is_array($categories))return;
+        foreach ($categories as $category)
+        {
+            if(!Category::exist($category['cid']))
+                Category::save($category);
+        }
+    }
 }

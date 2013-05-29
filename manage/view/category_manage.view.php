@@ -33,7 +33,7 @@
         <a href="<?= "/category_manage.do?parent={$category['parent_cid']}" ?>">兄弟分类</a>
     </td>
     <td>
-        <select class="type_select">
+        <select class="type_select" autocomplete="off">
 <?php
 $type_id = $category['type_id'];
 if ($type_id > 0)

@@ -16,10 +16,16 @@ class CategoryManage
             preg_match('/^\d+$/', $traceup)
         ) return self::traceup($traceup);
 
-        $where = (isset($condition['parent']) &&
+        if(isset($condition['parent']) &&
             ($parent = $condition['parent']) &&
             preg_match('/^\d+$/', $parent)
-        ) ? " where parent_cid=$parent" : null;
+        )
+        {
+            require_once APP_ROOT . '/../common/model/category.model.php';
+            Category::fetch_children($parent);
+            $where = " where parent_cid=$parent";
+        }
+        else $where = null;
             
         $offset = $page >= 1 ? ($page - 1) * $limit : 0;
         $sql = "select SQL_CALC_FOUND_ROWS * from categories $where limit $offset, $limit";

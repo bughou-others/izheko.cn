@@ -10,7 +10,7 @@
 <?php foreach($types as $type) { ?>
 <tr>
     <td><?= $type['id'] ?></td>
-    <td><input type="text" origin="<?= $type['name'] ?>" value="<?= $type['name'] ?>" /></td>
+    <td><input type="text" origin="<?= $type['name'] ?>" value="<?= $type['name'] ?>" autocomplete="off" /></td>
     <td><?= $type['create_time'] ?></td>
     <td><?= $type['update_time'] ?></td>
     <td>
@@ -24,7 +24,7 @@
 <script id="empty_row" type="text/template">
 <tr>
 <td></td>
-<td><input type="text" /></td>
+<td><input type="text" autocomplete="off" /></td>
 <td></td>
 <td></td>
 <td>
@@ -36,7 +36,7 @@
 <script>
 $(function(){
     $('#create_button').click(function(){
-        $('#type_tbody').append($('#empty_row').html());
+        $('#type_tbody > tr:first-child').after($('#empty_row').html());
     });
 
     $('#type_tbody').on('click', 'button[class=save_button]', function(){
