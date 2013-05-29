@@ -3,12 +3,6 @@ require_once APP_ROOT . '/../common/db.php';
 
 class TypeManage
 {
-    static function db()
-    {
-        static $db;
-        if (! $db) $db = DB::connect();
-        return $db;
-    }
     static function select($id = null)
     {
         $sql = "select id, name, create_time, update_time from types ";

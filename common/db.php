@@ -1,6 +1,13 @@
 <?php
 class DB
 {
+    static function connection()
+    {
+        static $db;
+        if (! $db) $db = DB::connect();
+        return $db;
+    }
+
     static function connect()
     {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
