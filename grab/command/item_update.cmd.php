@@ -51,7 +51,6 @@ class ItemUpdate
         );
         $cid = $info['cid'];
         $type_id = Category::get_type_id($cid);
-        var_dump($cid, $type_id);
         $vip_price   = isset($info['vip_price'])   ? $info['vip_price']   : '0';
         $promo_price = isset($info['promo_price']) ? $info['promo_price'] : '0';
         $promo_start = isset($info['promo_start']) ? $info['promo_start'] : '0';

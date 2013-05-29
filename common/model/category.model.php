@@ -35,10 +35,10 @@ class Category
             !is_array($category = $response['itemcats_get_response']['item_cats']['item_cat'][0])
         )
         {
-            fputs(STDERR, "get category failed: $cid \n");
+            fputs(STDERR, "fetch category $cid failed\n");
             return;
         }
-        self::save($category);
+        return self::save($category);
     }
 
     static function save($category)
@@ -80,8 +80,8 @@ class Category
         if(!is_array($categories))return;
         foreach ($categories as $category)
         {
-            if(!Category::exist($category['cid']))
-                Category::save($category);
+            if(!self::exist($category['cid']))
+                self::save($category);
         }
     }
 }
