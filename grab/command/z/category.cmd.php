@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/model/category.model.php';
+require_once APP_ROOT . '/../common/model/category.model.php';
 
 class CategoryCmd
 {
@@ -15,7 +15,11 @@ class CategoryCmd
             return;
         }
 
-        if ($cmd === 'fetch_children')
+        if ($cmd === 'get_type')
+            self::get_type($cid);
+        elseif ($cmd === 'get_type_id')
+            var_dump(Category::get_type_id($cid));
+        elseif ($cmd === 'fetch_children')
             self::fetch_children($cid);
         elseif ($cmd === 'fetch_children_recursively')
             self::fetch_children($cid, true);
@@ -24,6 +28,24 @@ class CategoryCmd
             echo "unknow action: $type\n";
             return;
         }
+    }
+
+    static function get_type($cid)
+    { 
+        while($cid) {
+            if(!$category = Category::get($cid))
+            {
+                echo "get category $cid failed\n";
+                var_dump($category);
+                break;
+            }
+            if(isset($category['type_id']) && $category['type_id'] > 0)
+            {
+                break;
+            }
+            $cid = $category['parent_cid'];
+        }
+        var_dump($category);
     }
 
     static function fetch_children($cid, $recursive = false)
