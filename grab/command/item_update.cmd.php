@@ -1,6 +1,6 @@
 <?php
 require_once APP_ROOT . '/model/taobao_item.model.php';
-require_once APP_ROOT . '/model/category.model.php';
+require_once APP_ROOT . '/../common/model/category.model.php';
 require_once APP_ROOT . '/../common/model/item_base.model.php';
 
 class ItemUpdate

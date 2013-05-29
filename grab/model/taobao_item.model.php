@@ -1,6 +1,6 @@
 <?php
-require_once APP_ROOT . '/model/taobao_api.model.php';
 require_once APP_ROOT . '/helper/curl.helper.php';
+require_once APP_ROOT . '/../common/model/taobao_api.model.php';
 require_once APP_ROOT . '/../common/helper/json.helper.php';
 require_once APP_ROOT . '/../common/helper/price.helper.php';
 
