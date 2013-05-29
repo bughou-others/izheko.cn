@@ -6,16 +6,10 @@ define('APP_ROOT', dirname(__FILE__));
 
 class App
 {
-    static function run()
+    static function run_command()
     {
-        if (php_sapi_name() === 'cli')
-            self::run_file();
-        else #cgi_fcgi
-            self::run_controller();
-    }
-
-    static function run_file()
-    {
+        ini_set('log_errors', 1);
+        ini_set('display_errors', 0);
         global $argv;
         $run = array_shift($argv);
         if(!isset($argv[0]) || !($target = $argv[0]))
@@ -27,46 +21,8 @@ class App
         if (file_exists($target)) require_once $target;
         else echo "file not exist: $target\n";
     }
-
-    static function run_controller()
-    {
-        if (!isset($_SERVER['DOCUMENT_URI']) || !($target = $_SERVER['DOCUMENT_URI']))
-        {
-            header("HTTP/1.0 404 Not Found");
-            return;
-        }
-            
-        if (substr($target, -3) == '.do')
-            $target = substr($target, 0, -3);
-        else
-        {
-            if (preg_match('//', $target))
-                $target = '';
-            elseif (preg_match('//', $target))
-                $target = '';
-            else $target = '';
-        }
-        $target = APP_ROOT . "/app/controller/$target.controller.php";
-        if (file_exists($target)) require_once $target;
-        else header("HTTP/1.0 404 Not Found");
-    }
-
-    static function debug()
-    {
-        $concern = array(
-            'SCRIPT_FILENAME', 'SCRIPT_NAME', 'PHP_SELF', 'DOCUMENT_URI', 
-            'REQUEST_URI', 'QUERY_STRING'
-        );
-        echo '<pre>';
-        foreach ($concern as $k)
-        {
-            printf("%20s => %s\n", $k, $_SERVER[$k]); 
-        }
-        var_dump($_GET);
-        echo '</pre>';
-    }
 }
 
-App::run();
+App::run_command();
 
 

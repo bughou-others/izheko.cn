@@ -3,8 +3,7 @@ class DB
 {
     static function connect()
     {
-        $driver = new mysqli_driver();
-        $driver->report_mode = MYSQLI_REPORT_STRICT;
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $config = self::config();
         $mysqli = new mysqli($config['host'], $config['user'], $config['password'], $config['database']);
         if ($mysqli->connect_errno) 
