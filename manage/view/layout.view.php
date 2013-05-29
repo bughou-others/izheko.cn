@@ -36,7 +36,7 @@
         }
         th, td {
             border: 1px solid #ddd;
-            padding: 0 1em; 
+            padding: 0 0.5em; 
         }
         .pagination {
             margin: 1em 0;
