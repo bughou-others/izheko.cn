@@ -11,18 +11,13 @@ class ItemUpdate
         $instance->update();
     }
 
-    function __construct()
-    {
-        $this->db = DB::connect();
-    }
-
     function update()
     {
         $sql = 'select num_iid from items'; 
         global $argv;
         if (isset($argv[1])) $sql .= " where {$argv[1]}";
         $sql .= ' order by id asc';
-        $result = $this->db->query($sql);
+        $result = DB::query($sql);
         echo "{$result->num_rows} item to update\n";
         $i = 0;
         while(list($num_iid) = $result->fetch_row())
@@ -37,12 +32,11 @@ class ItemUpdate
 
     function update_item($num_iid, $info)
     {
-        $db = $this->db;
         $now         = strftime('%F %T');
-        $title       = $db->escape_string($info['title']);
-        $detail_url  = $db->escape_string($info['detail_url']);
-        $click_url   = isset($info['click_url']) ? $db->escape_string($info['click_url']) : '';
-        $pic_url     = $db->escape_string($info['pic_url']);
+        $title       = DB::escape($info['title']);
+        $detail_url  = DB::escape($info['detail_url']);
+        $click_url   = isset($info['click_url']) ? DB::escape($info['click_url']) : '';
+        $pic_url     = DB::escape($info['pic_url']);
         $flags_operation = self::bits_update(ItemBase::FLAGS_MASK_POSTAGE_FREE,
             $info['freight_payer'] === 'seller' ||
             $info['post_fee']      === '0.00' ||
@@ -69,7 +63,7 @@ class ItemUpdate
             click_url  ='$click_url',
             pic_url    ='$pic_url'
             where num_iid = $num_iid ";
-        if($db->query($sql)) return $db->affected_rows;
+        return DB::affected_rows($sql);
     }
 
     static function bits_update($bits, $bool)

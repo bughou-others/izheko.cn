@@ -14,7 +14,6 @@ class ItemGrab
     function __construct()
     {
         $this->curl = new Curl();
-        $this->db   = DB::connect();
     }
 
     function grab()
@@ -135,16 +134,16 @@ class ItemGrab
             $flags = $is_click_url ? (ItemBase::FLAGS_MASK_REF_CLICK_URL) : 0;
             if($ref_price_vip) $flags |= ItemBase::FLAGS_MASK_REF_PRICE_VIP;
             $ref_price = $ref_price ? parse_price($ref_price) : 'null';
-            $ref_url = $this->db->escape_string($ref_url);
+            $ref_url = DB::escape($ref_url);
             $values .= ",($item_id, '$now', $flags, $ref_price, '$ref_url')";
         }
         $values = substr($values, 1);
         $sql = 'insert ignore into items (`num_iid`, `create_time`, `flags`, `ref_price`, `ref_url`)
             values ' . $values;
         $count = count($items);
-        if ($this->db->query($sql))
-            echo "insert success: $count, {$this->db->affected_rows}\n";
-        else fputs(STDERR, "{$this->db->error}insert failed: $count\n");
+        $affected = DB::affected_rows($sql)
+        if ($affected == false) error_log("insert failed: $count\n");
+        else echo "insert success: $count, {$affected}\n";
     }
 }
 

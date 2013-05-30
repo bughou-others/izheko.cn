@@ -9,17 +9,12 @@ class ItemClear
         $instance->clear();
     }
 
-    function __construct()
-    {
-        $this->db = DB::connect();
-    }
-
     function clear()
     {
         #delisted
         #too expensive than ref price
         $sql = 'select num_iid from items where title = "" ';
-        $result = $this->db->query($sql);
+        $result = DB::query($sql);
         echo "{$result->num_rows} item to update\n";
         while(list($num_iid) = $result->fetch_row())
         {
