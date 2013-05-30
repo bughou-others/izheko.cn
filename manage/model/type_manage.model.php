@@ -8,19 +8,15 @@ class TypeManage
         $sql = "select id, name, create_time, update_time from types ";
         if ($id) {
             $sql .= " where id = $id" ;
-            return self::db()->query($sql)->fetch_assoc();
+            return DB::get_row($sql);
         }
-        return self::db()->query($sql)->fetch_all(MYSQLI_ASSOC);
+        return DB::get_rows($sql);
     }
 
     static function get_types()
     {
         $sql = "select id, name from types ";
-        $result = self::db()->query($sql);
-        $types = array();
-        while($row = $result->fetch_assoc())
-            $types[$row['id']] = $row['name'];
-        return $types;
+        return DB::get_map($sql);
     }
 
     static function update($id, $name)
@@ -30,22 +26,18 @@ class TypeManage
             !($name = trim($name))
         ) return;
 
-        $name = self::db()->escape_string($name);
+        $name = DB::escape($name);
         $sql = "update ignore types set name='$name', update_time=now()
             where id = $id and name != '$name'";
-        if (self::db()->query($sql))
-            return self::db()->affected_rows;
-        else return false;
+        return DB::affected_rows($sql);
     }
 
     static function insert($name)
     {
         if (! $name = trim($name)) return;
-        $name = self::db()->escape_string($name);
+        $name = DB::escape($name);
         $sql  = "insert ignore into types (name, create_time) values ('$name', now())";
-        if (self::db()->query($sql))
-            return self::db()->insert_id;
-        else return false;
+        return DB::insert_id($sql);
     }
 
     static function delete($id)
@@ -54,9 +46,7 @@ class TypeManage
             !(preg_match('/^\d+$/', $id))
         ) return;
         $sql = "delete from types where id = $id";
-        if (self::db()->query($sql))
-            return self::db()->affected_rows;
-        else return false;
+        return DB::affected_rows($sql);
     }
 
     function __construct($data)

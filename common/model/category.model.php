@@ -25,7 +25,7 @@ class Category
     static function get_from_db($cid)
     {
         $sql = "select * from categories where cid=$cid limit 1";
-        return self::db()->query($sql)->fetch_assoc();
+        return DB::get_row($sql);
     }
 
     static function fetch($cid)
@@ -43,27 +43,20 @@ class Category
 
     static function save($category)
     {
-        $name = self::db()->escape_string($category['name']);
+        $name = DB::escape($category['name']);
         $is_parent = $category['is_parent'] ? '1' : '0';
         $create_time = strftime('%F %T');
         $sql = "insert into categories (cid, name, parent_cid, is_parent, create_time)
             values ({$category['cid']}, '$name', '{$category['parent_cid']}', $is_parent, '$create_time')";
-        return self::db()->query($sql);
+        return DB::query($sql);
     }
 
     static function exist($cid)
     {
         $sql = "select 1 from categories where cid = '$cid' limit 1";
-        return self::db()->query($sql)->num_rows > 0;
+        return DB::query($sql)->num_rows > 0;
     }
         
-    static function db()
-    {
-        static $db;
-        if (! $db) $db = DB::connect();
-        return $db;
-    }
-
     static function get_children_from_api($cid)
     {
         $response = TaobaoApi::itemcats_children_get($cid);
