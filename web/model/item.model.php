@@ -72,15 +72,15 @@ class Item extends ItemBase
             $vip = true;
         }
         $ref_price = $this->data['ref_price'];
-        if ( $now_price <= $ref_price * 1.2)
+        if ($now_price <= $ref_price * 1.2)
         {
             $discount_price = $now_price;
-            $risen_price   = null;
+            $risen_price    = null;
         }
         else 
         {
             $discount_price = $ref_price;
-            $risen_price   = $now_price;
+            $risen_price    = $now_price;
         }
         return array($discount_price, $vip, $price, $risen_price);
     }

@@ -18,7 +18,7 @@ class ItemClear
         echo "{$result->num_rows} item to update\n";
         while(list($num_iid) = $result->fetch_row())
         {
-            if ($info = TaobaoItem::get_item_info($num_iid))
+            if($info = TaobaoItem::get_item_info($num_iid))
                 $this->update_item($num_iid, $info);
         }
     }
