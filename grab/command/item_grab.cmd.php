@@ -7,17 +7,6 @@ class ItemGrab
 {
     static function start()
     {
-        $instance = new self;
-        $instance->grab();
-    }
-
-    function __construct()
-    {
-        $this->curl = new Curl();
-    }
-
-    function grab()
-    {
         global $argv;
         $target = isset($argv[1]) ? $argv[1] : null;
         if ($target === null || $target === 'tomorrow')
@@ -30,10 +19,21 @@ class ItemGrab
             $url = 'http://ju.jiukuaiyou.com/shijiu';
         else
         {
-            fputs(STDERR, "unknown $target \nusage: {$argv[0]} [tomorow|today|jiu|shijiu]\n");
+            error_log("unknown $target \nusage: {$argv[0]} [tomorow|today|jiu|shijiu]\n");
             return;
         }
 
+        $instance = new self;
+        $instance->grab($url);
+    }
+
+    function __construct()
+    {
+        $this->curl = new Curl();
+    }
+
+    function grab($url)
+    {
         $refer = 'http://www.jiukuaiyou.com/';
         $page = $this->curl->get($refer);
         if ($url) $page = $this->curl->get($url, $refer);
@@ -78,7 +78,7 @@ class ItemGrab
             #http://item.taobao.com/item.htm?id=17894105049
             else if(preg_match('{http://item.taobao.com/item.htm\?.*(?<=[?&])id=(\d+)}i', $url, $matches))
                 return array($matches[1], false);
-            else fputs(STDERR, "unexpected click url: $url\n");
+            else error_log("unexpected click url: $url\n");
         }
     }
 
@@ -95,18 +95,18 @@ class ItemGrab
     {
         if (! $url2 = $this->curl->get_redirect_url($click_url, $refer))
         {
-            fputs(STDERR, "no url2 from click_url: $click_url\n");
+            error_log("no url2 from click_url: $click_url\n");
             return;
         }
         parse_str(parse_url($url2, PHP_URL_QUERY), $params);
         if (! $url3 = @$params['tu'])
         {
-            fputs(STDERR, "no url3 from url2: $url2\n");
+            error_log("no url3 from url2: $url2\n");
             return;
         }
         if (! $url4 = $this->curl->get_redirect_url($url3, $url2))
         {
-            fputs(STDERR, "no url4 from url3: $url3\n");
+            error_log("no url4 from url3: $url3\n");
             return;
         }
         parse_str(parse_url($url4, PHP_URL_QUERY), $params);
@@ -114,11 +114,11 @@ class ItemGrab
         {
             if (($item_id = trim($item_id)) && preg_match('/^\d+$/', $item_id))
                 return array($item_id, true);
-            else fputs(STDERR, "invalid item id $item_id from url4: $url4\n");
+            else error_log("invalid item id $item_id from url4: $url4\n");
         }
         else
         {
-            fputs(STDERR, "no item id from url4: $url4\n");
+            error_log("no item id from url4: $url4\n");
             return;
         }
     }

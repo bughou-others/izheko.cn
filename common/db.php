@@ -30,12 +30,18 @@ class DB
 
     static function get_row($sql)
     {
-        return self::$db->query($sql)->fetch_assoc();
+        $result = self::$db->query($sql);
+        $row = $result->fetch_assoc();
+        $result->free();
+        return $row;
     }
 
     static function get_rows($sql)
     {
-        return self::$db->query($sql)->fetch_all(MYSQLI_ASSOC);
+        $result = self::$db->query($sql);
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+        $result->free();
+        return $rows;
     }
 
     static function get_rows_and_field($sql, $field)
@@ -48,12 +54,15 @@ class DB
             $data[] = $row;
             $field_data[] = $row[$field];
         }
+        $result->free();
         return array($data, $field_data);
     }
 
     static function get_value($sql)
     {
-        list($value) = self::$db->query($sql)->fetch_row();
+        $result = self::$db->query($sql);
+        list($value) = $result->fetch_row();
+        $result->free();
         return $value;
     }
 
@@ -63,6 +72,7 @@ class DB
         $result = self::$db->query($sql);
         while(list($k, $v) = $result->fetch_row())
             $map[$k] = $v;
+        $result->free();
         return $map;
     }
 
@@ -80,8 +90,26 @@ class DB
         else return false;
     }
 
-    static function update($sql)
+    static function update_affected_rows($sql, $data = null)
     {
+        if($data)
+        {
+            if(is_array($data))
+            {
+                $values = '';
+                foreach($data as $k => $v)
+                {
+                    if(is_null($v)) $v = 'null';
+                    elseif(is_string($v)) $v = '"' . self::$db->escape_string($v) . '"';
+                    $values .= $values ? ",$k=$v" : "$k=$v";
+                }
+            }
+            else $values = self::$db->escape_string($data);
+            $sql = sprintf($sql, $values);
+        }
+        if(self::$db->query($sql))
+            return self::$db->affected_rows;
+        else return false;
     }
 }
 

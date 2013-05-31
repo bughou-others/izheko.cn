@@ -7,70 +7,75 @@ class ItemUpdate
 {
     static function start()
     {
-        $instance = new self;
-        $instance->update();
+        global $argv;
+        $where = isset($argv[1]) ? " where {$argv[1]}" : null;
+        $sql = "select num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
+            promo_start, promo_end, list_time, delist_time, detail_url, click_url, pic_url
+            from items $where order by id asc"; 
+        DB::$db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
+        self::update(DB::query($sql));
     }
 
-    function update()
+    static function update($result)
     {
-        $sql = 'select num_iid from items'; 
-        global $argv;
-        if (isset($argv[1])) $sql .= " where {$argv[1]}";
-        $sql .= ' order by id asc';
-        $result = DB::query($sql);
         echo "{$result->num_rows} item to update\n";
-        $i = 0;
-        while(list($num_iid) = $result->fetch_row())
+        for($i = 1; $item = $result->fetch_assoc(); $i++)
         {
-            $i++;
-            if ( ($info = TaobaoItem::get_item_info($num_iid)) &&
-                ($affected = $this->update_item($num_iid, $info))
-            )    echo "$i update $num_iid success: {$affected}\n";
-            else echo "$i update $num_iid failed\n";
+            $num_iid = $item['num_iid'];
+            if(!$info = TaobaoItem::get_item_info($num_iid))
+            {
+                error_log("$i $num_iid get item info failded\n");
+                continue;
+            }
+            if(!$changes = self::get_changes($item, $info))
+            {
+                echo "$i $num_iid not changed\n";
+                continue;
+            }
+            var_dump($changes);
+            if($affected = self::update_item($num_iid, $changes))
+                echo "$i $num_iid update success: {$affected}\n";
+            else echo "$i $num_iid update failed\n";
         }
     }
 
-    function update_item($num_iid, $info)
+        /*
+        array(
+            'title', 'cid', 'type_id', 'price', 'vip_price', 'promo_price',
+            'promo_start', 'promo_end', 'list_time', 'delist_time', 
+            'detail_url', 'click_url', 'pic_url'
+        );
+         */
+    static function get_changes($item, $info)
     {
-        $now         = strftime('%F %T');
-        $title       = DB::escape($info['title']);
-        $detail_url  = DB::escape($info['detail_url']);
-        $click_url   = isset($info['click_url']) ? DB::escape($info['click_url']) : '';
-        $pic_url     = DB::escape($info['pic_url']);
-        $flags_operation = self::bits_update(ItemBase::FLAGS_MASK_POSTAGE_FREE,
+        unset($item['num_iid']);
+        $info['type_id'] = Category::get_type_id($info['cid']);
+        $info['flags'] = mask_bits($item['flags'], ItemBase::FLAGS_MASK_POSTAGE_FREE,
             $info['freight_payer'] === 'seller' ||
             $info['post_fee']      === '0.00' ||
             $info['express_fee']   === '0.00' ||
             $info['ems_fee']       === '0.00'
         );
-        $cid = $info['cid'];
-        $type_id = Category::get_type_id($cid);
-        $vip_price   = isset($info['vip_price'])   ? $info['vip_price']   : '0';
-        $promo_price = isset($info['promo_price']) ? $info['promo_price'] : '0';
-        $promo_start = isset($info['promo_start']) ? $info['promo_start'] : '0';
-        $promo_end   = isset($info['promo_end'])   ? $info['promo_end']   : '0';
-
-        $sql = "update items set update_time='$now',
-            title='$title', flags=flags $flags_operation,
-            cid='$cid', type_id='$type_id',
-            price='{$info['price']}', vip_price='$vip_price',
-            promo_price='$promo_price',
-            promo_start='$promo_start',
-            promo_end  ='$promo_end',
-            list_time  ='{$info['list_time'  ]}',
-            delist_time='{$info['delist_time']}',
-            detail_url ='$detail_url',
-            click_url  ='$click_url',
-            pic_url    ='$pic_url'
-            where num_iid = $num_iid ";
-        return DB::affected_rows($sql);
+        $changes = array();
+        foreach($item as $k => $v)
+        {
+            if(($v_new = array_key_exists($info[$k]) ? $info[$k] : null) !== $v)
+                $changes[$k] = $v_new;
+        }
+        return $changes;
     }
 
-    static function bits_update($bits, $bool)
+    static function update_item($num_iid, $data)
     {
-        return $bool ? ('| ' . $bits) : ('& ' . (~ $bits));
+        $data['update_time'] = strftime('%F %T');
+        $sql = "update items set %s where num_iid = $num_iid ";
+        return DB::update_affected_rows($sql, $data);
     }
 
+    static function mask_bits($bits, $mask, $bool)
+    {
+        return $bool ? ($bits | $mask) : ($bits & ~$mask);
+    }
 }
 ItemUpdate::start();
 

@@ -6,6 +6,43 @@ require_once APP_ROOT . '/../common/helper/price.helper.php';
 
 class TaobaoItem
 {
+    static function get_item_info($num_iid)
+    {
+        $result = TaobaoApi::item_get($num_iid);
+        $item_info = @$result['item_get_response']['item'];
+        if (isset($item_info['price']))
+            $item_info['price'] = parse_price($item_info['price']);
+        $item_info['vip_price'] = self::get_vip_price($num_iid);
+        if (($result = TaobaoApi::ump_promotion_get($num_iid)) &&
+            ($promo_info =  @$result['ump_promotion_get_response']['promotions']
+            ['promotion_in_item']['promotion_in_item'][0])
+        )
+        {
+            $item_info['promo_price'] = parse_price($promo_info['item_promo_price']);
+            $item_info['promo_start'] = $promo_info['start_time'];
+            $item_info['promo_end']   = $promo_info['end_time'];
+        }
+        if (($result = TaobaoApi::taobaoke_items_detail_get($num_iid)) &&
+            ($click_url = @$result['taobaoke_items_detail_get_response']['taobaoke_item_details']
+            ['taobaoke_item_detail'][0]['click_url'])
+        )
+        {
+            $item_info['click_url'] = $click_url;
+        }
+        return $item_info;
+    }
+
+    static function get_click_urls($num_iid_array)
+    {
+        if (! $result = TaobaoApi::taobaoke_items_detail_get(implode(',', $num_iid_array)))return;
+        if (! $info = @$result['taobaoke_items_detail_get_response']['taobaoke_item_details']['taobaoke_item_detail']) return;
+        $click_urls = array();
+        foreach ($info as $one)
+        {
+            $click_urls[$one['item']['num_iid']] = $one['click_url'];
+        }
+        return $click_urls;
+    }
     static function get_vip_price($num_iid)
     {
         static $curl;
@@ -59,43 +96,6 @@ class TaobaoItem
         return $vip_price;
     }
 
-    static function get_item_info($num_iid)
-    {
-        $result = TaobaoApi::item_get($num_iid);
-        $item_info = @$result['item_get_response']['item'];
-        if (isset($item_info['price']))
-            $item_info['price'] = parse_price($item_info['price']);
-        $item_info['vip_price'] = self::get_vip_price($num_iid);
-        if (($result = TaobaoApi::ump_promotion_get($num_iid)) &&
-            ($promo_info =  @$result['ump_promotion_get_response']['promotions']
-            ['promotion_in_item']['promotion_in_item'][0])
-        )
-        {
-            $item_info['promo_price'] = parse_price($promo_info['item_promo_price']);
-            $item_info['promo_start'] = $promo_info['start_time'];
-            $item_info['promo_end']   = $promo_info['end_time'];
-        }
-        if (($result = TaobaoApi::taobaoke_items_detail_get($num_iid)) &&
-            ($click_url = @$result['taobaoke_items_detail_get_response']['taobaoke_item_details']
-            ['taobaoke_item_detail'][0]['click_url'])
-        )
-        {
-            $item_info['click_url'] = $click_url;
-        }
-        return $item_info;
-    }
-
-    static function get_click_urls($num_iid_array)
-    {
-        if (! $result = TaobaoApi::taobaoke_items_detail_get(implode(',', $num_iid_array)))return;
-        if (! $info = @$result['taobaoke_items_detail_get_response']['taobaoke_item_details']['taobaoke_item_detail']) return;
-        $click_urls = array();
-        foreach ($info as $one)
-        {
-            $click_urls[$one['item']['num_iid']] = $one['click_url'];
-        }
-        return $click_urls;
-    }
 }
 
 
