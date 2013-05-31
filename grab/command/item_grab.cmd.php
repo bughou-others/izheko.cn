@@ -141,8 +141,8 @@ class ItemGrab
         $sql = 'insert ignore into items (`num_iid`, `create_time`, `flags`, `ref_price`, `ref_url`)
             values ' . $values;
         $count = count($items);
-        $affected = DB::affected_rows($sql)
-        if ($affected == false) error_log("insert failed: $count\n");
+        $affected = DB::affected_rows($sql);
+        if($affected === false) error_log("insert failed: $count");
         else echo "insert success: $count, {$affected}\n";
     }
 }

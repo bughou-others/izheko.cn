@@ -32,7 +32,6 @@ class ItemUpdate
                 echo "$i $num_iid not changed\n";
                 continue;
             }
-            var_dump($changes);
             if($affected = self::update_item($num_iid, $changes))
                 echo "$i $num_iid update success: {$affected}\n";
             else echo "$i $num_iid update failed\n";
@@ -50,7 +49,7 @@ class ItemUpdate
     {
         unset($item['num_iid']);
         $info['type_id'] = Category::get_type_id($info['cid']);
-        $info['flags'] = mask_bits($item['flags'], ItemBase::FLAGS_MASK_POSTAGE_FREE,
+        $info['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_POSTAGE_FREE,
             $info['freight_payer'] === 'seller' ||
             $info['post_fee']      === '0.00' ||
             $info['express_fee']   === '0.00' ||
@@ -59,7 +58,7 @@ class ItemUpdate
         $changes = array();
         foreach($item as $k => $v)
         {
-            if(($v_new = array_key_exists($info[$k]) ? $info[$k] : null) !== $v)
+            if(($v_new = array_key_exists($k, $info) ? $info[$k] : null) !== $v)
                 $changes[$k] = $v_new;
         }
         return $changes;
@@ -77,6 +76,6 @@ class ItemUpdate
         return $bool ? ($bits | $mask) : ($bits & ~$mask);
     }
 }
-ItemUpdate::start();
 
+ItemUpdate::start();
 
