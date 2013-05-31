@@ -148,7 +148,7 @@
 </head>
 <body>
   <div id="header">
-    <img src="/izheko-header.png" alt="爱折扣" />
+    <a href="http://www.izheko/"><img src="/img/izheko-header.png" alt="爱折扣" /></a>
     <div id="nav">
       <span class="on">全部</span>
       <span>女装</span>
@@ -166,7 +166,7 @@
   </div>
   <div id="main">
 <?php
-require_once APP_ROOT . '/common/string/string.php';
+require_once APP_ROOT . '/../common/helper/price.helper.php';
 foreach($items as $item) { 
     list($discount_price, $vip, $original_price, $risen_price, $status) = $item->get_price_and_status();
     if ($risen_price) $risen_price = format_price($risen_price);

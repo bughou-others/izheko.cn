@@ -1,17 +1,16 @@
 <?php
 require_once APP_ROOT . '/../common/db.php';
+require_once APP_ROOT . '/../common/model/item_base.model.php';
 
 class Item extends ItemBase
 {
     static function select($offset = 0, $limit = 30)
     {
-        static $db;
-        if (! $db) $db = DB::connect();
         $sql = "select title,flags,ref_price,price,promo_price,vip_price,
             promo_start,list_time,delist_time,detail_url,click_url,pic_url
             from items where title != '' limit $limit offset $offset
             ";
-        $result = $db->query($sql);
+        $result = DB::query($sql);
         $instances = array();
         while($data = $result->fetch_assoc()) $instances[] = new self($data);
         return $instances;
