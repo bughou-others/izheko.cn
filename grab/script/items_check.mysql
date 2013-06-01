@@ -1,5 +1,5 @@
 #!/bin/bash
-eval $(egrep -v '^;' config/db.ini)
+eval $(egrep -v '^;' $(dirname $0)/../../common/config/db.ini)
 cmd="mysql -h$host -u$user -p$password $database"
 #$cmd -H <<"SQL_BLOCK" | w3m -T 'text/html'
  $cmd -t <<"SQL_BLOCK" | less -S
@@ -40,7 +40,8 @@ select 'price' check_item \G
 select id, update_time, num_iid, ref_price, price, vip_price, promo_price,
  promo_start, promo_end, list_time, delist_time, ref_url
 from items 
-where vip_price > price or promo_price > price or (promo_price > 0 and vip_price > promo_price)
+where vip_price > price or promo_price > price
+#or (promo_price > 0 and vip_price > promo_price)
 ;
 
 SQL_BLOCK
