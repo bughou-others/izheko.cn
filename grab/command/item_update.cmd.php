@@ -10,7 +10,7 @@ class ItemUpdate
         global $argv;
         $where = isset($argv[1]) ? " where {$argv[1]}" : null;
         $sql = "select num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
-            promo_start, promo_end, list_time, delist_time, detail_url, click_url, pic_url
+            promo_start, promo_end, list_time, delist_time, detail_url, pic_url
             from items $where order by id asc"; 
         DB::$db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
         self::update(DB::query($sql));
@@ -32,19 +32,12 @@ class ItemUpdate
                 echo "$i $num_iid not changed\n";
                 continue;
             }
-            if($affected = self::update_item($num_iid, $changes))
+            if($affected = self::update_one_item($num_iid, $changes))
                 echo "$i $num_iid update success: {$affected}\n";
             else echo "$i $num_iid update failed\n";
         }
     }
 
-        /*
-        array(
-            'title', 'cid', 'type_id', 'price', 'vip_price', 'promo_price',
-            'promo_start', 'promo_end', 'list_time', 'delist_time', 
-            'detail_url', 'click_url', 'pic_url'
-        );
-         */
     static function get_changes($item, $info)
     {
         unset($item['num_iid']);
@@ -64,7 +57,7 @@ class ItemUpdate
         return $changes;
     }
 
-    static function update_item($num_iid, $data)
+    static function update_one_item($num_iid, $data)
     {
         $data['update_time'] = strftime('%F %T');
         $sql = "update items set %s where num_iid = $num_iid ";

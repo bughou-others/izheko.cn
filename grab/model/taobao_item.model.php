@@ -8,13 +8,19 @@ class TaobaoItem
 {
     static function get_item_info($num_iid)
     {
-        $result = TaobaoApi::item_get($num_iid);
-        $item_info = @$result['item_get_response']['item'];
-        if (isset($item_info['price']))
+        if(($result = TaobaoApi::item_get($num_iid)) &&
+            isset($result['item_get_response']['item'])
+        ) $item_info = $result['item_get_response']['item'];
+        else $item_info = array();
+
+        if(isset($item_info['price']))
             $item_info['price'] = parse_price($item_info['price']);
         $item_info['vip_price'] = self::get_vip_price($num_iid);
+
         if (($result = TaobaoApi::ump_promotion_get($num_iid)) &&
-            ($promo_info =  @$result['ump_promotion_get_response']['promotions']
+            isset($result['ump_promotion_get_response']['promotions']
+            ['promotion_in_item']['promotion_in_item'][0]) &&
+            ($promo_info = $result['ump_promotion_get_response']['promotions']
             ['promotion_in_item']['promotion_in_item'][0])
         )
         {
@@ -22,27 +28,9 @@ class TaobaoItem
             $item_info['promo_start'] = $promo_info['start_time'];
             $item_info['promo_end']   = $promo_info['end_time'];
         }
-        if (($result = TaobaoApi::taobaoke_items_detail_get($num_iid)) &&
-            ($click_url = @$result['taobaoke_items_detail_get_response']['taobaoke_item_details']
-            ['taobaoke_item_detail'][0]['click_url'])
-        )
-        {
-            $item_info['click_url'] = $click_url;
-        }
         return $item_info;
     }
 
-    static function get_click_urls($num_iid_array)
-    {
-        if (! $result = TaobaoApi::taobaoke_items_detail_get(implode(',', $num_iid_array)))return;
-        if (! $info = @$result['taobaoke_items_detail_get_response']['taobaoke_item_details']['taobaoke_item_detail']) return;
-        $click_urls = array();
-        foreach ($info as $one)
-        {
-            $click_urls[$one['item']['num_iid']] = $one['click_url'];
-        }
-        return $click_urls;
-    }
     static function get_vip_price($num_iid)
     {
         static $curl;
@@ -81,7 +69,7 @@ class TaobaoItem
         $response = $curl->get($url, $refer);
         if (! preg_match('/TB\.PromoData\s*=\s*({.*})/s', $response->body, $matches))
         {
-            fputs(STDERR, 'unexpected response:' . $response->body . PHP_EOL);
+            error_log('unexpected response:' . $response->body);
             return;
         }
         $data = decode_json(iconv('GBK', 'UTF-8', $matches[1]));
