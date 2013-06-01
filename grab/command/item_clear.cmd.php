@@ -1,28 +1,31 @@
 <?php
-require_once APP_ROOT . '/app/model/item.php';
+require_once APP_ROOT . '/../common/db.php';
 
 class ItemClear
 {
     static function start()
     {
-        $instance = new self;
-        $instance->clear();
+        self::clear();
     }
 
-    function clear()
+    static function clear()
     {
-        #delisted
-        #too expensive than ref price
-        $sql = 'select num_iid from items where title = "" ';
-        $result = DB::query($sql);
-        echo "{$result->num_rows} item to update\n";
-        while(list($num_iid) = $result->fetch_row())
-        {
-            if($info = TaobaoItem::get_item_info($num_iid))
-                $this->update_item($num_iid, $info);
-        }
+        #delisted or risen price(too expensive than ref price)
+        $common = '
+            from items where delist_time < now() or 
+            least(
+                ifnull(price, 0xffffffff),
+                ifnull(vip_price, 0xffffffff),
+                ifnull(promo_price, 0xffffffff)
+            ) > 1.2 * ref_price
+            ';
+        $sql    = 'replace into items_history select * ' . $common;
+        $count1 = DB::affected_rows($sql);
+        $sql    = 'delete ' . $common;
+        $count2 = DB::affected_rows($sql);
+        echo "cleared $count2 => $count1 \n";
     }
 }
-ItemClear::start();
 
+ItemClear::start();
 
