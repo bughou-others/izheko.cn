@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/model/taobao_api.model.php';
+require_once APP_ROOT . '/../common/model/taobao_api.model.php';
 
 class TaobaoApiCmd
 {

@@ -1,5 +1,6 @@
 <?php
 require_once APP_ROOT . '/helper/curl.helper.php';
+require_once APP_ROOT . '/model/click_url.model.php';
 require_once APP_ROOT . '/../common/helper/price.helper.php';
 require_once APP_ROOT . '/../common/model/item_base.model.php';
 
@@ -24,6 +25,7 @@ class ItemGrab
         }
         self::grab($url);
         system('cd ' . APP_ROOT . '; php run command/item_update.cmd.php \'title=""\'');
+        #system('cd ' . APP_ROOT . '; php run command/click_url_get.cmd.php ');
     }
 
     static function grab($url)

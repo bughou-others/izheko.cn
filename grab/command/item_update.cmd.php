@@ -48,8 +48,8 @@ class ItemUpdate
         $info['type_id'] = Category::get_type_id($info['cid']);
         $info['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_POSTAGE_FREE,
             $info['freight_payer'] === 'seller' ||
-            $info['post_fee']      === '0.00' ||
-            $info['express_fee']   === '0.00' ||
+            $info['post_fee']      === '0.00'   ||
+            $info['express_fee']   === '0.00'   ||
             $info['ems_fee']       === '0.00'
         );
         $changes = array();
