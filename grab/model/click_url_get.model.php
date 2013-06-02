@@ -6,14 +6,14 @@ class ClickUrlGet
 {
     static function fetch($where)
     {
-        $sql = "select num_iid from items $where order by id asc"; 
+        $sql = "select num_iid, list_time from items $where order by id asc"; 
         $result = DB::query($sql);
         $now = strftime('%F %T');
         echo "$now {$result->num_rows} item to get click_url\n";
         $batch = array();
-        while(list($num_iid) = $result->fetch_row())
+        while(list($num_iid, $liist_time) = $result->fetch_row())
         {
-            $batch[] = $num_iid;
+            $batch[$num_iid] = $list_time;
             if(count($batch) >= 10)
             {
                 self::fetch_batch($batch);
@@ -25,21 +25,22 @@ class ClickUrlGet
         echo "$now finished {$result->num_rows} item\n";
     }
 
-    static function fetch_batch($num_iid_array)
+    static function fetch_batch($data)
     {
-        if(!$click_url_array = self::get_batch($num_iid_array))return;
+        if(!$click_url_array = self::get_batch(array_keys($data))) return;
         static $n = 0;
         $i = 0;
         foreach($click_url_array as $num_iid => $click_url)
         {
             $i++;
             $now = strftime('%F %T');
+            $list_time = $data[$num_iid];
             if($click_url){
                 $affected = DB::update_affected_rows(
                     "update items set click_url='%s' where num_iid=$num_iid", $click_url);
-                echo "$now $n-$i $num_iid : $affected\n";
+                echo "$now $n-$i $num_iid $list_time: $affected\n";
             }
-            else echo "$now $n-$i $num_iid : $click_url\n";
+            else echo "$now $n-$i $num_iid $list_time: $click_url\n";
         }
         $n++;
     }

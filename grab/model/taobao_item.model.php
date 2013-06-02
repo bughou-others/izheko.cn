@@ -11,7 +11,7 @@ class TaobaoItem
         if(($result = TaobaoApi::item_get($num_iid)) &&
             isset($result['item_get_response']['item'])
         ) $item_info = $result['item_get_response']['item'];
-        else $item_info = array();
+        else return;
 
         if(isset($item_info['price']))
             $item_info['price'] = parse_price($item_info['price']);
