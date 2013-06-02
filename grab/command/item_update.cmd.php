@@ -18,23 +18,25 @@ class ItemUpdate
 
     static function update($result)
     {
-        echo "{$result->num_rows} item to update\n";
+        $now = strftime('%F %T');
+        echo "$now {$result->num_rows} item to update\n";
         for($i = 1; $item = $result->fetch_assoc(); $i++)
         {
+            $now = strftime('%F %T');
             $num_iid = $item['num_iid'];
             if(!$info = TaobaoItem::get_item_info($num_iid))
             {
-                error_log("$i $num_iid get item info failded\n");
+                error_log("$now $i $num_iid get item info failded\n");
                 continue;
             }
             if(!$changes = self::get_changes($item, $info))
             {
-                echo "$i $num_iid not changed\n";
+                echo "$now $i $num_iid not changed\n";
                 continue;
             }
             if($affected = self::update_one_item($num_iid, $changes))
-                echo "$i $num_iid update success: {$affected}\n";
-            else echo "$i $num_iid update failed\n";
+                echo "$now $i $num_iid update success: {$affected}\n";
+            else echo "$now $i $num_iid update failed\n";
         }
     }
 

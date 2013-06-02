@@ -142,8 +142,9 @@ class ItemGrab
             values ' . $values;
         $count = count($items);
         $affected = DB::affected_rows($sql);
-        if($affected === false) error_log("insert failed: $count");
-        else echo "insert success: $count, {$affected}\n";
+        $now = strftime('%F %T');
+        if($affected === false) error_log("$now insert failed: $count");
+        else echo "$now insert success: $count, {$affected}\n";
     }
 }
 
