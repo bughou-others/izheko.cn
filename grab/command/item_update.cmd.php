@@ -31,13 +31,15 @@ class ItemUpdate
             }
             if(!$changes = self::get_changes($item, $info))
             {
-                echo "$now $i $num_iid not changed\n";
+                #echo "$now $i $num_iid not changed\n";
                 continue;
             }
             if($affected = self::update_one_item($num_iid, $changes))
                 echo "$now $i $num_iid update success: {$affected}\n";
             else echo "$now $i $num_iid update failed\n";
         }
+        if(--$i) echo "$now finished updating $i item\n\n";
+        else echo "\n";
     }
 
     static function get_changes($item, $info)

@@ -25,6 +25,7 @@ class ItemGrab
 
         $instance = new self;
         $instance->grab($url);
+        system('cd ' . APP_ROOT . '; php run command/item_update.cmd.php \'title=""\'');
     }
 
     function __construct()
