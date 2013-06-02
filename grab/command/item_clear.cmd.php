@@ -23,7 +23,8 @@ class ItemClear
         $count1 = DB::affected_rows($sql);
         $sql    = 'delete ' . $common;
         $count2 = DB::affected_rows($sql);
-        echo "cleared $count2 => $count1 \n";
+        $now = strftime('%F %T');
+        echo "$now cleared $count2 => $count1 \n";
     }
 }
 

@@ -9,7 +9,8 @@ class ClickUrlGet
         $sql = 'select num_iid from items where click_url = ""
             order by id asc'; 
         $result = DB::query($sql);
-        echo "{$result->num_rows} item to get click_url\n";
+        $now = strftime('%F %T');
+        echo "$now {$result->num_rows} item to get click_url\n";
         $batch = array();
         while(list($num_iid) = $result->fetch_row())
         {
@@ -31,12 +32,13 @@ class ClickUrlGet
         foreach($click_url_array as $num_iid => $click_url)
         {
             $i++;
+            $now = strftime('%F %T');
             if($click_url){
                 $affected = DB::update_affected_rows(
                     "update items set click_url='%s' where num_iid=$num_iid", $click_url);
-                echo "$n.$i $num_iid : $affected\n";
+                echo "$now $n$i $num_iid : $affected\n";
             }
-            else echo "$n.$i $num_iid : $click_url\n";
+            else echo "$now $n$i $num_iid : $click_url\n";
         }
         $n++;
     }
