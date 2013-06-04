@@ -1,13 +1,12 @@
 #MAILTO = ""
 SHELL   = /bin/bash
 APP_ROOT= /home/bughou/projects/izheko.cn/grab
-# m   h  dom mon dow  command
-  0   5  *   *   *    cd $APP_ROOT; php run command/item_clear.cmd.php      &>> tmp/item_clear.log
+#m    h  dom mon dow  command
+ 0    5  *   *   *    cd $APP_ROOT; php run command/item_clear.cmd.php      &>> tmp/item_clear.log
 
-# 0 16,20,23 * * *    cd $APP_ROOT; php run command/item_grab.cmd.php       &>> tmp/item_grab_tomorrow.log
- 10   5  *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php today &>> tmp/item_grab_today.log
+ 0 15-23 *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php       &>> tmp/item_grab_tomorrow.log
+10    *  *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php today &>> tmp/item_grab_today.log
 
 #20   *  *   *   *    cd $APP_ROOT; php run command/item_update.cmd.php     &>> tmp/item_update.log
-#*/3  *  *   *   *    cd $APP_ROOT; php run command/click_url_get.cmd.php   &>> tmp/click_url_get.log
-# *   *  *   *   *    echo $APP_ROOT &>> other/click_url_get.log
+#*    *  *   *   *    cd $APP_ROOT; php run command/click_url_get.cmd.php   &>> tmp/click_url_get.log
 
