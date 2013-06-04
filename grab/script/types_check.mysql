@@ -1,0 +1,16 @@
+#!/bin/bash
+eval $(egrep -v '^;' $(dirname $0)/../../common/config/db.ini)
+cmd="mysql -h$host -u$user -p$password $database"
+#$cmd -H <<"SQL_BLOCK" | w3m -T 'text/html'
+ $cmd -t <<"SQL_BLOCK" | less -S
+
+set names utf8;
+select type_id, types.name, count(*) count
+from items left join types on items.type_id = types.id
+where cid > 0
+group by type_id 
+order by count desc
+;
+
+SQL_BLOCK
+
