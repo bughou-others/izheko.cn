@@ -25,13 +25,14 @@ class ItemGrab
         }
         self::grab($url);
         system('cd ' . APP_ROOT . <<<EOL
-; php run command/item_update.cmd.php 'title=""' >> tmp/item_update.log 2>&1 &
+; php run command/item_update.cmd.php >> tmp/item_update.log 2>&1 &
 EOL
     );
     }
 
     static function grab($url)
     {
+        echo strtotime("%F %T\n");
         $curl = new Curl();
         $refer = 'http://www.jiukuaiyou.com/';
         $page = $curl->get($refer);
@@ -49,7 +50,8 @@ EOL
         $node_list = $page->query('//div[@class="main"]//ul/li/div');
         foreach ($node_list as $item_node)
         {
-            if ( ($buy_node = $page->query('./div[@class="buy_content"]/a', $item_node)->item(0)) &&
+            if ( ($buy_node = $page->query('./div[@class="buy_content"]/div[1]/a',
+                $item_node)->item(0)) &&
                 ($jump_url = $buy_node->getAttribute('href')) &&
                 (list($item_id, $has_click_url) = self::get_one_item($jump_url, $page)) &&
                 ($item_id = trim($item_id)) && preg_match('/^\d+$/', $item_id)

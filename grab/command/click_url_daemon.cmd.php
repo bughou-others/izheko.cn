@@ -1,7 +1,4 @@
 <?php
-require_once APP_ROOT . '/../common/db.php';
-require_once APP_ROOT . '/model/click_url_get.model.php';
-
 class ClickUrlDaemonCmd
 {
     const error_limit = 60;
@@ -9,7 +6,12 @@ class ClickUrlDaemonCmd
     static function daemonize()
     {
         if(($pid = pcntl_fork()) > 0) exit;
-        elseif($pid === 0) posix_setsid();
+        elseif($pid === 0)
+        {
+            posix_setsid();
+            require_once APP_ROOT . '/../common/db.php';
+            require_once APP_ROOT . '/model/click_url_get.model.php';
+        }
         else  error_log('daemonize faild');
     }
 

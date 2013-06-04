@@ -9,6 +9,9 @@ class ItemUpdate
     {
         global $argv;
         $where = isset($argv[1]) ? " where {$argv[1]}" : null;
+        if($cond === null) $where = ' where title="" and delist_time > now()';
+        else($cond === 'all') $where = '';
+
         $sql = "select num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
             promo_start, promo_end, list_time, delist_time, detail_url, pic_url
             from items $where order by id asc"; 
@@ -27,7 +30,7 @@ class ItemUpdate
             $num_iid = $item['num_iid'];
             if(!$info = TaobaoItem::get_item_info($num_iid))
             {
-                error_log("$now $i $num_iid get item info failded\n");
+                error_log("$now $i $num_iid get item info failded");
                 continue;
             }
             if(!$changes = self::get_changes($item, $info))
