@@ -20,6 +20,7 @@ class ItemUpdate
     {
         $now = strftime('%F %T');
         echo "$now {$result->num_rows} item to update\n";
+        $list_time_change = false;
         for($i = 1; $item = $result->fetch_assoc(); $i++)
         {
             $now = strftime('%F %T');
@@ -37,9 +38,13 @@ class ItemUpdate
             if($affected = self::update_one_item($num_iid, $changes))
                 echo "$now $i $num_iid update success: {$affected}\n";
             else echo "$now $i $num_iid update failed\n";
+            if(isset($changes['list_time'])) $list_time_change = true;
         }
         if(--$i) echo "$now finished updating $i item\n\n";
         else echo "\n";
+        if($list_time_change) {
+            system('cd ' . APP_ROOT . '; php run command/click_url_daemon.cmd.php');
+        }
     }
 
     static function get_changes($item, $info)

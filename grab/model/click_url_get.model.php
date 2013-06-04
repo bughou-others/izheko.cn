@@ -11,7 +11,7 @@ class ClickUrlGet
         $now = strftime('%F %T');
         echo "$now {$result->num_rows} item to get click_url\n";
         $batch = array();
-        while(list($num_iid, $liist_time) = $result->fetch_row())
+        while(list($num_iid, $list_time) = $result->fetch_row())
         {
             $batch[$num_iid] = $list_time;
             if(count($batch) >= 10)
@@ -23,6 +23,7 @@ class ClickUrlGet
         if($batch) self::fetch_batch($batch);
         $now = strftime('%F %T');
         echo "$now finished {$result->num_rows} item\n";
+        $result->free();
     }
 
     static function fetch_batch($data)

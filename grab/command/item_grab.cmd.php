@@ -25,7 +25,6 @@ class ItemGrab
         }
         self::grab($url);
         system('cd ' . APP_ROOT . '; php run command/item_update.cmd.php \'title=""\'');
-        #system('cd ' . APP_ROOT . '; php run command/click_url_get.cmd.php ');
     }
 
     static function grab($url)

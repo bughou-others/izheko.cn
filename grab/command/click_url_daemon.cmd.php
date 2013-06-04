@@ -6,12 +6,21 @@ class ClickUrlDaemonCmd
 {
     const error_limit = 60;
 
+    static function sig_handler($signo)
+    {
+        exit("signal $signo, exited\n");
+    }
+
     static function start()
     {
+        `pkill -SIGTERM -fx 'php run command/click_url_daemon\.cmd\.php'`;
+        pcntl_signal(SIGTERM, 'self::sig_handler');
         do {
             $now = time();
             self::do_work($now, isset($last) ? $last : null);
-            self::do_sleep($now);
+            declare(ticks = 1) {
+                self::do_sleep($now);
+            }
             $last = $now;
         } while(true);
     }
@@ -38,7 +47,7 @@ class ClickUrlDaemonCmd
             if($next = DB::get_value($sql)) $next = strtotime($next);
             else exit("no one to get click_url\n");
         }
-        while(($wait = $next - time()) > 0)sleep($wait);
+        if(($wait = $next - time()) > 0)sleep($wait);
     }
 }
 ClickUrlDaemonCmd::start();
