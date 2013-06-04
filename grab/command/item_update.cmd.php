@@ -43,13 +43,12 @@ class ItemUpdate
         if(--$i) echo "$now finished updating $i item\n\n";
         else echo "\n";
 
-        if($list_time_change) {
-            if(($pid = pcntl_fork()) === 0)
-                pcntl_exec('cd ' . APP_ROOT . <<<EOL
-; php run command/click_url_daemon.cmd.php >> tmp/click_url_daemon.log 2>&1
+        if($list_time_change)
+        {
+            system('cd ' . APP_ROOT . <<<EOL
+; php run command/click_url_daemon.cmd.php >> tmp/click_url_daemon.log 2>&1 &
 EOL
-            );
-            elseif($pid < 0) error_log('run click_url_daemon faild');
+        );
         }
     }
 
