@@ -5,12 +5,14 @@ require_once APP_ROOT . '/../common/model/item_base.model.php';
 
 class ItemUpdate
 {
+    static $list_time_change = false;
+
     static function start()
     {
         global $argv;
         $where = isset($argv[1]) ? " where {$argv[1]}" : null;
-        if($cond === null) $where = ' where title="" and delist_time > now()';
-        else($cond === 'all') $where = '';
+        if($where === null) $where = ' where title=""';
+        elseif($where === 'all') $where = '';
 
         $sql = "select num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
             promo_start, promo_end, list_time, delist_time, detail_url, pic_url
@@ -23,38 +25,39 @@ class ItemUpdate
     {
         $now = strftime('%F %T');
         echo "$now {$result->num_rows} item to update\n";
-        $list_time_change = false;
-        for($i = 1; $item = $result->fetch_assoc(); $i++)
-        {
-            $now = strftime('%F %T');
-            $num_iid = $item['num_iid'];
-            if(!$info = TaobaoItem::get_item_info($num_iid))
-            {
-                error_log("$now $i $num_iid get item info failded");
-                continue;
-            }
-            if(!$changes = self::get_changes($item, $info))
-            {
-                #echo "$now $i $num_iid not changed\n";
-                continue;
-            }
-            if($affected = self::update_one_item($num_iid, $changes))
-                echo "$now $i $num_iid update success: {$affected}\n";
-            else echo "$now $i $num_iid update failed\n";
-            if(isset($changes['list_time'])) $list_time_change = true;
-        }
-        if(--$i) echo "$now finished updating $i item\n\n";
-        else echo "\n";
 
-        if($list_time_change)
+        for($i = 1; $item = $result->fetch_assoc(); $i++)
+            self::update_one($item, $i);
+        if(--$i) echo "$now finished updating $i item\n";
+
+        if(self::$list_time_change)
         {
-            echo 'restart click_url_daemon'
+            echo "restart click_url_daemon\n";
             system('cd ' . APP_ROOT . <<<EOL
 ; php run command/click_url_daemon.cmd.php >> tmp/click_url_daemon.log 2>&1 &
 EOL
         );
-            echo "success\n";
         }
+        echo "\n";
+    }
+    
+    static function update_one($item, $i)
+    {
+        $now = strftime('%F %T');
+        $num_iid = $item['num_iid'];
+        if(!$info = TaobaoItem::get_item_info($num_iid))
+        {
+            error_log("$now $i $num_iid get item info failded");
+            return;
+        }
+        if(!$changes = self::get_changes($item, $info)) return;
+
+        $json = json_encode($changes);
+        if($affected = self::update_db($num_iid, $changes))
+            echo "$now $i $num_iid update success: {$affected} $json\n";
+        else echo "$now $i $num_iid update failed $json\n";
+
+        if(isset($changes['list_time'])) self::$list_time_change = true;
     }
 
     static function get_changes($item, $info)
@@ -76,7 +79,7 @@ EOL
         return $changes;
     }
 
-    static function update_one_item($num_iid, $data)
+    static function update_db($num_iid, $data)
     {
         $data['update_time'] = strftime('%F %T');
         $sql = "update items set %s where num_iid = $num_iid ";
