@@ -6,6 +6,13 @@ class ClickUrlDaemonCmd
 {
     const error_limit = 60;
 
+    static function daemonize()
+    {
+        if(($pid = pcntl_fork()) > 0) exit;
+        elseif($pid === 0) posix_setsid();
+        else  error_log('daemonize faild');
+    }
+
     static function sig_handler($signo)
     {
         exit("signal $signo, exited\n");
@@ -13,8 +20,13 @@ class ClickUrlDaemonCmd
 
     static function start()
     {
+        self::daemonize();
         `pkill -SIGTERM -fx 'php run command/click_url_daemon\.cmd\.php'`;
         pcntl_signal(SIGTERM, 'self::sig_handler');
+    }
+
+    static function main_loop()
+    {
         do {
             $now = time();
             self::do_work($now, isset($last) ? $last : null);

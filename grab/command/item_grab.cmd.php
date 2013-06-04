@@ -24,7 +24,12 @@ class ItemGrab
             return;
         }
         self::grab($url);
-        system('cd ' . APP_ROOT . '; php run command/item_update.cmd.php \'title=""\'');
+        if(($pid = pcntl_fork()) === 0)
+            pcntl_exec('cd ' . APP_ROOT . <<<EOL
+; php run command/item_update.cmd.php 'title=""' >> tmp/item_update.log 2>&1
+EOL
+        );
+        elseif($pid === -1) error_log('run click_url_daemon faild');
     }
 
     static function grab($url)
