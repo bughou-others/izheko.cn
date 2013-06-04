@@ -2,12 +2,12 @@
 SHELL   = /bin/bash
 APP_ROOT= /home/bughou/projects/izheko.cn/grab
 #m    h     dom mon dow  command
- 0    5     *   *   *    cd $APP_ROOT; php run command/item_clear.cmd.php       &>> tmp/item_clear.log
+ 0    4     *   *   *    cd $APP_ROOT; php run command/item_clear.cmd.php       &>> tmp/item_clear.log
 
- 0 15,17,23 *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php        &>> tmp/item_grab_tomorrow.log
- 0  */4     *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php today  &>> tmp/item_grab_today.log
-10  */4     *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php shijiu &>> tmp/item_grab_shijiu.log
+ 0 17,23    *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php        &>> tmp/item_grab_tomorrow.log
+ 0  */5     *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php today  &>> tmp/item_grab_today.log
+10  */5     *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php shijiu &>> tmp/item_grab_shijiu.log
 
- 0  */5     *   *   *    cd $APP_ROOT; php run command/item_update.cmd.php      &>> tmp/item_update.log
+ 0  */8     *   *   *    cd $APP_ROOT; php run command/item_update.cmd.php      &>> tmp/item_update.log
 #*    *     *   *   *    cd $APP_ROOT; php run command/click_url_get.cmd.php    &>> tmp/click_url_get.log
 
