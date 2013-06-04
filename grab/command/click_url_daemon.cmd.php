@@ -21,8 +21,13 @@ class ClickUrlDaemonCmd
     static function start()
     {
         self::daemonize();
-        `pkill -SIGTERM -fx 'php run command/click_url_daemon\.cmd\.php'`;
+        $pids = `pgrep -fx 'php run command/click_url_daemon\.cmd\.php'`;
+        $pid  = posix_getpid();
+        $pids = preg_replace("/\b$pid\b/", '',  $pids);
+        if(!preg_match('/^\s*$/', $pids))
+            `kill -SIGTERM $pids`;
         pcntl_signal(SIGTERM, 'self::sig_handler');
+        self::main_loop();
     }
 
     static function main_loop()
