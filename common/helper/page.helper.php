@@ -1,15 +1,14 @@
 <?php
-function paginate($url, $current, $total, $size, $left = 3, $middle = 5, $right = 3)
+function paginate($prefix, $suffix, $current, $total, $size, $left = 3, $middle = 5, $right = 3)
 {
     $current = (int)$current;
     $last = ceil($total / $size);
     if($last < 1 || $current > $last) return;
     if($current < 1) $current = 1;
 
-    $url .= strpos($url, '?') === false ? '?page=' : '&page=';
     $nav = '';
     if(($prev = $current - 1) >= 1) $nav .= <<<EOT
-<a href="$url$prev">上一页</a>\n
+<a href="$prefix$prev$suffix">上一页</a>\n
 EOT;
     /* 
      * divide all page number into three parts: left, middle, right。
@@ -42,14 +41,14 @@ EOT;
             if($now == $current)
                 $nav .= "<span class=\"current_page\">$now</span>\n";
             else $nav .= <<<EOT
-<a href="$url$now">$now</a>\n
+<a href="$prefix$now$suffix">$now</a>\n
 EOT;
             $now++;
         }
     }
 
     if(($next = $current + 1) <= $last) $nav .= <<<EOT
-            <a href="$url$next">下一页</a>\n
+            <a href="$prefix$next$suffix">下一页</a>\n
 EOT;
     return $nav;
 }

@@ -65,7 +65,7 @@ EOT;
 <div class="pagination">
 <?php
 require_once APP_ROOT . '/../common/helper/page.helper.php';
-echo paginate('/category_manage.do', $page, $total_count, $page_size);
+echo paginate('/category_manage.do?page=', '', $page, $total_count, $page_size);
 ?>
 </div>
 

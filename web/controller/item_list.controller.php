@@ -5,8 +5,22 @@ class ItemListController
 {
     static function index()
     {
-        $items = Item::select(0, 60);
+        $type = isset($_GET['type']) ? $_GET['type'] : null;
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $page_size = 60;
+        list($items, $total_count) = Item::select($type, $page, $page_size);
+        if(!$items) {
+            header("X-Accel-Redirect: =404");
+            error_log('no items get');
+            return;
+        }
+        $path = $_SERVER['REQUEST_DOCUMENT'];
+        $full_path = $_SERVER['DOCUMENT_ROOT'] . $path;
+        if(!is_dir($dir = dirname($full_path))) mkdir($dir, 0755, true);
+        ob_start();
         require_once APP_ROOT . '/view/item_list.view.php';
+        file_put_contents($full_path, ob_get_clean());
+        header("X-Accel-Redirect: $path");
     }
 }
 

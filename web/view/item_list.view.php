@@ -142,13 +142,39 @@
     .clearfix {
       clear: both;
     }
+        .pagination {
+            margin: 1em 0;
+            padding: 1em;
+        }
+        .pagination > a, .pagination > span {
+            color: #666;
+            text-decoration: none;
+            margin: 0 0.2em;
+            padding: 0.5em 0.8em;
+        }
+        .pagination > a, .pagination > span.current_page {
+            border: 1px solid #ccc;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=white,endColorstr=#f0f0f0);
+            background-image: -moz-linear-gradient(top,#fff,#f0f0f0);
+            background-image: -webkit-linear-gradient(top,#fff,#f0f0f0);
+            background-image: -ms-linear-gradient(top,#fff,#f0f0f0);
+        }
+        .pagination > span.current_page {
+            color: white;
+            font-weight: bold;
+            background: none repeat scroll 0 0 #FFA405;
+            border: 1px solid #FE8101;
+        }
     
 
   </style>
 </head>
 <body>
   <div id="header">
-    <a href="http://www.izheko/"><img src="/img/izheko-header.png" alt="爱折扣" /></a>
+    <a href="http://www.izheko/"><img src="/static/izheko-header.png" alt="爱折扣" /></a>
     <div id="nav">
       <span class="on">全部</span>
       <span>女装</span>
@@ -197,6 +223,12 @@ foreach($items as $item) {
       </div>
     </div>
 <?php } ?>
+  </div>
+  <div class="pagination">
+<?php
+    require_once APP_ROOT . '/../common/helper/page.helper.php';
+    echo paginate($type ? "/$type/" : '/', '.html', $page, $total_count, $page_size);
+?>
   </div>
 </body>
 </html>

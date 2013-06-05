@@ -4,16 +4,25 @@ require_once APP_ROOT . '/../common/model/item_base.model.php';
 
 class Item extends ItemBase
 {
-    static function select($offset = 0, $limit = 30)
+    static function select($type = null, $page = 0, $page_size = 30)
     {
-        $sql = "select title,flags,ref_price,price,promo_price,vip_price,
+        if($type) {
+            $type_id = DB::get_value("select id from types where pinyin = '$type'");
+            if(!$type_id) return;
+            $type_condition = "and type_id=$type_id";
+        }
+        else $type_condition = '';
+
+        $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
+        $sql = "select SQL_CALC_FOUND_ROWS title,flags,ref_price,price,promo_price,vip_price,
             promo_start,list_time,delist_time,detail_url,click_url,pic_url
-            from items where title != '' limit $limit offset $offset
+            from items where title != '' $type_condition limit $offset, $page_size
             ";
         $result = DB::query($sql);
+        $found_rows = DB::get_value('select found_rows()');
         $instances = array();
         while($data = $result->fetch_assoc()) $instances[] = new self($data);
-        return $instances;
+        return array($instances, $found_rows);
     }
 
     function __construct($data)
