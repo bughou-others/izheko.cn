@@ -33,27 +33,14 @@ create table if not exists `types`
 (
  `id`            int     unsigned not null auto_increment,
  `name`          varchar(10)      not null,
+ `pinyin`        varchar(50)      not null,
  `create_time`   datetime         not null,
  `update_time`   datetime         default null,
  primary key (`id`),
  unique  key `name` (`name`)
+ unique  key `pinyin` (`pinyin`)
 ) engine=InnoDB default charset=utf8; 
 
-insert into `types` (name, create_time)
-values 
-("女装", now()),
-("男装", now()),
-("居家", now()),
-("母婴", now()),
-("鞋包", now()),
-("配饰", now()),
-("美食", now()),
-("数码", now()),
-("家电", now()),
-("化妆", now()),
-("文体", now())
-("个人护理", now())
-;
 #}}}}}}}}}}}
 SQL_BLOCK
 

@@ -5,7 +5,7 @@ class TypeManage
 {
     static function select($id = null)
     {
-        $sql = "select id, name, create_time, update_time from types ";
+        $sql = "select id, name, pinyin, create_time, update_time from types ";
         if ($id) {
             $sql .= " where id = $id" ;
             return DB::get_row($sql);
@@ -19,17 +19,18 @@ class TypeManage
         return DB::get_map($sql);
     }
 
-    static function update($id, $name)
+    static function update($id, $name, $pinyin)
     {
         if (!($id = trim($id)) ||
             !(preg_match('/^\d+$/', $id)) ||
-            !($name = trim($name))
+            !($name = trim($name)) ||
+            !($pinyin = trim($pinyin)) ||
+            !(preg_match('/^[a-z]+$/', $pinyin))
         ) return;
 
-        $name = DB::escape($name);
-        $sql = "update ignore types set name='$name', update_time=now()
-            where id = $id and name != '$name'";
-        return DB::affected_rows($sql);
+        $sql = "update ignore types set %s, update_time=now()
+            where id = $id ";
+        return DB::update_affected_rows($sql, array('name' => $name, 'pinyin' => $pinyin));
     }
 
     static function insert($name)

@@ -29,12 +29,13 @@ class TypeManageController
     static function save()
     {
         if (!isset($_POST['name']) ||
-            !($name = trim($_POST['name']))
+            !($name = trim($_POST['name'])) ||
+            !($pinyin = trim($_POST['pinyin']))
         ) return;
 
         if ($id = $_POST['save'])
         {
-            if ($r = TypeManage::update($id, $name))
+            if ($r = TypeManage::update($id, $name, $pinyin))
                 $data = TypeManage::select($id);
             elseif ($r === 0)
                 $error = '已经是: ' . $name;
@@ -43,7 +44,7 @@ class TypeManageController
         }
         else
         {
-            if ($id = TypeManage::insert($name))
+            if ($id = TypeManage::insert($name, $pinyin))
                 $data = TypeManage::select($id);
             elseif ($id === 0)
                 $error = '已经存在: ' . $name;
