@@ -16,17 +16,7 @@ class App
             return;
         }
             
-        if (substr($target, -3) == '.do')
-            $target = substr($target, 0, -3);
-        else
-        {
-            if (preg_match('//', $target))
-                $target = '';
-            elseif (preg_match('//', $target))
-                $target = '';
-            else $target = '';
-        }
-        $target = APP_ROOT . "/controller/$target.controller.php";
+        $target = APP_ROOT . "/controller/item_list.controller.php";
         if (file_exists($target)) require_once $target;
         else {
             header("X-Accel-Redirect: =404");
