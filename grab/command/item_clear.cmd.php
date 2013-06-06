@@ -1,5 +1,6 @@
 <?php
 require_once APP_ROOT . '/../common/db.php';
+require_once APP_ROOT . '/../common/model/item_base.model.php';
 
 class ItemClear
 {
@@ -18,7 +19,8 @@ class ItemClear
                 ifnull(vip_price, 0xffffffff),
                 ifnull(promo_price, 0xffffffff)
             ) > 1.2 * ref_price
-            ';
+            or (flags & ' . ItemBase::FLAGS_MASK_ITEM_DELETED . ')'
+            ;
         $sql    = 'replace into items_history select * ' . $common;
         $count1 = DB::affected_rows($sql);
         $sql    = 'delete ' . $common;
