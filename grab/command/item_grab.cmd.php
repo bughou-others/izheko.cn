@@ -50,25 +50,34 @@ EOL
         $node_list = $page->query('//div[@class="main"]//ul/li/div');
         foreach ($node_list as $item_node)
         {
-            if ( ($buy_node = $page->query('./div[@class="buy_content"]/div[1]/a',
-                $item_node)->item(0)) &&
-                ($jump_url = $buy_node->getAttribute('href')) &&
-                (list($item_id, $has_click_url) = self::get_one_item($jump_url, $page)) &&
-                ($item_id = trim($item_id)) && preg_match('/^\d+$/', $item_id)
-            )
+            if($item = self::get_one_item($item_node, $page))
             {
-                $price =  ( ($price_node = $page->query('./div/span[@class="price"]', $buy_node)->item(0)) &&
-                    ($price = $price_node->nodeValue) && preg_match('/\d+(\.\d+)?/', $price, $matches)
-                ) ? $matches[0] : null;
-                $is_vip_price = $page->query('./h3/i[@class="tao_v"]', $item_node)->length > 0;
-                $items[$item_id] = array($price, $is_vip_price, $has_click_url, $jump_url);
+                $item_id = array_shift($item);
+                $items[$item_id] = $item;
             }
         }
         if (!$items) return;
         self::save_items($items);
     }
 
-    static function get_one_item($jump_url, $page)
+    static function get_one_item($item_node, $page)
+    {
+        $buy_node = $page->query(
+            './div[@class="buy_content"]/div[@class="buy_action clearfix"]',
+            $item_node)->item(0);
+        $jump_url = $page->query('./a', $buy_node)->item(0)->getAttribute('href');
+        list($item_id, $has_click_url) = self::get_item_id($jump_url, $page); 
+        $item_id = trim($item_id);
+        if ($item_id && preg_match('/^\d+$/', $item_id))
+        {
+            $price = $page->query('./span[@class="price"]', $buy_node)->item(0)->nodeValue;
+            $price = preg_match('/\d+(\.\d+)?/', $price, $matches) ? $matches[0] : null;
+            $is_vip_price = $page->query('./h3/i[@class="tao_v"]', $item_node)->length > 0;
+            return array($item_id, $price, $is_vip_price, $has_click_url, $jump_url);
+        }
+    }
+
+    static function get_item_id($jump_url, $page)
     {
         $refresh = $page->get_by_url($jump_url)->query('//meta[@http-equiv="refresh"]/@content')->item(0);
         if ($refresh && ($refresh = $refresh->value) && preg_match("/;url='(.+)'/", $refresh, $matches))
