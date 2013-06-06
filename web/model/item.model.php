@@ -4,6 +4,21 @@ require_once APP_ROOT . '/../common/model/item_base.model.php';
 
 class Item extends ItemBase
 {
+    static function types()
+    {
+        $sql = "select type_id, count(*) count from items where title != '' and type_id > 0
+            group by type_id order by count desc";
+        if(!$types = DB::get_map($sql)) return;
+        $type_ids = implode(',', array_keys($types));
+        $sql = "select id, name, pinyin from types where id in ($type_ids)";
+        $result = DB::query($sql);
+        while(list($id, $name, $pinyin) = $result->fetch_row())
+        {
+            $types[$id] = array($name, $pinyin, $types[$id]);
+        }
+        return $types;
+    }
+
     static function select($type = null, $page = 0, $page_size = 30)
     {
         if($type) {

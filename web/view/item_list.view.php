@@ -116,7 +116,7 @@
       border-width: 0 0 2px 0;
       border-bottom: 2px solid #f27b03;
     }
-    #nav > span {
+    #nav > a {
       display:inline-block;
       *display:inline;
       *zoom:1;
@@ -126,15 +126,17 @@
       border-left: 1px solid white;
       border-right: 1px solid white;
       border-width: 1px 1px 0 1px;
+      color: #db4701;
+      text-decoration: none;
     }
-    #nav > span:hover {
+    #nav > a:hover {
       border-top-color: #f90;
       border-left-color: #f90;
       border-right-color: #f90;
       background-color: #f6feed;
     }
 
-    #nav > span.on {
+    #nav > a.on {
       color: white;
       border-color: #f90;
       background-color: #f37c06;
@@ -158,9 +160,9 @@
             -webkit-border-radius: 2px;
             border-radius: 2px;
             filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=white,endColorstr=#f0f0f0);
-            background-image: -moz-linear-gradient(top,#fff,#f0f0f0);
-            background-image: -webkit-linear-gradient(top,#fff,#f0f0f0);
-            background-image: -ms-linear-gradient(top,#fff,#f0f0f0);
+            background-image: -moz-linear-gradient(top,#fff,#eee);
+            background-image: -webkit-linear-gradient(top,#fff,#eee);
+            background-image: -ms-linear-gradient(top,#fff,#eee);
         }
         .pagination > span.current_page {
             color: white;
@@ -168,25 +170,23 @@
             background: none repeat scroll 0 0 #FFA405;
             border: 1px solid #FE8101;
         }
-    
 
   </style>
 </head>
 <body>
   <div id="header">
-    <a href="http://www.izheko/"><img src="/static/izheko-header.png" alt="爱折扣" /></a>
+    <a href="/"><img src="/static/izheko-header.png" alt="爱折扣" /></a>
     <div id="nav">
-      <span class="on">全部</span>
-      <span>女装</span>
-      <span>男装</span>
-      <span>居家</span>
-      <span>母婴</span>
-      <span>鞋包</span>
-      <span>配饰</span>
-      <span>美食</span>
-      <span>数码家电</span>
-      <span>化妆品</span>
-      <span>文体</span>
+      <a href="/"<?= $type ? '' : ' class="on"' ?>>全部</a>
+<?php
+foreach($types as $one) {
+    list($name, $pinyin, $count) = $one;
+    $class = $pinyin === $type ? ' class="on"' : '';
+    echo <<<EOL
+<a href="/$pinyin"$class>$name $count</a>
+EOL;
+}
+?>
       <div class="clearfix"></div>
     </div>
   </div>
