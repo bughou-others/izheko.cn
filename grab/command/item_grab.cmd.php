@@ -57,7 +57,7 @@ EOL
                 ($item_id = trim($item_id)) && preg_match('/^\d+$/', $item_id)
             )
             {
-                $price =  ( ($price_node = $page->query('./span[1]', $buy_node)->item(0)) &&
+                $price =  ( ($price_node = $page->query('./div/span[@class="price"]', $buy_node)->item(0)) &&
                     ($price = $price_node->nodeValue) && preg_match('/\d+(\.\d+)?/', $price, $matches)
                 ) ? $matches[0] : null;
                 $is_vip_price = $page->query('./h3/i[@class="tao_v"]', $item_node)->length > 0;
