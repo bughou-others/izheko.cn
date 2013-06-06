@@ -35,10 +35,12 @@ class ItemUpdate
         if(self::$list_time_change)
         {
             echo "restart click_url_daemon\n";
+            /*
             system('cd ' . APP_ROOT . <<<EOL
 ; php run command/click_url_daemon.cmd.php >> tmp/click_url_daemon.log 2>&1 &
 EOL
         );
+             */
         }
 
         if(self::$changes_type_id)

@@ -8,6 +8,6 @@ APP_ROOT= /home/bughou/projects/izheko.cn/grab
  0  */5     *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php today  &>> tmp/item_grab_today.log
 10  */5     *   *   *    cd $APP_ROOT; php run command/item_grab.cmd.php shijiu &>> tmp/item_grab_shijiu.log
 
- 0  */8     *   *   *    cd $APP_ROOT; php run command/item_update.cmd.php      &>> tmp/item_update.log
+#0  */8     *   *   *    cd $APP_ROOT; php run command/item_update.cmd.php      &>> tmp/item_update.log
 #*    *     *   *   *    cd $APP_ROOT; php run command/click_url_get.cmd.php    &>> tmp/click_url_get.log
 
