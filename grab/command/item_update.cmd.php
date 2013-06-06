@@ -12,7 +12,7 @@ class ItemUpdate
     {
         global $argv;
         $where = isset($argv[1]) ? $argv[1] : null;
-        if($where === null) $where = ' where title=""';
+        if($where === null) $where = ' where title="" and !(flags & ' . ItemBase::FLAGS_MASK_ITEM_DELETED . ')';
         elseif($where === 'all') $where = '';
         else $where = "where $where";
 
@@ -32,16 +32,16 @@ class ItemUpdate
             self::update_one($item, $i);
         if(--$i) echo "$now finished updating $i item\n";
 
+/*
         if(self::$list_time_change)
         {
             echo "restart click_url_daemon\n";
-            /*
             system('cd ' . APP_ROOT . <<<EOL
 ; php run command/click_url_daemon.cmd.php >> tmp/click_url_daemon.log 2>&1 &
 EOL
         );
-             */
         }
+ */
 
         if(self::$changes_type_id)
         {

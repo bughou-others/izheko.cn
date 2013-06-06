@@ -14,7 +14,8 @@ class TaobaoItem
                 $item_info = $result['item_get_response']['item'];
             elseif(
                 isset($result['error_response']['sub_msg']) &&
-                $result['error_response']['sub_msg'] === '该商品已被删除'
+                ( ($sub_msg = $result['error_response']['sub_msg']) === '该商品已被删除'
+                || $sub_msg === '未登录用户不能获取小二下架或删除的商品')
             ) return 'deleted';
             else return;
         }
