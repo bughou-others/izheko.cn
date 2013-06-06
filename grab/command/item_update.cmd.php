@@ -60,7 +60,9 @@ EOL
         }
         if(!$changes = self::get_changes($item, $info)) return;
 
-        $json = json_encode($changes);
+        if($item['title'] === '') $json = 'new';
+        else $json = json_encode($changes);
+
         if($affected = self::update_db($num_iid, $changes))
             echo "$now $i $num_iid update success: {$affected} $json\n";
         else echo "$now $i $num_iid update failed $json\n";
