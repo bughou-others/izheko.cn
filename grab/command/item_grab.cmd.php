@@ -10,10 +10,10 @@ class ItemGrab
     {
         global $argv;
         $target = isset($argv[1]) ? $argv[1] : null;
-        if ($target === null || $target === 'tomorrow')
-            $url = 'http://ju.jiukuaiyou.com/r/'. strftime('%Y%m%d', strtotime('tomorrow'));
-        elseif ($target === 'today')
+        if ($target === null || $target === 'today')
             $url = 'http://ju.jiukuaiyou.com/jiu/all/today/new/all';
+        elseif ($target === 'tomorrow')
+            $url = 'http://ju.jiukuaiyou.com/r/'. strftime('%Y%m%d', strtotime('tomorrow'));
         elseif ($target === 'jiu')
             $url = null;
         elseif ($target === 'shijiu')
