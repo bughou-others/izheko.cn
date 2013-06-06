@@ -4,16 +4,18 @@ require_once APP_ROOT . '/../common/model/taobao_api.model.php';
 
 class ClickUrlGet
 {
+    static $changes_type_id;
     static function fetch($where)
     {
-        $sql = "select num_iid, list_time from items $where order by id asc"; 
+        self::$changes_type_id = array():
+        $sql = "select num_iid, list_time, type_id from items $where order by id asc"; 
         $result = DB::query($sql);
         $now = strftime('%F %T');
         echo "$now {$result->num_rows} item to get click_url\n";
         $batch = array();
-        while(list($num_iid, $list_time) = $result->fetch_row())
+        while(list($num_iid, $list_time, $type_id) = $result->fetch_row())
         {
-            $batch[$num_iid] = $list_time;
+            $batch[$num_iid] = array($list_time, $type_id);
             if(count($batch) >= 10)
             {
                 self::fetch_batch($batch);
@@ -24,6 +26,11 @@ class ClickUrlGet
         $now = strftime('%F %T');
         echo "$now finished {$result->num_rows} item\n";
         $result->free();
+        if(self::$changes_type_id)
+        {
+            require_once APP_ROOT . '/model/cache.model.php';
+            Cache::clear(array_keys($changes_type_id));
+        }
     }
 
     static function fetch_batch($data)
@@ -35,11 +42,12 @@ class ClickUrlGet
         {
             $i++;
             $now = strftime('%F %T');
-            $list_time = $data[$num_iid];
+            list($list_time, $type_id) = $data[$num_iid];
             if($click_url){
                 $affected = DB::update_affected_rows(
                     "update items set click_url='%s' where num_iid=$num_iid", $click_url);
                 echo "$now $n-$i $num_iid $list_time: $affected\n";
+                self::$changes_type_id[$type_id] = 1;
             }
             else echo "$now $n-$i $num_iid $list_time: $click_url\n";
         }
