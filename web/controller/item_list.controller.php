@@ -10,8 +10,8 @@ class ItemListController
         $page_size = 60;
         list($items, $total_count) = Item::select($type, $page, $page_size);
         if(!$items) {
-            header("X-Accel-Redirect: =404");
-            error_log('no items get');
+            header("X-Accel-Redirect: /static/404.htm");
+            error_log('no items gotten');
             return;
         }
         $path = $_SERVER['REQUEST_DOCUMENT'];

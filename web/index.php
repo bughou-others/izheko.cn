@@ -14,7 +14,7 @@ class App
         if (!isset($_SERVER['DOCUMENT_URI']) || !($target = $_SERVER['DOCUMENT_URI']))
         {
             #header("HTTP/1.0 404 Not Found");
-            header("X-Accel-Redirect: =404");
+            header("X-Accel-Redirect: /static/404.htm");
             error_log('no DOCUMENT_URI given');
             return;
         }
@@ -22,7 +22,7 @@ class App
         $target = APP_ROOT . '/controller' . $target;
         if (file_exists($target)) require_once $target;
         else {
-            header("X-Accel-Redirect: =404");
+            header("X-Accel-Redirect: /static/404.htm");
             error_log('controller not exist: ' . $target);
         }
     }
