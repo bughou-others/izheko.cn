@@ -8,9 +8,16 @@ class TaobaoItem
 {
     static function get_item_info($num_iid)
     {
-        if(($result = TaobaoApi::item_get($num_iid)) &&
-            isset($result['item_get_response']['item'])
-        ) $item_info = $result['item_get_response']['item'];
+        if($result = TaobaoApi::item_get($num_iid))
+        {
+            if(isset($result['item_get_response']['item']))
+                $item_info = $result['item_get_response']['item'];
+            elseif(
+                isset($result['error_response']['sub_msg']) &&
+                $result['error_response']['sub_msg'] === '该商品已被删除'
+            ) return 'deleted';
+            else return;
+        }
         else return;
 
         if(isset($item_info['price']))

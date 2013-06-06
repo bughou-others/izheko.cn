@@ -44,7 +44,7 @@ EOL
         if(self::$changes_type_id)
         {
             require_once APP_ROOT . '/model/cache.model.php';
-            Cache::clear(array_keys($changes_type_id));
+            Cache::clear(array_keys(self::$changes_type_id));
         }
         echo "\n";
     }
@@ -60,20 +60,26 @@ EOL
         }
         if(!$changes = self::get_changes($item, $info)) return;
 
-        if($item['title'] === '') $json = 'new';
+        if($info === 'deleted') $json = 'deleted';
+        elseif($item['title'] === '') $json = 'new';
         else $json = json_encode($changes);
-
+        
         if($affected = self::update_db($num_iid, $changes))
             echo "$now $i $num_iid update success: {$affected} $json\n";
         else echo "$now $i $num_iid update failed $json\n";
 
         if(isset($changes['list_time'])) self::$list_time_change = true;
-        self::$changes_type_id[$item['type_id']] = 1;
+        if(isset($item['type_id'])) self::$changes_type_id[$item['type_id']] = 1;
         if(isset($changes['type_id'])) self::$changes_type_id[$changes['type_id']] = 1;
     }
 
     static function get_changes($item, $info)
     {
+        if($info === 'deleted')
+        {
+            $flags = $item['flags'] | ItemBase::FLAGS_MASK_ITEM_DELETED;
+            return $flags === $item['flags'] ? null : array('flags' => $flags);
+        }
         unset($item['num_iid']);
         $info['type_id'] = Category::get_type_id($info['cid']);
         $info['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_POSTAGE_FREE,

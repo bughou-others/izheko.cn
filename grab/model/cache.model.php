@@ -5,6 +5,14 @@ class Cache
     static function clear($type_ids)
     {
         if(!$type_ids) return;
+        foreach($type_ids as $k => $v)
+        {
+            if(!preg_match('/^\d+$/', $v))
+            {
+                error_log("invlid type_id $v");
+                unset($type_ids[$k]);
+            }
+        }
         $type_ids = implode(',', $type_ids);
         $sql = "select name, pinyin from types where id in ($type_ids)";
         $types = DB::get_map($sql);

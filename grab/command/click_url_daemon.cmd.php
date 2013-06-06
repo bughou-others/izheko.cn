@@ -12,12 +12,13 @@ class ClickUrlDaemonCmd
             require_once APP_ROOT . '/../common/db.php';
             require_once APP_ROOT . '/model/click_url_get.model.php';
         }
-        else  error_log('daemonize faild');
+        else error_log('daemonize faild');
     }
 
     static function sig_handler($signo)
     {
-        exit("signal $signo, exited\n");
+        $now = strftime('%F %T');
+        exit("$now signal $signo, exited\n");
     }
 
     static function start()
@@ -63,7 +64,11 @@ class ClickUrlDaemonCmd
         {
             $sql = "select min(list_time) from items where click_url='' and list_time>'$s'";
             if($next = DB::get_value($sql)) $next = strtotime($next);
-            else exit("no one to get click_url\n");
+            else 
+            {
+                $now = strftime('%F %T');
+                exit("$now no one to get click_url, exited\n");
+            }
         }
         if(($wait = $next - time()) > 0)sleep($wait);
     }

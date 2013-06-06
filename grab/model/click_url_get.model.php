@@ -7,7 +7,7 @@ class ClickUrlGet
     static $changes_type_id;
     static function fetch($where)
     {
-        self::$changes_type_id = array():
+        self::$changes_type_id = array();
         $sql = "select num_iid, list_time, type_id from items $where order by id asc"; 
         $result = DB::query($sql);
         $now = strftime('%F %T');
@@ -47,7 +47,7 @@ class ClickUrlGet
                 $affected = DB::update_affected_rows(
                     "update items set click_url='%s' where num_iid=$num_iid", $click_url);
                 echo "$now $n-$i $num_iid $list_time: $affected\n";
-                self::$changes_type_id[$type_id] = 1;
+                if(isset($type_id)) self::$changes_type_id[$type_id] = 1;
             }
             else echo "$now $n-$i $num_iid $list_time: $click_url\n";
         }

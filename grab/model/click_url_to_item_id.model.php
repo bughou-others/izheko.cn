@@ -1,7 +1,7 @@
 <?php
 
 require_once APP_ROOT . '/helper/curl.helper.php';
-class ClickUrl
+class ClickUrlToItemId
 {
     static $curl;
     #click_url example(302 redirected to url2)
@@ -13,7 +13,7 @@ class ClickUrl
     #url4 example
     #http://detail.tmall.com/item.htm?id=18263930351&ali_trackid=2:mm_16674950_0_0,108kh5101010101010nmido0101010T0:1368018253_3k1_855976017&spm=2014.12057478.1.0
 
-    static function to_item_id($click_url, $refer = null)
+    static function fetch($click_url, $refer = null)
     {
         if (! $url2 = self::$curl->get_redirect_url($click_url, $refer))
         {
@@ -45,5 +45,5 @@ class ClickUrl
         }
     }
 }
-ClickUrl::$curl = new Curl();
+ClickUrlToItemId::$curl = new Curl();
 

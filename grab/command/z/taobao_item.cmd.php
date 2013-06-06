@@ -10,6 +10,8 @@ class TaobaoItemCmd
         $num_iid = @$argv[2];
         if ($type ===  'vip_price')
             $result = TaobaoItem::get_vip_price($num_iid);
+        elseif ($type ===  'item_info')
+            $result = TaobaoItem::get_item_info($num_iid);
         else
         {
             echo "unknow action: $type\n";
@@ -18,3 +20,5 @@ class TaobaoItemCmd
         var_dump($result);
     }
 }
+TaobaoItemCmd::start();
+

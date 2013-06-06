@@ -1,6 +1,6 @@
 <?php
 require_once APP_ROOT . '/helper/curl.helper.php';
-require_once APP_ROOT . '/model/click_url.model.php';
+require_once APP_ROOT . '/model/click_url_to_item_id.model.php';
 require_once APP_ROOT . '/../common/helper/price.helper.php';
 require_once APP_ROOT . '/../common/model/item_base.model.php';
 
@@ -75,7 +75,7 @@ EOL
         {
             $url = $matches[1];
             if(preg_match('{http://s.click.taobao.com/}i', $url))
-                return array(ClickUrl::to_item_id($url, $jump_url), true);
+                return array(ClickUrlToItemId::fetch($url, $jump_url), true);
             #http://item.taobao.com/item.htm?id=17894105049
             else if(preg_match('{http://item.taobao.com/item.htm\?.*(?<=[?&])id=(\d+)}i', $url, $matches))
                 return array($matches[1], false);

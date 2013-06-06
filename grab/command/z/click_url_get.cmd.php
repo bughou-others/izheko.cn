@@ -18,6 +18,7 @@ class ClickUrlGetCmd
             $end   = strftime('%F %T', $now + $matches[2] * 60);
             $where = "where click_url='' and list_time between '$start' and '$end'";
         }
+        elseif($target) $where = "where $target";
         else die("usage: php run {$argv[0]} [blank|all|<minutes>,<minutes>]");
 
         ClickUrlGet::fetch($where);
