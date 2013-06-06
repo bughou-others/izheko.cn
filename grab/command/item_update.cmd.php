@@ -6,13 +6,15 @@ require_once APP_ROOT . '/../common/model/item_base.model.php';
 class ItemUpdate
 {
     static $list_time_change = false;
+    static $changes_type_id  = array();
 
     static function start()
     {
         global $argv;
-        $where = isset($argv[1]) ? " where {$argv[1]}" : null;
+        $where = isset($argv[1]) ? $argv[1] : null;
         if($where === null) $where = ' where title=""';
         elseif($where === 'all') $where = '';
+        else $where = "where $where";
 
         $sql = "select num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
             promo_start, promo_end, list_time, delist_time, detail_url, pic_url
@@ -38,6 +40,12 @@ class ItemUpdate
 EOL
         );
         }
+
+        if(self::$changes_type_id)
+        {
+            require_once APP_ROOT . '/model/cache.model.php';
+            Cache::clear(array_keys($changes_type_id));
+        }
         echo "\n";
     }
     
@@ -58,6 +66,8 @@ EOL
         else echo "$now $i $num_iid update failed $json\n";
 
         if(isset($changes['list_time'])) self::$list_time_change = true;
+        self::$changes_type_id[$item['type_id']] = 1;
+        if(isset($changes['type_id'])) self::$changes_type_id[$changes['type_id']] = 1;
     }
 
     static function get_changes($item, $info)
