@@ -3,6 +3,7 @@ require_once APP_ROOT . '/model/taobao_item.model.php';
 require_once APP_ROOT . '/../common/model/category.model.php';
 require_once APP_ROOT . '/../common/model/item_base.model.php';
 
+declare(ticks = 1);
 class ItemUpdate
 {
     static $list_time_change = false;
@@ -20,14 +21,27 @@ class ItemUpdate
         $pid = posix_getpid();
         $sql = "update items set updater=$pid where updater=0 $condition";
         if(!DB::affected_rows($sql))return;
+
+        pcntl_signal(SIGINT, 'ItemUpdate::exit_callback');
+        pcntl_signal(SIGTERM, 'ItemUpdate::exit_callback');
+
         $sql = "select num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
             promo_start, promo_end, list_time, delist_time, detail_url, pic_url
             from items where updater=$pid order by id asc for update
             ";
         DB::$db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
         self::update(DB::query($sql));
+        
+        self::exit_callback('program');
+    }
+
+    static function exit_callback($signo)
+    {
+        $pid = posix_getpid();
+        echo "clear updater $pid by $signo\n";
         $sql = "update items set updater=0 where updater=$pid";
         DB::query($sql);
+        exit;
     }
 
     static function update($result)

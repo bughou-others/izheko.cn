@@ -28,7 +28,7 @@ class ClickUrlDaemonCmd
         $pid  = posix_getpid();
         $pids = preg_replace("/\b$pid\b/", '',  $pids);
         if(!preg_match('/^\s*$/', $pids)) `kill -TERM $pids`;
-        pcntl_signal(SIGTERM, 'self::sig_handler');
+        pcntl_signal(SIGTERM, 'ClickUrlDaemonCmd::sig_handler');
         self::main_loop();
     }
 
@@ -37,9 +37,7 @@ class ClickUrlDaemonCmd
         do {
             $now = time();
             self::do_work($now, isset($last) ? $last : null);
-            declare(ticks = 1) {
-                self::do_sleep($now);
-            }
+            self::do_sleep($now);
             $last = $now;
         } while(true);
     }
@@ -57,6 +55,7 @@ class ClickUrlDaemonCmd
 
     static function do_sleep($now)
     {
+        declare(ticks = 1);
         $s = strftime('%F %T', $now);
         $sql = "select max(list_time) from items where click_url='' and list_time<='$s'";
         if(($prev = DB::get_value($sql)) && $now < ($next = strtotime($prev) + self::error_limit)) ;
