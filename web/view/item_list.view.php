@@ -183,7 +183,7 @@ foreach($types as $one) {
     list($name, $pinyin, $count) = $one;
     $class = $pinyin === $type ? ' class="on"' : '';
     echo <<<EOL
-<a href="/$pinyin"$class>$name $count</a>
+<a href="/$pinyin"$class>$name</a>
 EOL;
 }
 ?>
