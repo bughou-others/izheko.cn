@@ -65,6 +65,7 @@ EOL
         $buy_node = $page->query(
             './div[@class="buy_content"]/div[@class="buy_action clearfix"]',
             $item_node)->item(0);
+        if(!$buy_node)return;
         $jump_url = $page->query('./a', $buy_node)->item(0)->getAttribute('href');
         list($item_id, $has_click_url) = self::get_item_id($jump_url, $page); 
         $item_id = trim($item_id);
