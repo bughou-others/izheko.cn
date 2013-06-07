@@ -3,7 +3,7 @@
 [[ $1 =~ ^[0-9]+$ ]] && num_iid=$1 || { echo "invalid num_iid: $1"; exit; }
 (( $# == 2 )) && {
   [[ $2 = 'tmall' || $2 = 'taobao' ]] && which=$2 || { echo "unknow argument: $2"; exit; }
-} || which=taobao
+} || which=tmall
 
 agent='Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31'
 if [[ $which = 'taobao' ]]; then
@@ -14,6 +14,6 @@ else
     url="http://mdskip.taobao.com/core/initItemDetail.htm?itemId=$num_iid"
 fi
 
-wget -O - -U "$agent" --refer "$refer"  "$url" #| vim -
+wget -O - -U "$agent" --refer "$refer"  "$url" | vim -
 
 

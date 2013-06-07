@@ -59,7 +59,8 @@ class TaobaoItem
             ) foreach($promo_list as $promo)
             {
                 if (is_array($promo) &&
-                    isset($promo['type']) && $promo['type'] === 'VIP价格' &&
+                    isset($promo['type']) && 
+                    ($promo['type'] === 'VIP价格' || $promo['type'] === '店铺vip') &&
                     isset($promo['price']) && ($price = parse_price($promo['price'])) &&
                     (is_null($vip_price) || $price < $vip_price)
                 ) $vip_price = $price;
