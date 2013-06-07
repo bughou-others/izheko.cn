@@ -24,10 +24,7 @@ class ItemGrab
             return;
         }
         self::grab($url);
-        system('cd ' . APP_ROOT . <<<EOL
-; php run command/item_update.cmd.php >> tmp/item_update.log 2>&1 &
-EOL
-    );
+        system('cd ' . APP_ROOT . '; php run command/item_update.cmd.php');
     }
 
     static function grab($url)

@@ -11,16 +11,23 @@ class ItemUpdate
     static function start()
     {
         global $argv;
-        $where = isset($argv[1]) ? $argv[1] : null;
-        if($where === null) $where = ' where title="" and !(flags & ' . ItemBase::FLAGS_MASK_ITEM_DELETED . ')';
-        elseif($where === 'all') $where = '';
-        else $where = "where $where";
+        $condition = isset($argv[1]) ? $argv[1] : null;
+        if($condition === null)
+            $condition = 'and title="" and !(flags&' . ItemBase::FLAGS_MASK_ITEM_DELETED . ')';
+        elseif($condition === 'all') $condition = '';
+        else $condition = "and $condition";
 
+        $pid = posix_getpid();
+        $sql = "update items set updater=$pid where updater=0 $condition";
+        if(!DB::affected_rows($sql))return;
         $sql = "select num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
             promo_start, promo_end, list_time, delist_time, detail_url, pic_url
-            from items $where order by id asc"; 
+            from items where updater=$pid order by id asc for update
+            ";
         DB::$db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
         self::update(DB::query($sql));
+        $sql = "update items set updater=0 where updater=$pid";
+        DB::query($sql);
     }
 
     static function update($result)
