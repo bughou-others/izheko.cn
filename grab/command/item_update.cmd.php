@@ -37,8 +37,9 @@ class ItemUpdate
 
     static function exit_callback($signo)
     {
+        $now = strftime('%F %T');
         $pid = posix_getpid();
-        echo "clear updater $pid by $signo\n";
+        echo "$now clear updater $pid by $signo\n\n";
         $sql = "update items set updater=0 where updater=$pid";
         DB::query($sql);
         exit;
@@ -56,11 +57,10 @@ class ItemUpdate
 /*
         if(self::$list_time_change)
         {
-            echo "restart click_url_daemon\n";
-            system('cd ' . APP_ROOT . <<<EOL
-; php run command/click_url_daemon.cmd.php >> tmp/click_url_daemon.log 2>&1 &
-EOL
-        );
+            $now = strftime('%F %T');
+            echo "$now restart click_url_daemon\n";
+            system('cd ' . APP_ROOT .
+                '; php run command/click_url_daemon.cmd.php >> tmp/click_url_daemon.log 2>&1 &');
         }
  */
 
@@ -69,7 +69,6 @@ EOL
             require_once APP_ROOT . '/model/cache.model.php';
             Cache::clear(array_keys(self::$changes_type_id));
         }
-        echo "\n";
     }
     
     static function update_one($item, $i)

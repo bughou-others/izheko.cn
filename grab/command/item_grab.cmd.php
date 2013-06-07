@@ -39,6 +39,7 @@ class ItemGrab
         do {
             self::get_all_item($page);
         } while ($page = $page->get($xpath));
+        echo "\n";
     }
 
     static function get_all_item($page)
