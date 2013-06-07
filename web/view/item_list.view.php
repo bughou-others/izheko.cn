@@ -30,7 +30,7 @@ foreach($items as $item) {
     $status_data = array(
         '未开始'   => array( 'green', '折扣活动还没开始哟。'),
         '去抢购'   => array( 'red',   '快去抢购吧！'),
-        '已涨价'   => array( 'gray',  "宝贝已经涨价为 ￥$risen_price 啦。"),
+        '已涨价'   => array( 'gray2', "宝贝已经涨价为 ￥$risen_price 啦。"),
         '折扣结束' => array( 'gray',  '折扣活动已经结束啦。'),
         '已抢光'   => array( 'gray',  '宝贝被抢光，已经下架啦。'),
     );
@@ -40,18 +40,21 @@ foreach($items as $item) {
     <div class="item">
       <a target="_blank" href="<?= $item->jump_url() ?>">
         <img src="<?= $item->get_pic_url() ?>" />
-        <h3><?= $item->postage_free() ? '<b>包邮</b> ' : null ?><span><?= $item->get_title() ?></span></h3>
+        <h3><span><?= $item->get_title() ?></span></h3>
         <div class="<?= $style ?>" title="<?= $title ?>"><?= $status ?><?=
           $risen_price ? "<div>￥$risen_price</div>" : null
         ?></div>
       </a>
-      <div>
-        <span title="折扣价<?= format_price($discount_price) ?>">￥<big><?=
+      <div class="price">
+        <span title="折扣价 ￥<?= format_price($discount_price) ?>">￥<big><?=
              $discount_price_yuan ?></big>.<?= $discount_price_fen ?></span>
-        <?= $vip ? '<sup title="这是淘宝VIP用户价哟。">VIP价</sup>' : null ?>
         <?php if ($original_price > $discount_price) { ?>
-        <small title="原价<?= format_price($original_price) ?>"><?= format_price($original_price) ?></small>
+        <small title="原价 ￥<?= format_price($original_price) ?>">￥<?= format_price($original_price) ?></small>
         <?php } ?>
+      </div>
+      <div class="flags">
+        <?= $item->postage_free() ? '<span class="post">包邮</span> ' : null ?>
+        <?= $vip ? '<span class="vip" title="这是淘宝VIP用户价哟。">VIP价</span>' : null ?>
       </div>
     </div>
 <?php } ?>

@@ -5,11 +5,20 @@ body {
     padding: 0;
     text-align: center;
     font-family: "微软雅黑";
+    font-size: 14px;
+    line-height: 22px;
     background-color: white;
+}
+a {
+    color: black;
+    text-decoration: none;
+}
+img {
+    border-width: 0;
 }
 
 #main {
-    margin: 10px;
+    margin: 2em;
 }
 /* item */
 .item {
@@ -17,47 +26,43 @@ body {
     *display: inline;
     *zoom: 1;
     vertical-align: top; 
+    margin: 0.5em;
     width: 240px;
-    margin: 10px;
     border: 1px solid #ccc;
     text-align: left;
     color: black;
 }
-.item > a {
-    text-decoration: none;
-}
 .item:hover {
     border-color: #f90;
+}
+.item > a {
+    text-decoration: none;
 }
 .item > a > img {
     width: 240px;
     height: 240px;
-    border-width: 0;
 }
-.item > a > h3 { 
+.item > a > h3 {
     margin: 0;
     padding: 0 0.5em;
-    /*height: 44px;*/
     overflow: hidden;
-    font: normal 14px/22px "微软雅黑";
-}
-.item > a > h3 > b {
-    color: #393;
-    border: 1px dotted #393;
-}
-.item > a > h3 > span {
-    color: black;
+    font-size: 100%;
+    font-weight: normal;
+    line-height 1.5em: 
+    height: 3em;
 }
 .item > a > h3 > span:hover {
     color: #c00;
 }
 .item > a > div {
-    margin: 0.5em 0.5em 0 0.5em;
+    margin: 0.5em;
     float: right;
     cursor: pointer;
     text-align: center;
     color: white;
-    font: bolder 16px/30px "微软雅黑";
+    font-size: 120%;
+    line-height: 160%;
+    font-weight: bolder;
     padding: 0 1em;
     -moz-border-radius: 0.3em;
     -webkit-border-radius: 0.3em;
@@ -65,45 +70,58 @@ body {
     position: relative;
     behavior: url(/pie/PIE.htc);
 }
-.item > a > div > div {
-    font: bolder 14px/18px "微软雅黑";
-}
-.item > div {
-    margin: 0.5em;
-}
-.item > div > span {
-    color: #c00;
-    font: bold 16px/30px "微软雅黑"; 
-}
-.item > div > span > big {
-    font: bold 30px/30px "微软雅黑";
-}
-.item > div > sup { 
-    position: relative;
-    left: -2.5em;
-    top: -0.8em;
-    color: #393;
-    border: 1px dotted #393;
-    font: bold 12px/14px "微软雅黑";
-}
-.item > div > small {
-    margin: 0; 
-    color: #aaa;
-    font: 14px/22px "微软雅黑"; 
-    text-decoration: line-through;
-}
 .item > a > div.green {
     background-color: #393;
 }
 .item > a > div.red { 
     background-color: #e00;
 }
-.item > a > div.yellow { 
-    color: #393;
-    background-color: yellow;
-}
 .item > a > div.gray { 
     background-color: gray;
+}
+.item > a > div.gray2 {
+    background-color: gray;
+    font-size: 90%;
+    line-height: 120%;
+}
+
+.item > .price {
+    margin: 0.5em;
+    white-space: nowrap;
+}
+.item > .price > span {
+    color: #c00;
+    font-weight: bold;
+}
+.item > .price > span > big {
+    font-size: 200%;
+}
+.item > .price > small {
+    margin: 0; 
+    color: #aaa;
+    text-decoration: line-through;
+}
+.item > .flags {
+    height: 1em;
+    line-height: 1em;
+    margin: 0.5em;
+    white-space: nowrap;
+}
+.item > .flags > .post, .item > .flags > .vip {
+    color: white;
+    font-size: 85%;
+    -webkit-border-radius: 0.3em;
+    -moz-border-radius: 0.3em;
+    border-radius: 0.3em;
+    position: relative;
+    behavior: url(/pie/PIE.htc);
+}
+
+.item > div.flags > span.post {
+    background-color: #393;
+}
+.item > div.flags > span.vip {
+    background-color: #f37c06;
 }
 
 /* navigation */
