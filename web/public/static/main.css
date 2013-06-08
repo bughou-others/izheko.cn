@@ -46,9 +46,9 @@ img {
     margin: 0;
     padding: 0 0.5em;
     overflow: hidden;
-    font-size: 100%;
+    font-size: 1em;
     font-weight: normal;
-    line-height 1.5em: 
+    line-height: 1.5em;
     height: 3em;
 }
 .item > a > h3 > span:hover {
@@ -60,8 +60,8 @@ img {
     cursor: pointer;
     text-align: center;
     color: white;
-    font-size: 120%;
-    line-height: 160%;
+    font-size: 1.2em;
+    line-height: 1.6em;
     font-weight: bolder;
     padding: 0 1em;
     -moz-border-radius: 0.3em;
@@ -81,8 +81,8 @@ img {
 }
 .item > a > div.gray2 {
     background-color: gray;
-    font-size: 90%;
-    line-height: 120%;
+    font-size: 0.9em;
+    line-height: 1.2em;
 }
 
 .item > .price {
@@ -94,7 +94,7 @@ img {
     font-weight: bold;
 }
 .item > .price > span > big {
-    font-size: 200%;
+    font-size: 2em;
 }
 .item > .price > small {
     margin: 0; 
@@ -109,7 +109,7 @@ img {
 }
 .item > .flags > .post, .item > .flags > .vip {
     color: white;
-    font-size: 85%;
+    font-size: 0.85em;
     -webkit-border-radius: 0.3em;
     -moz-border-radius: 0.3em;
     border-radius: 0.3em;
