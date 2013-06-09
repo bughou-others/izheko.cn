@@ -16,10 +16,14 @@ a {
 img {
     border-width: 0;
 }
-
-#main {
+.content {
     margin: 2em;
 }
+.footer {
+    color: #aaa;
+    margin: 2em;
+}
+
 /* item */
 .item {
     display: inline-block;
@@ -116,14 +120,14 @@ img {
 }
 
 /* navigation */
-#nav {
+.nav {
     margin-top: 10px;
     color: #db4701;
     font: normal 16px/22px "微软雅黑";
     border-width: 0 0 2px 0;
     border-bottom: 2px solid #f27b03;
 }
-#nav > a {
+.nav > a {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -136,13 +140,13 @@ img {
     color: #db4701;
     text-decoration: none;
 }
-#nav > a:hover {
+.nav > a:hover {
     border-top-color: #f90;
     border-left-color: #f90;
     border-right-color: #f90;
     background-color: #f6feed;
 }
-#nav > a.on {
+.nav > a.on {
     color: white;
     border-color: #f90;
     background-color: #f37c06;
@@ -152,17 +156,17 @@ img {
 }
 
 /* pagination */
-.pagination {
+.page {
     margin: 1em 0;
     padding: 1em;
 }
-.pagination > a, .pagination > span {
+.page > a, .page > span {
     color: #666;
     text-decoration: none;
     margin: 0 0.2em;
     padding: 0.5em 0.8em;
 }
-.pagination > a, .pagination > span.current_page {
+.page > a, .page > span.current_page {
     border: 1px solid #ccc;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -172,7 +176,7 @@ img {
     background-image: -webkit-linear-gradient(top,#fff,#eee);
     background-image: -ms-linear-gradient(top,#fff,#eee);
 }
-.pagination > span.current_page {
+.page > span.current_page {
     color: white;
     font-weight: bold;
     background: none repeat scroll 0 0 #FFA405;

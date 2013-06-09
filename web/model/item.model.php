@@ -8,7 +8,7 @@ class Item extends ItemBase
     static function types()
     {
         $sql = "select type_id, count(*) count from items where title != '' and type_id > 0
-            group by type_id order by count desc";
+            group by type_id";
         $result = DB::query($sql);
         $types = array();
         $all = Type::all();
