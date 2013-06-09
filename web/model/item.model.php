@@ -1,6 +1,7 @@
 <?php
 require_once APP_ROOT . '/../common/db.php';
 require_once APP_ROOT . '/../common/model/item_base.model.php';
+require_once APP_ROOT . '/model/type.model.php';
 
 class Item extends ItemBase
 {
@@ -8,13 +9,13 @@ class Item extends ItemBase
     {
         $sql = "select type_id, count(*) count from items where title != '' and type_id > 0
             group by type_id order by count desc";
-        if(!$types = DB::get_map($sql)) return;
-        $type_ids = implode(',', array_keys($types));
-        $sql = "select id, name, pinyin from types where id in ($type_ids)";
         $result = DB::query($sql);
-        while(list($id, $name, $pinyin) = $result->fetch_row())
+        $types = array();
+        $all = Type::all();
+        while(list($id, $count) = $result->fetch_row())
         {
-            $types[$id] = array($name, $pinyin, $types[$id]);
+            list($name, $pinyin) = $all[$id];
+            $types[$id] = array($name, $pinyin, $count);
         }
         return $types;
     }
@@ -29,7 +30,7 @@ class Item extends ItemBase
         else $type_condition = '';
 
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
-        $sql = "select SQL_CALC_FOUND_ROWS title,flags,ref_price,price,promo_price,vip_price,
+        $sql = "select SQL_CALC_FOUND_ROWS title,type_id,flags,ref_price,price,promo_price,vip_price,
             promo_start,list_time,delist_time,detail_url,click_url,pic_url
             from items where title != '' $type_condition limit $offset, $page_size
             ";
@@ -48,6 +49,16 @@ class Item extends ItemBase
     function get($name)
     {
         if (isset($this->data[$name])) return $this->data[$name];
+    }
+
+    function get_type_tag()
+    {
+        static $types;
+        if(!$types) $types = Type::all();
+        $type_id = $this->data['type_id'];
+        if(!isset($types[$type_id])) return;
+        list($name, $pinyin) = $types[$type_id];
+        return "<a href=\"/$pinyin\">【{$name}】</a>";
     }
 
     function get_title()

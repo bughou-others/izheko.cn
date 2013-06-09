@@ -38,14 +38,20 @@ foreach($items as $item) {
     list($discount_price_yuan, $discount_price_fen) = split_price($discount_price);
 ?>
     <div class="item">
+      <div class="title">
+        <b><?= $item->get_type_tag() ?></b>
+        <a target="_blank" href="<?= $item->jump_url() ?>">
+          <?= $item->get_title() ?>
+        </a>
+      </div>
       <a target="_blank" href="<?= $item->jump_url() ?>">
         <img src="<?= $item->get_pic_url() ?>" />
-        <h3><span><?= $item->get_title() ?></span></h3>
-        <div class="<?= $style ?>" title="<?= $title ?>"><?= $status ?><?=
-          $risen_price ? "<div>￥$risen_price</div>" : null
-        ?></div>
       </a>
-      <div class="price">
+      <div class="buy">
+        <a class="action <?= $style ?>" title="<?= $title ?>" target="_blank" href="<?= $item->jump_url() ?>">
+          <?= $status ?>
+          <?= $risen_price ? "<div>￥$risen_price</div>" : null ?>
+        </a>
         <span title="折扣价 ￥<?= format_price($discount_price) ?>">￥<big><?=
              $discount_price_yuan ?></big>.<?= $discount_price_fen ?></span>
         <?php if ($original_price > $discount_price) { ?>
@@ -54,7 +60,7 @@ foreach($items as $item) {
       </div>
       <div class="flags">
         <?= $item->postage_free() ? '<span class="post">包邮</span> ' : null ?>
-        <?= $vip ? '<span class="vip" title="这是淘宝VIP用户价哟。">VIP价</span>' : null ?>
+        <?= $vip ? '<span class="vip" title="淘宝VIP用户价哟。">VIP价</span>' : null ?>
       </div>
     </div>
 <?php } ?>

@@ -26,42 +26,36 @@ img {
     *display: inline;
     *zoom: 1;
     vertical-align: top; 
-    margin: 0.5em;
     width: 240px;
-    border: 1px solid #ccc;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid #eee;
     text-align: left;
     color: black;
 }
 .item:hover {
-    border-color: #f90;
-}
-.item > a {
-    text-decoration: none;
+    border-color: #ccc;
 }
 .item > a > img {
     width: 240px;
     height: 240px;
 }
-.item > a > h3 {
+.item > .title {
     margin: 0;
-    padding: 0 0.5em;
     overflow: hidden;
-    font-size: 1em;
-    font-weight: normal;
     line-height: 1.5em;
     height: 3em;
 }
-.item > a > h3 > span:hover {
+.item > .title a:hover {
     color: #c00;
 }
-.item > a > div {
-    margin: 0.5em;
+.item .action {
     float: right;
     cursor: pointer;
     text-align: center;
     color: white;
     font-size: 1.2em;
-    line-height: 1.6em;
+    line-height: 2em;
     font-weight: bolder;
     padding: 0 1em;
     -moz-border-radius: 0.3em;
@@ -70,41 +64,38 @@ img {
     position: relative;
     behavior: url(/pie/PIE.htc);
 }
-.item > a > div.green {
+.item .green {
     background-color: #393;
 }
-.item > a > div.red { 
+.item .red { 
     background-color: #e00;
 }
-.item > a > div.gray { 
+.item .gray { 
     background-color: gray;
 }
-.item > a > div.gray2 {
+.item .gray2 {
     background-color: gray;
-    font-size: 0.9em;
+    font-size: 1em;
     line-height: 1.2em;
 }
 
-.item > .price {
-    margin: 0.5em;
+.item > .buy {
     white-space: nowrap;
 }
-.item > .price > span {
+.item > .buy > span {
     color: #c00;
     font-weight: bold;
 }
-.item > .price > span > big {
+.item > .buy > span > big {
     font-size: 2em;
 }
-.item > .price > small {
-    margin: 0; 
+.item > .buy > small {
     color: #aaa;
     text-decoration: line-through;
 }
 .item > .flags {
-    height: 1em;
-    line-height: 1em;
-    margin: 0.5em;
+    height: 1.5em;
+    line-height: 1.5em;
     white-space: nowrap;
 }
 .item > .flags > .post, .item > .flags > .vip {
@@ -117,10 +108,10 @@ img {
     behavior: url(/pie/PIE.htc);
 }
 
-.item > div.flags > span.post {
+.item > .flags > .post {
     background-color: #393;
 }
-.item > div.flags > span.vip {
+.item > .flags > .vip {
     background-color: #f37c06;
 }
 
