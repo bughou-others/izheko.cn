@@ -1,0 +1,5 @@
+#!/bin/bash
+src="$(dirname $0)/../.."
+dest='root@bughou.com:~/izheko.cn'
+rsync -avrz --exclude-from $src/.gitignore -e 'ssh -p 22000' $src $dest
+
