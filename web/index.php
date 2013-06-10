@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 # vim: ft=php
 define('APP_ROOT', dirname(__FILE__));
