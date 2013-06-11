@@ -13,7 +13,7 @@ class TypeCmd
             self::update_all_type_id();
         else
         {
-            echo "unknow action: $type\n";
+            echo "unknow action: $cmd\n";
             return;
         }
     }
