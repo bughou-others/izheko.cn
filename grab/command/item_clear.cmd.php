@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/../common/db.php';
+require_once APP_ROOT . '/../common/helper/db.helper.php';
 require_once APP_ROOT . '/../common/model/item_base.model.php';
 
 class ItemClear

@@ -5,7 +5,7 @@ class DB
     static function connect()
     {
         static $config;
-        if (!$config) $config = parse_ini_file(APP_ROOT . '/common/database/db.ini');
+        if (!$config) $config = parse_ini_file(APP_ROOT . '/../common/db/db.ini');
 
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         $mysqli = new mysqli($config['host'], $config['user'], $config['password'], $config['database']);

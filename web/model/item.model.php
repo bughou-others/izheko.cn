@@ -1,5 +1,4 @@
 <?php
-require_once APP_ROOT . '/../common/db.php';
 require_once APP_ROOT . '/../common/model/item_base.model.php';
 require_once APP_ROOT . '/model/type.model.php';
 

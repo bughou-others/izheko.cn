@@ -13,6 +13,6 @@ if (( $# > 0 )); then
         $cmd "$database" < $file
     done
 else
-    $cmd
+    $cmd "$database"
 fi
 

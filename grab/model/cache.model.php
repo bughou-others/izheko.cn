@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/../common/db.php';
+require_once APP_ROOT . '/../common/helper/db.helper.php';
 class Cache
 {
     static function clear($type_ids)
