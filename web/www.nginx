@@ -1,0 +1,66 @@
+# vim: filetype=conf
+server {
+    server_name www.izheko;
+
+    set  $app_root APP_ROOT;
+    root $app_root/public;
+
+    error_page 404 /static/404.htm;
+
+    merge_slashes on;
+
+    location = / {
+        try_files /index.html /1.html;
+    }
+
+    location ~ ^(/[a-z]+)/?$ {
+        try_files $uri $1/1.html;
+    }
+
+    location ~ ^/([1-9]\d?)\.html$ {
+        set $request_document /cache/all$document_uri;
+        try_files $request_document /item_list.controller.php?page=$1;
+    }
+
+    location ~ ^/([a-z]+)/([1-9]\d?)\.html$ {
+        set $request_document /cache$document_uri;
+        try_files $request_document /item_list.controller.php?type=$1&page=$2;
+    }
+
+    location ^~ /cache {
+        internal;
+    }
+
+    location ~ .controller.php$ {
+        internal;
+
+        fastcgi_pass    127.0.0.1:9000;
+
+        fastcgi_param	SCRIPT_FILENAME		$app_root/index.php;
+        fastcgi_param	REQUEST_DOCUMENT	$request_document;
+
+        fastcgi_param	QUERY_STRING		$query_string;
+        fastcgi_param	REQUEST_METHOD		$request_method;
+        fastcgi_param	CONTENT_TYPE		$content_type;
+        fastcgi_param	CONTENT_LENGTH		$content_length;
+
+#       fastcgi_param	SCRIPT_FILENAME		$request_filename;
+        fastcgi_param	SCRIPT_NAME		$fastcgi_script_name;
+        fastcgi_param	REQUEST_URI		$request_uri;
+        fastcgi_param	DOCUMENT_URI		$document_uri;
+        fastcgi_param	DOCUMENT_ROOT		$document_root;
+        fastcgi_param	SERVER_PROTOCOL		$server_protocol;
+
+        fastcgi_param	GATEWAY_INTERFACE	CGI/1.1;
+        fastcgi_param	SERVER_SOFTWARE		nginx/$nginx_version;
+
+        fastcgi_param	REMOTE_ADDR		$remote_addr;
+        fastcgi_param	REMOTE_PORT		$remote_port;
+        fastcgi_param	SERVER_ADDR		$server_addr;
+        fastcgi_param	SERVER_PORT		$server_port;
+        fastcgi_param	SERVER_NAME		$server_name;
+
+        fastcgi_param	HTTPS			$https;
+        fastcgi_param	REDIRECT_STATUS		200;
+    }
+}
