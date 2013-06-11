@@ -1,0 +1,13 @@
+
+drop   table if     exists `types`;
+create table if not exists `types`
+(
+ `id`            int     unsigned not null auto_increment,
+ `name`          varchar(10)      not null,
+ `pinyin`        varchar(50)      not null,
+ `create_time`   datetime         not null,
+ `update_time`   datetime         default null,
+ primary key (`id`),
+ unique  key `name` (`name`),
+ unique  key `pinyin` (`pinyin`)
+) engine=InnoDB default charset=utf8; 
