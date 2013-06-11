@@ -6,3 +6,8 @@ dir=$(dirname $0)/..
 $dir/db/run $dir/db/sql/create_items.mysql
 $dir/db/load
 
+replace APP_ROOT '' < $dir/../web/www.nginx       > /etc/nginx/sites-enabled/www.nginx
+replace APP_ROOT '' < $dir/../manage/manage.nginx > /etc/nginx/sites-enabled/manage.nginx
+
+nginx -s reload
+

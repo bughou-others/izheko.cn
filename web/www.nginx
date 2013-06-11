@@ -1,4 +1,4 @@
-# vim: filetype=conf
+# vim: filetype=nginx
 server {
     server_name www.izheko;
 
