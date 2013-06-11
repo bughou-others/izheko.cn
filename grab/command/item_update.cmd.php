@@ -25,7 +25,7 @@ class ItemUpdate
         pcntl_signal(SIGINT, 'ItemUpdate::exit_callback');
         pcntl_signal(SIGTERM, 'ItemUpdate::exit_callback');
 
-        $sql = "select num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
+        $sql = "select cast(num_iid as char) num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
             promo_start, promo_end, list_time, delist_time, detail_url, pic_url
             from items where updater=$pid order by id asc for update
             ";
