@@ -1,7 +1,0 @@
-#!/bin/bash
-dir=$(dirname $0)/..
-eval $(egrep -v '^;' $dir/config/db.ini)
-cmd="mysql -h$host -u$user -p$password $database"
-$cmd < $dir/sql/types.dump.mysql
-$cmd < $dir/sql/categories.dump.mysql
-
