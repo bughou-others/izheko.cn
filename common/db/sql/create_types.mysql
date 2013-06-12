@@ -1,5 +1,5 @@
 
-drop   table if     exists `types`;
+#drop   table if     exists `types`;
 create table if not exists `types`
 (
  `id`            int     unsigned not null auto_increment,
