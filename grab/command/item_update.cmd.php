@@ -24,6 +24,7 @@ class ItemUpdate
 
         pcntl_signal(SIGINT, 'ItemUpdate::exit_callback');
         pcntl_signal(SIGTERM, 'ItemUpdate::exit_callback');
+        register_shutdown_function('ItemUpdate::exit_callback');
 
         $sql = "select cast(num_iid as char) num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
             promo_start, promo_end, list_time, delist_time, detail_url, pic_url
@@ -31,15 +32,14 @@ class ItemUpdate
             ";
         DB::$db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
         self::update(DB::query($sql));
-        
-        self::exit_callback('program');
     }
 
-    static function exit_callback($signo)
+    static function exit_callback($signo = null)
     {
         $now = strftime('%F %T');
         $pid = posix_getpid();
-        echo "$now clear updater $pid by $signo\n\n";
+        $caller = $signo ? "signal $signo" : 'shutdown function';
+        echo "$now clear updater $pid by $caller\n\n";
         $sql = "update items set updater=0 where updater=$pid";
         DB::query($sql);
         exit;

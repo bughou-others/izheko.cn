@@ -1,6 +1,5 @@
 <?php
 # vim: ft=php
-
 define('APP_ROOT', dirname(__FILE__));
 
 class App

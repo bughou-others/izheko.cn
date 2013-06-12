@@ -46,7 +46,7 @@ class Category
         $name = DB::escape($category['name']);
         $is_parent = $category['is_parent'] ? '1' : '0';
         $create_time = strftime('%F %T');
-        $sql = "insert into categories (cid, name, parent_cid, is_parent, create_time)
+        $sql = "insert ignore into categories (cid, name, parent_cid, is_parent, create_time)
             values ({$category['cid']}, '$name', '{$category['parent_cid']}', $is_parent, '$create_time')";
         return DB::query($sql);
     }
