@@ -10,7 +10,7 @@ $cmd -e "create database if not exists \`$database\` default charset=utf8; "
 
 if (( $# > 0 )); then
     for file; do
-        $cmd "$database" < $file
+        $cmd "$database" < "$file"
     done
 else
     $cmd "$database"

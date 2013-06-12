@@ -1,5 +1,5 @@
 #!/bin/bash
-dir=$(dirname $0)
+dir="$(dirname "$0")"
 
-$dir/run $dir/dump_sql/types.dump.mysql $dir/dump_sql/categories.dump.mysql
+$dir/run "$dir/sql_dump/types.dump.mysql" "$dir/sql_dump/categories.dump.mysql"
 
