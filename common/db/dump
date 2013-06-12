@@ -1,9 +1,9 @@
 #!/bin/bash
-dir=$(dirname $0)
+cd "$(dirname "$0")"
 
-eval $(egrep -v '^;' $dir/db.ini)
+eval $(egrep -v '^;' db.ini)
 cmd="mysqldump -h$host -u$user -p$password $database --default-character-set=utf8"
 
-$cmd                                    types > $dir/dump_sql/types.dump.mysql
-$cmd -w"type_id>0 or parent_cid=0" categories > $dir/dump_sql/categories.dump.mysql
+$cmd                                    types > dump_sql/types.dump.mysql
+$cmd -w"type_id>0 or parent_cid=0" categories > dump_sql/categories.dump.mysql
 
