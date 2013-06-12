@@ -1,0 +1,8 @@
+#!/bin/bash
+dir=$(readlink -m $0/../../..)
+
+replace APP_ROOT "$dir/web"    < $dir/web/www.nginx       > /etc/nginx/sites-enabled/www.nginx
+replace APP_ROOT "$dir/manage" < $dir/manage/manage.nginx > /etc/nginx/sites-enabled/manage.nginx
+
+nginx -s reload
+

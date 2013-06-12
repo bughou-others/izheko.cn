@@ -1,0 +1,4 @@
+#!/bin/bash
+dir=$(dirname $0)/..
+$dir/db/run $dir/db/sql/create_items.mysql
+$dir/db/load
