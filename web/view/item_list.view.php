@@ -6,7 +6,7 @@
     </head>
     <body>
         <div class="header">
-            <a href="/"><img src="/static/izheko-header.png" alt="爱折扣" /></a>
+            <a href="/"><img src="/static/logo.png" alt="爱折扣" /></a>
             <div class="nav">
                 <a href="/"<?= $type ? '' : ' class="on"' ?>>全部</a>
 <?php
@@ -72,7 +72,7 @@ foreach($items as $item) {
 ?>
         </div>
         <div class="footer">
-           爱折扣 © 2013 izheko.cn 
+            <p>爱折扣 © 2013 izheko.cn</p>
         </div>
     </body>
 </html>
