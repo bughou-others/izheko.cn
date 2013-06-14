@@ -30,20 +30,33 @@ img {
     padding: 3px;
     background-color: #f27b04; 
     vertical-align: text-top;
+    width: 50%;
+    position: relative;
 }
-.search > input {
+.search > .input_wrapper {
+    padding-right: 12px;
+    margin-right: 8em;
+}
+.search > .input_wrapper > input {
+    width: 100%;
     margin: 0;
     border: none;
     padding: 7px;
-    width: 30em;
     font-size: 1em;
     outline: none;
     background-color: white;
 }
-.search > button {
-    margin: 0;
+.search > .submit_wrapper {
+    width: 8em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    text-align: center;
+}
+.search > .submit_wrapper > button {
+    padding: 0;
     border: none;
-    padding: 0 3em;
     color: white;
     font-size: 1em;
     font-weight: bold;
