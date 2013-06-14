@@ -50,12 +50,13 @@ img {
 .search > .submit_wrapper {
     width: 8em;
     position: absolute;
-    top: 0;
     right: 0;
+    top: 3px;
     text-align: center;
 }
 .search > .submit_wrapper > button {
-    margin: 9px 0;
+    line-height: 2em;
+    vertical-align: middle;
     padding: 0;
     border: none;
     color: white;
