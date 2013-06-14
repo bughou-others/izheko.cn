@@ -6,7 +6,7 @@ body {
     text-align: center;
     font-family: "微软雅黑";
     font-size: 14px;
-    line-height: 22px;
+    line-height: 1.5em;
     background-color: white;
 }
 a {
@@ -14,8 +14,42 @@ a {
     text-decoration: none;
 }
 img {
+    margin: 0;
+    padding: 0;
     border-width: 0;
 }
+.header img {
+    vertical-align: middle;
+}
+.search {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    font-size: 1em;
+    margin-left: 5em;
+    padding: 3px;
+    background-color: #f27b04; 
+    vertical-align: text-top;
+}
+.search > input {
+    margin: 0;
+    border: none;
+    padding: 7px;
+    width: 30em;
+    font-size: 1em;
+    outline: none;
+    background-color: white;
+}
+.search > button {
+    margin: 0;
+    border: none;
+    padding: 0 3em;
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #f27b04;
+}
+
 .content {
     margin: 2em;
 }

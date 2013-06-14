@@ -7,6 +7,11 @@
     <body>
         <div class="header">
             <a href="/"><img src="/static/logo.png" alt="爱折扣" /></a>
+            <form class="search">
+                <input type="text" name="s" />
+                <button type="submit">搜 索</button>
+            </form>
+        </div>
             <div class="nav">
                 <a href="/"<?= $type ? '' : ' class="on"' ?>>全部</a>
 <?php
@@ -20,7 +25,6 @@ EOL;
 ?>
                 <div class="clearfix"></div>
             </div>
-        </div>
         <div class="content">
 <?php
 require_once APP_ROOT . '/../common/helper/price.helper.php';
