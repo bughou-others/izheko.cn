@@ -3,6 +3,7 @@ dir=$(readlink -m "$0"/../../..)
 
 replace APP_ROOT "$dir/web"    < "$dir"/web/nginx    > /etc/nginx/sites-enabled/www.nginx
 replace APP_ROOT "$dir/manage" < "$dir"/manage/nginx > /etc/nginx/sites-enabled/manage.nginx
+test -d "$dir"/manage/tmp || mkdir "$dir"/manage/tmp
 "$(dirname "$0")"/gen-htpasswd bughou death          > "$dir"/manage/tmp/htpasswd
 nginx -s reload
 

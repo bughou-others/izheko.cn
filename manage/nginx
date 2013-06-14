@@ -22,7 +22,7 @@ server {
 
         include fastcgi_params;
         fastcgi_param	DOCUMENT_URI		/$1.do;
-        fastcgi_param	SCRIPT_NAME		/run;
-        fastcgi_param	SCRIPT_FILENAME		$app_root/run;
+        fastcgi_param	SCRIPT_NAME		/index.php;
+        fastcgi_param	SCRIPT_FILENAME		$app_root/index.php;
     }
 }
