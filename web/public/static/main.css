@@ -32,9 +32,10 @@ img {
     vertical-align: text-top;
     width: 50%;
     position: relative;
+    overflow: hidden;
 }
 .search > .input_wrapper {
-    padding-right: 12px;
+    padding-right: 14px;
     margin-right: 8em;
 }
 .search > .input_wrapper > input {
@@ -51,10 +52,10 @@ img {
     position: absolute;
     top: 0;
     right: 0;
-    overflow: hidden;
     text-align: center;
 }
 .search > .submit_wrapper > button {
+    margin: 9px 0;
     padding: 0;
     border: none;
     color: white;
