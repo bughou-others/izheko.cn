@@ -89,7 +89,7 @@ foreach($items as $item) {
                 所有购买与支付交易都在淘宝、天猫进行，
                 请放心购买。
             </div>
-            <p>爱折扣 © 2013 izheko.cn</p>
+            <p>爱折扣©2013 &nbsp; izheko.cn</p>
         </div>
     </body>
 </html>
