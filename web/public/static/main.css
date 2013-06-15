@@ -32,7 +32,7 @@ img {
     font-size: 1em;
     margin-left: 5em;
     padding: 3px;
-    background-color: #f27b04; 
+    background-color: #ffa405; 
     vertical-align: text-top;
     width: 50%;
     position: relative;
@@ -67,7 +67,7 @@ img {
     color: white;
     font-size: 1em;
     font-weight: bold;
-    background-color: #f27b04;
+    background-color: #ffa405;
 }
 
 /* navigation */
@@ -75,7 +75,7 @@ img {
     margin-top: 1em;
     font-size: 1.2em;
     line-height: 2em;
-    background-color: #f37c06;
+    background-color: #ffa405;
 }
 .nav > a {
     color: white;
@@ -146,7 +146,7 @@ img {
     background-color: #393;
 }
 .item .yellow { 
-    background-color: #f40;
+    background-color: #ffa405;
 }
 .item .gray { 
     background-color: gray;
@@ -161,7 +161,7 @@ img {
     white-space: nowrap;
 }
 .item > .buy > span {
-    color: #c00;
+    color: #f40;
     font-weight: bold;
 }
 .item > .buy > span > big {
@@ -217,7 +217,7 @@ img {
 .page > span.current_page {
     color: white;
     font-weight: bold;
-    background: none repeat scroll 0 0 #FFA405;
+    background: none repeat scroll 0 0 #ffa405;
     border: 1px solid #FE8101;
 }
 
