@@ -24,7 +24,7 @@ EOL;
 }
 ?>
         </div>
-        <div class="content">
+        <div class="content"><!--
 <?php
 require_once APP_ROOT . '/../common/helper/price.helper.php';
 foreach($items as $item) { 
@@ -40,7 +40,7 @@ foreach($items as $item) {
     list($style, $title) = $status_data[$status];
     list($discount_price_yuan, $discount_price_fen) = split_price($discount_price);
 ?>
-            <div class="item">
+           --><div class="item">
                 <div class="title">
                     <b><?= $item->get_type_tag() ?></b>
                     <a target="_blank" href="<?= $item->jump_url() ?>">
@@ -65,9 +65,9 @@ foreach($items as $item) {
                     <?= $item->postage_free() ? '<span class="post">包邮</span> ' : null ?>
                     <?= $vip ? '<span class="vip" title="淘宝VIP用户价哟。">VIP价</span>' : null ?>
                 </div>
-            </div>
+            </div><!--
 <?php } ?>
-        </div>
+        --></div>
         <div class="page">
 <?php
     require_once APP_ROOT . '/../common/helper/page.helper.php';

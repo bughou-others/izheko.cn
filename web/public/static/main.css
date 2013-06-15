@@ -96,6 +96,7 @@ img {
 
 .content {
     margin: 2em;
+    border-collapse: collapse;
 }
 /* item */
 .item {
