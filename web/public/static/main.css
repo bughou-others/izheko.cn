@@ -104,7 +104,7 @@ img {
     *display: inline;
     *zoom: 1;
     vertical-align: top; 
-    width: 240px;
+    width: 210px;
     padding: 1em;
     margin: 1em;
     border: 1px solid #eee;
@@ -115,8 +115,8 @@ img {
     border-color: #ccc;
 }
 .item > a > img {
-    width: 240px;
-    height: 240px;
+    width: 210px;
+    height: 210px;
 }
 .item > .title {
     margin: 0;
