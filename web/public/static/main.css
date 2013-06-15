@@ -231,6 +231,9 @@ img {
 .footer table {
     margin: 0 auto;
 }
+.footer table img {
+    margin-right: 2em;
+}
 .footer table th {
     text-align: right;
     white-space: nowrap;

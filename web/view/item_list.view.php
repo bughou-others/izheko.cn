@@ -77,6 +77,7 @@ foreach($items as $item) {
         <div class="footer">
             <table>
                 <tr>
+                    <td rowspan="2"><img src="/static/logo.png" alt="爱折扣" /></td>
                     <th>爱折扣的价值：</th>
                     <td> 爱折扣为您精选了淘宝、 天猫的优质折扣商品， 让您轻松找到物美价廉、 称心如意的宝贝。</td>
                 </tr>
