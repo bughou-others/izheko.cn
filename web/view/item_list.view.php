@@ -23,7 +23,6 @@ foreach($types as $one) {
 EOL;
 }
 ?>
-            <div class="clearfix"></div>
         </div>
         <div class="content">
 <?php

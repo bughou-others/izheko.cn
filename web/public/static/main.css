@@ -174,34 +174,21 @@ img {
 /* navigation */
 .nav {
     margin-top: 1em;
-    color: #db4701;
-    font: normal 16px/22px "微软雅黑";
-    border-width: 0 0 2px 0;
-    border-bottom: 2px solid #f27b03;
+    font-size: 1.2em;
+    line-height: 2em;
+    background-color: #f37c06;
 }
 .nav > a {
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    padding: 0 15px;
-    margin-right: 3px;
-    border-top: 1px solid white;
-    border-left: 1px solid white;
-    border-right: 1px solid white;
-    border-width: 1px 1px 0 1px;
-    color: #db4701;
+    color: white;
+    padding: 0.6em 1em;
     text-decoration: none;
+    vertical-align: top;
 }
 .nav > a:hover {
-    border-top-color: #f90;
-    border-left-color: #f90;
-    border-right-color: #f90;
-    background-color: #f6feed;
+    background-color: #f40;
 }
 .nav > a.on {
-    color: white;
-    border-color: #f90;
-    background-color: #f37c06;
+    background-color: #f40;
 }
 .clearfix {
     clear: both;
