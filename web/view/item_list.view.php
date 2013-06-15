@@ -12,19 +12,19 @@
                 <div class="submit_wrapper"><button type="submit">搜 索</button></div>
             </form>
         </div>
-            <div class="nav">
-                <a href="/"<?= $type ? '' : ' class="on"' ?>>全部</a>
+        <div class="nav">
+            <a href="/"<?= $type ? '' : ' class="on"' ?>>全部</a>
 <?php
 foreach($types as $one) {
     list($name, $pinyin, $count) = $one;
     $class = $pinyin === $type ? ' class="on"' : '';
     echo <<<EOL
-                <a href="/$pinyin"$class>$name</a>\n
+            <a href="/$pinyin"$class>$name</a>\n
 EOL;
 }
 ?>
-                <div class="clearfix"></div>
-            </div>
+            <div class="clearfix"></div>
+        </div>
         <div class="content">
 <?php
 require_once APP_ROOT . '/../common/helper/price.helper.php';

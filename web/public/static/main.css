@@ -18,6 +18,9 @@ img {
     padding: 0;
     border-width: 0;
 }
+.header {
+    margin: 1em 0;
+}
 .header img {
     vertical-align: middle;
 }
@@ -170,7 +173,7 @@ img {
 
 /* navigation */
 .nav {
-    margin-top: 10px;
+    margin-top: 1em;
     color: #db4701;
     font: normal 16px/22px "微软雅黑";
     border-width: 0 0 2px 0;
