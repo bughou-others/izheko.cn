@@ -228,27 +228,14 @@ img {
     margin-top: 2em;
     border-top: 1px solid #ffa405;
 }
-
-.footer > .value, .footer > .trade {
-    margin: 0 3em;
-    border: 1em solid #eee;
+.footer table {
+    margin: 0 auto;
+}
+.footer table th {
+    text-align: right;
+    white-space: nowrap;
+}
+.footer table td {
     text-align: left;
-    vertical-align: top;
-    display: inline-block;
-    line-height: 2em;
-    font-size: 0.85em;
 }
-.footer > .value {
-    padding: 1em 2em;
-    width: 11em; 
-    font-size: 0.85em;
-}
-.footer > .trade {
-    padding: 1em;
-    width: 14em;
-}
-.footer > .value > div,
-.footer > .trade > div {
-    font-weight: bold;
-    text-align: center;
-}
+
