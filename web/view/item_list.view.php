@@ -75,6 +75,20 @@ foreach($items as $item) {
 ?>
         </div>
         <div class="footer">
+            <div class="value">
+                <div>爱折扣的价值</div>
+                爱折扣为您精选了淘宝、<br/>
+                天猫的优质折扣商品，<br/>
+                让您轻松找到物美价廉、<br/>
+                称心如意的宝贝。
+            </div>
+            <div class="trade">
+                <div>购买与支付</div>
+                爱折扣仅提供到淘宝、天猫的链接，
+                不涉及任何交易行为，<br/>
+                所有购买与支付交易都在淘宝、天猫进行，
+                请放心购买。
+            </div>
             <p>爱折扣 © 2013 izheko.cn</p>
         </div>
     </body>
