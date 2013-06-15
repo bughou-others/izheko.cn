@@ -32,7 +32,7 @@ foreach($items as $item) {
     if ($risen_price) $risen_price = format_price($risen_price);
     $status_data = array(
         '未开始'   => array( 'green', '折扣活动还没开始哟。'),
-        '去抢购'   => array( 'red',   '快去抢购吧！'),
+        '去抢购'   => array( 'yellow',   '快去抢购吧！'),
         '已涨价'   => array( 'gray2', "宝贝已经涨价为 ￥$risen_price 啦。"),
         '折扣结束' => array( 'gray',  '折扣活动已经结束啦。'),
         '已抢光'   => array( 'gray',  '宝贝被抢光，已经下架啦。'),
