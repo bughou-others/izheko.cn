@@ -2,11 +2,10 @@
 server {
     server_name manage.izheko;
 
-    set  $app_root /home/bughou/projects/izheko.cn/manage;
-    root $app_root/public;
+    root APP_ROOT/public;
 
     auth_basic protection;
-    auth_basic_user_file $app_root/tmp/htpasswd;
+    auth_basic_user_file APP_ROOT/tmp/htpasswd;
 
     error_page 404 /404.html;
 
@@ -16,13 +15,13 @@ server {
 
     location ~ ^/(.+)\.do$ {
         try_files /../controller/$1.controller.php =404;
-        #if (!-e $app_root/controller/$1.controller.php) { return 404; }
+        #if (!-e APP_ROOT/$1.controller.php) { return 404; }
 
         fastcgi_pass 127.0.0.1:9000;
 
         include fastcgi_params;
         fastcgi_param	DOCUMENT_URI		/$1.do;
         fastcgi_param	SCRIPT_NAME		/index.php;
-        fastcgi_param	SCRIPT_FILENAME		$app_root/index.php;
+        fastcgi_param	SCRIPT_FILENAME		APP_ROOT/index.php;
     }
 }

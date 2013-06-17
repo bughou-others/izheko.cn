@@ -101,6 +101,12 @@ img {
 
 .content {
     margin: 2em;
+}
+.error_pic {
+    margin: 2em;
+}
+
+.item_list{
     border-collapse: collapse;
 }
 /* item */

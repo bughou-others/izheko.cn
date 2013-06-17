@@ -1,6 +1,9 @@
 #!/bin/bash
-dir=$(readlink -m "$0"/../../..)
+dir=$(realpath -s "$0"/../../..)
 
+cache_dir="$dir"/web/public/cache
+test -d "$cache_dir" || mkdir "$cache_dir"
+chown www-data:www-data "$cache_dir"
 replace APP_ROOT "$dir/web"    < "$dir"/web/nginx    > /etc/nginx/sites-enabled/www.nginx
 replace APP_ROOT "$dir/manage" < "$dir"/manage/nginx > /etc/nginx/sites-enabled/manage.nginx
 test -d "$dir"/manage/tmp || mkdir "$dir"/manage/tmp

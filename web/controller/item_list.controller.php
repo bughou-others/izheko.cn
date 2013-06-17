@@ -10,13 +10,13 @@ class ItemListController
         $page_size = 60;
         list($items, $total_count) = Item::select($type, $page, $page_size);
         if(!$items) {
-            header("X-Accel-Redirect: /static/404.htm");
+            header('X-Accel-Redirect: /cache/404.html');
             error_log('no items gotten');
             return;
         }
-        $types = Item::types();
         #ob_start();
-        require_once APP_ROOT . '/view/item_list.view.php';
+        $target_view = 'item_list';
+        require_once APP_ROOT . '/view/layout.view.php';
         /*
         $path = $_SERVER['REQUEST_DOCUMENT'];
         $full_path = $_SERVER['DOCUMENT_ROOT'] . $path;
