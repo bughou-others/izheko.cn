@@ -9,7 +9,7 @@
             <a href="/"><img src="/static/logo.png" alt="爱折扣" /></a>
             <form class="search">
                 <div class="input_wrapper"><input type="text" name="s" /></div>
-                <div class="submit_wrapper"><button type="submit">搜 索</button></div>
+                <div class="submit_wrapper"><button type="submit">搜　索</button></div>
             </form>
         </div>
         <div class="nav">

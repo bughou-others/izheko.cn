@@ -1,5 +1,5 @@
 #!/bin/bash
-eval $(egrep -v '^;' $(dirname $0)/../../common/config/db.ini)
+eval $(egrep -v '^;' $(dirname $0)/../../common/db/db.ini)
 cmd="mysql -h$host -u$user -p$password $database"
 #$cmd -H <<"SQL_BLOCK" | w3m -T 'text/html'
  $cmd -t <<"SQL_BLOCK" | less -S
@@ -12,5 +12,10 @@ group by type_id
 order by count desc
 ;
 
+select items.cid, categories.name, count(*) count
+from items left join categories on items.cid = categories.cid
+group by items.cid 
+order by count desc
+;
 SQL_BLOCK
 
