@@ -19,25 +19,19 @@ class Item extends ItemBase
         return $types;
     }
 
-    static function search($word, $page, $page_size)
+    static function query($type, $word, $page, $page_size)
     {
-        $word = trim($word);
-        if(strlen($word) > 0) {
-            $word = DB::escape($word);
-            $condition = "and title like '%$word%'";
-        }
-        else return;
-        return self::select($condition, $page, $page_size);
-    }
-
-    static function query($type, $page, $page_size)
-    {
-        if($type) {
+        if($type && $type !== 'all') {
             $type_id = DB::get_value("select id from types where pinyin = '$type'");
             if(!$type_id) return;
             $condition = "and type_id=$type_id";
         }
         else $condition = '';
+
+        if(strlen($word) > 0) {
+            $word = DB::escape($word);
+            $condition .= " and title like '%$word%'";
+        }
 
         return self::select($condition, $page, $page_size);
     }

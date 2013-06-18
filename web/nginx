@@ -9,7 +9,7 @@ server {
     merge_slashes on;
 
     location = / {
-        set $request_document /cache/all/1.html;
+        set $request_document /cache/type/all/1.html;
         try_files $request_document /item_list.controller.php;
     }
 
@@ -19,7 +19,7 @@ server {
     }
 
     location ~ ^/([1-9]\d?)\.html$ {
-        set $request_document /cache/all$document_uri;
+        set $request_document /cache/type/all$document_uri;
         try_files $request_document /item_list.controller.php?page=$1;
     }
 
@@ -29,17 +29,24 @@ server {
     }
 
     location = /search {
-        if ($arg_s !~ \S+) {
-            set $request_document /cache/all/1.html;
-            rewrite ^ /item_list.controller.php last;
+        set $type $arg_t;
+        if ($type ~ ^\s*$) {
+            set $type all;
         }
-        set $request_document /cache/search/$arg_s/1.html;
-        try_files $request_document /item_list.controller.php?search=$arg_s;
+        if ($arg_s ~ ^\s*$) {
+            set $request_document /$type/1.html;
+            rewrite ^ $request_document last;
+        }
+        set $request_document "/cache/search/$type/$arg_s/1.html";
+        if (-f $request_document) {
+            rewrite ^ $request_document break;
+        }
+        rewrite ^ /item_list.controller.php?type=$type&search=$arg_s last;
     }
 
-    location ~ ^/search/(.+)/([1-9]\d?).html$ {
-        set $request_document /cache/search/$1;
-        try_files $request_document /item_list.controller.php?search=$1&page=$2;
+    location ~ ^/search/([a-z]+)/(.*\S+.*)/([1-9]\d?).html$ {
+        set $request_document /cache/search/$1/$2/$3.html;
+        try_files $request_document /item_list.controller.php?type=$1&search=$2&page=$3;
     }
 
     location ^~ /cache {

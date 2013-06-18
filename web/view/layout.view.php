@@ -8,22 +8,32 @@
         <div class="header">
             <a href="/"><img src="/static/logo.png" alt="爱折扣" /></a>
             <form class="search" action="/search">
-                <div><input type="text" name="s" /></div>
+                <div><input type="text" name="s" value="<?= isset($word) ? $word : null ?>" /></div>
                 <span>
-                    <select autocomplete="off">
-                        <option value="">全部</option>
-                        <option value="">女装</option>
-                        <option value="">男装</option>
+                    <select autocomplete="off" name="t">
+                        <option value="all"<?= 
+                        isset($type) && ($type === '' || $type === 'all') ? ' selected' : null
+                        ?>>全部</option>
+<?php
+    require_once APP_ROOT . '/model/item.model.php';
+    $types = Item::types();
+    foreach($types as $one)
+    {
+        list($name, $pinyin) = $one;
+        $selected = isset($type) && $pinyin === $type ? ' selected' : '';
+        echo <<<EOL
+                        <option value="$pinyin"$selected>$name</option>\n
+EOL;
+    }
+?>
                     </select>
                 </span>
                 <button type="submit">搜　索</button>
             </form>
         </div>
         <div class="nav">
-            <a href="/"<?= isset($type) && !$type ? ' class="on"' : '' ?>>全部</a>
+            <a href="/"<?= isset($type) && (!$type || $type === 'all') ? ' class="on"' : '' ?>>全部</a>
 <?php
-    require_once APP_ROOT . '/model/item.model.php';
-    $types = Item::types();
     foreach($types as $one)
     {
         list($name, $pinyin, $count) = $one;

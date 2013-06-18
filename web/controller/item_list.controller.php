@@ -7,27 +7,27 @@ class ItemListController
     {
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         $page_size = 60;
-        if (isset($_GET['search']))
-        {
-            $word = $_GET['search'];
-            list($items, $total_count) = Item::search($word, $page, $page_size);
+
+        $type = isset($_GET['type'])   ? trim($_GET['type'])   : '';
+        $word = isset($_GET['search']) ? trim($_GET['search']) : '';
+        list($items, $total_count) = Item::query($type, $word, $page, $page_size);
+        if(strlen($word) > 0) {
             if(!is_array($items)) {
                 header('X-Accel-Redirect: /cache/404.html');
                 error_log('search error');
                 return;
             }
-            $page_url = "/search/$word/";
+            if($type === '')$type = 'all';
+            $page_url = "/search/$type/$word/";
         }
         else
         {
-            $type = isset($_GET['type']) ? $_GET['type'] : '';
-            list($items, $total_count) = Item::query($type, $page, $page_size);
             if(!$items) {
                 header('X-Accel-Redirect: /cache/404.html');
                 error_log('no items gotten');
                 return;
             }
-            $page_url = $type ? "/$type/" : '/';
+            $page_url = $type && $type !== 'all' ? "/$type/" : '/';
         }
         #ob_start();
         $target_view = 'item_list';
