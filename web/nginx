@@ -14,7 +14,7 @@ server {
     }
 
     location ~ ^/([a-z]+)/?$ {
-        set $request_document /cache/$1/1.html;
+        set $request_document /cache/type/$1/1.html;
         try_files $request_document /item_list.controller.php?type=$1;
     }
 
@@ -24,11 +24,22 @@ server {
     }
 
     location ~ ^/([a-z]+)/([1-9]\d?)\.html$ {
-        set $request_document /cache$document_uri;
+        set $request_document /cache/type$document_uri;
         try_files $request_document /item_list.controller.php?type=$1&page=$2;
     }
 
     location = /search {
+        if ($arg_s !~ \S+) {
+            set $request_document /cache/all/1.html;
+            rewrite ^ /item_list.controller.php last;
+        }
+        set $request_document /cache/search/$arg_s/1.html;
+        try_files $request_document /item_list.controller.php?search=$arg_s;
+    }
+
+    location ~ ^/search/(.+)/([1-9]\d?).html$ {
+        set $request_document /cache/search/$1;
+        try_files $request_document /item_list.controller.php?search=$1&page=$2;
     }
 
     location ^~ /cache {

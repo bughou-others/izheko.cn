@@ -19,19 +19,35 @@ class Item extends ItemBase
         return $types;
     }
 
-    static function select($type = null, $page = 0, $page_size = 30)
+    static function search($word, $page, $page_size)
+    {
+        $word = trim($word);
+        if(strlen($word) > 0) {
+            $word = DB::escape($word);
+            $condition = "and title like '%$word%'";
+        }
+        else return;
+        return self::select($condition, $page, $page_size);
+    }
+
+    static function query($type, $page, $page_size)
     {
         if($type) {
             $type_id = DB::get_value("select id from types where pinyin = '$type'");
             if(!$type_id) return;
-            $type_condition = "and type_id=$type_id";
+            $condition = "and type_id=$type_id";
         }
-        else $type_condition = '';
+        else $condition = '';
 
+        return self::select($condition, $page, $page_size);
+    }
+
+    static function select($condition, $page, $page_size)
+    {
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
         $sql = "select SQL_CALC_FOUND_ROWS title,type_id,flags,ref_price,price,promo_price,vip_price,
             promo_start,list_time,delist_time,detail_url,click_url,pic_url
-            from items where title != '' $type_condition limit $offset, $page_size
+            from items where title != '' $condition limit $offset, $page_size
             ";
         $result = DB::query($sql);
         $found_rows = DB::get_value('select found_rows()');

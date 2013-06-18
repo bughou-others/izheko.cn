@@ -1,3 +1,11 @@
+<?php
+if (empty($items))
+{
+?>
+        <div class="no_items">很抱歉，没有符合条件的宝贝。</div>
+<?php
+} else {
+?>
         <div class="item_list"><!--
 <?php
 require_once APP_ROOT . '/../common/helper/price.helper.php';
@@ -45,6 +53,9 @@ foreach($items as $item) {
         <div class="page">
 <?php
     require_once APP_ROOT . '/../common/helper/page.helper.php';
-    echo paginate($type ? "/$type/" : '/', '.html', $page, $total_count, $page_size);
+    echo paginate($page_url, '.html', $page, $total_count, $page_size);
 ?>
         </div>
+<?php
+}
+?>

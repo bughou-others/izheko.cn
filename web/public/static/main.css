@@ -102,8 +102,13 @@ img {
 .content {
     margin: 2em;
 }
-.error_pic {
-    margin: 2em;
+
+.error_content {
+    margin: 4em 0;
+}
+
+.no_items {
+    margin: 10em 0;
 }
 
 .item_list{

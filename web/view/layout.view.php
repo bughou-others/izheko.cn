@@ -7,20 +7,20 @@
     <body>
         <div class="header">
             <a href="/"><img src="/static/logo.png" alt="爱折扣" /></a>
-            <form class="search" action="/">
+            <form class="search" action="/search">
                 <div class="input_wrapper"><input type="text" name="s" /></div>
                 <div class="submit_wrapper"><button type="submit">搜　索</button></div>
             </form>
         </div>
         <div class="nav">
-            <a href="/"<?= $type || is_null($type) ? '' : ' class="on"' ?>>全部</a>
+            <a href="/"<?= isset($type) && !$type ? ' class="on"' : '' ?>>全部</a>
 <?php
     require_once APP_ROOT . '/model/item.model.php';
     $types = Item::types();
     foreach($types as $one)
     {
         list($name, $pinyin, $count) = $one;
-        $class = $pinyin === $type ? ' class="on"' : '';
+        $class = isset($type) && $pinyin === $type ? ' class="on"' : '';
         echo <<<EOL
             <a href="/$pinyin"$class>$name</a>\n
 EOL;
@@ -34,7 +34,7 @@ if (isset($target_view)) {
 }
 else 
     echo '
-            <img src="/static/404.png" class="error_pic" />
+            <img src="/static/404.png" class="error_content" />
     ';
 ?>
         </div>

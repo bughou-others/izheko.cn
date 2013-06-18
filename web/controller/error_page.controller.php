@@ -4,7 +4,6 @@ class ErrorPage
 {
     static function gen_404()
     {
-        $type = null;
         #ob_start();
         require_once APP_ROOT . '/view/layout.view.php';
 #        $path = $_SERVER['REQUEST_DOCUMENT'];
