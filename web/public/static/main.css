@@ -21,6 +21,7 @@ img {
 
 .header {
     margin: 1em 0;
+    white-space: nowrap;
 }
 .header img {
     vertical-align: middle;
@@ -34,7 +35,7 @@ img {
     padding: 3px;
     background-color: #ffa405; 
     vertical-align: text-top;
-    width: 30%;
+    width: 50%;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -43,6 +44,7 @@ img {
     border-radius: 0.3em;
     position: relative;
     behavior: url(/pie/PIE.htc);
+    min-width: 30em;
 }
 .search > div {
     padding-right: 14px;
@@ -81,10 +83,10 @@ img {
 }
 .search > span > select > option {
     display: block;
-    text-align: center;
+    text-align: left;
     height: 16px;
     margin: 0;
-    padding: 7px 15px 7px 7px;
+    padding: 7px;
     border: none;
 }
 .search > button {
@@ -112,6 +114,7 @@ img {
     font-size: 1.2em;
     line-height: 2em;
     background-color: #ffa405;
+    white-space: nowrap;
 }
 .nav > a {
     color: white;
