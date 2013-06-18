@@ -11,16 +11,18 @@
                 <div><input type="text" name="s" value="<?= isset($word) ? $word : null ?>" /></div>
                 <span>
                     <select autocomplete="off" name="t">
-                        <option value="all"<?= 
-                        isset($type) && ($type === '' || $type === 'all') ? ' selected' : null
-                        ?>>全部</option>
+<?php
+$flag = isset($type) && isset($word) && strlen($word) > 0;
+$selected = $flag && ($type === '' || $type === 'all') ? ' selected' : null
+?>
+                        <option value="all"<?= $selected ?>>全部</option>
 <?php
     require_once APP_ROOT . '/model/item.model.php';
     $types = Item::types();
     foreach($types as $one)
     {
         list($name, $pinyin) = $one;
-        $selected = isset($type) && $pinyin === $type ? ' selected' : '';
+        $selected = $flag && $pinyin === $type ? ' selected' : '';
         echo <<<EOL
                         <option value="$pinyin"$selected>$name</option>\n
 EOL;
@@ -32,7 +34,10 @@ EOL;
             </form>
         </div>
         <div class="nav">
-            <a href="/"<?= isset($type) && (!$type || $type === 'all') ? ' class="on"' : '' ?>>全部</a>
+<?php
+    $class = isset($type) && (!$type || $type === 'all') ? ' class="on"' : '';
+?>
+            <a href="/"<?= $class ?>>全部</a>
 <?php
     foreach($types as $one)
     {
