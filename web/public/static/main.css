@@ -44,35 +44,42 @@ img {
     position: relative;
     behavior: url(/pie/PIE.htc);
 }
-.search > .input_wrapper {
+.search > div {
     padding-right: 14px;
     margin-right: 14em;
 }
-.search > .input_wrapper > input {
+.search > div > input {
     width: 100%;
     margin: 0;
     border: none;
     padding: 7px;
     font-size: 1em;
-    line-height: 1.2em;
+    height: 17px;
+    line-height: 17px;
     outline: none;
     background-color: white;
 }
-.search > select {
-    width: 86px;
+.search > span {
     position: absolute;
     right: 112px;
     top: 3px;
+    border: none;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ffa405;
+}
+.search > span > select {
+    width: 87px;
     font-size: 1em;
     margin: 0;
     border: none;
     padding: 7px 15px 7px 7px;
     height: 31px;
+    line-height: 17px;
     outline: none;
-    /*border-left: 2px solid #eee;*/
+    background-color: white;
     color: #999;
 }
-.search option {
+.search > span > select > option {
     display: block;
     text-align: center;
     font-size: 13px;

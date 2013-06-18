@@ -8,12 +8,14 @@
         <div class="header">
             <a href="/"><img src="/static/logo.png" alt="爱折扣" /></a>
             <form class="search" action="/search">
-                <div class="input_wrapper"><input type="text" name="s" /></div>
-                <select autocomplete="off">
-                    <option value="">全部</option>
-                    <option value="">女装</option>
-                    <option value="">男装</option>
-                </select>
+                <div><input type="text" name="s" /></div>
+                <span>
+                    <select autocomplete="off">
+                        <option value="">全部</option>
+                        <option value="">女装</option>
+                        <option value="">男装</option>
+                    </select>
+                </span>
                 <button type="submit">搜　索</button>
             </form>
         </div>
