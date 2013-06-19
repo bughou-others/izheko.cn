@@ -56,6 +56,21 @@ foreach($items as $item) {
     echo paginate($page_url, '.html', $page, $total_count, $page_size);
 ?>
         </div>
+        <div class="sidebar">
+            <div class="go_top"><a href="#"><span>回到顶部</span><b></b></a></div>
 <?php
+    if($page >= 2) {
+        $prev_page_url = $page_url . ($page - 1) . '.html' 
+?>
+            <div class="prev_page"><a href="<?= $prev_page_url ?>"><span>上一页</span><b></b></a></div>
+<?php 
+    } 
+    if(($total_count / $page_size) > $page) {
+        $next_page_url = $page_url . ($page + 1) . '.html' 
+?>
+            <div class="next_page"><a href="<?= $next_page_url ?>"><span>下一页</span><b></b></a></div>
+        </div>
+<?php
+    }
 }
 ?>
