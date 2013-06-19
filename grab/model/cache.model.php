@@ -23,7 +23,7 @@ class Cache
 
     static function clear_cache($types)
     {
-        $base_dir = APP_ROOT . '/../web/public/cache';
+        $base_dir = APP_ROOT . '/../www/public/cache';
         $prefixes = array('/type/', '/search/');
         
         foreach($types as $name => $pinyin)

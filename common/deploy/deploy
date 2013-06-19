@@ -1,6 +1,6 @@
 #!/bin/bash
 cd "$(dirname $0)/.."
-script/install
+deploy/install
 db/create
-nginx/gen-config $1
+deploy/gen-config $1
 
