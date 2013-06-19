@@ -37,6 +37,7 @@ class App
         }
         else self::real_render($target_view, $data);
     }
+
     static function real_render($target_view, $data)
     {
         if($data) extract($data);
