@@ -182,10 +182,12 @@ img {
     cursor: pointer;
     text-align: center;
     color: white;
+    width: 80px;
+    height: 33px;
     font-size: 1.2em;
     line-height: 2em;
     font-weight: bolder;
-    padding: 0 1em;
+    padding: 0;
     -moz-border-radius: 0.3em;
     -webkit-border-radius: 0.3em;
     border-radius: 0.3em;

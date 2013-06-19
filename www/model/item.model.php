@@ -86,9 +86,13 @@ class Item extends ItemBase
     function now_price()
     {
         $now_price = $this->data['price'];
-        $this->vip = false;
+        $this->vip   = false;
+        $this->promo = false;
         if (($promo_price = $this->data['promo_price']) && $promo_price < $now_price)
-            $now_price = $promo_price;
+        {
+            $now_price   = $promo_price;
+            $this->promo = true;
+        }
         if (($vip_price = $this->data['vip_price']) && $vip_price < $now_price)
         {
             $now_price = $vip_price;
@@ -149,15 +153,25 @@ class Item extends ItemBase
         return $this->original_price_str;
     }
 
+    function start_time()
+    {
+        $time = strtotime($this->data['list_time']);
+        isset($this->promo) || $this->now_price();
+        if ($this->promo && ($t = strtotime($this->data['promo_start'])) > $time)
+            $time = $t;
+        return $time;
+    }
+
     function action()
     {
         if (isset($this->action)) return $this->action;
         $now = time();
-        if ($now < strtotime($this->data['list_time']) || $now < strtotime($this->data['promo_start']))
+        if ($now < ($start_time = $this->start_time()))
         {
-            $this->action        = '未开始';
+            $start_time = strftime('%H:%M', $start_time);
+            $this->action        = $start_time;
             $this->action_style  = 'green';
-            $this->action_title  = '折扣活动还没开始哟';
+            $this->action_title  = "折扣 $start_time 开始哟";
         }
         elseif ($now > strtotime($this->data['delist_time']))
         {
@@ -165,16 +179,16 @@ class Item extends ItemBase
             $this->action_style  = 'gray';
             $this->action_title  = '宝贝被抢光，已经下架啦。';
         }
-        elseif (($risen_price = $this->risen_price()) || $now > strtotime($this->data['promo_end']))
+        elseif (($risen_price = $this->risen_price()) || $this->promo && $now > strtotime($this->data['promo_end']))
         {
             if ($risen_price === null || $risen_price === $this->data['price']) {
                 $this->action        = '已结束';
                 $this->action_style  = 'gray';
-                $this->action_title  = '折扣活动已经结束啦。';
+                $this->action_title  = '折扣已经结束啦。';
             } else {
-                $risen_price = format_price($risen_price);
-                $this->action        = "已涨价<div>￥$risen_price</div>";
-                $this->action_style  = 'gray2';
+                $risen_price         = format_price($risen_price);
+                $this->action        = "￥$risen_price";
+                $this->action_style  = 'gray';
                 $this->action_title  = "宝贝已经涨价为 ￥$risen_price 啦。";
             }
         }
@@ -182,7 +196,7 @@ class Item extends ItemBase
         {
             $this->action = '去抢购';
             $this->action_style  = 'yellow';
-            $this->action_title  = '快去抢购吧！';
+            $this->action_title  = '折扣正在进行，快去抢购吧！';
         }
         return $this->action;
     }

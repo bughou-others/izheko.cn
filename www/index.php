@@ -22,7 +22,7 @@ class App
         }
     }
 
-    const cache = true;
+    const cache = false;
 
     static function render($target_view, $data = null)
     {
