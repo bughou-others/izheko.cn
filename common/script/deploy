@@ -2,5 +2,5 @@
 cd "$(dirname $0)/.."
 script/install
 db/create
-nginx/gen-config
+nginx/gen-config $1
 
