@@ -66,6 +66,15 @@ class DB
         return $value;
     }
 
+    static function get_values($sql)
+    {
+        $result = self::$db->query($sql);
+        $values = array();
+        while(list($value) = $result->fetch_row()) $values[] = $value;
+        $result->free();
+        return $values;
+    }
+
     static function get_map($sql)
     {
         $map = array();

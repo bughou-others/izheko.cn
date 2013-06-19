@@ -18,17 +18,29 @@ class Cache
         $types = DB::get_map($sql);
         if(!$types) return;
         $types['全部'] = 'all';
-        $cache_base_dir = APP_ROOT . '/../web/public/cache/';
+        self::clear_cache($types);
+    }
+
+    static function clear_cache($types)
+    {
+        $base_dir = APP_ROOT . '/../web/public/cache';
+        $prefixes = array('/type/', '/search/');
+        
         foreach($types as $name => $pinyin)
         {
-            $cache_type_dir = $cache_base_dir . $pinyin;
-            if(is_dir($cache_type_dir))
+            foreach($prefixes as $prefix)
             {
-                $status = null;
-                system("rm -rf $cache_type_dir", $status);
-                echo "clear cache $name $pinyin: $status\n";
+                $cache = $prefix . $pinyin;
+                $dir = $base_dir . $cache;
+                if(is_dir($dir))
+                {
+                    $status = null;
+                    system("rm -rf $dir", $status);
+                    if($status === 0) $status = 'ok';
+                    echo "clear cache $name $cache: $status\n";
+                }
+                else echo "clear cache $name $cache: no cache\n";
             }
-            else echo "clear cache $name $pinyin: no cache\n";
         }
     }
 }

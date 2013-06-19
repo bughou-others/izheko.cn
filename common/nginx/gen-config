@@ -8,7 +8,7 @@ else
 fi
 
 cache_dir="$dir"/web/public/cache
-test -d "$cache_dir" || mkdir "$cache_dir"
+test -d "$cache_dir" || mkdir --mode=755 "$cache_dir"
 chown www-data:www-data "$cache_dir"
 replace DOMAIN_SUFFIX $ds APP_ROOT "$dir/web"    < "$dir"/web/nginx    > /etc/nginx/sites-enabled/www.nginx
 replace DOMAIN_SUFFIX $ds APP_ROOT "$dir/manage" < "$dir"/manage/nginx > /etc/nginx/sites-enabled/manage.nginx
