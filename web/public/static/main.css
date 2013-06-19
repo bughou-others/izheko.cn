@@ -269,8 +269,8 @@ img {
 .page > span.current_page {
     color: white;
     font-weight: bold;
+    border: 1px solid #fe8101;
     background: none repeat scroll 0 0 #ffa405;
-    border: 1px solid #FE8101;
 }
 
 .sidebar {
@@ -295,8 +295,8 @@ img {
     height: 30px;
     margin: 0;
     padding: 0;
-    border: 1px solid #fe8101;
-    background-color: #ffa405;
+    border: 1px solid #aaa;
+    background-color: #bbb;
     position: absolute;
     right: 0px;
     overflow: hidden;
@@ -307,11 +307,11 @@ img {
 }
 .sidebar a span {
     display: block;
-    padding: 5px 10px;
+    padding: 5px 0 5px 10px;
     color: white;
     white-space: nowrap;
     position: absolute;
-    right: 32px;
+    right: 35px;
 }
 .sidebar a b {
     display: block;
@@ -324,13 +324,16 @@ img {
 }
 .sidebar .go_top a:hover {
     width: 108px;
+    border-color: #fe8101;
+    background-color: #ffa405;
 }
-.sidebar .prev_page a:hover {
-    width: 94px;
-}
+.sidebar .prev_page a:hover,
 .sidebar .next_page a:hover {
     width: 94px;
+    border-color: #fe8101;
+    background-color: #ffa405;
 }
+
 .sidebar .prev_page b {
     background-position: -16px -1px;
 }
