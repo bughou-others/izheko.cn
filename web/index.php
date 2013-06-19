@@ -21,6 +21,27 @@ class App
             error_log('controller not exist: ' . $target);
         }
     }
+
+    const cache = true;
+
+    static function render($target_view, $data = null)
+    {
+        if(self::cache) {
+            ob_start();
+            self::real_render($target_view, $data);
+            $path = $_SERVER['REQUEST_DOCUMENT'];
+            $full_path = $_SERVER['DOCUMENT_ROOT'] . $path;
+            if(!is_dir($dir = dirname($full_path))) mkdir($dir, 0755, true);
+            file_put_contents($full_path, ob_get_clean());
+            header("X-Accel-Redirect: $path");
+        }
+        else self::real_render($target_view, $data);
+    }
+    static function real_render($target_view, $data)
+    {
+        if($data) extract($data);
+        require_once APP_ROOT . '/view/layout.view.php';
+    }
 }
 App::run_controller();
 
