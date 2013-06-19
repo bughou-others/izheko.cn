@@ -1,6 +1,9 @@
 #!/bin/bash
 dir=$(realpath -s "$0"/../../..)
 
+tmp_dir="$dir"/grab/tmp
+test -d "$tmp_dir" || mkdir --mode=755 "$tmp_dir"
+chown www-data:www-data "$tmp_dir"
 replace APP_ROOT "$dir/grab"  < "$dir"/grab/crontab | crontab -u www-data -
 
 if test "$1" = production; then 
@@ -16,7 +19,6 @@ replace DOMAIN_SUFFIX $ds APP_ROOT "$dir/www"    < "$dir"/www/nginx    > /etc/ng
 
 tmp_dir="$dir"/manage/tmp
 test -d "$tmp_dir" || mkdir --mode=755 "$tmp_dir"
-chown www-data:www-data "$tmp_dir"
 "$(dirname "$0")"/gen-htpasswd > "$tmp_dir"/htpasswd
 replace DOMAIN_SUFFIX $ds APP_ROOT "$dir/manage" < "$dir"/manage/nginx > /etc/nginx/sites-enabled/manage.nginx
 
