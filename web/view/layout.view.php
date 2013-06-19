@@ -60,6 +60,11 @@ else
     ';
 ?>
         </div>
+        <div class="sidebar">
+            <div class="go_top"><a href="#"><span>回到顶部</span><b></b></a></div>
+            <div class="prev_page"><a href="#"><span>上一页</span><b></b></a></div>
+            <div class="next_page"><a href="#"><span>下一页</span><b></b></a></div>
+        </div>
         <div class="footer">
             <table>
                 <tr>

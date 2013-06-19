@@ -259,6 +259,8 @@ img {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
+    position: relative;
+    behavior: url(/pie/PIE.htc);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=white,endColorstr=#f0f0f0);
     background-image: -moz-linear-gradient(top,#fff,#eee);
     background-image: -webkit-linear-gradient(top,#fff,#eee);
@@ -271,6 +273,70 @@ img {
     border: 1px solid #FE8101;
 }
 
+.sidebar {
+    position: fixed;
+    right: 1%;
+    bottom: 5em;
+    _position: absolute;
+    _top:expression(eval(
+        document.documentElement.scrollTop + document.documentElement.clientHeight
+        - this.offsetHeight - 1em
+        ));
+}
+.sidebar div {
+    position: relative;
+    width:  32px;
+    height: 32px;
+    margin: 5px 0;
+}
+.sidebar a {
+    display: block;
+    width:  30px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #fe8101;
+    background-color: #ffa405;
+    position: absolute;
+    right: 0px;
+    overflow: hidden;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    behavior: url(/pie/PIE.htc);
+}
+.sidebar a span {
+    display: block;
+    padding: 5px 10px;
+    color: white;
+    white-space: nowrap;
+    position: absolute;
+    right: 32px;
+}
+.sidebar a b {
+    display: block;
+    width:  17px;
+    height: 17px;
+    background: no-repeat url(/static/tool.png);
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+.sidebar .go_top a:hover {
+    width: 108px;
+}
+.sidebar .prev_page a:hover {
+    width: 94px;
+}
+.sidebar .next_page a:hover {
+    width: 94px;
+}
+.sidebar .prev_page b {
+    background-position: -16px -1px;
+}
+.sidebar .next_page b {
+    background-position: -31px -1px;
+}
 
 .footer {
     color: #aaa;
