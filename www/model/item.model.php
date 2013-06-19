@@ -41,7 +41,8 @@ class Item extends ItemBase
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
         $sql = "select SQL_CALC_FOUND_ROWS title,type_id,flags,ref_price,price,promo_price,vip_price,
             promo_start,list_time,delist_time,detail_url,click_url,pic_url
-            from items where title != '' $condition limit $offset, $page_size
+            from items where title != '' $condition
+            order by id desc limit $offset, $page_size
             ";
         $result = DB::query($sql);
         $found_rows = DB::get_value('select found_rows()');
