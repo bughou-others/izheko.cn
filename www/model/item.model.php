@@ -40,11 +40,15 @@ class Item extends ItemBase
     static function select($condition, $page, $page_size)
     {
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
-        $sql = "select SQL_CALC_FOUND_ROWS title,type_id,flags,ref_price,price,promo_price,vip_price,
-            promo_start,list_time,delist_time,detail_url,click_url,pic_url
-            from items where title != '' $condition
-            order by id desc limit $offset, $page_size
-            ";
+        $now = strftime('%F %T', strtotime('tomorrow'));
+        $sql = "select SQL_CALC_FOUND_ROWS 
+            title,type_id,flags,ref_price,price,promo_price,vip_price,
+            promo_start,promo_end,list_time,delist_time,detail_url,click_url,pic_url
+            from items
+            where title != '' and !(flags&" . ItemBase::FLAGS_MASK_ITEM_DELETED . ")
+            and list_time < '$now' $condition 
+            order by id desc limit $offset, $page_size";
+        #and (promo_start is null or promo_start < '$now')
         $result = DB::query($sql);
         $found_rows = DB::get_value('select found_rows()');
         $instances = array();
@@ -106,7 +110,7 @@ class Item extends ItemBase
         if (isset($this->discount_price)) return $this->discount_price;
         $now_price = $this->now_price();
         $ref_price = $this->data['ref_price'];
-        if ($ref_price <= 0 || $now_price <= $ref_price * 1.2)
+        if ($ref_price <= 0 || $now_price <= $ref_price * self::factor_price_risen)
         {
             $this->discount_price = $now_price;
             $this->risen_price    = null;

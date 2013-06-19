@@ -19,7 +19,7 @@ class ItemClear
                 ifnull(price, 0xffffffff),
                 ifnull(vip_price, 0xffffffff),
                 ifnull(promo_price, 0xffffffff)
-            ) > 1.2 * ref_price
+            ) > ' . ItemBase::factor_price_risen . ' * ref_price
             or (flags & ' . ItemBase::FLAGS_MASK_ITEM_DELETED . ')'
             ;
         $type_ids = DB::get_values('select distinct type_id ' . $common);
