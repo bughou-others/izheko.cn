@@ -6,6 +6,7 @@
         <meta name="keywords" content="爱折扣,九块九,九块九包邮,9.9包邮,优质折扣" />
         <meta name="description" content="爱折扣为您精选了淘宝、 天猫的优质折扣商品， 让您轻松找到物美价廉、 称心如意的宝贝。" />
         <link charset="utf-8" rel="stylesheet" type="text/css" href="/static/main.css" />
+        <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21430461"></script>
     </head>
     <body>
         <div class="header">
