@@ -1,6 +1,6 @@
 # vim: filetype=nginx
 server {
-    server_name www.izheko.DOMAIN_SUFFIX;
+    server_name www.DOMAIN_SUFFIX;
 
     root APP_ROOT/public;
 

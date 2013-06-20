@@ -7,9 +7,9 @@ chown www-data:www-data "$tmp_dir"
 replace APP_ROOT "$dir/grab"  < "$dir"/grab/crontab | crontab -u www-data -
 
 if test "$1" = production; then 
-    ds=cn
+    ds=bughou.com
 else
-    ds=dev
+    ds=izheko.dev
 fi
 
 cache_dir="$dir"/www/public/cache
