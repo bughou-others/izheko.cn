@@ -4,6 +4,13 @@ nginx mysql-client-5.5 mysql-server-5.5
 php5-cli php5-mysqlnd php5-curl php5-fpm
 realpath
 "
+
+to_install=
 for pkg in $packages; do
-    dpkg-query -W $pkg || apt-get install $pkg
+    dpkg-query -W $pkg || to_install="$to_install $pkg"
 done
+test "$to_install" = '' && exit
+
+apt-get -q update
+apt-get -qy install $to_install
+
