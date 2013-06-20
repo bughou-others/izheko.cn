@@ -1,6 +1,10 @@
 # vim: filetype=nginx
 server {
-    server_name www.DOMAIN_SUFFIX;
+    server_name .TOP_DOMAIN;
+    rewrite ^ http://www.TOP_DOMAIN$document_uri;
+}
+server {
+    server_name www.TOP_DOMAIN;
 
     root APP_ROOT/public;
 

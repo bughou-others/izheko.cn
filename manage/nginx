@@ -1,6 +1,6 @@
 # vim: filetype=nginx
 server {
-    server_name manage.DOMAIN_SUFFIX;
+    server_name manage.TOP_DOMAIN;
 
     root APP_ROOT/public;
 
