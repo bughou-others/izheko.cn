@@ -46,11 +46,11 @@ img {
     behavior: url(/pie/PIE.htc);
     min-width: 30em;
 }
-.search > div {
+.search div {
     padding-right: 14px;
     margin-right: 14em;
 }
-.search > div > input {
+.search div input {
     width: 100%;
     margin: 0;
     border: none;
@@ -61,7 +61,7 @@ img {
     outline: none;
     background-color: white;
 }
-.search > span {
+.search span {
     position: absolute;
     right: 112px;
     top: 3px;
@@ -69,7 +69,7 @@ img {
     border-left: 1px solid #ddd;
     border-bottom: 1px solid #ffa405;
 }
-.search > span > select {
+.search span select {
     width: 87px;
     font-size: 13px;
     margin: 0;
@@ -81,7 +81,7 @@ img {
     background-color: white;
     color: #999;
 }
-.search > span > select > option {
+.search span select option {
     display: block;
     text-align: left;
     height: 16px;
@@ -89,7 +89,7 @@ img {
     padding: 7px;
     border: none;
 }
-.search > button {
+.search button {
     width: 8em;
     position: absolute;
     right: 0;
@@ -116,17 +116,17 @@ img {
     background-color: #ffa405;
     white-space: nowrap;
 }
-.nav > a {
+.nav a {
     color: white;
     padding: 0.5em 1em;
     text-decoration: none;
     vertical-align: top;
     white-space: nowrap;
 }
-.nav > a:hover {
+.nav a:hover {
     background-color: #f40;
 }
-.nav > a.on {
+.nav a.on {
     background-color: #f40;
 }
 .clearfix {
@@ -164,17 +164,17 @@ img {
 .item:hover {
     border-color: #ccc;
 }
-.item > a > img {
+.item a img {
     width: 210px;
     height: 210px;
 }
-.item > .title {
+.item .title {
     margin: 0;
     overflow: hidden;
     line-height: 1.5em;
     height: 3em;
 }
-.item > .title a:hover {
+.item .title a:hover {
     color: #c00;
 }
 .item .action {
@@ -209,26 +209,26 @@ img {
     line-height: 1.2em;
 }
 
-.item > .buy {
+.item .buy {
     white-space: nowrap;
 }
-.item > .buy > span {
+.item .buy span {
     color: #f40;
     font-weight: bold;
 }
-.item > .buy > span > big {
+.item .buy span big {
     font-size: 2em;
 }
-.item > .buy > small {
+.item .buy small {
     color: #aaa;
     text-decoration: line-through;
 }
-.item > .flags {
+.item .flags {
     height: 1.5em;
     line-height: 1.5em;
     white-space: nowrap;
 }
-.item > .flags > .post, .item > .flags > .vip {
+.item .flags .post, .item .flags .vip {
     color: white;
     font-size: 0.85em;
     -webkit-border-radius: 0.3em;
@@ -238,10 +238,10 @@ img {
     behavior: url(/pie/PIE.htc);
 }
 
-.item > .flags > .post {
+.item .flags .post {
     background-color: #393;
 }
-.item > .flags > .vip {
+.item .flags .vip {
     background-color: #f37c06;
 }
 
@@ -250,13 +250,13 @@ img {
     margin: 1em 0;
     padding: 1em;
 }
-.page > a, .page > span {
+.page a, .page span {
     color: #666;
     text-decoration: none;
     margin: 0 0.2em;
     padding: 0.5em 0.8em;
 }
-.page > a, .page > span.current_page {
+.page a, .page span.current_page {
     border: 1px solid #ccc;
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
@@ -268,7 +268,7 @@ img {
     background-image: -webkit-linear-gradient(top,#fff,#eee);
     background-image: -ms-linear-gradient(top,#fff,#eee);
 }
-.page > span.current_page {
+.page span.current_page {
     color: white;
     font-weight: bold;
     border: 1px solid #fe8101;
