@@ -6,7 +6,7 @@ body {
     text-align: center;
     font-family: "微软雅黑";
     font-size: 14px;
-    line-height: 1.5em;
+    line-height: 22px;
     background-color: white;
 }
 a {
@@ -25,6 +25,8 @@ img {
 }
 .header img {
     vertical-align: middle;
+    background-color: white;
+    background-image: none;
 }
 .search {
     display: inline-block;
@@ -39,15 +41,15 @@ img {
     position: relative;
     overflow: hidden;
     white-space: nowrap;
-    -moz-border-radius: 0.3em;
-    -webkit-border-radius: 0.3em;
-    border-radius: 0.3em;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
     position: relative;
     behavior: url(/pie/PIE.htc);
     min-width: 30em;
 }
 .search div {
-    padding-right: 14px;
+    padding-right: 1em;
     margin-right: 14em;
 }
 .search div input {
@@ -111,17 +113,19 @@ img {
 /* navigation */
 .nav {
     margin-top: 1em;
-    font-size: 1.2em;
-    line-height: 2em;
+    height: 32px;
     background-color: #ffa405;
+    font-size: 16px;
+    line-height: 32px;
     white-space: nowrap;
+    overflow: visible;
 }
 .nav a {
+    padding: 9px 16px;
     color: white;
-    padding: 0.5em 1em;
-    text-decoration: none;
-    vertical-align: top;
     white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
 }
 .nav a:hover {
     background-color: #f40;
@@ -171,8 +175,8 @@ img {
 .item .title {
     margin: 0;
     overflow: hidden;
-    line-height: 1.5em;
-    height: 3em;
+    line-height: 22px;
+    height: 44px;
 }
 .item .title a:hover {
     color: #c00;
@@ -180,8 +184,8 @@ img {
 .item .buy {
     white-space: nowrap;
     position: relative;
-    height: 32px;
-    line-height: 32px;
+    height: 30px;
+    line-height: 30px;
     vertical-align: baseline;
 }
 .item .buy span {
@@ -204,13 +208,13 @@ img {
     color: white;
     width: 80px;
     height: 33px;
-    font-size: 1.2em;
+    font-size: 16px;
     line-height: 2em;
     font-weight: bolder;
     padding: 0;
-    -moz-border-radius: 0.3em;
-    -webkit-border-radius: 0.3em;
-    border-radius: 0.3em;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
     behavior: url(/pie/PIE.htc);
 }
 .item .green {
@@ -224,21 +228,21 @@ img {
 }
 .item .gray2 {
     background-color: gray;
-    font-size: 1em;
-    line-height: 1.2em;
+    font-size: 14px;
+    line-height: 17px;
 }
 
 .item .flags {
-    height: 1.5em;
-    line-height: 1.5em;
+    height: 22px;
+    line-height: 22px;
     white-space: nowrap;
 }
 .item .flags .post, .item .flags .vip {
     color: white;
-    font-size: 0.85em;
-    -webkit-border-radius: 0.3em;
-    -moz-border-radius: 0.3em;
-    border-radius: 0.3em;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
     position: relative;
     behavior: url(/pie/PIE.htc);
 }
@@ -258,8 +262,8 @@ img {
 .page a, .page span {
     color: #666;
     text-decoration: none;
-    margin: 0 0.2em;
-    padding: 0.5em 0.8em;
+    margin: 0 3px;
+    padding: 7px 11px;
 }
 .page a, .page span.current_page {
     border: 1px solid #ccc;
