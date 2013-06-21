@@ -23,10 +23,12 @@ img {
     margin: 1em 0;
     white-space: nowrap;
 }
-.header img {
+.header .logo {
+    width: 128px;
+    height: 60px;
     vertical-align: middle;
-    background-color: white;
-    background-image: none;
+    _background-image: none;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/static/logo.png', enabled=true, sizingMethod='crop');
 }
 .search {
     display: inline-block;
@@ -38,15 +40,14 @@ img {
     background-color: #ffa405; 
     vertical-align: text-top;
     width: 50%;
+    min-width: 30em;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    position: relative;
     behavior: url(/pie/PIE.htc);
-    min-width: 30em;
 }
 .search div {
     padding-right: 1em;
@@ -69,7 +70,9 @@ img {
     top: 3px;
     border: none;
     border-left: 1px solid #ddd;
-    border-bottom: 1px solid #ffa405;
+    display: block;
+    height: 31px;
+    background-color: white;
 }
 .search span select {
     width: 87px;
@@ -107,7 +110,6 @@ img {
     font-weight: bold;
     background-color: #ffa405;
     cursor: pointer;
-    -webkit-appearance: button;
 }
 
 /* navigation */
