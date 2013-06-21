@@ -177,8 +177,28 @@ img {
 .item .title a:hover {
     color: #c00;
 }
-.item .action {
-    float: right;
+.item .buy {
+    white-space: nowrap;
+    position: relative;
+    height: 32px;
+    line-height: 32px;
+    vertical-align: baseline;
+}
+.item .buy span {
+    color: #f40;
+    font-weight: bold;
+}
+.item .buy span big {
+    font-size: 2em;
+}
+.item .buy small {
+    color: #aaa;
+    text-decoration: line-through;
+}
+.item .buy .action {
+    position: absolute;
+    top: 0;
+    right: 0;
     cursor: pointer;
     text-align: center;
     color: white;
@@ -191,7 +211,6 @@ img {
     -moz-border-radius: 0.3em;
     -webkit-border-radius: 0.3em;
     border-radius: 0.3em;
-    position: relative;
     behavior: url(/pie/PIE.htc);
 }
 .item .green {
@@ -209,20 +228,6 @@ img {
     line-height: 1.2em;
 }
 
-.item .buy {
-    white-space: nowrap;
-}
-.item .buy span {
-    color: #f40;
-    font-weight: bold;
-}
-.item .buy span big {
-    font-size: 2em;
-}
-.item .buy small {
-    color: #aaa;
-    text-decoration: line-through;
-}
 .item .flags {
     height: 1.5em;
     line-height: 1.5em;
