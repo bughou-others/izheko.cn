@@ -1,6 +1,8 @@
 # vim: filetype=nginx
 server {
     server_name manage.TOP_DOMAIN;
+    access_log  /var/log/nginx/manage.access.log general_format;
+    error_log   /var/log/nginx/manage.error.log;
 
     root APP_ROOT/public;
 

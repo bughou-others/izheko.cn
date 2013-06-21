@@ -1,10 +1,17 @@
 # vim: filetype=nginx
+log_format general_format '$remote_addr $http_host $remote_user [$time_local] '
+'"$request" $status $body_bytes_sent '
+'"$http_referer" "$http_user_agent"';
 server {
     server_name .TOP_DOMAIN;
     rewrite ^ http://www.TOP_DOMAIN$document_uri;
+    access_log  /var/log/nginx/other.access.log general_format;
+    error_log   /var/log/nginx/other.error.log;
 }
 server {
     server_name www.TOP_DOMAIN;
+    access_log  /var/log/nginx/www.access.log general_format;
+    error_log   /var/log/nginx/www.error.log;
 
     root APP_ROOT/public;
 
