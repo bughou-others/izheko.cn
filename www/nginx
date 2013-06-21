@@ -1,7 +1,7 @@
 # vim: filetype=nginx
 log_format general_format '$remote_addr $http_host $remote_user [$time_local] '
-'"$request" $status $body_bytes_sent '
-'"$http_referer" "$http_user_agent"';
+'"$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"';
+
 server {
     server_name .TOP_DOMAIN;
     rewrite ^ http://www.TOP_DOMAIN$document_uri permanent;
