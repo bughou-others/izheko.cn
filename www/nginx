@@ -4,7 +4,7 @@ log_format general_format '$remote_addr $http_host $remote_user [$time_local] '
 '"$http_referer" "$http_user_agent"';
 server {
     server_name .TOP_DOMAIN;
-    rewrite ^ http://www.TOP_DOMAIN$document_uri;
+    rewrite ^ http://www.TOP_DOMAIN$document_uri permanent;
     access_log  /var/log/nginx/other.access.log general_format;
     error_log   /var/log/nginx/other.error.log;
 }
