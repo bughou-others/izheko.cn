@@ -6,10 +6,13 @@ test -d "$tmp_dir" || mkdir --mode=755 "$tmp_dir"
 chown www-data:www-data "$tmp_dir"
 replace APP_ROOT "$dir/grab"  < "$dir"/grab/crontab | crontab -u www-data -
 
-if test "$1" = production; then 
+if test -z "$1"; then 
+    domain=izheko.dev
+elif test "$1" = production; then 
     domain=bughou.com
 else
-    domain=izheko.dev
+    echo unknow argument: "$1"
+    exit
 fi
 
 cache_dir="$dir"/www/public/cache
