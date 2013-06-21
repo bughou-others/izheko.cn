@@ -70,8 +70,7 @@ img {
     top: 3px;
     border: none;
     border-left: 1px solid #ddd;
-    display: block;
-    height: 31px;
+    *height: 32px;
     background-color: white;
 }
 .search span select {
@@ -93,6 +92,7 @@ img {
     margin: 0;
     padding: 7px;
     border: none;
+    outline: none;
 }
 .search button {
     width: 8em;
