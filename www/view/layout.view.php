@@ -76,7 +76,11 @@ else
                     <td> 爱折扣仅提供到淘宝、天猫的链接， 不涉及任何交易行为， 所有购买与支付交易都在淘宝、天猫进行， 请放心购买。 </td>
                 </tr>
             </table>
-            <p>爱折扣©2013 &nbsp; izheko.cn</p>
+            <p>
+                爱折扣©2013 &nbsp; izheko.cn
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <script src="http://s19.cnzz.com/stat.php?id=5452772&web_id=5452772&show=pic" language="JavaScript"></script>
+            </p>
         </div>
     </body>
 </html>
