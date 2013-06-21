@@ -1,11 +1,6 @@
 #!/bin/bash
 dir=$(realpath -s "$0"/../../..)
 
-tmp_dir="$dir"/grab/tmp
-test -d "$tmp_dir" || mkdir --mode=755 "$tmp_dir"
-chown www-data:www-data "$tmp_dir"
-replace APP_ROOT "$dir/grab"  < "$dir"/grab/crontab | crontab -u www-data -
-
 if test -z "$1"; then 
     domain=izheko.dev
 elif test "$1" = production; then 
@@ -14,6 +9,14 @@ else
     echo unknow argument: "$1"
     exit
 fi
+
+if test "$1" = production; then 
+    tmp_dir="$dir"/grab/tmp
+    test -d "$tmp_dir" || mkdir --mode=755 "$tmp_dir"
+    chown www-data:www-data "$tmp_dir"
+    replace APP_ROOT "$dir/grab"  < "$dir"/grab/crontab | crontab -u www-data -
+fi
+
 
 cache_dir="$dir"/www/public/cache
 test -d "$cache_dir" || mkdir --mode=755 "$cache_dir"
