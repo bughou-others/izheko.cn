@@ -20,6 +20,13 @@ server {
 
     merge_slashes on;
 
+    location = /favicon.ico {
+        access_log  /var/log/nginx/static.TOP_DOMAIN.access.log general_format;
+    }
+    location ^~ /static/ {
+        access_log  /var/log/nginx/static.TOP_DOMAIN.access.log general_format;
+    }
+
     location = / {
         set $request_document /cache/type/all/1.html;
         try_files $request_document /item_list.controller.php;
