@@ -104,17 +104,18 @@ img {
     outline: none;
 }
 .search button {
-    width: 8em;
     position: absolute;
     right: 0;
-    top: 3px;
+    top: 12px;
     text-align: center;
 
-    font-size: 1em;
-    line-height: 2em;
-    vertical-align: middle;
+    margin: 0;
     padding: 0;
     border: none;
+    width: 112px;
+    height: 14px;
+    font-size: 14px;
+    line-height: 14px;
     color: white;
     font-weight: bold;
     background-color: #ffa405;
