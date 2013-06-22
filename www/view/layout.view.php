@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="header">
-            <a href="/"><img class="logo" src="/static/logo.png" alt="爱折扣" /></a>
+            <a href="/" class="logo"></a>
             <form class="search" action="/search">
                 <div class="input-wrapper"><input type="text" name="s" value="<?= isset($word) ? $word : null ?>" /></div>
                 <div class="select-wrapper">
