@@ -248,13 +248,15 @@ img {
 }
 
 .item .flags {
-    height: 22px;
-    line-height: 22px;
+    margin-top: 5px;
     white-space: nowrap;
 }
 .item .flags .post, .item .flags .vip {
     color: white;
     font-size: 12px;
+    line-height: 16px;
+    display: inline-block;
+    _padding-top: 2px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
