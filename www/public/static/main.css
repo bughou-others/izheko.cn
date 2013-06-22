@@ -36,11 +36,13 @@ img {
     *zoom: 1;
     font-size: 1em;
     margin-left: 5em;
-    padding: 3px;
     background-color: #ffa405; 
     vertical-align: text-top;
     width: 50%;
     min-width: 30em;
+    height: 31px;
+    padding: 3px;
+    *padding: 2px 3px 3px 3px;
     position: relative;
     overflow: hidden;
     white-space: nowrap;
@@ -49,11 +51,12 @@ img {
     border-radius: 4px;
     behavior: url(/pie/PIE.htc);
 }
-.search div {
+.search .input-wrapper {
     padding-right: 1em;
     margin-right: 14em;
+    height: 31px;
 }
-.search div input {
+.search input {
     width: 100%;
     margin: 0;
     border: none;
@@ -64,33 +67,39 @@ img {
     outline: none;
     background-color: white;
 }
-.search span {
+.search .select-wrapper {
     position: absolute;
     right: 112px;
     top: 3px;
     border: none;
     border-left: 1px solid #ddd;
-    *height: 32px;
+    height: 20px;
+    padding: 8px 6px 3px 1px;
     background-color: white;
 }
-.search span select {
+
+.search .select-hide-border {
+    width: 83px;
+    height: 16px;
+    overflow: hidden;
+}
+
+.search select {
+    display: block;
     width: 87px;
-    font-size: 13px;
-    margin: 0;
-    border: none;
-    padding: 7px 15px 7px 7px;
-    height: 31px;
-    line-height: 17px;
+    height: 20px;
+    font: normal 12px/20px "";
+    margin: -2px 0 0 -2px;
     outline: none;
-    background-color: white;
     color: #999;
+    background-color: white;
+    vertical-align: baseline;
 }
-.search span select option {
+.search select option {
     display: block;
     text-align: left;
     height: 16px;
     margin: 0;
-    padding: 7px;
     border: none;
     outline: none;
 }
