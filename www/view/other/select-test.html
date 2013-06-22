@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>select test</title>
+    <style>
+        div.select-wrapper {
+            margin: 5em;
+            width: 96px;
+            padding: 5px;
+            border: 1px solid #eee;
+        }
+        div.select-hide-border {
+            width: 96px;
+            height: 16px;
+            overflow: hidden;
+        }
+        select {
+            display: block;
+            width: 100px;
+            height: 20px;
+            font: normal 12px/20px "";
+            vertical-align: baseline;
+            margin: -2px 0 0 -2px;
+            border: none;
+        }
+        option {
+            text-align: left;
+        }
+        select { filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=-1, OffY=0,color=#525252) progid:DXImageTransform.Microsoft.dropshadow(OffX=1, OffY=0,color=#525252) progid:DXImageTransform.Microsoft.dropshadow(OffX=0, OffY=-1,color=#525252) progid:DXImageTransform.Microsoft.dropshadow(OffX=0, OffY=1,color=#525252); }
+    </style>
+</head>
+<body>
+    <div class="select-wrapper">
+        <div class="select-hide-border">
+            <select>
+                <option>全部</option>
+                <option>男装</option>
+                <option>女装</option>
+            </select>
+        </div>
+    </div>
+</body>
+</html>
