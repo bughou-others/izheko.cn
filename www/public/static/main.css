@@ -106,16 +106,16 @@ img {
 .search button {
     position: absolute;
     right: 0;
-    top: 12px;
+    top: 8px;
     text-align: center;
 
     margin: 0;
     padding: 0;
     border: none;
     width: 112px;
-    height: 14px;
+    height: 22px;
     font-size: 14px;
-    line-height: 14px;
+    line-height: 22px;
     color: white;
     font-weight: bold;
     background-color: #ffa405;
