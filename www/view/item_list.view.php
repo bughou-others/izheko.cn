@@ -1,6 +1,11 @@
 <?php if (empty($items)) { ?>
         <div class="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
+        <div class="filter">
+            <a href="<?= $page_url ?>new">今日新品</a>
+            <a href="<?= $page_url ?>coming">即将开始</a>
+            <a href="<?= $page_url ?>tomorrow">明日预告</a>
+        </div>
         <div class="item_list"><!--
 <?php foreach($items as $item) { ?>
          --><div class="item">
@@ -31,6 +36,7 @@
         <div class="page">
 <?php
     require_once APP_ROOT . '/../common/helper/page.helper.php';
+    if($filter) $page_url .= $filter . '/';
     echo paginate($page_url, '.html', $page, $total_count, $page_size);
 ?>
         </div>

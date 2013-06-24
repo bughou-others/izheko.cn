@@ -20,7 +20,7 @@ class Item extends ItemBase
         return $types;
     }
 
-    static function query($type, $word, $page, $page_size)
+    static function query($type, $word, $filter, $page, $page_size)
     {
         if($type && $type !== 'all') {
             $type_id = DB::get_value("select id from types where pinyin = '$type'");
@@ -32,23 +32,36 @@ class Item extends ItemBase
         if(strlen($word) > 0) {
             $word = DB::escape($word);
             $condition .= " and title like '%$word%'";
+        } else {
+            $tomorrow = strftime('%F %T', strtotime('tomorrow'));
+            if($filter === 'new') {
+                $today = strftime('%F %T', strtotime('today'));
+                $cond  = "between '$today' and '$tomorrow'";
+            } elseif($filter === 'coming') {
+                $now = strftime('%F %T');
+                $cond = "between '$now' and '$tomorrow'";
+            } elseif($filter === 'tomorrow') {
+                $cond = "> '$tomorrow'";
+            } else {
+                $cond = "< '$tomorrow'";
+            }
+            $condition .= " and list_time $cond and (
+                promo_start is null or promo_price > vip_price or promo_start $cond
+            )";
         }
-
         return self::select($condition, $page, $page_size);
     }
 
     static function select($condition, $page, $page_size)
     {
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
-        $now = strftime('%F %T', strtotime('tomorrow'));
         $sql = "select SQL_CALC_FOUND_ROWS 
             title,type_id,flags,ref_price,price,promo_price,vip_price,
             promo_start,promo_end,list_time,delist_time,detail_url,click_url,pic_url
             from items
             where title != '' and !(flags&" . ItemBase::FLAGS_MASK_ITEM_DELETED . ")
-            and list_time < '$now' $condition 
+            $condition 
             order by id desc limit $offset, $page_size";
-        #and (promo_start is null or promo_start < '$now')
         $result = DB::query($sql);
         $found_rows = DB::get_value('select found_rows()');
         $instances = array();

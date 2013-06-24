@@ -55,11 +55,6 @@ EOL;
     }
 ?>
         </div>
-        <div class="filter">
-            <a href="/">今日新品</a>
-            <a href="/">即将开始</a>
-            <a href="/">明日预告</a>
-        </div>
         <div class="content">
 <?php
 if (isset($target_view)) {

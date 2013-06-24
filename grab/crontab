@@ -5,8 +5,8 @@ app_root = APP_ROOT
  0    4     *   *   *    cd $app_root; php run command/item_clear.cmd.php       &>> tmp/item_clear.log
 
 #0  */8     *   *   *    cd $app_root; php run command/item_grab.cmd.php jiu      &>> tmp/item_grab_jiu.log
- 0  */8     *   *   *    cd $app_root; php run command/item_grab.cmd.php shijiu   &>> tmp/item_grab_shijiu.log
- 3 10-23/5  *   *   *    cd $app_root; php run command/item_grab.cmd.php today    &>> tmp/item_grab_today.log
+ 0    8     *   *   *    cd $app_root; php run command/item_grab.cmd.php shijiu   &>> tmp/item_grab_shijiu.log
+ 3 10,15    *   *   *    cd $app_root; php run command/item_grab.cmd.php today    &>> tmp/item_grab_today.log
  3 17,23    *   *   *    cd $app_root; php run command/item_grab.cmd.php tomorrow &>> tmp/item_grab_tomorrow.log
 
  0    1     *   *   *    cd $app_root; php run command/item_update.cmd.php all    &>> tmp/item_update.log

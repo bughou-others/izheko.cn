@@ -32,19 +32,24 @@ server {
         try_files $request_document /item_list.controller.php;
     }
 
-    location ~ ^/([a-z]+)/?$ {
-        set $request_document /cache/type/$1/1.html;
-        try_files $request_document /item_list.controller.php?type=$1;
+    location ~ ^/(new|coming|tomorrow)$ {
+        set $request_document /cache/type/all/$1/1.html;
+        try_files $request_document /item_list.controller.php?filter=$1;
     }
 
-    location ~ ^/([1-9]\d?)\.html$ {
+    location ~ ^/([a-z]+)(/(new|coming|tomorrow))?/?$ {
+        set $request_document /cache/type/$1/$3/1.html;
+        try_files $request_document /item_list.controller.php?type=$1&filter=$3;
+    }
+
+    location ~ ^/((new|coming|tomorrow)/)?([1-9]\d?)\.html$ {
         set $request_document /cache/type/all$document_uri;
-        try_files $request_document /item_list.controller.php?page=$1;
+        try_files $request_document /item_list.controller.php?filter=$2&page=$3;
     }
 
-    location ~ ^/([a-z]+)/([1-9]\d?)\.html$ {
+    location ~ ^/([a-z]+)(/(new|coming|tomorrow))?/([1-9]\d?)\.html$ {
         set $request_document /cache/type$document_uri;
-        try_files $request_document /item_list.controller.php?type=$1&page=$2;
+        try_files $request_document /item_list.controller.php?type=$1&filter=$3&page=$4;
     }
 
     location = /search {

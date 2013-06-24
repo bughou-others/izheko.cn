@@ -10,7 +10,7 @@ body {
     background-color: white;
 }
 a {
-    color: black;
+    color: #06c;
     text-decoration: none;
 }
 img {
@@ -127,7 +127,7 @@ img {
 
 /* navigation */
 .nav {
-    margin-top: 1em;
+    margin: 1em 0;
     height: 32px;
     background-color: #ffa405;
     font-size: 16px;
@@ -148,12 +148,19 @@ img {
 .nav a.on {
     background-color: #f40;
 }
+
+/* filter */
+.filter a {
+    margin: 0 2em;
+}
+
+
 .clearfix {
     clear: both;
 }
 
 .content {
-    margin: 2em;
+    margin: 0 2em;
 }
 
 .error_content {
@@ -192,6 +199,9 @@ img {
     overflow: hidden;
     line-height: 22px;
     height: 44px;
+}
+.item .title a {
+    color: #333;
 }
 .item .title a:hover {
     color: #c00;
