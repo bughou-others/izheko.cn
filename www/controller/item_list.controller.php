@@ -23,7 +23,7 @@ class ItemListController
         }
         else
         {
-            if(!$items) {
+            if(!is_array($items)) {
                 header('X-Accel-Redirect: /cache/404.html');
                 error_log('no items gotten');
                 return;

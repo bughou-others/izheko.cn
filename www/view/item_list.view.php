@@ -1,11 +1,12 @@
+
+        <div class="filter">
+            <a href="<?= $page_url ?>new">今日新品<span>()</span></a>
+            <a href="<?= $page_url ?>coming">即将开始<span>()</span></a>
+            <a href="<?= $page_url ?>tomorrow">明日预告<span>()</span></a>
+        </div>
 <?php if (empty($items)) { ?>
         <div class="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
-        <div class="filter">
-            <a href="<?= $page_url ?>new">今日新品</a>
-            <a href="<?= $page_url ?>coming">即将开始</a>
-            <a href="<?= $page_url ?>tomorrow">明日预告</a>
-        </div>
         <div class="item_list"><!--
 <?php foreach($items as $item) { ?>
          --><div class="item">
