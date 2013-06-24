@@ -22,11 +22,18 @@ class App
         }
     }
 
-    const cache = true;
+    static function cache()
+    {
+        static $cache;
+        if(!isset($cache)){
+            $cache = !is_file(APP_ROOT . '/tmp/no_cache');
+        }
+        return $cache;
+    }
 
     static function render($target_view, $data = null)
     {
-        if(self::cache) {
+        if(self::cache()) {
             ob_start();
             self::real_render($target_view, $data);
             $path = $_SERVER['REQUEST_DOCUMENT'];

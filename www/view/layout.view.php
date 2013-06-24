@@ -43,7 +43,7 @@ EOL;
 <?php
     $class = isset($type) && (!$type || $type === 'all') ? ' class="on"' : '';
 ?>
-            <a href="/"<?= $class ?>>全部</a>
+            <a href="/"<?= $class ?>>首页</a>
 <?php
     foreach($types as $one)
     {
@@ -54,6 +54,11 @@ EOL;
 EOL;
     }
 ?>
+        </div>
+        <div class="filter">
+            <a href="/">今日新品</a>
+            <a href="/">即将开始</a>
+            <a href="/">明日预告</a>
         </div>
         <div class="content">
 <?php
