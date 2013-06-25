@@ -9,6 +9,10 @@
         <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21430461"></script>
     </head>
     <body>
+        <div class="topbar">
+            <span>晚上好。</span>
+            <a>浏览记录</a>
+        </div>
         <div class="header">
             <a href="/" class="logo"></a>
             <form class="search" action="/search">
