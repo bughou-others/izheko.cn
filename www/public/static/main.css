@@ -127,7 +127,7 @@ img {
 
 /* navigation */
 .nav {
-    margin: 1em 0;
+    margin: 1em 0 0 0;
     height: 32px;
     background-color: #ffa405;
     font-size: 16px;
@@ -149,18 +149,32 @@ img {
     background-color: #f40;
 }
 
-/* filter */
-.filter a {
-    margin: 0 2em;
-}
-
-
-.clearfix {
-    clear: both;
-}
-
 .content {
-    margin: 0 2em;
+    margin: 0;
+    padding: 1em 2em;
+}
+
+/* filter */
+.filter {
+    background-color: white;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
+.filter a {
+    margin: 0 1em;
+}
+.filter span {
+    color: #aaa;
+    font-size: 12px;
+    padding: 0 0 0 3px;
+}
+.filter a.on {
+    color: white;
+    background-color: #ffa405;
+}
+.filter a.on span {
+    color: white;
 }
 
 .error_content {
@@ -186,6 +200,7 @@ img {
     border: 1px solid #eee;
     text-align: left;
     color: black;
+    background-color: white;
 }
 .item:hover {
     border-color: #ccc;

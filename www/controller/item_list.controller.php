@@ -8,12 +8,13 @@ class ItemListController
         $type   = isset($_GET['type'])   ? trim($_GET['type'])   : '';
         $word   = isset($_GET['search']) ? trim($_GET['search']) : '';
         $filter = isset($_GET['filter']) ? trim($_GET['filter']) : null;
+        if($filter === '')$filter = null;
         $page   = isset($_GET['page'])   ? intval($_GET['page']) : 1;
         $page_size = 60;
 
-        list($items, $total_count) = Item::query($type, $word, $filter, $page, $page_size);
+        $data = Item::query($type, $word, $filter, $page, $page_size);
         if(strlen($word) > 0) {
-            if(!is_array($items)) {
+            if(!is_array($data['items'])) {
                 header('X-Accel-Redirect: /cache/404.html');
                 error_log('search error');
                 return;
@@ -23,7 +24,7 @@ class ItemListController
         }
         else
         {
-            if(!is_array($items)) {
+            if(!is_array($data['items'])) {
                 header('X-Accel-Redirect: /cache/404.html');
                 error_log('no items gotten');
                 return;
@@ -31,7 +32,7 @@ class ItemListController
             $page_url = $type && $type !== 'all' ? "/$type/" : '/';
         }
         App::render('item_list', compact('type', 'word', 'filter',  'page', 'page_size',
-            'items', 'total_count', 'page_url'));
+            'data', 'page_url'));
     }
 }
 

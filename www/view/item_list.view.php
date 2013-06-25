@@ -1,14 +1,10 @@
-
-        <div class="filter">
-            <a href="<?= $page_url ?>new">今日新品<span>()</span></a>
-            <a href="<?= $page_url ?>coming">即将开始<span>()</span></a>
-            <a href="<?= $page_url ?>tomorrow">明日预告<span>()</span></a>
-        </div>
-<?php if (empty($items)) { ?>
+<?php
+require_once APP_ROOT . '/view/filter.view.php';
+if (empty($data['items'])) { ?>
         <div class="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
         <div class="item_list"><!--
-<?php foreach($items as $item) { ?>
+<?php foreach($data['items'] as $item) { ?>
          --><div class="item">
                 <div class="title">
                     <b><?= $item->type_tag() ?></b>
@@ -38,7 +34,7 @@
 <?php
     require_once APP_ROOT . '/../common/helper/page.helper.php';
     if($filter) $page_url .= $filter . '/';
-    echo paginate($page_url, '.html', $page, $total_count, $page_size);
+    echo paginate($page_url, '.html', $page, $data['total_count'], $page_size);
 ?>
         </div>
 <?php

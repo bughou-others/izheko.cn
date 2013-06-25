@@ -20,6 +20,14 @@ class Item extends ItemBase
         return $types;
     }
 
+    static function time_cond($cond)
+    {
+        return " and list_time $cond and (
+            promo_start is null or promo_price > vip_price or promo_start $cond
+        )";
+    }
+
+
     static function query($type, $word, $filter, $page, $page_size)
     {
         if($type && $type !== 'all') {
@@ -32,27 +40,43 @@ class Item extends ItemBase
         if(strlen($word) > 0) {
             $word = DB::escape($word);
             $condition .= " and title like '%$word%'";
-        } else {
-            $tomorrow = strftime('%F %T', strtotime('tomorrow'));
-            if($filter === 'new') {
-                $today = strftime('%F %T', strtotime('today'));
-                $cond  = "between '$today' and '$tomorrow'";
-            } elseif($filter === 'coming') {
-                $now = strftime('%F %T');
-                $cond = "between '$now' and '$tomorrow'";
-            } elseif($filter === 'tomorrow') {
-                $cond = "> '$tomorrow'";
-            } else {
-                $cond = "< '$tomorrow'";
-            }
-            $condition .= " and list_time $cond and (
-                promo_start is null or promo_price > vip_price or promo_start $cond
-            )";
-        }
-        return self::select($condition, $page, $page_size);
+        } 
+
+        $now      = strftime('%F %T');
+        $today    = strftime('%F %T', strtotime('today'));
+        $tomorrow = strftime('%F %T', strtotime('tomorrow'));
+        $new_cond      = $condition . self::time_cond("between '$today' and '$tomorrow'");
+        $coming_cond   = $condition . self::time_cond("between '$now'   and '$tomorrow'");
+        $tomorrow_cond = $condition . self::time_cond(">= '$tomorrow'");
+        $default_cond  = $condition . strlen($word) > 0 ? '' : self::time_cond("< '$tomorrow'");
+
+        $data = array();
+        self::filter($data, $filter, 'new',      $new_cond,      $page, $page_size);
+        self::filter($data, $filter, 'coming',   $coming_cond,   $page, $page_size);
+        self::filter($data, $filter, 'tomorrow', $tomorrow_cond, $page, $page_size);
+        self::filter($data, $filter, null,       $default_cond,  $page, $page_size);
+
+        return $data;
     }
 
-    static function select($condition, $page, $page_size)
+    static function filter(&$data, $filter, $target, $condition, $page, $page_size)
+    {
+        if($filter === $target) {
+            self::select($data, $condition, $page, $page_size);
+        } elseif ($target !== null) {
+            $data[$target . '_count'] = self::count($condition);
+        }
+    }
+
+    static function count($condition)
+    {
+        $sql = 'select count(*) from items
+            where title != "" and !(flags&' . ItemBase::FLAGS_MASK_ITEM_DELETED . ')' .
+            $condition;
+        return DB::get_value($sql);
+    }
+
+    static function select(&$data, $condition, $page, $page_size)
     {
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
         $sql = "select SQL_CALC_FOUND_ROWS 
@@ -63,10 +87,10 @@ class Item extends ItemBase
             $condition 
             order by id desc limit $offset, $page_size";
         $result = DB::query($sql);
-        $found_rows = DB::get_value('select found_rows()');
         $instances = array();
-        while($data = $result->fetch_assoc()) $instances[] = new self($data);
-        return array($instances, $found_rows);
+        while($row = $result->fetch_assoc()) $instances[] = new self($row);
+        $data['items']       = &$instances;
+        $data['total_count'] = DB::get_value('select found_rows()');
     }
 
     function __construct($data)
