@@ -8,6 +8,7 @@ body {
     font-size: 14px;
     line-height: 22px;
     background-color: white;
+    /*background: url(/static/bg.png) repeat scroll 0 0;*/
 }
 a {
     color: #06c;
