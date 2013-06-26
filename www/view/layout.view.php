@@ -10,8 +10,15 @@
     </head>
     <body>
         <div class="topbar">
-            <span>晚上好。</span>
-            <a>浏览记录</a>
+            <span>亲，欢迎来到爱折扣！</span>
+            <span class="right">
+                <a href="javascript: void(0);">浏览记录<b></b></a>
+<!--
+                <a href="javascript: void(0);">手机版</a>
+                <a href="javascript: void(0);">android客户端</a>
+                <a href="javascript: void(0);">iphone客户端</a>
+-->
+            <span>
         </div>
         <div class="header">
             <a href="/" class="logo"></a>
