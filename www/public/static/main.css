@@ -73,13 +73,11 @@ img {
     height: 31px;
     padding: 3px;
     *padding: 2px 3px 3px 3px;
-    position: relative;
     overflow: hidden;
     white-space: nowrap;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    behavior: url(/static/PIE.htc);
 }
 .search .input-wrapper {
     padding-right: 1em;
@@ -279,24 +277,15 @@ img {
     line-height: 20px;
     font-weight: bolder;
     padding: 7px 0 6px 0;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    behavior: url(/static/PIE.htc);
+}
+.item .yellow {
+    background: url(/static/rect.png) 0 0;
 }
 .item .green {
-    background-color: #393;
+    background: url(/static/rect.png) 0 -35px;
 }
-.item .yellow { 
-    background-color: #ffa405;
-}
-.item .gray { 
-    background-color: gray;
-}
-.item .gray2 {
-    background-color: gray;
-    font-size: 14px;
-    line-height: 17px;
+.item .gray {
+    background: url(/static/rect.png) 0 -70px;
 }
 
 .item .flags {
@@ -309,18 +298,13 @@ img {
     line-height: 16px;
     display: inline-block;
     _padding-top: 2px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    position: relative;
-    behavior: url(/static/PIE.htc);
 }
 
 .item .flags .post {
-    background-color: #393;
+    background: url(/static/rect.png) 0 -105px;
 }
 .item .flags .vip {
-    background-color: #f37c06;
+    background: url(/static/rect.png) -25px -105px;
 }
 
 /* pagination */
@@ -390,7 +374,6 @@ img {
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
-    behavior: url(/static/PIE.htc);
 }
 .sidebar a span {
     display: block;

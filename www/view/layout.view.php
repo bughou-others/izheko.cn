@@ -18,7 +18,7 @@
                 <a href="javascript: void(0);">android客户端</a>
                 <a href="javascript: void(0);">iphone客户端</a>
 -->
-            <span>
+            </span>
         </div>
         <div class="header">
             <a href="/" class="logo"></a>
