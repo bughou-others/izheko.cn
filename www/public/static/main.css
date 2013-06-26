@@ -55,10 +55,10 @@ img {
     display: inline-block;
     width: 128px;
     height: 60px;
-    background-image: url(/static/logo.png);
+    background-image: url(img/logo.png);
     vertical-align: middle;
     _background-image: none;
-    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/static/logo.png', enabled=true, sizingMethod='crop');
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/logo.png', enabled=true, sizingMethod='crop');
 }
 .search {
     display: inline-block;
@@ -78,6 +78,7 @@ img {
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
+    position: relative;
 }
 .search .input-wrapper {
     padding-right: 1em;
@@ -279,13 +280,13 @@ img {
     padding: 7px 0 6px 0;
 }
 .item .yellow {
-    background: url(/static/rect.png) 0 0;
+    background: url(img/rect.png) 0 0;
 }
 .item .green {
-    background: url(/static/rect.png) 0 -35px;
+    background: url(img/rect.png) 0 -35px;
 }
 .item .gray {
-    background: url(/static/rect.png) 0 -70px;
+    background: url(img/rect.png) 0 -70px;
 }
 
 .item .flags {
@@ -301,10 +302,10 @@ img {
 }
 
 .item .flags .post {
-    background: url(/static/rect.png) 0 -105px;
+    background: url(img/rect.png) 0 -105px;
 }
 .item .flags .vip {
-    background: url(/static/rect.png) -25px -105px;
+    background: url(img/rect.png) -25px -105px;
 }
 
 /* pagination */
@@ -387,7 +388,7 @@ img {
     display: block;
     width:  17px;
     height: 17px;
-    background: no-repeat url(/static/tool.png);
+    background: no-repeat url(img/tool.png);
     position: absolute;
     top: 6px;
     right: 6px;
