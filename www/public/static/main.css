@@ -55,7 +55,7 @@ img {
     display: inline-block;
     width: 128px;
     height: 60px;
-    background-image: url(img/logo.png);
+    background: no-repeat url(img/logo.png);
     vertical-align: middle;
     _background-image: none;
     _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/logo.png', enabled=true, sizingMethod='crop');
@@ -298,7 +298,6 @@ img {
     font-size: 12px;
     line-height: 16px;
     display: inline-block;
-    _padding-top: 2px;
 }
 
 .item .flags .post {
