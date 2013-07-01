@@ -61,12 +61,12 @@ img {
     position: absolute;
     top: 29px;
     right: 0;
-    z-index: 0;
-    width: 450px;
+    z-index: 1;
+    padding: 10px;
+    width: 470px;
 }
 #my-history-bar {
-    width: 430px;
-    margin: 10px;
+    margin: 10px 20px 0 20px;
     position: relative;
 }
 #my-history-bar div {
@@ -82,9 +82,11 @@ img {
 .my-history-item {
     width: 200px;
     height: 80px;
-    margin: 0 10px;
-    padding: 10px 0;
+    margin: 5px;
+    padding: 10px;
     display: inline-block;
+    *display: inline;
+    *zoom: 1;
     border: 1px dashed #ccc;
 }
 .my-history-item .image {
@@ -144,7 +146,6 @@ img {
     -webkit-border-radius: 4px;
     border-radius: 4px;
     position: relative;
-    z-index: -1;
 }
 .search .input-wrapper {
     padding-right: 1em;

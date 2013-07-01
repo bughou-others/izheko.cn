@@ -22,6 +22,32 @@
                     </div>
                 </span>
                 <script>
+function my_histroy(flag) {
+    if(this.items_data === undefined) {
+        this.items_data = { };
+    }
+    if(this.items === undefined) {
+        var m;
+        if(m = document.cookie.match(/(^| )my-history=(\d+(,\d+)*)(;|$)/)) {
+            this.items = m[2].split(',');
+        } else return null;
+    }
+
+    var page_size = 6;
+    if(this.page === undefined) this.page = 0;
+    if(flag === true) this.page ++;
+    else if(flag === false) this.page --;
+    if(this.page < 0) this.page = 0;
+    else {
+        var max_page = Match.ceil(this.items.length / page_size);
+        if(this.page > max_page) this.page = max_page - 1;
+    }
+    var begin = this.page * page_size;
+    var end   = begin + page_size;
+    if(end > this.items.length) end = this.items.length;
+    for(; begin < end; begin++) {
+    }
+}
                     $('#my-history-a').bind('click mouseenter', function(){
                         $('#my-history-span').addClass('my-history-span-on');
                         $('#my-history').css('display', 'block');
