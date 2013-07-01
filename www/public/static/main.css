@@ -85,7 +85,7 @@ img {
     margin: 0 10px;
     padding: 10px 0;
     display: inline-block;
-    border-bottom: 1px dashed #ddd;
+    border: 1px dashed #ccc;
 }
 .my-history-item .image {
     width: 80px;
@@ -289,13 +289,13 @@ img {
     width: 210px;
     padding: 1em;
     margin: 1em;
-    border: 1px solid #eee;
+    border: 1px dashed #ccc;
     text-align: left;
     color: black;
     background-color: white;
 }
 .item:hover {
-    border-color: #ccc;
+    border-color: #666;
 }
 .item a img {
     width: 210px;

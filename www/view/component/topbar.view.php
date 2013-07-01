@@ -21,6 +21,16 @@
                         </div>
                     </div>
                 </span>
+                <script>
+                    $('#my-history-a').bind('click mouseenter', function(){
+                        $('#my-history-span').addClass('my-history-span-on');
+                        $('#my-history').css('display', 'block');
+                    });
+                    $('#my-history-span').mouseleave(function(){
+                        $('#my-history').css('display', 'none');
+                        $(this).removeClass('my-history-span-on');
+                    });
+                </script>
 <!--
                 <a href="javascript: void(0);">手机版</a>
                 <a href="javascript: void(0);">android客户端</a>
