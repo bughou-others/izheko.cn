@@ -33,6 +33,12 @@ img {
     display: inline-block;
     padding: 7px 0.5em 3px 0.5em;
 }
+.my-history-span-on {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid white;
+    background-color: white;
+}
 #my-history-a:hover {
     color: #f60;
 }
@@ -58,17 +64,17 @@ img {
     z-index: 0;
     width: 450px;
 }
-#my-history .toolbar {
+#my-history-bar {
     width: 430px;
     margin: 10px;
     position: relative;
 }
-#my-history .toolbar div {
+#my-history-bar div {
     position: absolute;
     top: 0;
     right: 10px;
 }
-#my-history .toolbar span {
+#my-history-bar span {
     cursor: pointer;
     margin-left: 10px;
 }

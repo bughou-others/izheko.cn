@@ -11,7 +11,7 @@
                                 <b>￥19.97</b>
                             </span>
                         </div>
-                        <div class="my-history-bar">
+                        <div id="my-history-bar">
                             <a href="/my-history">查看全部</a>
                             <span>清空</span>
                             <div>

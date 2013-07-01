@@ -1,11 +1,10 @@
 $(function(){
     $('#my-history-a').bind('click mouseenter', function(){
-
-.topbar .my-history {
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid white;
-    background-color: white;
-}
+        $('#my-history-span').addClass('my-history-span-on');
+        $('#my-history').css('display', 'block');
+    });
+    $('#my-history-span').mouseleave(function(){
+        $('#my-history').css('display', 'none');
+        $(this).removeClass('my-history-span-on');
     });
 });
