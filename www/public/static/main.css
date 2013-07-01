@@ -29,20 +29,14 @@ img {
     position: absolute;
     right: 10%;
 }
-.topbar .left, .topbar span.my-history {
+.topbar .left, #my-history-span {
     display: inline-block;
     padding: 7px 0.5em 3px 0.5em;
 }
-.topbar span.my-history {
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-    border-bottom: 1px solid white;
-    background-color: white;
-}
-.topbar a.my-history:hover {
+#my-history-a:hover {
     color: #f60;
 }
-.topbar a.my-history b {
+#my-history-a b {
     display: inline-block;
     width: 0;
     height: 0;
@@ -54,13 +48,14 @@ img {
     border-color: #666 #f5f5f5 #f5f5f5;
 }
 #my-history {
+    display: none;
     background-color: white;
     border: 1px solid #ddd;
     border-top: none;
     position: absolute;
     top: 29px;
     right: 0;
-    z-index: 9999;
+    z-index: 0;
     width: 450px;
 }
 #my-history .toolbar {
@@ -143,6 +138,7 @@ img {
     -webkit-border-radius: 4px;
     border-radius: 4px;
     position: relative;
+    z-index: -1;
 }
 .search .input-wrapper {
     padding-right: 1em;

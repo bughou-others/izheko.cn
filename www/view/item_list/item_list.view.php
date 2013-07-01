@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/view/filter.view.php';
+require_once APP_ROOT . '/view/item_list/filter.view.php';
 if (empty($data['items'])) { ?>
         <div class="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
@@ -38,6 +38,6 @@ if (empty($data['items'])) { ?>
 ?>
         </div>
 <?php
-    require_once APP_ROOT . '/view/sidebar.view.php';
+    require_once APP_ROOT . '/view/item_list/sidebar.view.php';
 }
 ?>

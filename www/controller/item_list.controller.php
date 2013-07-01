@@ -31,7 +31,7 @@ class ItemListController
             }
             $page_url = $type && $type !== 'all' ? "/$type/" : '/';
         }
-        App::render('item_list', compact('type', 'word', 'filter',  'page', 'page_size',
+        App::render('item_list/item_list', compact('type', 'word', 'filter',  'page', 'page_size',
             'data', 'page_url'));
     }
 }
