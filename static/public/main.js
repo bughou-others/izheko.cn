@@ -1,5 +1,5 @@
 var MyHistory = {
-    init: function(){ 
+    init: function(){
         var o = this;
         $('#my-history-a').bind('click mouseenter', function(){
             $('#my-history-span').addClass('my-history-span-on');
@@ -71,8 +71,7 @@ var MyHistory = {
         }
         else o.set(item_ids);
     },
-    set: function (item_ids)
-    {
+    set: function (item_ids) {
         var html;
         if(item_ids) {
             html = '';

@@ -34,8 +34,8 @@ img {
     padding: 7px 0.5em 3px 0.5em;
 }
 .my-history-span-on {
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    border-left:   1px solid #ddd;
+    border-right:  1px solid #ddd;
     border-bottom: 1px solid white;
     background-color: white;
 }
@@ -80,6 +80,7 @@ img {
 }
 
 .my-history-item {
+    /* 232px */
     width: 200px;
     height: 80px;
     margin: 5px;
@@ -100,15 +101,12 @@ img {
 .my-history-item .desc {
     width: 100px;
     display: inline-block;
-}
-.my-history-item .desc {
     vertical-align: top;
     padding-left: 10px;
 }
 .my-history-item .desc a {
     display: block;
 }
-
 .my-history-item .desc b {
     color: #f40;
 }
