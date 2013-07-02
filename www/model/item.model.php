@@ -48,7 +48,7 @@ class Item extends ItemBase
         $new_cond      = $condition . self::time_cond("between '$today' and '$tomorrow'");
         $coming_cond   = $condition . self::time_cond("between '$now'   and '$tomorrow'");
         $tomorrow_cond = $condition . self::time_cond(">= '$tomorrow'");
-        $default_cond  = $condition . strlen($word) > 0 ? '' : self::time_cond("< '$tomorrow'");
+        $default_cond  = $condition . (strlen($word) > 0 ? '' : self::time_cond("< '$tomorrow'"));
 
         $data = array();
         self::filter($data, $filter, 'new',      $new_cond,      $page, $page_size);

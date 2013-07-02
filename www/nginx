@@ -21,7 +21,7 @@ server {
     merge_slashes on;
 
     location = /my-history {
-        rewrite /my_history.controller.php last;
+        rewrite ^ /my_history.controller.php last;
     }
 
     location = / {
@@ -65,12 +65,12 @@ server {
         rewrite ^ /item_list.controller.php?type=$type&search=$arg_s last;
     }
 
-    location ~ ^/search/([a-z]+)/([^/ ]+)(/(new|coming|tomorrow))/?$ {
+    location ~ "^/search/([a-z]+)/([^/ ]+)(/(new|coming|tomorrow))?/?$" {
         set $request_document /cache/search/$1/$2/1.html;
         try_files $request_document /item_list.controller.php?type=$1&search=$2&filter=$4;
     }
 
-    location ~ ^/search/([a-z]+)/([^/ ]+)(/(new|coming|tomorrow))/([1-9]\d?).html$ {
+    location ~ "^/search/([a-z]+)/([^/ ]+)(/(new|coming|tomorrow))?/([1-9]\d?).html$" {
         set $request_document /cache/search/$1/$2/$3.html;
         try_files $request_document /item_list.controller.php?type=$1&search=$2&filter=$4&page=$5;
     }
