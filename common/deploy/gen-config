@@ -23,6 +23,8 @@ test -d "$cache_dir" || mkdir --mode=755 "$cache_dir"
 chown www-data:www-data "$cache_dir"
 replace TOP_DOMAIN $domain APP_ROOT "$dir/www"    < "$dir"/www/nginx    > /etc/nginx/sites-enabled/www.nginx
 
+replace TOP_DOMAIN $domain APP_ROOT "$dir/static" < "$dir"/static/nginx > /etc/nginx/sites-enabled/static.nginx
+
 tmp_dir="$dir"/manage/tmp
 test -d "$tmp_dir" || mkdir --mode=755 "$tmp_dir"
 "$(dirname "$0")"/gen-htpasswd > "$tmp_dir"/htpasswd

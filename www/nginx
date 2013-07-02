@@ -20,11 +20,8 @@ server {
 
     merge_slashes on;
 
-    location = /favicon.ico {
-        access_log  /var/log/nginx/static.TOP_DOMAIN.access.log general_format;
-    }
-    location ^~ /static/ {
-        access_log  /var/log/nginx/static.TOP_DOMAIN.access.log general_format;
+    location = /my-history {
+        rewrite /my_history.controller.php last;
     }
 
     location = / {
@@ -100,5 +97,6 @@ server {
         fastcgi_param	QUERY_STRING		$query_string;
         fastcgi_param	REQUEST_METHOD		$request_method;
         fastcgi_param	DOCUMENT_ROOT		$document_root;
+        fastcgi_param	ROOT_DOMAIN             TOP_DOMAIN;
     }
 }

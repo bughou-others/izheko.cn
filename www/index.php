@@ -50,6 +50,13 @@ class App
         if($data) extract($data);
         require_once APP_ROOT . '/view/layout.view.php';
     }
+
+    static function static_server()
+    {
+        static $domain;
+        if(!isset($domain)) $domain = 'http://static.' . $_SERVER['ROOT_DOMAIN'];
+        return $domain;
+    }
 }
 App::run_controller();
 

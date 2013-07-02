@@ -23,9 +23,6 @@
                 </span>
                 <script>
 function my_histroy(flag) {
-    if(this.items_data === undefined) {
-        this.items_data = { };
-    }
     if(this.items === undefined) {
         var m;
         if(m = document.cookie.match(/(^| )my-history=(\d+(,\d+)*)(;|$)/)) {
@@ -46,6 +43,16 @@ function my_histroy(flag) {
     var end   = begin + page_size;
     if(end > this.items.length) end = this.items.length;
     for(; begin < end; begin++) {
+    }
+}
+function my_histroy_data(item_ids) {
+    if(this.items_data === undefined) {
+        this.items_data = { };
+    }
+    var to_fetch = [ ];
+    for(var i = 0; i < item_ids.length; i++) {
+        if(this.items_data[items_ids[i]] === undefined)
+            to_fetch.push(items_ids[i]);
     }
 }
                     $('#my-history-a').bind('click mouseenter', function(){
