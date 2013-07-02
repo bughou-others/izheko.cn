@@ -11,7 +11,6 @@ class ItemList extends ItemBase
         )";
     }
 
-
     static function query($type, $word, $filter, $page, $page_size)
     {
         if($type && $type !== 'all') {
@@ -64,7 +63,7 @@ class ItemList extends ItemBase
     {
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
         $sql = "select SQL_CALC_FOUND_ROWS 
-            title,type_id,flags,ref_price,price,promo_price,vip_price,
+            id, title,type_id,flags,ref_price,price,promo_price,vip_price,
             promo_start,promo_end,list_time,delist_time,detail_url,click_url,pic_url
             from items
             where title != '' and !(flags&" . ItemBase::FLAGS_MASK_ITEM_DELETED . ")
