@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/model/item.model.php';
+require_once APP_ROOT . '/model/item_list.model.php';
 
 class ItemListController
 {
@@ -12,7 +12,7 @@ class ItemListController
         $page   = isset($_GET['page'])   ? intval($_GET['page']) : 1;
         $page_size = 60;
 
-        $data = Item::query($type, $word, $filter, $page, $page_size);
+        $data = ItemList::query($type, $word, $filter, $page, $page_size);
         if(strlen($word) > 0) {
             if(!is_array($data['items'])) {
                 header('X-Accel-Redirect: /cache/404.html');
