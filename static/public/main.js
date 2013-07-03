@@ -36,9 +36,9 @@ var Footprints = {
             }
             a.unshift(item_id);
             var time = new Date();
-            time.setFullYear(time.getFullYear + 1);
-            document.cookie = 'footprints=' + a.join(',') + '; expires=' + time.toUTCString();
-            //+ '; domain=' + location.hostname + '; path=/';
+            time.setFullYear(time.getFullYear() + 1);
+            document.cookie = 'footprints=' + a.join(',') + '; expires=' + time.toUTCString() + '; path=/';
+            //+ '; domain=' + location.hostname 
             o.items = undefined;
         });
     },
@@ -83,7 +83,7 @@ var Footprints = {
         }
         if(to_fetch.length > 0) {
             $.get('/footprints?item_ids=' + to_fetch.join(','), function(data){
-                if(data[0] === '[') {
+                if(data.charAt(0) === '[') {
                     data = eval(data);
                     for(var i = 0; i < data.length; i++) {
                         var item = data[i];
