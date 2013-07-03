@@ -105,6 +105,7 @@ img {
     padding-left: 10px;
 }
 .my-history-item .desc a {
+    color: #333;
     display: block;
 }
 .my-history-item .desc b {
@@ -310,7 +311,7 @@ img {
     color: #333;
 }
 .item .title a:hover {
-    color: #f60;
+    color: #06c;
 }
 .item .buy {
     white-space: nowrap;
