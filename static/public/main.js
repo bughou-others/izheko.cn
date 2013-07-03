@@ -110,14 +110,14 @@ var Footprints = {
                     '</a><b>￥' + item.now_price + '</b></span></div>';
             }
         } else {
-            html = '<center>亲，还没有您的足迹哟。</center>';
+            html = '<center>亲，您还没有留下足迹哟。</center>';
         }
         $('#footprints > .footprints-item, #footprints > center').remove();
         if(this.page === 0) {
             var count = item_ids ? item_ids.length : 0;
             $('#footprints').css('width',         count > 1 ? '464px' : '232px');
             if(count > 0) {
-                $('#footprints').css('height',    count > 2 ? '262px' : '150px');
+                $('#footprints').css('height',    count > 2 ? '252px' : '140px');
                 $('#footprints-bar').css('width', count > 1 ? '424px' : '192px').css('display', 'block');
             } else {
                 $('#footprints').css('height',   'auto');
