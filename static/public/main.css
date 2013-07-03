@@ -39,8 +39,8 @@ img {
     border-bottom: 1px solid white;
     background-color: white;
 }
-#footprints-a:hover {
-    color: #f60;
+#footprints-a {
+    color: #06c;
 }
 #footprints-a b {
     display: inline-block;
