@@ -25,10 +25,10 @@ var MyHistory = {
     show: function(flag) {
         var o = this;
         if(o.items === undefined) {
+            o.page = 0;
             var m;
             if(m = document.cookie.match(/(^| )my-history=(\d+(,\d+)*)(;|$)/)) {
                 o.items = m[2].split(',');
-                o.page = 0;
             } else {
                 o.set();
                 return;
@@ -72,8 +72,7 @@ var MyHistory = {
         else o.set(item_ids);
     },
     set: function (item_ids) {
-        var html;
-        var count = 0;
+        var html, count = 0;
         if(item_ids) {
             html = '';
             var items_data = this.items_data;
@@ -87,20 +86,17 @@ var MyHistory = {
                     '</a><b>￥' + item.now_price + '</b></span></div>';
                 count ++;
             }
-            $('#my-history-bar').css('display', 'block');
         } else {
             html = '<center>亲，您还没有浏览过的宝贝哟。</center>';
-            $('#my-history-bar').css('display', 'none');
         }
         $('#my-history > .my-history-item, #my-history > center').remove();
-        if(this.page === 0 && count > 0) {
-            $('#my-history').css({
-                width : count > 1 ? '464px' : '232px',
-                height: count > 2 ? '262px' : '150px',
-            });
-            $('#my-history-bar').css({
-                width : count > 1 ? '424px' : '192px',
-            });
+        if(this.page === 0) {
+            $('#my-history').css('width',         count > 1 ? '464px' : '232px');
+            if(count > 0) {
+                $('#my-history').css('height',    count > 2 ? '262px' : '150px');
+                $('#my-history-bar').css('width', count > 1 ? '424px' : '192px').css('display', 'block');
+            }
+            else $('#my-history-bar').css('display', 'none');
         }
         $('#my-history').prepend(html);
     },
