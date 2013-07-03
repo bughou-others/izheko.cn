@@ -1,7 +1,7 @@
 <?php
-require_once APP_ROOT . '/model/my_history.model.php';
+require_once APP_ROOT . '/model/footprints.model.php';
 
-class MyHistoryController
+class FootprintsController
 {
     static function index()
     {
@@ -10,12 +10,12 @@ class MyHistoryController
             $item_ids = trim($_GET['item_ids']);
             if(preg_match('/^\d+(,\d+)*$/', $item_ids))
             {
-                $data = MyHistory::get($item_ids);
+                $data = Footprints::get($item_ids);
                 echo json_encode($data);
             }
         }
     }
 }
 
-MyHistoryController::index();
+FootprintsController::index();
 

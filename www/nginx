@@ -20,8 +20,8 @@ server {
 
     merge_slashes on;
 
-    location = /my-history {
-        rewrite ^ /my_history.controller.php last;
+    location = /footprints {
+        rewrite ^ /footprints.controller.php last;
     }
 
     location = / {

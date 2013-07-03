@@ -1,25 +1,47 @@
-var MyHistory = {
+var Footprints = {
     init: function(){
         var o = this;
-        $('#my-history-a').bind('click mouseenter', function(){
-            $('#my-history-span').addClass('my-history-span-on');
-            $('#my-history').css('display', 'block');
+        $('#footprints-a').bind('click mouseenter', function(){
+            $('#footprints-span').addClass('footprints-span-on');
+            $('#footprints').css('display', 'block');
             o.show();
         });
-        $('#my-history-span').mouseleave(function(){
-            $('#my-history').css('display', 'none');
-            $(this).removeClass('my-history-span-on');
+        $('#footprints-span').mouseleave(function(){
+            $('#footprints').css('display', 'none');
+            $(this).removeClass('footprints-span-on');
         });
-        $('#my-history-bar > span').click(function(){
-            document.cookie = 'my-history=';
+        $('#footprints-bar > span').click(function(){
+            var time = new Date();
+            time.setFullYear(time.getFullYear - 1);
+            document.cookie = 'footprints=; expires=' + time.toUTCString();
             o.items = undefined;
             o.show();
         });
-        $('#my-history-bar > div > span:first-child').click(function(){
+        $('#footprints-bar > div > span:first-child').click(function(){
             o.show('prev');
         });
-        $('#my-history-bar > div > span:last-child').click(function(){
+        $('#footprints-bar > div > span:last-child').click(function(){
             o.show('next');
+        });
+    },
+    init_record: function() {
+        var o = this;
+        $('#item_list').on('click', '.item > .title > a, .item > a, .item > .buy > a', function(){
+            var item_id = $(this).parents('.item').attr('item-id');
+            var a = [ ];
+            if(m = document.cookie.match(/(^| )footprints=(\d+(,\d+)*)(;|$)/)) {
+                a = m[2].split(',');
+                for(var i=0; i < a.length; ) {
+                    if(a[i] === item_id) a.splice(i, 1);
+                    else i++;
+                }
+            }
+            a.unshift(item_id);
+            var time = new Date();
+            time.setFullYear(time.getFullYear + 1);
+            document.cookie = 'footprints=' + a.join(',') + '; expires=' + time.toUTCString();
+            //+ '; domain=' + location.hostname + '; path=/';
+            o.item_ids = undefined;
         });
     },
     show: function(flag) {
@@ -27,7 +49,7 @@ var MyHistory = {
         if(o.items === undefined) {
             o.page = 0;
             var m;
-            if(m = document.cookie.match(/(^| )my-history=(\d+(,\d+)*)(;|$)/)) {
+            if(m = document.cookie.match(/(^| )footprints=(\d+(,\d+)*)(;|$)/)) {
                 o.items = m[2].split(',');
             } else {
                 o.set();
@@ -42,8 +64,8 @@ var MyHistory = {
         if(o.page < 0) o.page = 0;
         else if(o.page > max_page) o.page = max_page;
 
-        $('#my-history-bar > div > span:first-child').css('visibility', o.page > 0        ? 'visible' : 'hidden');
-        $('#my-history-bar > div > span:last-child') .css('visibility', o.page < max_page ? 'visible' : 'hidden');
+        $('#footprints-bar > div > span:first-child').css('visibility', o.page > 0        ? 'visible' : 'hidden');
+        $('#footprints-bar > div > span:last-child') .css('visibility', o.page < max_page ? 'visible' : 'hidden');
 
         var begin = o.page * page_size;
         var end   = begin + page_size;
@@ -61,7 +83,7 @@ var MyHistory = {
                 to_fetch.push(item_ids[i]);
         }
         if(to_fetch.length > 0) {
-            $.get('/my-history?item_ids=' + to_fetch.join(','), function(data){
+            $.get('/footprints?item_ids=' + to_fetch.join(','), function(data){
                 for(var i = 0; i < data.length; i++) {
                     var item = data[i];
                     o.items_data[item.id] = item;
@@ -72,7 +94,7 @@ var MyHistory = {
         else o.set(item_ids);
     },
     set: function (item_ids) {
-        var html, count = 0;
+        var html;
         if(item_ids) {
             html = '';
             var items_data = this.items_data;
@@ -80,24 +102,24 @@ var MyHistory = {
                 var id   = item_ids[i];
                 var item = items_data[id];
                 if(item === undefined) continue;
-                html += '<div class="my-history-item" item-id="' + id + 
+                html += '<div class="footprints-item" item-id="' + id + 
                     '"><a class="image" href="' + item.jump_url + '"><img src="' + item.pic_url + 
                     '" /></a><span class="desc"><a href="' + item.jump_url + '">' + item.title + 
                     '</a><b>￥' + item.now_price + '</b></span></div>';
-                count ++;
             }
         } else {
             html = '<center>亲，您还没有浏览过的宝贝哟。</center>';
         }
-        $('#my-history > .my-history-item, #my-history > center').remove();
+        $('#footprints > .footprints-item, #footprints > center').remove();
         if(this.page === 0) {
-            $('#my-history').css('width',         count > 1 ? '464px' : '232px');
+            var count = item_ids.length;
+            $('#footprints').css('width',         count > 1 ? '464px' : '232px');
             if(count > 0) {
-                $('#my-history').css('height',    count > 2 ? '262px' : '150px');
-                $('#my-history-bar').css('width', count > 1 ? '424px' : '192px').css('display', 'block');
+                $('#footprints').css('height',    count > 2 ? '262px' : '150px');
+                $('#footprints-bar').css('width', count > 1 ? '424px' : '192px').css('display', 'block');
             }
-            else $('#my-history-bar').css('display', 'none');
+            else $('#footprints-bar').css('display', 'none');
         }
-        $('#my-history').prepend(html);
+        $('#footprints').prepend(html);
     },
 };

@@ -1,11 +1,11 @@
 <?php
 require_once APP_ROOT . '/view/item_list/filter.view.php';
 if (empty($data['items'])) { ?>
-        <div class="no_items">很抱歉，没有符合条件的宝贝。</div>
+        <div id="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
-        <div class="item_list"><!--
+        <div id="item_list"><script> Footprints.init_record(); </script><!--
 <?php foreach($data['items'] as $item) { ?>
-         --><div class="item">
+         --><div class="item" item-id="<?= $item->get('id') ?>">
                 <div class="title">
                     <b><?= $item->type_tag() ?></b>
                     <a target="_blank" href="<?= $item->jump_url() ?>">

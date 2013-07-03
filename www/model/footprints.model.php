@@ -2,7 +2,7 @@
 require_once APP_ROOT . '/model/item.model.php';
 require_once APP_ROOT . '/../common/helper/price.helper.php';
 
-class MyHistory
+class Footprints
 {
     static function get($item_ids)
     {
