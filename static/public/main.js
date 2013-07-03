@@ -115,16 +115,16 @@ var Footprints = {
         $('#footprints > .footprints-item, #footprints > center').remove();
         if(this.page === 0) {
             var count = item_ids ? item_ids.length : 0;
-            $('#footprints').css('width',         count > 1 ? '464px' : '232px');
-            if(count > 0) {
-                $('#footprints').css('height',    count > 2 ? '252px' : '140px');
-                $('#footprints-bar').css('width', count > 1 ? '424px' : '192px').css('display', 'block');
-            } else {
-                $('#footprints').css('height',   'auto');
-                $('#footprints-bar').css('display', 'none');
-            }
+            $('#footprints').css({
+                'width':   count > 1 ? '464px' : '232px',
+                'height':  count > 2 ? '252px' : count > 0 ? '140px' : 'auto'
+            });
+            $('#footprints-bar').css({
+                'width':   count > 1 ? '424px' : '192px',
+                'display': count > 0 ? 'block' : 'none'
+            })
         }
         $('#footprints').prepend(html).css('display', 'block');
         $('#footprints-span').addClass('footprints-span-on');
-    },
+    }
 };
