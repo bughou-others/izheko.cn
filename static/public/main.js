@@ -2,8 +2,6 @@ var Footprints = {
     init: function(){
         var o = this;
         $('#footprints-a').bind('click mouseenter', function(){
-            $('#footprints-span').addClass('footprints-span-on');
-            $('#footprints').css('display', 'block');
             o.show();
         });
         $('#footprints-span').mouseleave(function(){
@@ -41,7 +39,7 @@ var Footprints = {
             time.setFullYear(time.getFullYear + 1);
             document.cookie = 'footprints=' + a.join(',') + '; expires=' + time.toUTCString();
             //+ '; domain=' + location.hostname + '; path=/';
-            o.item_ids = undefined;
+            o.items = undefined;
         });
     },
     show: function(flag) {
@@ -51,10 +49,12 @@ var Footprints = {
             var m;
             if(m = document.cookie.match(/(^| )footprints=(\d+(,\d+)*)(;|$)/)) {
                 o.items = m[2].split(',');
-            } else {
-                o.set();
-                return;
-            }
+            }        
+            else o.items = [ ];
+        }
+        if (o.items.length <= 0) {
+            o.set();
+            return;
         }
 
         var page_size = 4;
@@ -79,17 +79,19 @@ var Footprints = {
         }
         var to_fetch = [ ];
         for(var i = 0; i < item_ids.length; i++) {
-            if(o.items_data[item_ids[i]] === undefined)
-                to_fetch.push(item_ids[i]);
+            if(o.items_data[item_ids[i]] === undefined) to_fetch.push(item_ids[i]);
         }
         if(to_fetch.length > 0) {
             $.get('/footprints?item_ids=' + to_fetch.join(','), function(data){
-                for(var i = 0; i < data.length; i++) {
-                    var item = data[i];
-                    o.items_data[item.id] = item;
+                if(data[0] === '[') {
+                    data = eval(data);
+                    for(var i = 0; i < data.length; i++) {
+                        var item = data[i];
+                        o.items_data[item.id] = item;
+                    }
                 }
                 o.set(item_ids);
-            }, 'json');
+            }, 'text');
         }
         else o.set(item_ids);
     },
@@ -108,18 +110,21 @@ var Footprints = {
                     '</a><b>￥' + item.now_price + '</b></span></div>';
             }
         } else {
-            html = '<center>亲，您还没有浏览过的宝贝哟。</center>';
+            html = '<center>亲，还没有您的足迹哟。</center>';
         }
         $('#footprints > .footprints-item, #footprints > center').remove();
         if(this.page === 0) {
-            var count = item_ids.length;
+            var count = item_ids ? item_ids.length : 0;
             $('#footprints').css('width',         count > 1 ? '464px' : '232px');
             if(count > 0) {
                 $('#footprints').css('height',    count > 2 ? '262px' : '150px');
                 $('#footprints-bar').css('width', count > 1 ? '424px' : '192px').css('display', 'block');
+            } else {
+                $('#footprints').css('height',   'auto');
+                $('#footprints-bar').css('display', 'none');
             }
-            else $('#footprints-bar').css('display', 'none');
         }
-        $('#footprints').prepend(html);
+        $('#footprints').prepend(html).css('display', 'block');
+        $('#footprints-span').addClass('footprints-span-on');
     },
 };
