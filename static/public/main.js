@@ -10,8 +10,8 @@ var Footprints = {
         });
         $('#footprints-bar > span').click(function(){
             var time = new Date();
-            time.setFullYear(time.getFullYear - 1);
-            document.cookie = 'footprints=; expires=' + time.toUTCString();
+            time.setFullYear(time.getFullYear() - 1);
+            document.cookie = 'footprints=; expires=' + time.toUTCString() + '; path=/';
             o.items = undefined;
             o.show();
         });
@@ -24,7 +24,11 @@ var Footprints = {
     },
     init_record: function() {
         var o = this;
-        $('#item_list').on('click', '.item > .title > a, .item > a, .item > .buy > a', function(){
+        var s = '.item > .title > a, .item > a, .item > .buy > a';
+        $('#item_list').on('contextmenu', s, function(e){
+            return false;
+        }).on('click mouseup', s, function(e){
+            if(e.type === 'mouseup' && e.which !== 2) return false;
             var item_id = $(this).parents('.item').attr('item-id');
             var a = [ ];
             if(m = document.cookie.match(/(^| )footprints=(\d+(,\d+)*)(;|$)/)) {
