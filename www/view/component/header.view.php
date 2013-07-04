@@ -1,6 +1,6 @@
-        <div class="header">
+        <div id="header">
             <a href="/" class="logo"></a>
-            <form class="search" action="/search">
+            <form id="search" action="/search">
                 <div class="input-wrapper"><input type="text" name="s" value="<?= isset($word) ? $word : null ?>" /></div>
                 <div class="select-wrapper">
                     <div class="select-hide-border">

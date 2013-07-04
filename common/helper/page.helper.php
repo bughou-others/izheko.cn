@@ -39,7 +39,7 @@ EOT;
         else 
         {
             if($now == $current)
-                $nav .= "<span class=\"current_page\">$now</span>\n";
+                $nav .= "<span class=\"on\">$now</span>\n";
             else $nav .= <<<EOT
 <a href="$prefix$now$suffix">$now</a>\n
 EOT;

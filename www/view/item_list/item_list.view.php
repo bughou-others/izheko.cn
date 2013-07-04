@@ -30,7 +30,7 @@ if (empty($data['items'])) { ?>
             </div><!--
 <?php } ?>
      --></div>
-        <div class="page">
+        <div id="pagination">
 <?php
     require_once APP_ROOT . '/../common/helper/page.helper.php';
     if($filter) $page_url .= $filter . '/';

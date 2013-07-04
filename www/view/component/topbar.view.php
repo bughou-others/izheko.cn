@@ -1,4 +1,4 @@
-        <div class="topbar">
+        <div id="topbar">
             <span class="left">亲，欢迎来到爱折扣！</span>
             <span class="right">
                 <span id="footprints-span">

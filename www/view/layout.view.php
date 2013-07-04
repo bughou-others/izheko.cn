@@ -17,11 +17,11 @@
     require APP_ROOT . "/view/component/header.view.php";
     require APP_ROOT . "/view/component/navbar.view.php";
 
-    echo '<div class="content">';
+    echo '<div id="content">';
     if (isset($target_view)) {
         require APP_ROOT . "/view/$target_view.view.php";
     }
-    else echo '<img src="' . App::static_server() . '/img/404.png" class="error_content" />';
+    else echo '<img id="error_content" src="' . App::static_server() . '/img/404.png" />';
     echo '</div>';
 
     require APP_ROOT . "/view/component/footer.view.php";

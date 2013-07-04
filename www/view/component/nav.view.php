@@ -6,7 +6,7 @@ else
 {
     ob_start();
 ?>
-        <div class="nav">
+        <div id="navbar">
             <a href="/"<?= $type ? '' : ' class="on"' ?>>全部</a>
 <?php
     require_once APP_ROOT . '/model/item.model.php';

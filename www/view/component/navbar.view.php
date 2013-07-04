@@ -1,4 +1,4 @@
-        <div class="nav">
+        <div id="navbar">
 <?php
     $class = isset($type) && (!$type || $type === 'all') ? ' class="on"' : '';
 ?>

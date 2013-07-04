@@ -1,4 +1,4 @@
-        <div class="footer">
+        <div id="footer">
             <table>
                 <tr>
                     <td rowspan="2"><img src="<?= App::static_server() ?>/img/logo.png" alt="爱折扣" /></td>
