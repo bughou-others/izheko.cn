@@ -36,6 +36,9 @@ img {
     padding: 7px 0.5em 3px 0.5em;
     z-index: 9999;
 }
+#bookmark {
+    letter-spacing: 2px;
+}
 #bookmark b {
     display: inline-block;
     margin: 0 3px 0 5px;
