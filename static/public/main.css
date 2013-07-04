@@ -36,6 +36,16 @@ img {
     padding: 7px 0.5em 3px 0.5em;
     z-index: 9999;
 }
+#bookmark b {
+    display: inline-block;
+    margin: 0 3px 0 5px;
+    width: 13px;
+    height: 13px;
+    background: no-repeat url(img/tool2.png) -90px -23px;
+    position: relative;
+    top: 1px;
+}
+
 #footprints-span.on {
     border-left:   1px solid #ddd;
     border-right:  1px solid #ddd;
