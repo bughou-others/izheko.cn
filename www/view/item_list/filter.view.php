@@ -1,4 +1,4 @@
-        <div class="filter">
+        <div id="filter">
 <?php
 foreach(array(
     'new'      => '今日新品',
