@@ -1,24 +1,30 @@
         <div id="topbar">
             <span class="left">
                 亲，欢迎您！
-                <span id="bookmark" title="亲，请按 Ctrl+D 哦"><b></b>收藏爱折扣</span>
+                <span id="bookmark" title="亲，请按 Ctrl+D 哦"><b></b><span>Ctrl+D</span>收藏爱折扣</span>
                 <script>
                     (function(){
-                        var url   = 'http://www.izhko.cn/';
+                        var url   = 'http://' + location.hostname +'/';
                         var title = '爱折扣 - 精选优质折扣商品';
-                        if (window.sidebar && window.sidebar.addPanel) { //Firefox
-                            $('#bookmark').attr('title', '').css('cursor', 'pointer').click(function(){
-                                window.sidebar.addPanel(title, url, '');
-                            });
-                        } else if(window.external && window.external.AddFavorite) { //IE
+                        if(document.all) { //IE
                             $('#bookmark').attr('title', '').css('cursor', 'pointer').click(function(){
                                 window.external.AddFavorite(url, title);
                             });
+                            $('#bookmark span').text('');
+                        } else if (window.sidebar && window.sidebar.addPanel) { //Firefox
+                            $('#bookmark').attr('title', '').css('cursor', 'pointer').click(function(){
+                                window.sidebar.addPanel(title, url, '');
+                            });
+                            $('#bookmark span').text('');
                         } else if(window.opera && window.print) { //Opera
                             $('#bookmark').attr('title', '').css('cursor', 'pointer').click(function(){
-                                this.title = title;
-                                return true;
+                                var a = document.createElement('a');
+                                a.setAttribute('href', url);
+                                a.setAttribute('title', title);
+                                a.setAttribute('rel',  'sidebar');
+                                a.click();
                             });
+                            $('#bookmark span').text('');
                         }
                     })();
                 </script>

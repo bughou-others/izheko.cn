@@ -37,7 +37,7 @@ img {
     z-index: 9999;
 }
 #bookmark {
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 #bookmark b {
     display: inline-block;
@@ -45,8 +45,7 @@ img {
     width: 13px;
     height: 13px;
     background: no-repeat url(img/tool2.png) -90px -23px;
-    position: relative;
-    top: 1px;
+    vertical-align: top;
 }
 
 #footprints-span.on {
