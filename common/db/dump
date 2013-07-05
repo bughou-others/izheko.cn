@@ -4,6 +4,13 @@ cd "$(dirname "$0")"
 eval $(egrep -v '^;' db.ini)
 cmd="mysqldump -h$host -u$user -p$password $database --default-character-set=utf8"
 
-$cmd                                    types > dump_sql/types.dump.mysql
-$cmd -w"type_id>0 or parent_cid=0" categories > dump_sql/categories.dump.mysql
+if (( $# > 0 )); then
+    if [[ $# -eq 1 && "$1" = items ]]; then
+        test -d tmp || mkdir tmp
+        $cmd > tmp/items.dump.mysql
+    fi
+else
+    $cmd types > dump_sql/types.dump.mysql
+    $cmd -w"type_id>0 or parent_cid=0" categories > dump_sql/categories.dump.mysql
+fi
 
