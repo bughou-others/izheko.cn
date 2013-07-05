@@ -23,8 +23,61 @@ class TaobaoItem
 
         if(isset($item_info['price']))
             $item_info['price'] = parse_price($item_info['price']);
-        $item_info['vip_price'] = self::get_vip_price($num_iid);
+        if(is_array($promo_info = self::get_promo_info($num_iid)))
+            $item_info = array_merge($item_info, $promo_info);
 
+        return $item_info;
+    }
+
+    static function get_promo_info($num_iid)
+    {
+        if(!$price_info = self::get_price_info($num_iid)) return;
+        $promo = null;
+        foreach ($price_info as $sku)
+        {
+            if (isset($sku['promotionList']) &&
+                is_array($promo_list = $sku['promotionList'])
+            )
+            foreach($promo_list as $this_promo)
+            {
+                if (is_array($this_promo) && isset($this_promo['price']) &&
+                    ($price = parse_price($this_promo['price'])) &&
+                    (is_null($promo) || $price < $promo['price'])
+                ){
+                    $this_promo['price'] = $price;
+                    $promo = $this_promo;
+                }
+            }
+        }
+        if(is_int($promo['startTime']))
+            $promo['startTime'] = strftime('%F %T', $promo['startTime'] / 1000);
+        if(is_int($promo['endTime']))
+            $promo['endTime']   = strftime('%F %T', $promo['endTime']   / 1000);
+        return array(
+            'promo_price' => $promo['price'],
+            'promo_start' => $promo['startTime'],
+            'promo_end'   => $promo['endTime'],
+            'promo_vip'   => isset($promo['type']) && ($promo['type'] === 'VIP价格' || $promo['type'] === '店铺vip'),
+        );
+    }
+
+    static function get_price_info($num_iid)
+    {
+        static $curl;
+        if (! $curl) $curl = new Curl();
+        $refer='http://detail.tmall.com/item.htm?id=' . $num_iid;
+        $url='http://mdskip.taobao.com/core/initItemDetail.htm?queryMaybach=true&itemId=' . $num_iid;
+        $response = $curl->get($url, $refer);
+
+        $data = decode_json(iconv('GBK', 'UTF-8', $response->body));
+        if ( isset($data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
+            ($price_info = $data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
+            is_array($price_info)
+        ) return $price_info;
+    }
+
+    static function get_promo_info2($num_iid)
+    {
         if (($result = TaobaoApi::ump_promotion_get($num_iid)) &&
             isset($result['ump_promotion_get_response']['promotions']
             ['promotion_in_item']['promotion_in_item'][0]) &&
@@ -36,37 +89,6 @@ class TaobaoItem
             $item_info['promo_start'] = $promo_info['start_time'];
             $item_info['promo_end']   = $promo_info['end_time'];
         }
-        return $item_info;
-    }
-
-    static function get_vip_price($num_iid)
-    {
-        static $curl;
-        if (! $curl) $curl = new Curl();
-        $refer='http://detail.tmall.com/item.htm?id=' . $num_iid;
-        $url='http://mdskip.taobao.com/core/initItemDetail.htm?itemId=' . $num_iid;
-        $response = $curl->get($url, $refer);
-
-        $data = decode_json(iconv('GBK', 'UTF-8', $response->body));
-        $vip_price = null;
-        if ( isset($data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
-            ($price_info = $data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
-            is_array($price_info)
-        ) foreach ($price_info as $sku)
-        {
-            if ( isset($sku['promotionList']) && ($promo_list = $sku['promotionList']) &&
-                is_array($promo_list)
-            ) foreach($promo_list as $promo)
-            {
-                if (is_array($promo) &&
-                    isset($promo['type']) && 
-                    ($promo['type'] === 'VIP价格' || $promo['type'] === '店铺vip') &&
-                    isset($promo['price']) && ($price = parse_price($promo['price'])) &&
-                    (is_null($vip_price) || $price < $vip_price)
-                ) $vip_price = $price;
-            }
-        }
-        return $vip_price;
     }
 
     static function get_vip_price2($num_iid)
@@ -92,7 +114,6 @@ class TaobaoItem
                 ) $vip_price = $price;
         return $vip_price;
     }
-
 }
 
 

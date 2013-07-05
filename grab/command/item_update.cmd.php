@@ -26,7 +26,7 @@ class ItemUpdate
         pcntl_signal(SIGTERM, 'ItemUpdate::exit_callback');
         register_shutdown_function('ItemUpdate::exit_callback');
 
-        $sql = "select cast(num_iid as char) num_iid, title, flags, cid, type_id, price, vip_price, promo_price,
+        $sql = "select cast(num_iid as char) num_iid, title, flags, cid, type_id, price, promo_price,
             promo_start, promo_end, list_time, delist_time, detail_url, pic_url
             from items where updater=$pid order by id asc for update
             ";
@@ -109,6 +109,9 @@ class ItemUpdate
             $info['post_fee']      === '0.00'   ||
             $info['express_fee']   === '0.00'   ||
             $info['ems_fee']       === '0.00'
+        );
+        $info['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_PROMO_VIP,
+            $info['promo_vip']
         );
         $changes = array();
         foreach($item as $k => $v)
