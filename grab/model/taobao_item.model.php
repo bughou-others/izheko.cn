@@ -23,8 +23,10 @@ class TaobaoItem
 
         if(isset($item_info['price']))
             $item_info['price'] = parse_price($item_info['price']);
-        if(is_array($promo_info = self::get_promo_info($num_iid)))
-            $item_info = array_merge($item_info, $promo_info);
+        if(is_array($promo_info = self::get_promo_info($num_iid)) &&
+            $promo_info['promo_price'] < $item_info['price']
+        )
+        $item_info = array_merge($item_info, $promo_info);
 
         return $item_info;
     }

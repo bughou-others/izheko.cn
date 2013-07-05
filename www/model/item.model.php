@@ -51,28 +51,11 @@ class Item extends ItemBase
         return $this->data['pic_url'] . '_210x210.jpg';
     }
 
-    function now_price()
-    {
-        $now_price = $this->data['price'];
-        $this->vip   = false;
-        $this->promo = false;
-        if (($promo_price = $this->data['promo_price']) && $promo_price < $now_price)
-        {
-            $now_price   = $promo_price;
-            $this->promo = true;
-        }
-        if (($vip_price = $this->data['vip_price']) && $vip_price < $now_price)
-        {
-            $now_price = $vip_price;
-            $this->vip = true;
-        }
-        return $now_price;
-    }
-
     function discount_price()
     {
         if (isset($this->discount_price)) return $this->discount_price;
-        $now_price = $this->now_price();
+        $now_price = $this->data['promo_price'];
+        if(!$now_price) $now_price = $this->data['price'];
         $ref_price = $this->data['ref_price'];
         if ($ref_price <= 0 || $now_price <= $ref_price * self::factor_price_risen)
         {
@@ -124,8 +107,7 @@ class Item extends ItemBase
     function start_time()
     {
         $time = strtotime($this->data['list_time']);
-        isset($this->promo) || $this->now_price();
-        if ($this->promo && ($t = strtotime($this->data['promo_start'])) > $time)
+        if ($this->data['promo_price'] && ($t = strtotime($this->data['promo_start'])) > $time)
             $time = $t;
         return $time;
     }
@@ -147,7 +129,7 @@ class Item extends ItemBase
             $this->action_style  = 'gray';
             $this->action_title  = '宝贝被抢光，已经下架啦。';
         }
-        elseif (($risen_price = $this->risen_price()) || $this->promo && $now > strtotime($this->data['promo_end']))
+        elseif (($risen_price = $this->risen_price()) || $this->data['promo_price'] && $now > strtotime($this->data['promo_end']))
         {
             if ($risen_price === null || $risen_price === $this->data['price']) {
                 $this->action        = '已结束';
@@ -189,8 +171,8 @@ class Item extends ItemBase
 
     function vip_tag()
     {
-        isset($this->vip) || $this->now_price();
-        if($this->vip) return '<span class="vip" title="淘宝VIP用户价哟。">VIP价</span>';
+        if($this->data['flags'] & self::FLAGS_MASK_PROMO_VIP)
+            return '<span class="vip" title="淘宝VIP用户价哟。">VIP价</span>';
     }
 
     function jump_url()
