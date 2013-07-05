@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ssh root@bughou.com 'cd /root/izheko.cn/common/db; ./dump items;'
+cd "$(dirname "$0")"
+test -d tmp || mkdir tmp
+scp root@bughou.com:/root/izheko.cn/common/db/tmp/items.dump.mysql tmp/items2.dump.mysql
+./run tmp/items2.dump.mysql
+
