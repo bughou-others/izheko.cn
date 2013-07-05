@@ -16,9 +16,9 @@ class ItemClear
         $common = '
             from items where delist_time < now() or 
             least(
-                ifnull(price, 0xffffffff),
-                ifnull(vip_price, 0xffffffff),
-                ifnull(promo_price, 0xffffffff)
+                ifnull(price,       0xffffffff + 0),
+                ifnull(vip_price,   0xffffffff + 0),
+                ifnull(promo_price, 0xffffffff + 0)
             ) > ' . ItemBase::factor_price_risen . ' * ref_price
             or (flags & ' . ItemBase::FLAGS_MASK_ITEM_DELETED . ')'
             ;
