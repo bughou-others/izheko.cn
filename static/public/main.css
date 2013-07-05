@@ -375,6 +375,7 @@ img {
 .item .flags {
     margin-top: 5px;
     white-space: nowrap;
+    height: 22px;
 }
 .item .flags .post, .item .flags .vip {
     color: white;
