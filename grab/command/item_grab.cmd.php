@@ -98,9 +98,9 @@ class ItemGrab
         $values = '';
         foreach ($items as $item_id => $item_info)
         {
-            list($ref_price, $ref_price_vip, $has_click_url, $ref_url) = $item_info;
+            list($ref_price, $vip_price, $has_click_url, $ref_url) = $item_info;
             $flags = $has_click_url ? (ItemBase::FLAGS_MASK_REF_CLICK_URL) : 0;
-            if($ref_price_vip) $flags |= ItemBase::FLAGS_MASK_REF_PRICE_VIP;
+            if($vip_price) $flags |= ItemBase::FLAGS_MASK_REF_VIP_PRICE;
             $ref_price = $ref_price ? parse_price($ref_price) : 'null';
             $ref_url = DB::escape($ref_url);
             $values .= ",($item_id, '$now', $flags, $ref_price, '$ref_url')";

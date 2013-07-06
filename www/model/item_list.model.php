@@ -4,13 +4,6 @@ require_once APP_ROOT . '/model/item.model.php';
 
 class ItemList extends ItemBase
 {
-    static function time_cond($cond)
-    {
-        return " and list_time $cond and (
-            promo_start is null or promo_price > vip_price or promo_start $cond
-        )";
-    }
-
     static function query($type, $word, $filter, $page, $page_size)
     {
         if($type && $type !== 'all') {
@@ -28,10 +21,10 @@ class ItemList extends ItemBase
         $now      = strftime('%F %T');
         $today    = strftime('%F %T', strtotime('today'));
         $tomorrow = strftime('%F %T', strtotime('tomorrow'));
-        $new_cond      = $condition . self::time_cond("between '$today' and '$tomorrow'");
-        $coming_cond   = $condition . self::time_cond("between '$now'   and '$tomorrow'");
-        $tomorrow_cond = $condition . self::time_cond(">= '$tomorrow'");
-        $default_cond  = $condition . (strlen($word) > 0 ? '' : self::time_cond("< '$tomorrow'"));
+        $new_cond      = $condition . " and start_time between '$today' and '$tomorrow'";
+        $coming_cond   = $condition . " and start_time between '$now'   and '$tomorrow'";
+        $tomorrow_cond = $condition . " and start_time >= '$tomorrow'";
+        $default_cond  = $condition . (strlen($word) > 0 ? '' : " and start_time < '$tomorrow'");
 
         $data = array();
         self::filter($data, $filter, 'new',      $new_cond,      $page, $page_size);
@@ -63,8 +56,8 @@ class ItemList extends ItemBase
     {
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
         $sql = "select SQL_CALC_FOUND_ROWS 
-            id, title,type_id,flags,ref_price,price,promo_price,vip_price,
-            promo_start,promo_end,list_time,delist_time,detail_url,click_url,pic_url
+            id, title,type_id,flags,ref_price,price,now_price,
+            start_time,end_time,delist_time,detail_url,click_url,pic_url
             from items
             where title != '' and !(flags&" . ItemBase::FLAGS_MASK_ITEM_DELETED . ")
             $condition 

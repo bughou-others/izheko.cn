@@ -11,7 +11,7 @@ class TaobaoItem
         if($result = TaobaoApi::item_get($num_iid))
         {
             if(isset($result['item_get_response']['item']))
-                $item_info = $result['item_get_response']['item'];
+                $item = $result['item_get_response']['item'];
             elseif(
                 isset($result['error_response']['sub_msg']) &&
                 ( ($sub_msg = $result['error_response']['sub_msg']) === '该商品已被删除'
@@ -21,14 +21,28 @@ class TaobaoItem
         }
         else return;
 
-        if(isset($item_info['price']))
-            $item_info['price'] = parse_price($item_info['price']);
-        if(is_array($promo_info = self::get_promo_info($num_iid)) &&
-            $promo_info['promo_price'] < $item_info['price']
-        )
-        $item_info = array_merge($item_info, $promo_info);
+        if(isset($item['price']))
+            $item['price'] = parse_price($item['price']);
+        if(is_array($promo = self::get_promo_info($num_iid)) &&
+            $promo['price'] < $item['price']
+        ) {
+            $item['now_price']  = $promo['price'];
+            $item['start_time'] = is_int($promo['startTime']) &&
+                ($start_time = $promo['startTime'] / 1000) > strtotime($item['list_time']) ?
+                strftime('%F %T', $start_time) : $item['list_time'];
+            $item['end_time']   = is_int($promo['endTime']) && 
+                ($end_time = $promo['endTime'] / 1000)     < strtotime($item['delist_time']) ? 
+                strftime('%F %T', $end_time)   : $item['delist_time'];
+            $item['vip_price']  = $promo['vip_price'];
+        }
+        else {
+            $item['now_price']  = $item['price'];
+            $item['start_time'] = $item['list_time'];
+            $item['end_time']   = $item['delist_time'];
+            $item['vip_price']  = false;
+        }
 
-        return $item_info;
+        return $item;
     }
 
     static function get_promo_info($num_iid)
@@ -51,16 +65,11 @@ class TaobaoItem
                 }
             }
         }
-        if(is_int($promo['startTime']))
-            $promo['startTime'] = strftime('%F %T', $promo['startTime'] / 1000);
-        if(is_int($promo['endTime']))
-            $promo['endTime']   = strftime('%F %T', $promo['endTime']   / 1000);
-        return array(
-            'promo_price' => $promo['price'],
-            'promo_start' => $promo['startTime'],
-            'promo_end'   => $promo['endTime'],
-            'promo_vip'   => isset($promo['type']) && ($promo['type'] === 'VIP价格' || $promo['type'] === '店铺vip'),
-        );
+        if($promo) {
+            $promo['vip_price'] = isset($promo['type']) &&
+                ($promo['type'] === 'VIP价格' || $promo['type'] === '店铺vip');
+        }
+        return $promo;
     }
 
     static function get_price_info($num_iid)

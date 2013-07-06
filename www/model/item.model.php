@@ -54,8 +54,7 @@ class Item extends ItemBase
     function discount_price()
     {
         if (isset($this->discount_price)) return $this->discount_price;
-        $now_price = $this->data['promo_price'];
-        if(!$now_price) $now_price = $this->data['price'];
+        $now_price = $this->data['now_price'];
         $ref_price = $this->data['ref_price'];
         if ($ref_price <= 0 || $now_price <= $ref_price * self::factor_price_risen)
         {
@@ -104,19 +103,12 @@ class Item extends ItemBase
         return $this->original_price_str;
     }
 
-    function start_time()
-    {
-        $time = strtotime($this->data['list_time']);
-        if ($this->data['promo_price'] && ($t = strtotime($this->data['promo_start'])) > $time)
-            $time = $t;
-        return $time;
-    }
-
     function action()
     {
         if (isset($this->action)) return $this->action;
         $now = time();
-        if ($now < ($start_time = $this->start_time()))
+        $start_time = strtotime($this->data['start_time']);
+        if ($now < $start_time)
         {
             $start_time = strftime('%H:%M', $start_time);
             $this->action        = $start_time;
@@ -129,7 +121,7 @@ class Item extends ItemBase
             $this->action_style  = 'gray';
             $this->action_title  = '宝贝被抢光，已经下架啦。';
         }
-        elseif (($risen_price = $this->risen_price()) || $this->data['promo_price'] && $now > strtotime($this->data['promo_end']))
+        elseif (($risen_price = $this->risen_price()) || $now > strtotime($this->data['end_time']))
         {
             if ($risen_price === null || $risen_price === $this->data['price']) {
                 $this->action        = '已结束';
@@ -171,7 +163,7 @@ class Item extends ItemBase
 
     function vip_tag()
     {
-        if($this->data['flags'] & self::FLAGS_MASK_PROMO_VIP)
+        if($this->data['flags'] & self::FLAGS_MASK_VIP_PRICE)
             return '<span class="vip" title="淘宝VIP用户价哟。">VIP价</span>';
     }
 

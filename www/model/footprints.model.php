@@ -10,8 +10,8 @@ class Footprints
         $item_ids = explode(',', $item_ids);
         foreach($item_ids as $id) {
             $sql .= ($sql === null ? '' : ' union all ') .
-                'select id,title,type_id,flags,ref_price,price,promo_price,vip_price,
-                promo_start,promo_end,list_time,delist_time,detail_url,click_url,pic_url
+                'select id,title,type_id,flags,ref_price,price,now_price,
+                start_time,end_time,delist_time,detail_url,click_url,pic_url
                 from items where id = ' . $id;
         }
         $result = DB::query($sql);
