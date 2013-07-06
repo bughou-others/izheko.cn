@@ -110,7 +110,7 @@ class ItemUpdate
             $info['express_fee']   === '0.00'   ||
             $info['ems_fee']       === '0.00'
         );
-        $info['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_VIP_PRICE,
+        $info['flags'] = self::mask_bits($info['flags'], ItemBase::FLAGS_MASK_VIP_PRICE,
             $info['vip_price']
         );
         $changes = array();

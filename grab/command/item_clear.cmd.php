@@ -14,13 +14,9 @@ class ItemClear
     {
         #delisted or risen price(too expensive than ref price) or deleted
         $common = '
-            from items where delist_time < now() or 
-            least(
-                ifnull(price,       0xffffffff + 0),
-                ifnull(vip_price,   0xffffffff + 0),
-                ifnull(promo_price, 0xffffffff + 0)
-            ) > ' . ItemBase::factor_price_risen . ' * ref_price
-            or (flags & ' . ItemBase::FLAGS_MASK_ITEM_DELETED . ')'
+            from items where end_time < now() or now_price > ' .
+            ItemBase::factor_price_risen . ' * ref_price or (flags & ' .
+            ItemBase::FLAGS_MASK_ITEM_DELETED . ')'
             ;
         $type_ids = DB::get_values('select distinct type_id ' . $common);
         $sql    = 'replace into items_history select * ' . $common;
