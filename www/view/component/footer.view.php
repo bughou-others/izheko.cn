@@ -11,7 +11,7 @@
                 </tr>
             </table>
             <p>
-                爱折扣©2013 &nbsp; izheko.cn
+                爱折扣©2013 &nbsp; izheko.cn &nbsp; <small>蜀ICP备09019425号</small>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <script src="http://s25.cnzz.com/stat.php?id=5503631&web_id=5503631&show=pic" language="JavaScript"></script>
             </p>
