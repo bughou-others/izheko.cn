@@ -41,3 +41,20 @@ if (empty($data['items'])) { ?>
     require_once APP_ROOT . '/view/item_list/sidebar.view.php';
 }
 ?>
+<script type="text/javascript">
+(function(win,doc){
+    var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+    if (!win.alimamatk_show) {
+        s.charset = 'gbk';
+        s.async = true;
+        s.src = "http://a.alimama.cn/tkapi.js";
+        s.kslite = "";
+        h.insertBefore(s, h.firstChild);
+    }
+    var o = {
+        pid: "mm_40339139_0_0"
+    }
+    win.alimamatk_onload = win.alimamatk_onload || [];
+    win.alimamatk_onload.push(o);
+})(window,document);
+</script>

@@ -169,6 +169,7 @@ class Item extends ItemBase
 
     function jump_url()
     {
+        return $this->data['detail_url'];
         if ($click_url = $this->data['click_url']) return $click_url;
         $detail_url = urlencode($this->data['detail_url']);
         return "http://s.click.taobao.com/t_9?l={$detail_url}&pid=mm_40339139_0_0"; #&unid=206481310
