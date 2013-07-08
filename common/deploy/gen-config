@@ -4,7 +4,7 @@ dir=$(realpath -s "$0"/../../..)
 if test -z "$1"; then 
     domain=izheko.dev
 elif test "$1" = production; then 
-    domain=bughou.com
+    domain=izheko.cn
 else
     echo unknow argument: "$1"
     exit

@@ -13,6 +13,6 @@
             <p>
                 爱折扣©2013 &nbsp; izheko.cn
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <script src="http://s19.cnzz.com/stat.php?id=5452772&web_id=5452772&show=pic" language="JavaScript"></script>
+                <script src="http://s25.cnzz.com/stat.php?id=5503631&web_id=5503631&show=pic" language="JavaScript"></script>
             </p>
         </div>
