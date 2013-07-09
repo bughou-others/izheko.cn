@@ -13,7 +13,7 @@ if (empty($data['items'])) { ?>
                     </a>
                 </div>
                 <a target="_blank" href="<?= $item->jump_url() ?>">
-                    <img src="<?= $item->pic_url() ?>" />
+                    <img src="<?= App::static_server() ?>/img/blank.gif" data-original="<?= $item->pic_url() ?>" />
                 </a>
                 <div class="buy">
                     <span title="折扣价 ￥<?= $item->discount_price_str() ?>">
@@ -30,6 +30,25 @@ if (empty($data['items'])) { ?>
             </div><!--
 <?php } ?>
      --></div>
+        <script src="<?= App::static_server() ?>/jquery.lazyload.js"></script>
+        <script type="text/javascript">
+            $(".item img").lazyload({  threshold: 400 });
+            (function(win,doc){
+                var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+                if (!win.alimamatk_show) {
+                    s.charset = 'gbk';
+                    s.async = true;
+                    s.src = "http://a.alimama.cn/tkapi.js";
+                    s.kslite = "";
+                    h.insertBefore(s, h.firstChild);
+                }
+                var o = {
+                    pid: "mm_40339139_0_0"
+                }
+                win.alimamatk_onload = win.alimamatk_onload || [];
+                win.alimamatk_onload.push(o);
+            })(window,document);
+        </script>
         <div id="pagination">
 <?php
     require_once APP_ROOT . '/../common/helper/page.helper.php';
@@ -41,20 +60,3 @@ if (empty($data['items'])) { ?>
     require_once APP_ROOT . '/view/item_list/sidebar.view.php';
 }
 ?>
-<script type="text/javascript">
-(function(win,doc){
-    var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
-    if (!win.alimamatk_show) {
-        s.charset = 'gbk';
-        s.async = true;
-        s.src = "http://a.alimama.cn/tkapi.js";
-        s.kslite = "";
-        h.insertBefore(s, h.firstChild);
-    }
-    var o = {
-        pid: "mm_40339139_0_0"
-    }
-    win.alimamatk_onload = win.alimamatk_onload || [];
-    win.alimamatk_onload.push(o);
-})(window,document);
-</script>

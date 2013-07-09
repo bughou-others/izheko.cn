@@ -25,9 +25,7 @@ var Footprints = {
     init_record: function() {
         var o = this;
         var s = '.item > .title > a, .item > a, .item > .buy > a';
-        $('#item_list').on('contextmenu', s, function(e){
-            return false;
-        }).on('click mouseup', s, function(e){
+        $('#item_list').on('click mouseup contextmenu', s, function(e){
             if(e.type === 'mouseup' && e.which !== 2) return false;
             var item_id = $(this).parents('.item').attr('item-id');
             var a = [ ];
