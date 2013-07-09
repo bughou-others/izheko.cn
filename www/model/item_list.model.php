@@ -41,7 +41,7 @@ class ItemList extends ItemBase
     {
         if($filter === $target) {
             self::select($data, $condition, $page, $page_size);
-        } elseif ($target !== null) {
+        } else {
             $data[$target . '_count'] = self::count($condition);
         }
     }

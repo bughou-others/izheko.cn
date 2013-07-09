@@ -276,6 +276,11 @@ img {
 }
 #filter a {
     margin: 0 1em;
+    padding: 0 2px 1px;
+    vertical-align: middle;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
 }
 #filter span {
     color: #aaa;
@@ -284,7 +289,7 @@ img {
 }
 #filter a.on {
     color: white;
-    background-color: #ffa405;
+    background-color: #393;
 }
 #filter a.on span {
     color: white;
