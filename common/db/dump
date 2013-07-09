@@ -10,7 +10,7 @@ if (( $# > 0 )); then
         $cmd > tmp/items.dump.mysql
     fi
 else
-    $cmd types > dump_sql/types.dump.mysql
-    $cmd -w"type_id>0 or parent_cid=0" categories > dump_sql/categories.dump.mysql
+    $cmd types > sql_dump/types.dump.mysql
+    $cmd -w"type_id>0 or parent_cid=0" categories > sql_dump/categories.dump.mysql
 fi
 
