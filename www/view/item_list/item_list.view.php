@@ -36,7 +36,7 @@ if (empty($data['items'])) { ?>
      --></div>
         <script src="<?= App::static_server() ?>/jquery.lazyload.js"></script>
         <script type="text/javascript">
-            $(".item img").lazyload({  threshold: 400 });
+            $(".item img[data-original]").lazyload({  threshold: 400 });
             (function(win,doc){
                 var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
                 if (!win.alimamatk_show) {
