@@ -32,7 +32,7 @@ class ItemList extends ItemBase
         self::filter($data, $filter, 'new',      $new_cond,      $page, $page_size);
         self::filter($data, $filter, 'coming',   $coming_cond,   $page, $page_size);
         self::filter($data, $filter, 'tomorrow', $tomorrow_cond, $page, $page_size);
-        self::filter($data, $filter, null,       $default_cond,  $page, $page_size);
+        self::filter($data, $filter, '',         $default_cond,  $page, $page_size);
 
         return $data;
     }

@@ -1,6 +1,7 @@
         <div id="filter">
 <?php
 foreach(array(
+    ''         => '全部',
     'new'      => '今日新品',
     'coming'   => '即将开始',
     'tomorrow' => '明日预告'

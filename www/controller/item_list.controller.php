@@ -7,8 +7,7 @@ class ItemListController
     {
         $type   = isset($_GET['type'])   ? trim($_GET['type'])   : '';
         $word   = isset($_GET['search']) ? trim($_GET['search']) : '';
-        $filter = isset($_GET['filter']) ? trim($_GET['filter']) : null;
-        if($filter === '')$filter = null;
+        $filter = isset($_GET['filter']) ? trim($_GET['filter']) : '';
         $page   = isset($_GET['page'])   ? intval($_GET['page']) : 1;
         $page_size = 60;
 
