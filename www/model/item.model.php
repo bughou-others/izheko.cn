@@ -117,7 +117,7 @@ class Item extends ItemBase
             if($start_time < $tomorrow) $time = strftime('今天%H:%M', $start_time);
             elseif($start_time < $tomorrow + 86400) $time = strftime('明天%H:%M', $start_time);
             else $time = strftime('%F %H:%M', $start_time);
-            $this->action_title  = "折扣活动 $time 开始哟";
+            $this->action_title  = "折扣 $time 开始哟";
         }
         elseif ($now > strtotime($this->data['delist_time']))
         {

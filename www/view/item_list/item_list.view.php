@@ -4,7 +4,7 @@ if (empty($data['items'])) { ?>
         <div id="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
         <div id="item_list"><script> Footprints.init_record(); </script><!--
-<?php foreach($data['items'] as $item) { ?>
+<?php foreach($data['items'] as $i => $item) { ?>
          --><div class="item" item-id="<?= $item->get('id') ?>">
                 <div class="title">
                     <b><?= $item->type_tag() ?></b>
@@ -13,7 +13,11 @@ if (empty($data['items'])) { ?>
                     </a>
                 </div>
                 <a target="_blank" href="<?= $item->jump_url() ?>">
+<?php if ($i < 8) { ?>
+                    <img src="<?= $item->pic_url() ?>" />
+<?php } else { ?>
                     <img src="<?= App::static_server() ?>/img/blank.gif" data-original="<?= $item->pic_url() ?>" />
+<?php } ?>
                 </a>
                 <div class="buy">
                     <span title="折扣价 ￥<?= $item->discount_price_str() ?>">
