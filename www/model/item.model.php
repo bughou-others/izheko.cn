@@ -110,10 +110,14 @@ class Item extends ItemBase
         $start_time = strtotime($this->data['start_time']);
         if ($now < $start_time)
         {
-            $start_time = strftime('%H:%M', $start_time);
-            $this->action        = $start_time;
+            $time = strftime('%H:%M', $start_time);
+            $this->action        = $time;
             $this->action_style  = 'green';
-            $this->action_title  = "折扣 $start_time 开始哟";
+            $tomorrow = strtotime('tomorrow');
+            if($start_time < $tomorrow) $time = strftime('今天%H:%M', $start_time);
+            elseif($start_time < $tomorrow + 86400) $time = strftime('明天%H:%M', $start_time);
+            else $time = strftime('%F %H:%M', $start_time);
+            $this->action_title  = "折扣活动 $time 开始哟";
         }
         elseif ($now > strtotime($this->data['delist_time']))
         {
@@ -136,7 +140,7 @@ class Item extends ItemBase
         }
         else
         {
-            $this->action = '去抢购';
+            $this->action        = '去抢购';
             $this->action_style  = 'yellow';
             $this->action_title  = '折扣正在进行，快去抢购吧！';
         }

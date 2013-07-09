@@ -17,13 +17,15 @@ class ItemList extends ItemBase
             $word = DB::escape($word);
             $condition .= " and title like '%$word%'";
         } 
-
-        $now      = strftime('%F %T');
-        $today    = strftime('%F %T', strtotime('today'));
-        $tomorrow = strftime('%F %T', strtotime('tomorrow'));
-        $new_cond      = $condition . " and start_time between '$today' and '$tomorrow'";
-        $coming_cond   = $condition . " and start_time between '$now'   and '$tomorrow'";
-        $tomorrow_cond = $condition . " and start_time >= '$tomorrow'";
+        $today_time   = strtotime('today');
+        $now          = strftime('%F %T');
+        $today        = strftime('%F %T', $today_time);
+        $today_end    = strftime('%F %T', $today_time + 86399);
+        $tomorrow     = strftime('%F %T', $today_time + 86400);
+        $tomorrow_end = strftime('%F %T', $today_time + 86400 + 86399);
+        $new_cond      = $condition . " and start_time between '$today' and '$today_end'";
+        $coming_cond   = $condition . " and start_time between '$now'   and '$today_end'";
+        $tomorrow_cond = $condition . " and start_time between '$tomorrow' and '$tomorrow_end'";
         $default_cond  = $condition . (strlen($word) > 0 ? '' : " and start_time < '$tomorrow'");
 
         $data = array();
