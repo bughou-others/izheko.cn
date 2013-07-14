@@ -4,12 +4,12 @@ cd "$(dirname "$0")"
 test -d tmp || mkdir tmp
 
 if test "$1" = from_production; then
-    ssh root@bughou.com 'cd /root/izheko.cn/common/db; ./dump items;'
-    scp root@bughou.com:/root/izheko.cn/common/db/tmp/items.dump.mysql tmp/items2.dump.mysql
+    ssh root@izheko.cn 'cd /root/izheko.cn/common/db; ./dump items;'
+    scp root@izheko.cn:/root/izheko.cn/common/db/tmp/items.dump.mysql tmp/items2.dump.mysql
     ./run tmp/items2.dump.mysql
 elif test "$1" = to_production; then
     ./dump items;
-    scp tmp/items.dump.mysql root@bughou.com:/root/izheko.cn/common/db/tmp/items2.dump.mysql
-    ssh root@bughou.com 'cd /root/izheko.cn/common/db; ./run tmp/items2.dump.mysql;'
+    scp tmp/items.dump.mysql root@izheko.cn:/root/izheko.cn/common/db/tmp/items2.dump.mysql
+    ssh root@izheko.cn 'cd /root/izheko.cn/common/db; ./run tmp/items2.dump.mysql;'
 fi
 
