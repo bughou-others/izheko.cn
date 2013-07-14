@@ -25,7 +25,7 @@ class ItemUpdateDaemonCmd
         $pid  = posix_getpid();
         $pids = preg_replace("/\b$pid\b/", '',  $pids);
         if(!preg_match('/^\s*$/', $pids)) `kill -TERM $pids`;
-        pcntl_signal(SIGTERM, 'CacheClearDaemonCmd::sig_handler');
+        pcntl_signal(SIGTERM, 'ItemUpdateDaemonCmd::sig_handler');
         self::main_loop();
     }
 
@@ -41,7 +41,7 @@ class ItemUpdateDaemonCmd
     static function do_work($now) {
         $cond = self::get_cond($now);
         system('cd ' . APP_ROOT .
-            '; php run command/click_url_daemon.cmd.php >> tmp/item_update_daemon.log 2>&1 &');
+            "; php run command/item_update.cmd.php '$cond' >> tmp/item_update_daemon.log 2>&1 &");
     }
 
     static function do_sleep($now)
@@ -65,10 +65,9 @@ class ItemUpdateDaemonCmd
     {
         $start = strftime('%F %T', $time - 300);
         $end   = strftime('%F %T', $time + 300);
-        $time_cond  = "between '$start' and '$end'";
-        $cond = "start_time $time_cond or    end_time $time_cond or
-                  list_time $time_cond or delist_time $time_cond ";
-        return $cond;
+        $time_cond  = "between \"$start\" and \"$end\"";
+        return "(start_time $time_cond or    end_time $time_cond or
+                  list_time $time_cond or delist_time $time_cond ) ";
     }
 
     static function get_next($time)
