@@ -63,8 +63,8 @@ class ItemUpdateDaemonCmd
 
     static function get_cond($time)
     {
-        $start = strftime('%F %T', $time - 300);
-        $end   = strftime('%F %T', $time + 300);
+        $start = strftime('%F %T', $time - 120);
+        $end   = strftime('%F %T', $time + 120);
         $time_cond  = "between \"$start\" and \"$end\"";
         return "(start_time $time_cond or    end_time $time_cond or
                   list_time $time_cond or delist_time $time_cond ) ";
