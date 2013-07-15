@@ -15,6 +15,7 @@ if test "$1" = production; then
     test -d "$tmp_dir" || mkdir --mode=755 "$tmp_dir"
     chown www-data:www-data "$tmp_dir"
     replace APP_ROOT "$dir/grab"  < "$dir"/grab/crontab | crontab -u www-data -
+    (cd "$dir/grab"; php run command/item_update_daemon.cmd.php >> tmp/item_update_daemon.log 2>&1 &)
 fi
 
 
