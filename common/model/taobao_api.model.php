@@ -7,8 +7,8 @@ class TaobaoApi
     const APP_SECRET = 'test';
      */
     const BASE_URL   = 'http://gw.api.taobao.com/router/rest?';
-    const APP_KEY    = '21430461';
-    const APP_SECRET = 'f088b4001dceb8f76a3bca944d9e605e';
+    const APP_KEY    = '21567955';
+    const APP_SECRET = 'a4c10f52fcca718062745321bc927ed0';
     const NICK       = 'bughou';
 
     static function get_data($method, $app_params){
