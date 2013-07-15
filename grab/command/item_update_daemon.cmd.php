@@ -74,20 +74,17 @@ class ItemUpdateDaemonCmd
     {
         $s = strftime('%F %T', $time);
         $sql = "
-            select min(start_time), min(end_time), min(list_time), min(delist_time)
-            from items 
-            where start_time > '$s' or end_time    > '$s' or
-                   list_time > '$s' or delist_time > '$s' 
-            ";
-        $row = DB::get_row($sql);
-        $min_time = null;
-        foreach($row as $time) {
-            if ($time) {
-                $time = strtotime($time);
-                if ($min_time === null || $time < $min_time) $min_time = $time;
-            }
-        }
-        return $min_time;
+            select min(t) from (
+                select min(start_time)  t from items where start_time  > '$s'
+                union all
+                select min(end_time)    t from items where end_time    > '$s'
+                union all
+                select min(list_time)   t from items where list_time   > '$s'
+                union all
+                select min(delist_time) t from items where delist_time > '$s'
+            ) tmp
+         ";
+        return DB::get_value($sql);
     }
 }
 ItemUpdateDaemonCmd::start();

@@ -1,0 +1,32 @@
+#!/bin/bash
+eval $(egrep -v '^;' $(dirname $0)/../../common/db/db.ini)
+cmd="mysql -h$host -u$user -p$password $database"
+$cmd -t <<"SQL_BLOCK" | less -S
+
+select min, sum(count) count
+from (
+    select date_format(start_time, '%Y-%m-%d %H:%i') min, count(*) count
+    from items
+    where start_time between '2013-7-15' and '2013-7-16'
+    group by min 
+    union all
+    select date_format(end_time, '%Y-%m-%d %H:%i') min, count(*) count
+    from items
+    where end_time between '2013-7-15' and '2013-7-16'
+    group by min 
+    union all
+    select date_format(list_time, '%Y-%m-%d %H:%i') min, count(*) count
+    from items
+    where list_time between '2013-7-15' and '2013-7-16'
+    group by min 
+    union all
+    select date_format(delist_time, '%Y-%m-%d %H:%i') min, count(*) count
+    from items
+    where delist_time between '2013-7-15' and '2013-7-16'
+    group by min 
+) tmp
+group by min 
+;
+
+SQL_BLOCK
+
