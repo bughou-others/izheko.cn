@@ -166,7 +166,7 @@ img {
 }
 #search .input-wrapper {
     padding-right: 1em;
-    margin-right: 5em;
+    margin-right: 6em;
     height: 31px;
 }
 #search input {
@@ -189,7 +189,7 @@ img {
     margin: 0;
     padding: 0;
     border: none;
-    width: 70px;
+    width: 84px;
     height: 22px;
     font-size: 14px;
     line-height: 22px;
@@ -459,7 +459,6 @@ img {
 #footer {
     color: #aaa;
     padding: 1em;
-    margin-top: 2em;
     border-top: 1px solid #ffa405;
 }
 #footer table {
