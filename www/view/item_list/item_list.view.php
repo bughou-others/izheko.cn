@@ -12,11 +12,11 @@ if (empty($data['items'])) { ?>
                         <span><?= $item->title() ?></span>
                     </a>
                 </div>
-                <a target="_blank" href="<?= $item->jump_url() ?>">
+                <a class="pic" target="_blank" href="<?= $item->jump_url() ?>">
 <?php if ($i < 8) { ?>
                     <img src="<?= $item->pic_url() ?>" />
 <?php } else { ?>
-                    <img src="<?= App::static_server() ?>/img/blank.gif" data-original="<?= $item->pic_url() ?>" />
+                    <img src="<?= App::static_server() ?>/img/tears.gif" data-original="<?= $item->pic_url() ?>" />
 <?php } ?>
                 </a>
                 <div class="buy">
