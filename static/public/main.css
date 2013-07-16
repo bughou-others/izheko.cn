@@ -21,7 +21,7 @@ img {
     font: normal 12px/1.5 "";
     position: absolute;
     top: 5px;
-    right: 10%;
+    right: 5%;
 }
 #bookmark {
     letter-spacing: 1px;
@@ -148,12 +148,12 @@ img {
     *display: inline;
     *zoom: 1;
     font-size: 1em;
-    margin-left: 5em;
+    margin-left: 3em;
     background-color: #ffa405; 
     vertical-align: text-top;
-    width: 20%;
+    width: 30%;
     min-width: 15em;
-    max-width: 30em;
+    max-width: 50em;
     height: 31px;
     padding: 3px;
     *padding: 2px 3px 3px 3px;
