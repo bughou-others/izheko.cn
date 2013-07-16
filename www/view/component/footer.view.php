@@ -8,9 +8,9 @@
                     <td> 爱折扣仅提供到淘宝、天猫的宝贝链接， 所有交易都在淘宝、天猫进行， 请放心购买。 </td>
                 </tr>
             </table>
-            <p>
+            <div>
                 爱折扣©2013 &nbsp; izheko.cn &nbsp; <small>蜀ICP备09019425号</small>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <script src="http://s25.cnzz.com/stat.php?id=5503631&web_id=5503631&show=pic" language="JavaScript"></script>
-            </p>
+            </div>
         </div>

@@ -6,7 +6,7 @@ var Footprints = {
         });
         $('#footprints-span').mouseleave(function(){
             $('#footprints').css('display', 'none');
-            $(this).removeClass('on');
+            $('#footprints-a').removeClass('on');
         });
         $('#footprints-bar > span').click(function(){
             var time = new Date();
@@ -127,6 +127,6 @@ var Footprints = {
             })
         }
         $('#footprints').prepend(html).css('display', 'block');
-        $('#footprints-span').addClass('on');
+        $('#footprints-a').addClass('on');
     }
 };

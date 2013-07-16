@@ -13,7 +13,6 @@
     </head>
     <body>
 <?php
-    require APP_ROOT . "/view/component/topbar.view.php";
     require APP_ROOT . "/view/component/header.view.php";
     require APP_ROOT . "/view/component/navbar.view.php";
 
