@@ -477,6 +477,7 @@ img {
 #footer {
     padding: 1em;
     background-color: #f2f2f2;
+    white-space: nowrap;
 }
 #footer span {
     margin-left: 1em;
