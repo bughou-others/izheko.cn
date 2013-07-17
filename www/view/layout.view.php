@@ -9,7 +9,6 @@
         <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server() ?>/main.css" />
         <script src="<?= App::static_server() ?>/jquery.js"></script>
         <script src="<?= App::static_server() ?>/main.js"></script>
-        <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21567955"></script>
     </head>
     <body>
 <?php
@@ -25,5 +24,6 @@
 
     require APP_ROOT . "/view/component/footer.view.php";
 ?>
+        <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21567955"></script>
     </body>
 </html>
