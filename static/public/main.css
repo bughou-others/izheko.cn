@@ -436,8 +436,8 @@ img {
     height: 30px;
     margin: 0;
     padding: 0;
-    border: 1px solid #aaa;
-    background-color: #bbb;
+    border: 1px solid #fe8101;
+    background-color: #ffa405;
     position: absolute;
     right: 0px;
     overflow: hidden;
@@ -447,8 +447,6 @@ img {
 }
 #sidebar a:hover {
     width: 94px;
-    border-color: #fe8101;
-    background-color: #ffa405;
 }
 #sidebar a span {
     display: block;
