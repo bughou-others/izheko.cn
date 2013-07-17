@@ -13,7 +13,8 @@ if (empty($data['items'])) { ?>
                     </a>
                 </div>
                 <a class="pic" target="_blank" href="<?= $item->jump_url() ?>">
-<?php if ($i < 8) { ?>
+                    <!--[if IE 6]><span></span><![endif]-->
+<?php if ($i < 6) { ?>
                     <img src="<?= $item->pic_url() ?>" />
 <?php } else { ?>
                     <img src="<?= App::static_server() ?>/img/tears.gif" data-original="<?= $item->pic_url() ?>" />

@@ -141,7 +141,7 @@ img {
     background: no-repeat url(img/logo.png);
     vertical-align: middle;
     _background-image: none;
-    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='img/logo.png', enabled=true, sizingMethod='crop');
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.izheko.cn/img/logo.png', enabled=true, sizingMethod='crop');
 }
 #search {
     display: inline-block;
@@ -286,12 +286,24 @@ img {
 }
 .item .pic {
     width: 300px;
+    height: 300px;
+    line-height: 300px;
+    margin-bottom: 5px;
     display: block;
     overflow: hidden;
     text-align: center;
 }
 .item .pic img {
-    height: 300px;
+    max-width: 300px;
+    max-height: 300px;
+    vertical-align: middle;
+}
+.item .pic span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    font-size: 0;
 }
 .item .title {
     margin: 0;
