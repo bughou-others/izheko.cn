@@ -8,7 +8,7 @@ function paginate($prefix, $suffix, $current, $total, $size, $left = 3, $middle 
 
     $nav = '';
     if(($prev = $current - 1) >= 1) $nav .= <<<EOT
-<a href="$prefix$prev$suffix">上一页</a>\n
+<a href="$prefix$prev$suffix" class="on">上一页</a>\n
 EOT;
     /* 
      * divide all page number into three parts: left, middle, right。
@@ -48,7 +48,7 @@ EOT;
     }
 
     if(($next = $current + 1) <= $last) $nav .= <<<EOT
-            <a href="$prefix$next$suffix">下一页</a>\n
+            <a href="$prefix$next$suffix" class="on">下一页</a>\n
 EOT;
     return $nav;
 }
