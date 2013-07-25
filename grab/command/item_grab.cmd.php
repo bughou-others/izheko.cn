@@ -60,8 +60,12 @@ class ItemGrab
 
     static function get_one_item($item_node, $page)
     {
-        $jump_url = $page->query('./div[@class="good-price"]/a[@href]',
-            $item_node)->item(0)->getAttribute('href');
+        $jump_url = $page->query('./div[@class="good-price"]/a[@href]', $item_node)->item(0);
+        if (!$jump_url) {
+            //echo $page->query('./h5', $item_node)->item(0)->nodeValue, PHP_EOL;
+            return;
+        }
+        $jump_url = $jump_url->getAttribute('href');
         list($item_id, $has_click_url) = self::get_item_id($jump_url, $page); 
         $item_id = trim($item_id);
         if ($item_id && preg_match('/^\d+$/', $item_id))
