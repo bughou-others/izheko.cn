@@ -19,7 +19,7 @@ class ItemListController
                 return;
             }
             if($type === '')$type = 'all';
-            $page_url = "/search/$type/$word/";
+            $page_url = "/search/$word/";
         }
         else
         {
