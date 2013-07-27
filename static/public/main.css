@@ -363,6 +363,7 @@ img {
     margin-top: 5px;
     white-space: nowrap;
     height: 22px;
+    position: relative;
 }
 .item .flags .post, .item .flags .vip {
     color: white;
@@ -376,6 +377,13 @@ img {
 }
 .item .flags .vip {
     background: url(img/rect.png) -25px -105px;
+}
+.item .flags .end_time {
+    font-size: 12px;
+    line-height: 16px;
+    position: absolute;
+    top: 9px;
+    right: 0;
 }
 
 /* pagination */

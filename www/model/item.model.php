@@ -50,6 +50,11 @@ class Item extends ItemBase
         #170 190 210 240 270 290 300 310 320 350 360 400 430
         return $this->data['pic_url'] . '_300x300.jpg';
     }
+    
+    function end_time()
+    {
+        return strftime('%m月%d日 %H:%M', strtotime($this->data['end_time']));
+    }
 
     function discount_price()
     {
