@@ -32,7 +32,7 @@ if (empty($data['items'])) { ?>
                     </a>
                 </div>
                 <div class="flags"><?= $item->postage_tag() ?><?= $item->vip_tag() ?>
-                    <span class="end_time"><?= $item->end_time() ?>结束</span>
+                    <span class="end_time"><?= $item->end_time() ?> 结束</span>
                 </div>
             </div><!--
 <?php } ?>
