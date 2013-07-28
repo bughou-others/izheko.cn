@@ -26,7 +26,7 @@ class ItemList extends ItemBase
         $new_cond      = $condition . " and start_time between '$today' and '$today_end'";
         $coming_cond   = $condition . " and start_time between '$now'   and '$today_end'";
         $tomorrow_cond = $condition . " and start_time between '$tomorrow' and '$tomorrow_end'";
-        $default_cond  = $condition . (strlen($word) > 0 ? '' : " and start_time < '$tomorrow'");
+        $default_cond  = $condition . (strlen($word) > 0 ? '' : " and start_time < '$now'");
 
         $data = array();
         self::filter($data, $filter, 'new',      $new_cond,      $page, $page_size);
