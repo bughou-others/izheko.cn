@@ -8,11 +8,11 @@ if (empty($data['items'])) { ?>
          --><div class="item" item-id="<?= $item->get('id') ?>">
                 <div class="title">
                     <b><?= $item->type_tag() ?></b>
-                    <a target="_blank" href="<?= $item->jump_url() ?>">
+                    <a target="_blank" data-itemid="<?= $item->get('num_iid') ?>">
                         <span><?= $item->title() ?></span>
                     </a>
                 </div>
-                <a class="pic" target="_blank" href="<?= $item->jump_url() ?>">
+                <a class="pic" target="_blank" data-itemid="<?= $item->get('num_iid') ?>">
                     <!--[if IE 6]><span></span><![endif]-->
 <?php if ($i < 6) { ?>
                     <img src="<?= $item->pic_url() ?>" />
@@ -27,7 +27,7 @@ if (empty($data['items'])) { ?>
                     <?php if ($item->original_price_str()) { ?>
                     <small title="原价 ￥<?= $item->original_price_str() ?>">￥<?= $item->original_price_str() ?></small>
                     <?php } ?>
-                    <a class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="<?= $item->jump_url() ?>" target="_blank">
+                    <a class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" data-itemid="<?= $item->get('num_iid') ?>" target="_blank">
                         <b><?= $item->action() ?></b>
                     </a>
                 </div>
