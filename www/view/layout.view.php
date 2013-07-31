@@ -2,10 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8" />
+　      <meta name="viewport" content="width=device-width, initial-scale=1" />
 <?php
     require APP_ROOT . "/view/component/seo.view.php";
 ?>
-        <link rel="shortcut icon" href="<?= App::static_server() ?>/img/favicon.ico">
+        <link rel="shortcut icon" href="<?= App::static_server() ?>/img/favicon.ico" />
         <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server() ?>/main.css" />
         <script src="<?= App::static_server() ?>/jquery.min.js"></script>
         <script src="<?= App::static_server() ?>/main.js"></script>

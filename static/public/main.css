@@ -132,7 +132,6 @@ img {
 
 #header {
     padding: 3px 0 10px 0;
-    white-space: nowrap;
 }
 .logo {
     cursor: pointer;
@@ -206,7 +205,6 @@ img {
     background-color: #ffa405;
     font-size: 16px;
     line-height: 32px;
-    white-space: nowrap;
     overflow: visible;
 }
 #navbar a {
@@ -225,7 +223,7 @@ img {
 
 #content {
     margin: 0;
-    padding: 1em 2em;
+    padding: 1em 0;
 }
 
 #error_content {
@@ -487,7 +485,6 @@ img {
 #footer {
     padding: 1em;
     background-color: #f2f2f2;
-    white-space: nowrap;
 }
 #footer span {
     margin-left: 1em;
