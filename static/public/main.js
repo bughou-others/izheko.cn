@@ -13,7 +13,7 @@ var Footprints = {
             time.setFullYear(time.getFullYear() - 1);
             document.cookie = 'footprints=; expires=' + time.toUTCString() + '; path=/';
             o.items = undefined;
-            o.show();
+            o.show('clear');
         });
         $('#footprints-bar > div > span:first-child').click(function(){
             o.show('prev');
@@ -48,6 +48,7 @@ var Footprints = {
     page_size: 4,
     show: function(flag) {
         var o = this;
+        o.flag = flag;
         if(o.items === undefined) {
             o.page = 0;
             var m;
@@ -99,11 +100,12 @@ var Footprints = {
         else o.set(item_ids);
     },
     set: function (item_ids) {
+        var o = this;
         var html;
         var count = 0;
         if(item_ids) {
             html = '';
-            var items_data = this.items_data;
+            var items_data = o.items_data;
             for(var i = 0; i < item_ids.length; i++) {
                 var num_iid = item_ids[i];
                 var item = items_data[num_iid];
@@ -116,21 +118,18 @@ var Footprints = {
         } else {
             html = '<center>亲，您还没有留下足迹哟。</center>';
         }
+        var height = o.flag && o.last_count > count ? $('#footprints').height() + 'px' : 'auto';
         $('#footprints > .footprints-item, #footprints > center').remove();
-        if(this.page === 0) {
+        if(!o.flag && o.page === 0) {
             var wide = $(window).width() > 500;
-            $('#footprints').css({
-                'width':   wide && count > 1 ? '464px' : '232px'
-            });
-            $('#footprints-bar').css({
-                'width':   wide && count > 1 ? '424px' : '192px',
-                'display': count > 0 ? 'block' : 'none'
-            })
+            $('#footprints').css('width',       wide && count > 1 ? '464px' : '232px');
+            $('#footprints-bar').css('width',   wide && count > 1 ? '424px' : '192px');
         }
-        $('#footprints').prepend(html).css('display', 'block');
-        if(this.page === 0 && count === this.page_size) {
-            $('#footprints').css('height', $('#footprints').height());
+        if(o.page === 0) {
+            $('#footprints-bar').css('display', count > 0 ? 'block' : 'none');
         }
+        $('#footprints').css('height', height).prepend(html).css('display', 'block');
         $('#footprints-a').addClass('on');
+        o.last_count = count;
     }
 };

@@ -53,7 +53,7 @@ img {
     *zoom: 1;
     position: relative;
     z-index: 9999;
-    padding: 0 6px 0 6px;
+    padding: 3px 6px 0 6px;
     border:  1px solid white;
 }
 #footprints-a.on {
@@ -76,7 +76,7 @@ img {
     background-color: white;
     border: 1px solid #ddd;
     position: absolute;
-    top: 19px;
+    top: 22px;
     right: 0;
     _right: -1px;
     z-index: 999;
