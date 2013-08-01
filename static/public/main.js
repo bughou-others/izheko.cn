@@ -45,6 +45,7 @@ var Footprints = {
             o.items = undefined;
         });
     },
+    page_size: 4,
     show: function(flag) {
         var o = this;
         if(o.items === undefined) {
@@ -60,18 +61,17 @@ var Footprints = {
             return;
         }
 
-        var page_size = 4;
         if(flag === 'next') o.page ++;
         else if(flag === 'prev') o.page --;
-        var max_page = Math.ceil(o.items.length / page_size) - 1;
+        var max_page = Math.ceil(o.items.length / o.page_size) - 1;
         if(o.page < 0) o.page = 0;
         else if(o.page > max_page) o.page = max_page;
 
         $('#footprints-bar > div > span:first-child').css('visibility', o.page > 0        ? 'visible' : 'hidden');
         $('#footprints-bar > div > span:last-child') .css('visibility', o.page < max_page ? 'visible' : 'hidden');
 
-        var begin = o.page * page_size;
-        var end   = begin + page_size;
+        var begin = o.page * o.page_size;
+        var end   = begin + o.page_size;
         if(end > o.items.length) end = o.items.length;
         o.get(o.items.slice(begin, end));
     },
@@ -100,6 +100,7 @@ var Footprints = {
     },
     set: function (item_ids) {
         var html;
+        var count = 0;
         if(item_ids) {
             html = '';
             var items_data = this.items_data;
@@ -107,6 +108,7 @@ var Footprints = {
                 var num_iid = item_ids[i];
                 var item = items_data[num_iid];
                 if(item === undefined) continue;
+                count ++;
                 html += '<div class="footprints-item"><a class="image" data-itemid="' + num_iid +
                     '"><img src="' + item.pic_url + '" /></a><span class="desc"><a data-itemid="' +
                     num_iid + '">' + item.title   + '</a><b>￥' + item.now_price + '</b></span></div>';
@@ -116,17 +118,19 @@ var Footprints = {
         }
         $('#footprints > .footprints-item, #footprints > center').remove();
         if(this.page === 0) {
-            var count = item_ids ? item_ids.length : 0;
+            var wide = $(window).width() > 500;
             $('#footprints').css({
-                'width':   count > 1 ? '464px' : '232px',
-                'height':  count > 2 ? '252px' : count > 0 ? '140px' : 'auto'
+                'width':   wide && count > 1 ? '464px' : '232px'
             });
             $('#footprints-bar').css({
-                'width':   count > 1 ? '424px' : '192px',
+                'width':   wide && count > 1 ? '424px' : '192px',
                 'display': count > 0 ? 'block' : 'none'
             })
         }
         $('#footprints').prepend(html).css('display', 'block');
+        if(this.page === 0 && count === this.page_size) {
+            $('#footprints').css('height', $('#footprints').height());
+        }
         $('#footprints-a').addClass('on');
     }
 };
