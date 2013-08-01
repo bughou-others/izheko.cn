@@ -20,9 +20,8 @@ img {
 }
 #welcome {
     font: normal 12px/1.5 "";
-    position: absolute;
-    top: 5px;
-    right: 5%;
+    float: left;
+    margin-left: 10px;
 }
 #bookmark {
     letter-spacing: 1px;
@@ -45,6 +44,8 @@ img {
     font: normal 12px/1.5 "";
     margin: 0 0 5px 2em;
     vertical-align: bottom;
+    float: right;
+    margin: 5px 5px 0;
 }
 #footprints-a {
     color: #06c;
@@ -52,7 +53,7 @@ img {
     *zoom: 1;
     position: relative;
     z-index: 9999;
-    padding: 7px 6px 3px 6px;
+    padding: 0 6px 0 6px;
     border:  1px solid white;
 }
 #footprints-a.on {
@@ -75,7 +76,7 @@ img {
     background-color: white;
     border: 1px solid #ddd;
     position: absolute;
-    top: 29px;
+    top: 19px;
     right: 0;
     _right: -1px;
     z-index: 999;
@@ -131,6 +132,7 @@ img {
 }
 
 #header {
+    clear: both;
     padding: 3px 0 10px 0;
 }
 .logo {

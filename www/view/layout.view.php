@@ -1,9 +1,9 @@
 <!doctype html>
-<html>
+<html lang="zh-CN">
     <head>
-        <meta charset="utf-8" />
-　      <meta name="viewport" content="width=device-width, initial-scale=1" />
-　      <meta name="layoutmode" content="standard" />
+        <meta charset="utf-8">
+        <meta name="layoutmode" content="standard" />
+        <meta name="viewport"   content="width=device-width,initial-scale=1.0" />
 <?php
     require APP_ROOT . "/view/component/seo.view.php";
 ?>
@@ -14,6 +14,7 @@
     </head>
     <body>
 <?php
+    require APP_ROOT . "/view/component/topbar.view.php";
     require APP_ROOT . "/view/component/header.view.php";
     require APP_ROOT . "/view/component/navbar.view.php";
 
