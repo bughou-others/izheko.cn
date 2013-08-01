@@ -5,7 +5,7 @@ if (empty($data['items'])) { ?>
 <?php } else { ?>
         <div id="item_list"><script> Footprints.init_record(); </script><!--
 <?php foreach($data['items'] as $i => $item) { ?>
-         --><div class="item" item-id="<?= $item->get('id') ?>">
+         --><div class="item">
                 <div class="title">
                     <b><?= $item->type_tag() ?></b>
                     <a target="_blank" data-itemid="<?= $item->get('num_iid') ?>">

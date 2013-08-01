@@ -18,18 +18,18 @@ class Footprints
         $sql = null;
         foreach($item_ids as $id) {
             $sql .= ($sql === null ? '' : ' union all ') .
-                'select id,title,type_id,flags,ref_price,price,now_price,
+                'select num_iid,title,type_id,flags,ref_price,price,now_price,
                 start_time,end_time,delist_time,detail_url,click_url,pic_url
-                from ' . ($history ? 'items' : 'items_history') . ' where id =  ' . $id;
+                from ' . ($history ? 'items' : 'items_history') . ' where num_iid =  ' . $id;
         }
         $result = DB::query($sql);
         while($row = $result->fetch_assoc()) {
             $item   = new Item($row);
-            $id = $row['id'];
-            if(!$history && ($index = array_search($id, $item_ids, true)) !== false)
+            $num_iid = $row['num_iid'];
+            if(!$history && ($index = array_search($num_iid, $item_ids, true)) !== false)
                 unset($item_ids[$index]);
             $data[] = array(
-                'id'        => $id,
+                'num_iid'   => $num_iid,
                 'pic_url'   => $item->pic_url(),
                 'title'     => $item->title(),
                 'jump_url'  => $item->jump_url(),

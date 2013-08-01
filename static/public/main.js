@@ -27,10 +27,11 @@ var Footprints = {
         var s = '.item > .title > a, .item > a, .item > .buy > a';
         $('#item_list').on('click mouseup contextmenu', s, function(e){
             if(e.type === 'mouseup' && e.which !== 2) return false;
-            var item_id = $(this).parents('.item').attr('item-id');
+            var item_id = $(this).parents('.item').children('.pic').attr('data-itemid');
             var a = [ ];
-            if(m = document.cookie.match(/(^| )footprints=(\d+(,\d+)*)(;|$)/)) {
+            if(m = document.cookie.match(/(^| )footprints=(\d{8,}(,\d{8,})*)(;|$)/)) {
                 a = m[2].split(',');
+                if(a.length > 99) a = a.slice(0, 99);
                 for(var i=0; i < a.length; ) {
                     if(a[i] === item_id) a.splice(i, 1);
                     else i++;
@@ -89,7 +90,7 @@ var Footprints = {
                     data = eval(data);
                     for(var i = 0; i < data.length; i++) {
                         var item = data[i];
-                        o.items_data[item.id] = item;
+                        o.items_data[item.num_iid] = item;
                     }
                 }
                 o.set(item_ids);
@@ -103,13 +104,12 @@ var Footprints = {
             html = '';
             var items_data = this.items_data;
             for(var i = 0; i < item_ids.length; i++) {
-                var id   = item_ids[i];
-                var item = items_data[id];
+                var num_iid = item_ids[i];
+                var item = items_data[num_iid];
                 if(item === undefined) continue;
-                html += '<div class="footprints-item" item-id="' + id + 
-                    '"><a class="image" href="' + item.jump_url + '"><img src="' + item.pic_url + 
-                    '" /></a><span class="desc"><a href="' + item.jump_url + '">' + item.title + 
-                    '</a><b>￥' + item.now_price + '</b></span></div>';
+                html += '<div class="footprints-item"><a class="image" data-itemid="' + num_iid +
+                    '"><img src="' + item.pic_url + '" /></a><span class="desc"><a data-itemid="' +
+                    num_iid + '">' + item.title   + '</a><b>￥' + item.now_price + '</b></span></div>';
             }
         } else {
             html = '<center>亲，您还没有留下足迹哟。</center>';
