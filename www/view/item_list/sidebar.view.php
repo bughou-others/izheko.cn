@@ -11,3 +11,6 @@
             <div id="next_page"><a href="<?= $page_url . ($page + 1) . '.html' ?>"><span>下一页</span><b></b></a></div>
 <?php } ?>
         </div>
+        <script type="text/javascript">
+            if(navigator.vendor === 'UCWEB') $("#sidebar").css('display', 'none');
+        </script>
