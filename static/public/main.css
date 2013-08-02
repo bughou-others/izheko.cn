@@ -23,15 +23,15 @@ img {
     font: normal 12px/1.5 "";
     background-color: #f5f5f5;
     border-bottom: 1px solid #dcdcdc;
+    padding: 0 5%;
 }
 #hello {
     display: inline-block;
     padding: 5px 0 2px 0;
-    margin-left: 5%;
 }
 #bookmark {
     display: inline-block;
-    padding: 5px 0 2px 0;
+    padding: 5px 10px 2px 0;
     letter-spacing: 1px;
 }
 #bookmark b {
@@ -42,6 +42,22 @@ img {
     height: 13px;
     background: no-repeat url(img/tool2.png) -90px -23px;
 }
+#sns_share {
+    white-space: nowrap;
+}
+#sns_share a {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url(img/sns_icon.png);
+    vertical-align: -3px;
+}
+.sina_weibo { background-position: -18px 0; }
+.qq_weibo   { background-position: -66px 0; }
+.qzone      { background-position: -114px 0; }
+.renren     { background-position: -34px 0; }
+.douban     { background-position: -82px 0; }
+.kaixin     { background-position: -50px 0; }
 
 #footprints-span {
     float: right;
@@ -49,7 +65,6 @@ img {
     z-index: 999;
     text-align: left;
     white-space: normal;
-    margin-right: 5%;
 }
 #footprints-a {
     color: #06c;
@@ -75,7 +90,12 @@ img {
     margin-left: 5px;
     border-style: solid;
     border-width: 4px;
-    border-color: #666 #fff #fff;
+    border-color: #666 #f5f5f5 #f5f5f5;
+    vertical-align: -2px;
+}
+#footprints-a b.on {
+    border-color: #fff #fff #666 #fff;
+    vertical-align: 2px;
 }
 #footprints {
     display: none;
