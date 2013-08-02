@@ -56,7 +56,7 @@ $type_seo = array(
         '汽车用品', '超值热销汽车用品，汽车配饰，汽车清洗用品，汽车包养用品，汽车周边配件'
     ),
 );
-if (isset($type_seo[$type])) {
+if (isset($type, $type_seo[$type])) {
     list($title, $keywords, $name, $desc) = $type_seo[$type];
     $title .= ' - 爱折扣';
     $desc   = "汇集独家特约【淘宝网2-5折{$name}】，天天有新款，价格足够低，先到先得。为您精选淘宝网及淘宝商城{$desc}。";
