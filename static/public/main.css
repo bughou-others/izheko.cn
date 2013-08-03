@@ -51,8 +51,9 @@ img {
     display: inline-block;
     background-image: url(img/sns_icon.png);
     vertical-align: -3px;
+    margin: 0 2px;
     *vertical-align: 4px;
-    *margin: 0 2px;
+    *margin: 0 4px;
 }
 .sina_weibo { background-position: -18px 0; }
 .qq_weibo   { background-position: -66px 0; }
