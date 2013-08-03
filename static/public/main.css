@@ -260,12 +260,6 @@ img {
 
 
 /* filter */
-#filter {
-    background-color: white;
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-}
 #filter a {
     margin: 0 1em;
     padding: 0 2px 1px;
