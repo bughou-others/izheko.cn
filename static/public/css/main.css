@@ -40,7 +40,7 @@ img {
     vertical-align: text-top;
     width: 13px;
     height: 13px;
-    background: no-repeat url(img/tool2.png) -90px -23px;
+    background: no-repeat url(/img/tool2.png) -90px -23px;
 }
 #sns_share {
     white-space: nowrap;
@@ -49,7 +49,7 @@ img {
     width: 16px;
     height: 16px;
     display: inline-block;
-    background-image: url(img/sns_icon.png);
+    background-image: url(/img/sns_icon.png);
     vertical-align: -3px;
     margin: 0 2px;
     *vertical-align: 4px;
@@ -170,7 +170,7 @@ img {
     display: inline-block;
     width: 128px;
     height: 60px;
-    background: no-repeat url(img/logo.png);
+    background: no-repeat url(/img/logo.png);
     vertical-align: middle;
     _background-image: none;
     _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.izheko.cn/img/logo.png', enabled=true, sizingMethod='crop');
@@ -257,7 +257,7 @@ img {
     margin: 0;
     padding: 1em 0;
     /*
-    background: url(tmp/bg.png) repeat center top;
+    background: url(/tmp/bg.png) repeat center top;
      */
 }
 
@@ -269,7 +269,7 @@ img {
 /* 
 #filter {
     padding-bottom: 14px;
-    background: url(tmp/color-line.png) left bottom repeat-x;
+    background: url(/tmp/color-line.png) left bottom repeat-x;
 } 
  */
 #filter a {
@@ -383,13 +383,13 @@ img {
     padding: 7px 0 6px 0;
 }
 .item .yellow {
-    background: url(img/rect.png) 0 0;
+    background: url(/img/rect.png) 0 0;
 }
 .item .green {
-    background: url(img/rect.png) 0 -35px;
+    background: url(/img/rect.png) 0 -35px;
 }
 .item .gray {
-    background: url(img/rect.png) 0 -70px;
+    background: url(/img/rect.png) 0 -70px;
 }
 
 .item .flags {
@@ -406,10 +406,10 @@ img {
 }
 
 .item .flags .post {
-    background: url(img/rect.png) 0 -105px;
+    background: url(/img/rect.png) 0 -105px;
 }
 .item .flags .vip {
-    background: url(img/rect.png) -25px -105px;
+    background: url(/img/rect.png) -25px -105px;
 }
 .item .flags .end_time {
     font-size: 12px;
@@ -504,7 +504,7 @@ img {
     display: block;
     width:  17px;
     height: 17px;
-    background: no-repeat url(img/tool.png);
+    background: no-repeat url(/img/tool.png);
     position: absolute;
     top: 6px;
     right: 6px;

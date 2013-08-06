@@ -37,7 +37,7 @@ if (empty($data['items'])) { ?>
             </div><!--
 <?php } ?>
      --></div>
-        <script src="<?= App::static_server() ?>/jquery.lazyload.min.js"></script>
+        <script src="<?= App::static_server() ?>/js/jquery.lazyload.min.js"></script>
         <script type="text/javascript">
             $(".item img[data-original]").lazyload({  threshold: 100 });
             (function(win,doc){
