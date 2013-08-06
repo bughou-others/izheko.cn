@@ -1,0 +1,521 @@
+@charset "utf-8";
+
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: "微软雅黑", "宋体", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+}
+a {
+    color: #06c;
+    text-decoration: none;
+    cursor: pointer;
+}
+img {
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+}
+#header {
+    padding: 3px 5%;
+    color: #c2c2c2;
+    background-color: #010101;
+}
+#header .right {
+    font: normal 12px/22px "";
+    float: right;
+    margin-top: 15px;
+}
+#hello {
+    display: inline-block;
+    padding: 5px 0 2px 0;
+}
+#bookmark {
+    display: inline-block;
+    padding: 5px 10px 2px 0;
+    letter-spacing: 1px;
+}
+#bookmark b {
+    display: inline-block;
+    margin: 0 3px 0 5px;
+    vertical-align: text-top;
+    width: 13px;
+    height: 13px;
+    background: no-repeat url(/img/tool2.png) -90px -23px;
+}
+#sns_share {
+    white-space: nowrap;
+    float: right;
+}
+#sns_share a {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    background-image: url(/img/sns_icon.png);
+    vertical-align: -3px;
+    margin: 0 2px;
+    *vertical-align: 4px;
+    *margin: 0 4px;
+    font-size: 0;
+}
+.sina_weibo { background-position: -18px 0; }
+.qq_weibo   { background-position: -66px 0; }
+.qzone      { background-position: -114px 0; }
+.renren     { background-position: -34px 0; }
+.douban     { background-position: -82px 0; }
+.kaixin     { background-position: -50px 0; }
+
+#footprints-span {
+    position: relative;
+    z-index: 999;
+    text-align: left;
+    white-space: normal;
+    float: right;
+}
+#footprints-a {
+    *display: inline;
+    *zoom: 1;
+    position: relative;
+    z-index: 9999;
+    padding: 5px 6px 2px 6px;
+}
+#footprints-a.on {
+    color: #99e000;
+}
+#footprints-a b {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    margin-left: 5px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #666 #010101 #010101;
+    vertical-align: -2px;
+}
+#footprints-a b.on {
+    border-color: #99e000 #010101 #010101;
+}
+#footprints {
+    display: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 29px;
+    right: 0;
+    _right: -1px;
+    z-index: 999;
+    padding: 10px 10px 30px 10px;
+    font: normal 12px/18px "";
+}
+#footprints-bar {
+    display: none;
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+}
+#footprints-bar div {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+#footprints-bar span {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.footprints-item {
+    /* 232px * 112px */
+    width: 200px;
+    height: 80px;
+    margin: 5px;
+    padding: 10px;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    border: 1px dashed #ccc;
+}
+.footprints-item .image {
+    width: 80px;
+    display: inline-block;
+}
+.footprints-item img {
+    width: 80px;
+    height: 80px;
+}
+.footprints-item .desc {
+    width: 100px;
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 10px;
+}
+.footprints-item .desc a {
+    color: #333;
+    display: block;
+}
+.footprints-item .desc b {
+    color: #f40;
+}
+
+.logo {
+    vertical-align: middle;
+}
+#search {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    font-size: 1em;
+    margin-left: 3em;
+    background-color: #84d516; 
+    vertical-align: text-top;
+    width: 30%;
+    min-width: 15em;
+    max-width: 50em;
+    height: 31px;
+    overflow: hidden;
+    white-space: nowrap;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    position: relative;
+}
+#search .input-wrapper {
+    padding-right: 1em;
+    margin-right: 6em;
+    height: 31px;
+}
+#search input {
+    width: 100%;
+    margin: 0;
+    border: none;
+    padding: 7px;
+    font-size: 1em;
+    height: 17px;
+    line-height: 17px;
+    outline: none;
+    background-color: white;
+}
+#search button {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    text-align: center;
+
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: 84px;
+    height: 22px;
+    font-size: 14px;
+    line-height: 22px;
+    color: white;
+    font-weight: bold;
+    background-color: #84d516; 
+    cursor: pointer;
+}
+
+/* navigation */
+#navbar {
+    margin: 0;
+    background-color: #ffa405;
+    font-size: 16px;
+    line-height: 32px;
+    overflow: visible;
+}
+#navbar a {
+    padding: 7px 16px;
+    color: white;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+}
+#navbar a:hover {
+    background-color: #f40;
+}
+#navbar a.on {
+    background-color: #f40;
+}
+
+#content {
+    margin: 0;
+    padding: 1em 0;
+    /*
+    background: url(/tmp/bg.png) repeat center top;
+     */
+}
+
+#error_content {
+    margin: 4em 0;
+}
+
+
+/* 
+#filter {
+    padding-bottom: 14px;
+    background: url(/tmp/color-line.png) left bottom repeat-x;
+} 
+ */
+#filter a {
+    margin: 0 1em;
+    padding: 0 2px 1px;
+    vertical-align: middle;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+#filter span {
+    color: #aaa;
+    font-size: 12px;
+    padding: 0 0 0 3px;
+}
+#filter a.on {
+    color: white;
+    background-color: #393;
+}
+#filter a.on span {
+    color: white;
+}
+
+#no_items {
+    margin: 10em 0;
+}
+
+#item_list{
+    border-collapse: collapse;
+}
+/* item */
+.item {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: top; 
+    width: 300px;
+    padding: 1em;
+    margin: 1em;
+    border: 1px dashed #ccc;
+    text-align: left;
+    color: black;
+    background-color: white;
+}
+.item:hover {
+    border-color: #666;
+}
+.item .pic {
+    width: 300px;
+    height: 300px;
+    line-height: 300px;
+    margin-bottom: 5px;
+    display: block;
+    overflow: hidden;
+    text-align: center;
+}
+.item .pic img {
+    max-width: 300px;
+    max-height: 300px;
+    vertical-align: middle;
+}
+.item .pic span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 0;
+    font-size: 0;
+}
+.item .title {
+    margin: 0;
+    overflow: hidden;
+    line-height: 22px;
+    height: 44px;
+}
+.item .title a {
+    color: #333;
+}
+.item .title a:hover {
+    color: #06c;
+}
+.item .buy {
+    white-space: nowrap;
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: baseline;
+}
+.item .buy span {
+    color: #f40;
+    font-weight: bold;
+}
+.item .buy span big {
+    font-size: 2em;
+}
+.item .buy small {
+    color: #aaa;
+    text-decoration: line-through;
+}
+.item .buy .action {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    width: 80px;
+    height: 20px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: bolder;
+    padding: 7px 0 6px 0;
+}
+.item .yellow {
+    background: url(/img/rect.png) 0 0;
+}
+.item .green {
+    background: url(/img/rect.png) 0 -35px;
+}
+.item .gray {
+    background: url(/img/rect.png) 0 -70px;
+}
+
+.item .flags {
+    margin-top: 5px;
+    white-space: nowrap;
+    height: 22px;
+    position: relative;
+}
+.item .flags .post, .item .flags .vip {
+    color: white;
+    font-size: 12px;
+    line-height: 16px;
+    display: inline-block;
+}
+
+.item .flags .post {
+    background: url(/img/rect.png) 0 -105px;
+}
+.item .flags .vip {
+    background: url(/img/rect.png) -25px -105px;
+}
+.item .flags .end_time {
+    font-size: 12px;
+    line-height: 16px;
+    position: absolute;
+    top: 9px;
+    right: 0;
+    color: #aaa;
+}
+
+/* pagination */
+#pagination {
+    margin: 1em 0;
+}
+#pagination a, #pagination span {
+    display: inline-block;
+    margin: 5px 3px;
+    padding: 5px 12px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+#pagination a {
+    color: #929292;
+    text-decoration: none;
+    background-color: #eee;
+}
+#pagination a.on {
+    color: white;
+    font-weight: bold;
+    background-color: #f39;
+}
+#pagination a:hover {
+    color: white;
+    background-color: #f39;
+}
+#pagination span.on {
+    color: #f39;
+    font-weight: bold;
+    background-color: #ffdcee;
+}
+
+*html{
+    background-image:url(about:blank);
+    background-attachment:fixed;
+}
+#sidebar {
+    position: fixed;
+    right: 1%;
+    bottom: 5em;
+    _position: absolute;
+    _bottom: auto;
+    _top: expression(eval(
+        document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 70
+        ));
+}
+#sidebar div {
+    position: relative;
+    width:  32px;
+    height: 32px;
+    margin: 5px 0;
+}
+#sidebar a {
+    display: block;
+    width:  30px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    background-color: #f39;
+    position: absolute;
+    right: 0px;
+    overflow: hidden;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+#go_top a {
+    background-color: #aaa;
+}
+#sidebar a:hover {
+    width: 94px;
+}
+#sidebar a span {
+    display: block;
+    padding: 5px 0 5px 10px;
+    color: white;
+    white-space: nowrap;
+    position: absolute;
+    right: 35px;
+}
+#sidebar a b {
+    display: block;
+    width:  17px;
+    height: 17px;
+    background: no-repeat url(/img/tool.png);
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
+#prev_page a b {
+    background-position: -16px -1px;
+}
+#next_page a b {
+    background-position: -31px -1px;
+}
+
+#footer {
+    padding: 1em;
+    color: white;
+    background-color: #444;
+    border-top: 1px solid #525252;
+}
+#footer div {
+    color: #aaa;
+    display: block;
+    margin-top: 10px;
+}
+#footer a {
+    color: #aaa;
+}
+body object {
+    display: none;
+}

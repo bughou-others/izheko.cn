@@ -1,11 +1,12 @@
 <?php
 $img = new Imagick();
-$img->newImage(128, 60, 'transparent', 'png');
+$img->newImage(128, 60, '#010101', 'png');
 
 $draw = new ImagickDraw();
 $draw->setFont('./pangwa.ttf');
 $draw->setTextAlignment(2);
 $draw->setFillColor('#84d516');
+//$draw->setTextAntialias(false);
 
 $draw->setFontSize(40);
 $img->annotateImage($draw, 64, 35, 0, '爱折扣');
