@@ -110,6 +110,7 @@ img {
     _right: -1px;
     z-index: 999;
     padding: 10px 10px 30px 10px;
+    font: normal 12px/18px "";
 }
 #footprints-bar {
     display: none;
