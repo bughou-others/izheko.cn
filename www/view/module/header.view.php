@@ -1,10 +1,12 @@
         <div id="topbar">
 <?php
     require APP_ROOT . "/view/component/footprint.view.php";
-    require APP_ROOT . "/view/component/bookmark.view.php";
-    require APP_ROOT . "/view/component/sns_share.view.php";
 ?>
             <span id="hello">亲，欢迎您！</span>
+<?php
+    require APP_ROOT . "/view/component/sns_share.view.php";
+    require APP_ROOT . "/view/component/bookmark.view.php";
+?>
         </div>
         <div id="header">
             <a href="/" class="logo"></a>
