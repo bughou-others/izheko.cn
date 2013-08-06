@@ -14,9 +14,7 @@
     </head>
     <body>
 <?php
-    require APP_ROOT . "/view/component/topbar.view.php";
-    require APP_ROOT . "/view/component/header.view.php";
-    require APP_ROOT . "/view/component/navbar.view.php";
+    require APP_ROOT . "/view/module/header.view.php";
 
     echo '
         <div id="content">
@@ -31,7 +29,7 @@
         </div>
         ';
 
-    require APP_ROOT . "/view/component/footer.view.php";
+    require APP_ROOT . "/view/module/footer.view.php";
 ?>
         <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21567955"></script>
     </body>

@@ -5,7 +5,7 @@ $img->newImage(128, 60, 'transparent', 'png');
 $draw = new ImagickDraw();
 $draw->setFont('./pangwa.ttf');
 $draw->setTextAlignment(2);
-$draw->setFillColor('#77a610');
+$draw->setFillColor('#84d516');
 
 $draw->setFontSize(40);
 $img->annotateImage($draw, 64, 35, 0, '爱折扣');
