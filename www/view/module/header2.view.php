@@ -16,6 +16,9 @@
             <a href="/"><img class="logo" src="<?= App::static_server() ?>/tmp/t2.png" /></a>
             <form id="search" action="/search">
                 <div class="input-wrapper"><input type="text" name="s" /></div>
-                <button type="submit">搜索</button>
+                <button type="submit">搜 索</button>
             </form>
+<?php
+    require APP_ROOT . "/view/component/navbar.view.php";
+?>
         </div>

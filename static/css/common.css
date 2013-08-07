@@ -136,26 +136,9 @@ img {
     cursor: pointer;
 }
 
-/* navigation */
-#navbar {
+#content {
     margin: 0;
-    background-color: #ffa405;
-    font-size: 16px;
-    line-height: 32px;
-    overflow: visible;
-}
-#navbar a {
-    padding: 7px 16px;
-    color: white;
-    white-space: nowrap;
-    text-decoration: none;
-    vertical-align: baseline;
-}
-#navbar a:hover {
-    background-color: #f40;
-}
-#navbar a.on {
-    background-color: #f40;
+    padding: 1em 0;
 }
 
 #error_content {
@@ -332,7 +315,6 @@ img {
 #pagination a {
     color: #929292;
     text-decoration: none;
-    background-color: #eee;
 }
 #pagination a.on {
     color: white;

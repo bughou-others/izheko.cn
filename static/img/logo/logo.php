@@ -4,15 +4,15 @@ $img->newImage(128, 60, '#010101', 'png');
 
 $draw = new ImagickDraw();
 $draw->setFont('./pangwa.ttf');
-$draw->setTextAlignment(2);
-$draw->setFillColor('#84d516');
+$draw->setTextAlignment(Imagick::ALIGN_CENTER);
+$draw->setFillColor('#84d516'); 
 //$draw->setTextAntialias(false);
 
 $draw->setFontSize(40);
 $img->annotateImage($draw, 64, 35, 0, '爱折扣');
 
 $draw->setFontSize(18);
-$draw->setTextKerning(Imagick::ALIGN_CENTER);
+$draw->setTextKerning(2);
 $img->annotateImage($draw, 64, 57, 0, 'izheko.cn');
 
 $img->writeImage($argv[1]);

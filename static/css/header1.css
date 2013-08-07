@@ -111,12 +111,28 @@
     background-color: #ffa405;
 }
 
-
-#content {
+/* navigation */
+#navbar {
     margin: 0;
-    padding: 1em 0;
-    /*
-    background: url(/tmp/bg.png) repeat center top;
-     */
+    background-color: #ffa405;
+    font-size: 16px;
+    line-height: 32px;
+    overflow: visible;
+}
+#navbar a {
+    padding: 7px 16px;
+    color: white;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+}
+#navbar a:hover {
+    background-color: #f40;
+}
+#navbar a.on {
+    background-color: #f40;
 }
 
+#pagination a {
+    background-color: #eee;
+}
