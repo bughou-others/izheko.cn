@@ -500,28 +500,13 @@ body object {
 
 
 #search {
-    background-color: #84d516; 
+    background-color: #518900; 
 }
 #search button {
     top: 5px;
-    background-color: #84d516; 
+    background-color: #518900; 
 }
 
-/* navigation */
-#navbar {
-    margin: 0;
-    background-color: #ffa405;
-    font-size: 16px;
-    line-height: 32px;
-    overflow: visible;
-}
-#navbar a {
-    padding: 7px 16px;
-    color: white;
-    white-space: nowrap;
-    text-decoration: none;
-    vertical-align: baseline;
-}
 
 #content {
     margin: 0;
