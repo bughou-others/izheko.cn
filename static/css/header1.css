@@ -1,0 +1,122 @@
+
+#topbar {
+    text-align: left;
+    font: normal 12px/2 "";
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 0 5%;
+}
+#hello {
+    display: inline-block;
+    padding: 5px 0 2px 0;
+}
+#bookmark {
+    display: inline-block;
+    padding: 5px 10px 2px 0;
+    letter-spacing: 1px;
+}
+#bookmark b {
+    display: inline-block;
+    margin: 0 3px 0 5px;
+    vertical-align: text-top;
+    width: 13px;
+    height: 13px;
+    background: no-repeat url(/img/tool2.png) -90px -23px;
+}
+#sns-share {
+    white-space: nowrap;
+}
+#sns-share a {
+    font-size: 0;
+}
+#sns-share a b {
+    vertical-align: -3px;
+    margin: 0 2px;
+    *vertical-align: 4px;
+    *margin: 0 4px;
+}
+
+#footprints-span {
+    float: right;
+    position: relative;
+    z-index: 999;
+    text-align: left;
+    white-space: normal;
+}
+#footprints-a {
+    color: #06c;
+    *display: inline;
+    *zoom: 1;
+    position: relative;
+    z-index: 9999;
+    padding: 5px 6px 2px 6px;
+    border-left:  1px solid #f5f5f5;
+    border-right: 1px solid #f5f5f5;
+}
+#footprints-a.on {
+    border-color:  #ddd;
+    border-bottom: 1px solid white;
+    background-color: white;
+}
+#footprints-a b {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    margin-left: 5px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #666 #f5f5f5 #f5f5f5;
+    vertical-align: -2px;
+}
+#footprints-a b.on {
+    border-color: #fff #fff #666 #fff;
+    vertical-align: 2px;
+}
+#footprints {
+    display: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 31px;
+    right: 0;
+    _right: -1px;
+    z-index: 999;
+    padding: 10px 10px 30px 10px;
+    font: normal 12px/18px "";
+}
+
+#header {
+    clear: both;
+    padding: 10px 0;
+}
+.logo {
+    cursor: pointer;
+    display: inline-block;
+    width: 128px;
+    height: 60px;
+    background: no-repeat url(/img/logo.png);
+    vertical-align: middle;
+    _background-image: none;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.izheko.cn/img/logo.png', enabled=true, sizingMethod='crop');
+}
+#search {
+    background-color: #ffa405; 
+    padding: 3px;
+    *padding: 2px 3px 3px 3px;
+}
+#search button {
+    top: 8px;
+    background-color: #ffa405;
+}
+
+
+#content {
+    margin: 0;
+    padding: 1em 0;
+    /*
+    background: url(/tmp/bg.png) repeat center top;
+     */
+}
+

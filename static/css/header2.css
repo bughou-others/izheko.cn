@@ -1,0 +1,100 @@
+
+#header {
+    padding: 3px 5%;
+    color: #c2c2c2;
+    background-color: #010101;
+}
+#header .right {
+    float: right;
+    margin-top: 20px;
+    font: normal 12px/22px "";
+}
+
+#sns-share a {
+    display: block;
+    margin: 5px 0;
+    white-space: nowrap;
+}
+#sns-share a b {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+#sns-share-wrapper, #footprints-wrapper {
+    position: relative;
+    z-index: 999;
+    float: right;
+    padding: 0 0 8px 2em;
+    text-align: left;
+    white-space: normal;
+}
+#sns-share-button, #footprints-button {
+    position: relative;
+    z-index: 9999;
+}
+#sns-share-button.on, #footprints-button.on {
+    color: #99e000;
+}
+#sns-share-button b, #footprints-button b {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    margin-left: 5px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #666 #010101 #010101;
+    vertical-align: -2px;
+}
+#sns-share-button b.on, #footprints-button b.on {
+    border-color: #99e000 #010101 #010101;
+}
+#sns-share, #footprints {
+    display: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    _right: -1px;
+    z-index: 999;
+    padding: 10px 10px 30px 10px;
+    font: normal 12px/18px "";
+}
+.logo {
+    vertical-align: middle;
+}
+
+
+#search {
+    background-color: #84d516; 
+}
+#search button {
+    top: 5px;
+    background-color: #84d516; 
+}
+
+/* navigation */
+#navbar {
+    margin: 0;
+    background-color: #ffa405;
+    font-size: 16px;
+    line-height: 32px;
+    overflow: visible;
+}
+#navbar a {
+    padding: 7px 16px;
+    color: white;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+}
+
+#content {
+    margin: 0;
+    padding: 1em 0;
+    /*
+    background: url(/tmp/bg.png) repeat center top;
+     */
+}

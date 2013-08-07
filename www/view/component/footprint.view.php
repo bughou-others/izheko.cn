@@ -1,5 +1,5 @@
-            <span id="footprints-span">
-                <div id="footprints-a">我的足迹<b></b></div>
+            <span id="footprints-wrapper">
+                <div id="footprints-button">我的足迹<b></b></div>
                 <div id="footprints">
                     <div id="footprints-bar">
                         <span>清空</span>

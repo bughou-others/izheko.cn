@@ -1,13 +1,27 @@
+var SnsShare = {
+    init: function(){
+        $('#sns-share-button').bind('click mouseenter', function(){
+            $('#sns-share').css('display', 'block');
+            $('#sns-share-button').addClass('on');
+            $('#sns-share-button b').addClass('on');
+        });
+        $('#sns-share-wrapper').mouseleave(function(){
+            $('#sns-share').css('display', 'none');
+            $('#sns-share-button').removeClass('on');
+            $('#sns-share-button b').removeClass('on');
+        });
+    }
+};
 var Footprints = {
     init: function(){
         var o = this;
-        $('#footprints-a').bind('click mouseenter', function(){
+        $('#footprints-button').bind('click mouseenter', function(){
             o.show();
         });
-        $('#footprints-span').mouseleave(function(){
+        $('#footprints-wrapper').mouseleave(function(){
             $('#footprints').css('display', 'none');
-            $('#footprints-a').removeClass('on');
-            $('#footprints-a b').removeClass('on');
+            $('#footprints-button').removeClass('on');
+            $('#footprints-button b').removeClass('on');
         });
         $('#footprints-bar > span').click(function(){
             var time = new Date();
@@ -130,8 +144,8 @@ var Footprints = {
             $('#footprints-bar').css('display', count > 0 ? 'block' : 'none');
         }
         $('#footprints').css('height', height).prepend(html).css('display', 'block');
-        $('#footprints-a').addClass('on');
-        $('#footprints-a b').addClass('on');
+        $('#footprints-button').addClass('on');
+        $('#footprints-button b').addClass('on');
         o.last_count = count;
     }
 };

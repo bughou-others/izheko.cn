@@ -18,100 +18,21 @@ img {
     padding: 0;
     border-width: 0;
 }
-#topbar {
-    text-align: left;
-    font: normal 12px/2 "";
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #dcdcdc;
-    padding: 0 5%;
-}
-#hello {
+
+#sns-share a b {
     display: inline-block;
-    padding: 5px 0 2px 0;
-}
-#bookmark {
-    display: inline-block;
-    padding: 5px 10px 2px 0;
-    letter-spacing: 1px;
-}
-#bookmark b {
-    display: inline-block;
-    margin: 0 3px 0 5px;
-    vertical-align: text-top;
-    width: 13px;
-    height: 13px;
-    background: no-repeat url(/img/tool2.png) -90px -23px;
-}
-#sns_share {
-    white-space: nowrap;
-}
-#sns_share a {
     width: 16px;
     height: 16px;
-    display: inline-block;
     background-image: url(/img/sns_icon.png);
-    vertical-align: -3px;
-    margin: 0 2px;
-    *vertical-align: 4px;
-    *margin: 0 4px;
 }
-.sina_weibo { background-position: -18px 0; }
-.qq_weibo   { background-position: -66px 0; }
-.qzone      { background-position: -114px 0; }
-.renren     { background-position: -34px 0; }
-.douban     { background-position: -82px 0; }
-.kaixin     { background-position: -50px 0; }
 
-#footprints-span {
-    float: right;
-    position: relative;
-    z-index: 999;
-    text-align: left;
-    white-space: normal;
-}
-#footprints-a {
-    color: #06c;
-    *display: inline;
-    *zoom: 1;
-    position: relative;
-    z-index: 9999;
-    padding: 5px 6px 2px 6px;
-    border-left:  1px solid #f5f5f5;
-    border-right: 1px solid #f5f5f5;
-}
-#footprints-a.on {
-    border-color:  #ddd;
-    border-bottom: 1px solid white;
-    background-color: white;
-}
-#footprints-a b {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    font-size: 0;
-    line-height: 0;
-    margin-left: 5px;
-    border-style: solid;
-    border-width: 4px;
-    border-color: #666 #f5f5f5 #f5f5f5;
-    vertical-align: -2px;
-}
-#footprints-a b.on {
-    border-color: #fff #fff #666 #fff;
-    vertical-align: 2px;
-}
-#footprints {
-    display: none;
-    background-color: white;
-    border: 1px solid #ddd;
-    position: absolute;
-    top: 31px;
-    right: 0;
-    _right: -1px;
-    z-index: 999;
-    padding: 10px 10px 30px 10px;
-    font: normal 12px/18px "";
-}
+#sns-share .sina_weibo b { background-position: -18px 0; }
+#sns-share .qq_weibo   b { background-position: -66px 0; }
+#sns-share .qzone      b { background-position: -114px 0; }
+#sns-share .renren     b { background-position: -34px 0; }
+#sns-share .douban     b { background-position: -82px 0; }
+#sns-share .kaixin     b { background-position: -50px 0; }
+
 #footprints-bar {
     display: none;
     position: absolute;
@@ -161,34 +82,17 @@ img {
     color: #f40;
 }
 
-#header {
-    clear: both;
-    padding: 10px 0;
-}
-.logo {
-    cursor: pointer;
-    display: inline-block;
-    width: 128px;
-    height: 60px;
-    background: no-repeat url(/img/logo.png);
-    vertical-align: middle;
-    _background-image: none;
-    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.izheko.cn/img/logo.png', enabled=true, sizingMethod='crop');
-}
 #search {
     display: inline-block;
     *display: inline;
     *zoom: 1;
     font-size: 1em;
     margin-left: 3em;
-    background-color: #ffa405; 
     vertical-align: text-top;
     width: 30%;
     min-width: 15em;
     max-width: 50em;
     height: 31px;
-    padding: 3px;
-    *padding: 2px 3px 3px 3px;
     overflow: hidden;
     white-space: nowrap;
     -moz-border-radius: 4px;
@@ -211,11 +115,13 @@ img {
     line-height: 17px;
     outline: none;
     background-color: white;
+    -moz-border-radius: 4px 0 0 4px;
+    -webkit-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
 }
 #search button {
     position: absolute;
     right: 0;
-    top: 8px;
     text-align: center;
 
     margin: 0;
@@ -227,7 +133,6 @@ img {
     line-height: 22px;
     color: white;
     font-weight: bold;
-    background-color: #ffa405;
     cursor: pointer;
 }
 
@@ -251,14 +156,6 @@ img {
 }
 #navbar a.on {
     background-color: #f40;
-}
-
-#content {
-    margin: 0;
-    padding: 1em 0;
-    /*
-    background: url(/tmp/bg.png) repeat center top;
-     */
 }
 
 #error_content {
