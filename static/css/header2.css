@@ -5,11 +5,18 @@
     background-color: #010101;
 }
 
+#header .right {
+    float: right;
+    margin-top: 20px;
+    _margin-top: 28px;
+    font: normal 12px/22px "";
+}
+
 #phone-edition, #bookmark {
     cursor: pointer;
-    float: right;
-    margin:  20px 2em 0 0;
-    font: normal 12px/22px "";
+    margin-right:  2em;
+    +vertical-align: 26px;
+    _vertical-align: 23px;
 }
 
 #sns-share a {
@@ -23,20 +30,14 @@
 }
 
 #sns-share-wrapper, #footprints-wrapper {
-    float: right;
     position: relative;
     z-index: 999;
     text-align: left;
     white-space: normal;
     display: inline-block;
-    padding: 0 0 8px 2em;
-    margin-top: 20px;
-    font: normal 12px/22px "";
 }
 #sns-share-button, #footprints-button {
-    *display: inline;
-    *zoom: 1;
-    _margin-top: 4px;
+    padding: 2px 3px 20px 2em;
 }
 #sns-share-button.on, #footprints-button.on {
     color: #99e000;
@@ -60,11 +61,17 @@
     background-color: white;
     border: 1px solid #ddd;
     position: absolute;
-    top: 30px;
+    top: 35px;
+    _top: 30px;
     right: 0;
     z-index: 999;
-    padding: 10px 10px 30px 10px;
     font: normal 12px/18px "";
+}
+#sns-share {
+    padding: 10px;
+}
+#footprints {
+    padding: 10px 10px 30px 10px;
 }
 #sns-share i, #footprints i {
     display: inline-block;

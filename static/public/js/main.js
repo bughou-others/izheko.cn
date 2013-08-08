@@ -8,6 +8,7 @@ var PhoneEdition_and_Bookmark = {
     },
     init: function(){
         if (this.is_mobile()) return;
+        document.write('<span id="phone-edition" title="手机版爱折扣">手机版</span>');
         if (document.all || true) { //IE
             document.write('<span id="bookmark" title="收藏爱折扣">收藏</span>');
             $('#bookmark').click(function(){
@@ -16,7 +17,6 @@ var PhoneEdition_and_Bookmark = {
                 window.external.AddFavorite(url, title);
             });
         };
-        document.write('<span id="phone-edition" title="手机版爱折扣">手机版</span>');
     }
 };
 var SnsShare = {
@@ -26,10 +26,6 @@ var SnsShare = {
             $('#sns-share-button').addClass('on');
             $('#sns-share-button b').addClass('on');
         });
-        /*
-           var ie6ie7 = navigator.userAgent.indexOf(' MSIE 6.0; ') > 0 ||
-           navigator.userAgent.indexOf(' MSIE 7.0; ') > 0;
-           */
         $('#sns-share-wrapper').mouseleave(function(){
             $('#sns-share').css('display', 'none');
             $('#sns-share-button').removeClass('on');
