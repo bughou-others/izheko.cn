@@ -26,9 +26,11 @@ var SnsShare = {
             $('#sns-share-button').addClass('on');
             $('#sns-share-button b').addClass('on');
         });
-        var ie6ie7 = navigator.userAgent.indexOf(' MSIE 6.0; ') > 0 ||
-            navigator.userAgent.indexOf(' MSIE 7.0; ') > 0;
-        $(ie6ie7 ? '#sns-share' : '#sns-share-wrapper').mouseleave(function(){
+        /*
+           var ie6ie7 = navigator.userAgent.indexOf(' MSIE 6.0; ') > 0 ||
+           navigator.userAgent.indexOf(' MSIE 7.0; ') > 0;
+           */
+        $('#sns-share-wrapper').mouseleave(function(){
             $('#sns-share').css('display', 'none');
             $('#sns-share-button').removeClass('on');
             $('#sns-share-button b').removeClass('on');
@@ -41,9 +43,7 @@ var Footprints = {
         $('#footprints-button').bind('click mouseenter', function(){
             o.show();
         });
-        var ie6ie7 = navigator.userAgent.indexOf(' MSIE 6.0; ') > 0 ||
-            navigator.userAgent.indexOf(' MSIE 7.0; ') > 0;
-        $(ie6ie7 ? '#footprints' : '#footprints-wrapper').mouseleave(function(){
+        $('#footprints-wrapper').mouseleave(function(){
             $('#footprints').css('display', 'none');
             $('#footprints-button').removeClass('on');
             $('#footprints-button b').removeClass('on');
