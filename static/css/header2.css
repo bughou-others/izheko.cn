@@ -34,8 +34,9 @@
     font: normal 12px/22px "";
 }
 #sns-share-button, #footprints-button {
-    position: relative;
-    z-index: 9999;
+    *display: inline;
+    *zoom: 1;
+    _margin-top: 4px;
 }
 #sns-share-button.on, #footprints-button.on {
     color: #99e000;
@@ -52,7 +53,7 @@
     vertical-align: -4px;
 }
 #sns-share-button b.on, #footprints-button b.on {
-    border-color: #99e000 #010101 #010101;
+    border-top-color: #99e000;
 }
 #sns-share, #footprints {
     display: none;
@@ -61,7 +62,6 @@
     position: absolute;
     top: 30px;
     right: 0;
-    _right: -1px;
     z-index: 999;
     padding: 10px 10px 30px 10px;
     font: normal 12px/18px "";
@@ -72,12 +72,12 @@
     height: 0;
     font-size: 0;
     line-height: 0;
-    border: 6px solid transparent;
+    border: 7px solid transparent;
+    _border-color: pink;
+    _filter: chroma(color=pink);
     border-bottom-color: white;
     position: absolute;
-    top: -12px;
-    _border-color: #010101 #010101 white #010101;
-    _top: -13px;
+    top: -14px;
 }
 #sns-share i {
     right: 20px;
@@ -102,15 +102,18 @@
 /* navigation */
 #navbar {
     margin: 10px 0;
-    line-height: 40px;
     border: 1px solid #518900;
+    padding: 8px;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
 #navbar a {
     color: #ccc;
+    display: inline-block;
     padding: 3px 20px;
+    _padding: 5px 20px 2px 20px;
+    margin: 2px 0;
     white-space: nowrap;
     text-decoration: none;
     vertical-align: baseline;
