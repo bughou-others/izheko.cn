@@ -35,7 +35,11 @@ $sns_array = array(
 foreach($sns_array as $sns)
 {
     list($name, $class, $url) = $sns;
-    echo <<<EOT
+    if (isset($no_text) && $no_text)
+        echo <<<EOT
+                <a target="_blank" class="$class" href="$url" title="分享到我的$name"><b></b></a>
+EOT;
+    else echo <<<EOT
                 <a target="_blank" class="$class" href="$url" title="分享到我的$name"><b></b>$name</a>
 EOT;
 }

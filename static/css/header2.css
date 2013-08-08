@@ -4,16 +4,12 @@
     color: #c2c2c2;
     background-color: #010101;
 }
-#header .right {
-    float: right;
-    margin-top: 20px;
-    font: normal 12px/22px "";
-}
 
 #phone-edition, #bookmark {
     cursor: pointer;
     float: right;
-    margin-right: 2em;
+    margin:  20px 2em 0 0;
+    font: normal 12px/22px "";
 }
 
 #sns-share a {
@@ -27,12 +23,15 @@
 }
 
 #sns-share-wrapper, #footprints-wrapper {
+    float: right;
     position: relative;
     z-index: 999;
-    float: right;
-    padding: 0 0 8px 2em;
     text-align: left;
     white-space: normal;
+    display: inline-block;
+    padding: 0 0 8px 2em;
+    margin-top: 20px;
+    font: normal 12px/22px "";
 }
 #sns-share-button, #footprints-button {
     position: relative;
@@ -47,7 +46,7 @@
     height: 0;
     font-size: 0;
     line-height: 0;
-    border: 5px solid transparent;
+    border: 5px solid #010101;
     border-top-color: #666;
     margin-left: 5px;
     vertical-align: -4px;
@@ -77,6 +76,8 @@
     border-bottom-color: white;
     position: absolute;
     top: -12px;
+    _border-color: #010101 #010101 white #010101;
+    _top: -13px;
 }
 #sns-share i {
     right: 20px;
