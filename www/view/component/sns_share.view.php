@@ -1,4 +1,5 @@
             <span id="sns-share">
+                <i></i>
 <?php
 $title = '我喜欢上了“爱折扣(izheko.cn)”每天9块9的小幸福。懂我的商品，懂我的价格，给力的9块9包邮。真的要跟你八卦一下才行！';
 $url   = 'http://www.izheko.cn/';

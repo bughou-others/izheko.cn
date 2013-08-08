@@ -315,7 +315,6 @@ img {
 #pagination a {
     color: #929292;
     text-decoration: none;
-    background-color: #eee;
 }
 #pagination a.on {
     color: white;
@@ -425,6 +424,12 @@ body object {
     font: normal 12px/22px "";
 }
 
+#phone-edition, #bookmark {
+    cursor: pointer;
+    float: right;
+    margin-right: 2em;
+}
+
 #sns-share a {
     display: block;
     margin: 5px 0;
@@ -456,11 +461,10 @@ body object {
     height: 0;
     font-size: 0;
     line-height: 0;
+    border: 5px solid transparent;
+    border-top-color: #666;
     margin-left: 5px;
-    border-style: solid;
-    border-width: 4px;
-    border-color: #666 #010101 #010101;
-    vertical-align: -2px;
+    vertical-align: -4px;
 }
 #sns-share-button b.on, #footprints-button b.on {
     border-color: #99e000 #010101 #010101;
@@ -477,6 +481,24 @@ body object {
     padding: 10px 10px 30px 10px;
     font: normal 12px/18px "";
 }
+#sns-share i, #footprints i {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    border: 6px solid transparent;
+    border-bottom-color: white;
+    position: absolute;
+    top: -12px;
+}
+#sns-share i {
+    right: 20px;
+}
+#footprints i {
+    right: 32px;
+}
+
 .logo {
     vertical-align: middle;
 }

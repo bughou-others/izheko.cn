@@ -11,6 +11,7 @@
                 </span>
                 <script>
                     SnsShare.init();
+                    PhoneEdition_and_Bookmark.init();
                 </script>
             </div>
             <a href="/"><img class="logo" src="<?= App::static_server() ?>/tmp/t2.png" /></a>

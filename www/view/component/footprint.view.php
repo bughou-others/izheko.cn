@@ -1,6 +1,7 @@
             <span id="footprints-wrapper">
                 <div id="footprints-button">我的足迹<b></b></div>
                 <div id="footprints">
+                    <i></i>
                     <div id="footprints-bar">
                         <span>清空</span>
                         <div>

@@ -1,3 +1,24 @@
+var PhoneEdition_and_Bookmark = {
+    is_mobile: function(){ 
+        var s = navigator.userAgent; 
+        var a = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"); 
+        var o;
+        for (var i = 0; o = a[i]; i++) if (s.indexOf(o) > 0) return true; 
+        return false; 
+    },
+    init: function(){
+        if (this.is_mobile()) return;
+        if (document.all || true) { //IE
+            document.write('<span id="bookmark" title="收藏爱折扣">收藏</span>');
+            $('#bookmark').click(function(){
+                var url   = 'http://' + location.hostname +'/';
+                var title = '爱折扣 - 精选优质折扣商品';
+                window.external.AddFavorite(url, title);
+            });
+        };
+        document.write('<span id="phone-edition" title="手机版爱折扣">手机版</span>');
+    }
+};
 var SnsShare = {
     init: function(){
         $('#sns-share-button').bind('click mouseenter', function(){
