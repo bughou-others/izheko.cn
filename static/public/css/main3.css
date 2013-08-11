@@ -420,12 +420,12 @@ body object {
 #header .right {
     float: right;
     margin: 20px 5% 0 0;
-    _margin-top: 28px;
 }
 
 #phone-edition, #bookmark {
     cursor: pointer;
     margin-right:  2em;
+    *vertical-align: 2px;
 }
 
 #sns-share a {
