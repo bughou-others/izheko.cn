@@ -8,8 +8,8 @@
                 <script> SnsShare.init(); </script>
                 <?php require APP_ROOT . "/view/component/footprint.view.php"; ?>
             </div>
-            <div>
-                <a href="/"><img class="logo" src="<?= App::static_server() ?>/tmp/t2.png" /></a>
+            <div id="logo-search">
+                <a href="/" class="logo"></a>
                 <form id="search" action="/search">
                     <div class="input-wrapper"><input type="text" name="s" /></div>
                     <button type="submit">搜 索</button>

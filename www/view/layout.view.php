@@ -8,7 +8,7 @@
     require APP_ROOT . "/view/component/seo.view.php";
 ?>
         <link rel="shortcut icon" href="<?= App::static_server() ?>/img/favicon.ico" />
-        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server() ?>/css/main2.css?v=20130808" />
+        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server() ?>/css/main3.css?v=20130808" />
         <script src="<?= App::static_server() ?>/js/jquery.min.js"></script>
         <script src="<?= App::static_server() ?>/js/main.js?v=20130808"></script>
     </head>
