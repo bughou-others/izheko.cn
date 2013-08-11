@@ -7,14 +7,11 @@
     float: right;
     margin: 20px 5% 0 0;
     _margin-top: 28px;
-    font: normal 12px/22px "";
 }
 
 #phone-edition, #bookmark {
     cursor: pointer;
     margin-right:  2em;
-    +vertical-align: 26px;
-    _vertical-align: 23px;
 }
 
 #sns-share a {
@@ -37,9 +34,13 @@
 #sns-share-button, #footprints-button {
     position: relative;
     z-index: 9999;
+    *display: inline;
+    *zoom: 1;
     padding: 5px 10px 2px 10px;
+    _padding: 10px 10px 3px 10px;
     border: 1px solid white;
     margin-left: 1em;
+    *margin-left: 0;
 }
 #sns-share-button.on, #footprints-button.on {
     border-color: #ddd #ddd white #ddd;
@@ -67,6 +68,7 @@
     position: absolute;
     top: 30px;
     right: 0;
+    _right: -1px;
     z-index: 999;
     font: normal 12px/18px "";
 }
@@ -87,6 +89,8 @@
     height: 60px;
     background: no-repeat url(/img/logo.png);
     vertical-align: middle;
+    _background-image: none;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.izheko.cn/img/logo.png', enabled=true, sizingMethod='crop');
 }
 
 #search {
