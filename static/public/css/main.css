@@ -513,7 +513,7 @@ body object {
     display: inline-block;
     width: 128px;
     height: 60px;
-    background: no-repeat url(/img/logo_green.png);
+    background: no-repeat url(/img/logo.png);
     vertical-align: middle;
 }
 
@@ -557,7 +557,10 @@ body object {
 }
 
 #content {
-    background: url(/tmp/bg.png) repeat center top;
+    background: url(/img/bg.png) repeat center top;
+}
+.item {
+    border: none;
 }
 
 #pagination a {

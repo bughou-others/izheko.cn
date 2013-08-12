@@ -89,8 +89,6 @@
     height: 60px;
     background: no-repeat url(/img/logo_red.png);
     vertical-align: middle;
-    _background-image: none;
-    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.izheko.cn/img/logo.png', enabled=true, sizingMethod='crop');
 }
 
 #search {

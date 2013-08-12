@@ -7,15 +7,26 @@
 <?php
     require APP_ROOT . "/view/component/seo.view.php";
     $suffix = preg_match('/^www([23]?)$/', App::sub_domain(), $m) ? $m[1] : '';
+    if ($suffix === '2') {
+        $icon_suffix    = '_red';
+        $header_suffix  = '';
+    }
+    elseif ($suffix === '3') {
+        $icon_suffix    = '_red';
+        $header_suffix  = '3';
+    } else {
+        $icon_suffix    = '';
+        $header_suffix  = '';
+    }
 ?>
-        <link rel="shortcut icon" href="<?= App::static_server() ?>/img/favicon.ico" />
-        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server() ?>/css/main<?= $suffix ?>.css?v=20130808" />
+        <link rel="shortcut icon" href="<?= App::static_server() . "/img/favicon$icon_suffix.ico" ?>?v=20130807" />
+        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server(). "/css/main$suffix.css" ?>?v=20130808" />
         <script src="<?= App::static_server() ?>/js/jquery.min.js"></script>
         <script src="<?= App::static_server() ?>/js/main.js?v=20130808"></script>
     </head>
     <body>
 <?php
-    require APP_ROOT . "/view/module/header$suffix.view.php";
+    require APP_ROOT . "/view/module/header$header_suffix.view.php";
 
     echo '
         <div id="content">
