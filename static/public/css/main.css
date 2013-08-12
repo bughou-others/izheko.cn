@@ -413,139 +413,153 @@ body object {
     display: none;
 }
 
-#topbar {
-    text-align: left;
-    font: normal 12px/2 "";
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #dcdcdc;
-    padding: 0 5%;
-}
-#hello {
-    display: inline-block;
-    padding: 5px 0 2px 0;
-}
-#bookmark {
-    display: inline-block;
-    padding: 5px 10px 2px 0;
-    letter-spacing: 1px;
-}
-#bookmark b {
-    display: inline-block;
-    margin: 0 3px 0 5px;
-    vertical-align: text-top;
-    width: 13px;
-    height: 13px;
-    background: no-repeat url(/img/tool2.png) -90px -23px;
-}
-#sns-share {
-    white-space: nowrap;
-}
-#sns-share a {
-    display: inline-block;
-    margin: 0 2px;
-    *margin: 0 4px;
-    vertical-align: -3px;
-    *vertical-align: 2px;
+#header {
+    padding: 3px 5%;
+    color: #c2c2c2;
+    background-color: #010101;
 }
 
-#footprints-wrapper {
+#header .right {
     float: right;
+    margin-top: 20px;
+    _margin-top: 28px;
+    font: normal 12px/22px "";
+}
+
+#phone-edition, #bookmark {
+    cursor: pointer;
+    margin-right:  2em;
+    +vertical-align: 26px;
+    _vertical-align: 23px;
+}
+
+#sns-share a {
+    display: block;
+    margin: 5px 0;
+    white-space: nowrap;
+}
+#sns-share a b {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+#sns-share-wrapper, #footprints-wrapper {
     position: relative;
     z-index: 999;
     text-align: left;
     white-space: normal;
+    display: inline-block;
 }
-#footprints-button {
-    position: relative;
-    z-index: 9999;
-    *display: inline;
-    *zoom: 1;
-    padding: 5px 6px 2px 6px;
-    _padding: 12px 6px 4px 6px;
-    border-left:  1px solid #f5f5f5;
-    border-right: 1px solid #f5f5f5;
-    color: #06c;
+#sns-share-button, #footprints-button {
+    padding: 2px 3px 20px 2em;
 }
-#footprints-button.on {
-    border-color:  #ddd;
-    border-bottom: 1px solid white;
-    background-color: white;
+#sns-share-button.on, #footprints-button.on {
+    color: #99e000;
 }
-#footprints-button b {
+#sns-share-button b, #footprints-button b {
     display: inline-block;
     width: 0;
     height: 0;
     font-size: 0;
     line-height: 0;
-    margin-left: 5px;
-    border: 5px solid #f5f5f5;
+    border: 5px solid #010101;
     border-top-color: #666;
+    margin-left: 5px;
     vertical-align: -4px;
 }
-#footprints-button b.on {
-    border: 5px solid white;
-    border-bottom-color: #666;
-    vertical-align: 1px;
+#sns-share-button b.on, #footprints-button b.on {
+    border-top-color: #99e000;
 }
-#footprints {
+#sns-share, #footprints {
     display: none;
     background-color: white;
     border: 1px solid #ddd;
     position: absolute;
-    top: 31px;
+    top: 35px;
+    _top: 30px;
     right: 0;
-    _right: -1px;
     z-index: 999;
-    padding: 10px 10px 30px 10px;
     font: normal 12px/18px "";
 }
-
-#header {
-    clear: both;
-    padding: 10px 0;
+#sns-share {
+    padding: 10px;
 }
+#footprints {
+    padding: 10px 10px 30px 10px;
+}
+#sns-share i, #footprints i {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    border: 7px solid transparent;
+    _border-color: pink;
+    _filter: chroma(color=pink);
+    border-bottom-color: white;
+    position: absolute;
+    top: -14px;
+}
+#sns-share i {
+    right: 20px;
+}
+#footprints i {
+    right: 32px;
+}
+
+
 .logo {
     cursor: pointer;
     display: inline-block;
     width: 128px;
     height: 60px;
-    background: no-repeat url(/img/logo_red.png);
+    background: no-repeat url(/img/logo_green.png);
     vertical-align: middle;
-    _background-image: none;
-    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.izheko.cn/img/logo.png', enabled=true, sizingMethod='crop');
 }
+
 #search {
-    background-color: #ffa405; 
-    padding: 3px;
-    *padding: 2px 3px 3px 3px;
+    background-color: #518900; 
 }
 #search button {
-    top: 8px;
-    background-color: #ffa405;
+    top: 5px;
+    background-color: #518900; 
 }
 
 /* navigation */
 #navbar {
-    margin: 0;
-    background-color: #ffa405;
-    font-size: 16px;
-    line-height: 32px;
-    overflow: visible;
+    margin: 10px 0;
+    border: 1px solid #518900;
+    padding: 8px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
 }
 #navbar a {
-    padding: 7px 16px;
-    color: white;
+    color: #ccc;
+    display: inline-block;
+    padding: 3px 20px;
+    _padding: 5px 20px 2px 20px;
+    margin: 2px 0;
     white-space: nowrap;
     text-decoration: none;
     vertical-align: baseline;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
 }
 #navbar a:hover {
-    background-color: #f40;
+    color: white;
+    background-color: #4f8a00;
 }
 #navbar a.on {
-    background-color: #f40;
+    color: white;
+    background-color: #4f8a00;
+}
+
+#content {
+    background: url(/tmp/bg.png) repeat center top;
 }
 
 #pagination a {
-    background-color: #eee;
+    background-color: #e3e3e3;
 }

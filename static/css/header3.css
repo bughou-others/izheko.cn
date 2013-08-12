@@ -1,98 +1,105 @@
 
-#header {
-    padding: 3px 0;
+#topbar {
+    text-align: left;
+    font: normal 12px/2 "";
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 0 5%;
 }
-
-#header .right {
-    float: right;
-    margin: 20px 5% 0 0;
+#hello {
+    display: inline-block;
+    padding: 5px 0 2px 0;
 }
-
-#phone-edition, #bookmark {
-    cursor: pointer;
-    margin-right:  2em;
+#bookmark {
+    display: inline-block;
+    padding: 5px 10px 2px 0;
+    letter-spacing: 1px;
+}
+#bookmark b {
+    display: inline-block;
+    margin: 0 3px 0 5px;
+    vertical-align: text-top;
+    width: 13px;
+    height: 13px;
+    background: no-repeat url(/img/tool2.png) -90px -23px;
+}
+#sns-share {
+    white-space: nowrap;
+}
+#sns-share a {
+    display: inline-block;
+    margin: 0 2px;
+    *margin: 0 4px;
+    vertical-align: -3px;
     *vertical-align: 2px;
 }
 
-#sns-share a {
-    display: block;
-    margin: 5px 0;
-    white-space: nowrap;
-}
-#sns-share a b {
-    margin-right: 5px;
-    vertical-align: middle;
-}
-
-#sns-share-wrapper, #footprints-wrapper {
+#footprints-wrapper {
+    float: right;
     position: relative;
     z-index: 999;
     text-align: left;
     white-space: normal;
-    display: inline-block;
 }
-#sns-share-button, #footprints-button {
+#footprints-button {
     position: relative;
     z-index: 9999;
     *display: inline;
     *zoom: 1;
-    padding: 5px 10px 2px 10px;
-    _padding: 10px 10px 3px 10px;
-    border: 1px solid white;
-    margin-left: 1em;
-    *margin-left: 0;
+    padding: 5px 6px 2px 6px;
+    _padding: 12px 6px 4px 6px;
+    border-left:  1px solid #f5f5f5;
+    border-right: 1px solid #f5f5f5;
+    color: #06c;
 }
-#sns-share-button.on, #footprints-button.on {
-    border-color: #ddd #ddd white #ddd;
+#footprints-button.on {
+    border-color:  #ddd;
+    border-bottom: 1px solid white;
+    background-color: white;
 }
-#sns-share-button b, #footprints-button b {
+#footprints-button b {
     display: inline-block;
     width: 0;
     height: 0;
     font-size: 0;
     line-height: 0;
-    border: 5px solid white;
-    border-top-color: #666;
     margin-left: 5px;
+    border: 5px solid #f5f5f5;
+    border-top-color: #666;
     vertical-align: -4px;
 }
-#sns-share-button b.on, #footprints-button b.on {
+#footprints-button b.on {
     border: 5px solid white;
     border-bottom-color: #666;
     vertical-align: 1px;
 }
-#sns-share, #footprints {
+#footprints {
     display: none;
     background-color: white;
     border: 1px solid #ddd;
     position: absolute;
-    top: 30px;
+    top: 31px;
     right: 0;
     _right: -1px;
     z-index: 999;
+    padding: 10px 10px 30px 10px;
     font: normal 12px/18px "";
 }
-#sns-share {
-    padding: 10px;
-}
-#footprints {
-    padding: 10px 10px 30px 10px;
-}
 
-#logo-search {
-    margin: 0 5%;
+#header {
+    clear: both;
+    padding: 10px 0;
 }
 .logo {
     cursor: pointer;
     display: inline-block;
     width: 128px;
     height: 60px;
-    background: no-repeat url(/img/logo.png);
+    background: no-repeat url(/img/logo_red.png);
     vertical-align: middle;
     _background-image: none;
     _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.izheko.cn/img/logo.png', enabled=true, sizingMethod='crop');
 }
-
 #search {
     background-color: #ffa405; 
     padding: 3px;
@@ -105,7 +112,7 @@
 
 /* navigation */
 #navbar {
-    margin-top: 10px;
+    margin: 0;
     background-color: #ffa405;
     font-size: 16px;
     line-height: 32px;
@@ -128,4 +135,3 @@
 #pagination a {
     background-color: #eee;
 }
-

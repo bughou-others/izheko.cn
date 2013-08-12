@@ -6,15 +6,16 @@
         <meta name="viewport"   content="width=device-width,initial-scale=1.0" />
 <?php
     require APP_ROOT . "/view/component/seo.view.php";
+    $suffix = preg_match('/^www([23]?)$/', App::sub_domain(), $m) ? $m[1] : '';
 ?>
         <link rel="shortcut icon" href="<?= App::static_server() ?>/img/favicon.ico" />
-        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server() ?>/css/main3.css?v=20130808" />
+        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server() ?>/css/main<?= $suffix ?>.css?v=20130808" />
         <script src="<?= App::static_server() ?>/js/jquery.min.js"></script>
         <script src="<?= App::static_server() ?>/js/main.js?v=20130808"></script>
     </head>
     <body>
 <?php
-    require APP_ROOT . "/view/module/header2.view.php";
+    require APP_ROOT . "/view/module/header$suffix.view.php";
 
     echo '
         <div id="content">

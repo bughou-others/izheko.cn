@@ -26,7 +26,7 @@ class App
     {
         static $cache;
         if(!isset($cache)){
-            $cache = !is_file(APP_ROOT . '/tmp/no_cache');
+            $cache = self::sub_domain() === 'www' && !is_file(APP_ROOT . '/tmp/no_cache');
         }
         return $cache;
     }
@@ -55,6 +55,16 @@ class App
     {
         static $domain;
         if(!isset($domain)) $domain = 'http://static.' . $_SERVER['ROOT_DOMAIN'];
+        return $domain;
+    }
+
+    static function sub_domain()
+    {
+        static $domain;
+        if(!isset($domain)) {
+            $domain = $_SERVER['HOST'];
+            $domain = substr($domain, 0, strpos($domain, '.'));
+        }
         return $domain;
     }
 }

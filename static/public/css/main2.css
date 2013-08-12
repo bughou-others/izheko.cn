@@ -414,23 +414,18 @@ body object {
 }
 
 #header {
-    padding: 3px 5%;
-    color: #c2c2c2;
-    background-color: #010101;
+    padding: 3px 0;
 }
 
 #header .right {
     float: right;
-    margin-top: 20px;
-    _margin-top: 28px;
-    font: normal 12px/22px "";
+    margin: 20px 5% 0 0;
 }
 
 #phone-edition, #bookmark {
     cursor: pointer;
     margin-right:  2em;
-    +vertical-align: 26px;
-    _vertical-align: 23px;
+    *vertical-align: 2px;
 }
 
 #sns-share a {
@@ -451,10 +446,18 @@ body object {
     display: inline-block;
 }
 #sns-share-button, #footprints-button {
-    padding: 2px 3px 20px 2em;
+    position: relative;
+    z-index: 9999;
+    *display: inline;
+    *zoom: 1;
+    padding: 5px 10px 2px 10px;
+    _padding: 10px 10px 3px 10px;
+    border: 1px solid white;
+    margin-left: 1em;
+    *margin-left: 0;
 }
 #sns-share-button.on, #footprints-button.on {
-    color: #99e000;
+    border-color: #ddd #ddd white #ddd;
 }
 #sns-share-button b, #footprints-button b {
     display: inline-block;
@@ -462,22 +465,24 @@ body object {
     height: 0;
     font-size: 0;
     line-height: 0;
-    border: 5px solid #010101;
+    border: 5px solid white;
     border-top-color: #666;
     margin-left: 5px;
     vertical-align: -4px;
 }
 #sns-share-button b.on, #footprints-button b.on {
-    border-top-color: #99e000;
+    border: 5px solid white;
+    border-bottom-color: #666;
+    vertical-align: 1px;
 }
 #sns-share, #footprints {
     display: none;
     background-color: white;
     border: 1px solid #ddd;
     position: absolute;
-    top: 35px;
-    _top: 30px;
+    top: 30px;
     right: 0;
+    _right: -1px;
     z-index: 999;
     font: normal 12px/18px "";
 }
@@ -487,79 +492,54 @@ body object {
 #footprints {
     padding: 10px 10px 30px 10px;
 }
-#sns-share i, #footprints i {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    font-size: 0;
-    line-height: 0;
-    border: 7px solid transparent;
-    _border-color: pink;
-    _filter: chroma(color=pink);
-    border-bottom-color: white;
-    position: absolute;
-    top: -14px;
-}
-#sns-share i {
-    right: 20px;
-}
-#footprints i {
-    right: 32px;
-}
 
-
+#logo-search {
+    margin: 0 5%;
+}
 .logo {
     cursor: pointer;
     display: inline-block;
     width: 128px;
     height: 60px;
-    background: no-repeat url(/tmp/t2.png);
+    background: no-repeat url(/img/logo_red.png);
     vertical-align: middle;
+    _background-image: none;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://static.izheko.cn/img/logo.png', enabled=true, sizingMethod='crop');
 }
 
 #search {
-    background-color: #518900; 
+    background-color: #ffa405; 
+    padding: 3px;
+    *padding: 2px 3px 3px 3px;
 }
 #search button {
-    top: 5px;
-    background-color: #518900; 
+    top: 8px;
+    background-color: #ffa405;
 }
 
 /* navigation */
 #navbar {
-    margin: 10px 0;
-    border: 1px solid #518900;
-    padding: 8px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+    margin-top: 10px;
+    background-color: #ffa405;
+    font-size: 16px;
+    line-height: 32px;
+    overflow: visible;
 }
 #navbar a {
-    color: #ccc;
-    display: inline-block;
-    padding: 3px 20px;
-    _padding: 5px 20px 2px 20px;
-    margin: 2px 0;
+    padding: 7px 16px;
+    color: white;
     white-space: nowrap;
     text-decoration: none;
     vertical-align: baseline;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
 }
 #navbar a:hover {
-    color: white;
-    background-color: #4f8a00;
+    background-color: #f40;
 }
 #navbar a.on {
-    color: white;
-    background-color: #4f8a00;
-}
-
-#content {
-    background: url(/tmp/bg.png) repeat center top;
+    background-color: #f40;
 }
 
 #pagination a {
-    background-color: #e3e3e3;
+    background-color: #eee;
 }
+
