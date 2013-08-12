@@ -1,3 +1,24 @@
+var Dialog = {
+    show: function(msg, target, delay) {
+        var o = this;
+        if(o.dialog_box === undefined) {
+            o.dialog_box = $('<div id="dialog_box"><b></b><div></div></div>').appendTo('body');
+            o.dialog_box.children('b').click(o.hide);
+        }
+        o.dialog_box.children('div').html(msg);
+        var pos = target.position();
+        o.dialog_box.css({
+            'left': pos.left + 'px',
+            'top':  (pos.top + target.height() + 10) + 'px',
+            'display': 'block'
+        });
+        if(o.timer !== undefined) clearTimeout(o.timer);
+        o.timer = setTimeout(o.hide, (delay ? delay : 5) * 1000);
+    },
+    hide: function(){
+        $(this.dialog_box).css('display', 'none');
+    }
+};
 var PhoneEdition_and_Bookmark = {
     is_mobile: function(){ 
         var s = navigator.userAgent; 
@@ -9,19 +30,26 @@ var PhoneEdition_and_Bookmark = {
     init: function(){
         if (this.is_mobile()) return;
         document.write('<span id="phone-edition" title="手机版爱折扣">手机版</span>');
-        if (document.all || true) { //IE
-            document.write('<span id="bookmark" title="收藏爱折扣">收藏</span>');
-            $('#bookmark').click(function(){
+        $('#phone-edition').click(function(){
+            Dialog.show('手机同样访问 www.izheko.cn 哟<br />爱折扣在所有设备上都表现完美！',
+                $(this), 10);
+        });
+        document.write('<span id="bookmark" title="收藏爱折扣">收藏</span>');
+        $('#bookmark').click(function(){
+            if (document.all) { //IE
                 var url   = 'http://' + location.hostname +'/';
                 var title = '爱折扣 - 精选优质折扣商品';
                 window.external.AddFavorite(url, title);
-            });
-        };
+            } else {
+                Dialog.show('亲，请按 Ctrl+D 哦', $(this));
+            }
+        });
     }
 };
 var SnsShare = {
     init: function(){
         $('#sns-share-button').bind('click mouseenter', function(){
+            Dialog.hide();
             $('#sns-share').css('display', 'block');
             $('#sns-share-button').addClass('on');
             $('#sns-share-button b').addClass('on');
@@ -164,6 +192,7 @@ var Footprints = {
         if(o.page === 0) {
             $('#footprints-bar').css('display', count > 0 ? 'block' : 'none');
         }
+        Dialog.hide();
         $('#footprints').css('height', height).prepend(html).css('display', 'block');
         $('#footprints-button').addClass('on');
         $('#footprints-button b').addClass('on');
