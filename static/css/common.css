@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    font-family: "微软雅黑";
+    font-family: "微软雅黑", Arial, sans-serif, "新宋体";
     font-size: 14px;
     line-height: 22px;
 }
@@ -40,7 +40,7 @@ img {
 #dialog_box div {
     border: 1px solid #ccc;
     padding: 5px 25px 5px 10px;
-    font-size: 12px;
+    font: normal 12px/22px "宋体";
     color: #333;
     background-color: white;
 }
@@ -99,6 +99,7 @@ img {
     display: inline-block;
     vertical-align: top;
     padding-left: 10px;
+    font-family: "宋体";
 }
 .footprints-item .desc a {
     color: #333;
@@ -252,6 +253,9 @@ img {
 }
 .item .title a {
     color: #333;
+}
+.item .title a span {
+    font-family: "宋体";
 }
 .item .title a:hover {
     color: #06c;
@@ -427,12 +431,27 @@ img {
     background-color: #444;
     border-top: 1px solid #525252;
 }
+#footer a {
+    color: white;
+    margin: 0 10px;
+}
 #footer div {
     color: #aaa;
     display: block;
     margin-top: 10px;
 }
-#footer a {
+#footer div span {
+    margin-right: 1em;
+    white-space: nowrap;
+}
+#footer div small {
+    margin-left: 2em;
+    white-space: nowrap;
+}
+#footer div sub {
+    display: none;
+}
+#footer div sub a {
     color: #aaa;
 }
 body object {
