@@ -1,13 +1,13 @@
 var Dialog = {
     show: function(msg, target, delay) {
         var o = this;
-        if(o.dialog_box === undefined) {
-            o.dialog_box = $('<div id="dialog_box"><b></b><div></div></div>').appendTo('body');
-            o.dialog_box.children('b').click(o.hide);
+        if(o.box === undefined) {
+            o.box = $('<div id="dialog_box"><b></b><div></div></div>').appendTo('body');
+            o.box.children('b').click(o.hide);
         }
-        o.dialog_box.children('div').html(msg);
+        o.box.children('div').html(msg);
         var pos = target.position();
-        o.dialog_box.css({
+        o.box.css({
             'left': pos.left + 'px',
             'top':  (pos.top + target.height() + 10) + 'px',
             'display': 'block'
@@ -16,7 +16,7 @@ var Dialog = {
         o.timer = setTimeout(o.hide, (delay ? delay : 5) * 1000);
     },
     hide: function(){
-        $(this.dialog_box).css('display', 'none');
+        $(Dialog.box).css('display', 'none');
     }
 };
 var PhoneEdition_and_Bookmark = {

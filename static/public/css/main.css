@@ -22,13 +22,27 @@ img {
 #dialog_box {
     position: absolute;
     border: 5px solid #ddd;
+    z-index: 9999;
+}
+#dialog_box b {
+    display: inline-block;
+    width: 12px;
+    height: 10px;
+    border: 1px solid white;
+    background: url(/img/tool.png) 0 -19px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+#dialog_box b:hover {
+    border-color: #ccc;
 }
 #dialog_box div {
-    color: #333;
     border: 1px solid #ccc;
-    padding: 5px 10px;
-    background-color: white;
+    padding: 5px 25px 5px 10px;
     font-size: 12px;
+    color: #333;
+    background-color: white;
 }
 
 #sns-share a b {
@@ -463,7 +477,8 @@ body object {
     display: inline-block;
 }
 #sns-share-button, #footprints-button {
-    padding: 2px 3px 20px 2em;
+    padding: 2px 3px;
+    margin: 0 0 20px 20px;
 }
 #sns-share-button.on, #footprints-button.on {
     color: #99e000;

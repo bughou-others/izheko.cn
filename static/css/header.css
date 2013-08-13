@@ -37,7 +37,8 @@
     display: inline-block;
 }
 #sns-share-button, #footprints-button {
-    padding: 2px 3px 20px 2em;
+    padding: 2px 3px;
+    margin: 0 0 20px 20px;
 }
 #sns-share-button.on, #footprints-button.on {
     color: #99e000;
