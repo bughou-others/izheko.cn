@@ -32,6 +32,7 @@
                 else echo '<img id="error_content" src="' . App::static_server() . '/img/404.png" />';
             ?>
         </div>
+        <?php require APP_ROOT . '/view/module/sidebar.view.php'; ?>
         <?php require APP_ROOT . "/view/module/footer.view.php"; ?>
         <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21567955"></script>
     </body>

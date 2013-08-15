@@ -66,6 +66,5 @@ if (empty($data['items'])) { ?>
 ?>
         </div>
 <?php
-    require_once APP_ROOT . '/view/item_list/sidebar.view.php';
 }
 ?>

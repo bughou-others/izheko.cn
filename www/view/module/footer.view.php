@@ -1,9 +1,9 @@
         <div id="footer">
-            <a>常见问题</a>
-            <a>交易安全</a>
-            <a>关于我们</a>
-            <a>联系我们</a>
-            <a target="_blank" href="http://wpa.qq.com/msgrd?uin=2038485911">在线客服</a>
+            <a href="/help.html?#faq">常见问题</a>
+            <a href="/help.html?#trans">交易安全</a>
+            <a href="/help.html?#about">关于我们</a>
+            <a href="/help.html?#contat">联系我们</a>
+            <a href="tencent://message/?uin=2038485911">在线客服</a>
             <div>
                 <span>Copyright © 2013 izheko.cn</span>
                 <span>爱折扣 版权所有</span>
