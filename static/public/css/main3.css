@@ -398,8 +398,14 @@ img {
 #go_top a {
     background-color: #aaa;
 }
+#kefu a {
+    background-color: #ffa405;
+}
 #sidebar a:hover {
-    width: 94px;
+    width: 90px;
+}
+#kefu a:hover {
+    width: 104px;
 }
 #sidebar a span {
     display: block;
@@ -423,6 +429,9 @@ img {
 }
 #next_page a b {
     background-position: -31px -1px;
+}
+#kefu a b {
+    background-position: -79px -1px;
 }
 
 #footer {

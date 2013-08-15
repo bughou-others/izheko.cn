@@ -25,24 +25,14 @@
         <script src="<?= App::static_server() ?>/js/main.js?v=20130808"></script>
     </head>
     <body>
-<?php
-    require APP_ROOT . "/view/module/header$header_suffix.view.php";
-
-    echo '
+        <?php require APP_ROOT . "/view/module/header$header_suffix.view.php"; ?>
         <div id="content">
-        ';
-
-    if (isset($target_view)) {
-        require APP_ROOT . "/view/$target_view.view.php";
-    }
-    else echo '<img id="error_content" src="' . App::static_server() . '/img/404.png" />';
-
-    echo '
+            <?php
+                if (isset($target_view)) require APP_ROOT . "/view/$target_view.view.php";
+                else echo '<img id="error_content" src="' . App::static_server() . '/img/404.png" />';
+            ?>
         </div>
-        ';
-
-    require APP_ROOT . "/view/module/footer.view.php";
-?>
+        <?php require APP_ROOT . "/view/module/footer.view.php"; ?>
         <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21567955"></script>
     </body>
 </html>
