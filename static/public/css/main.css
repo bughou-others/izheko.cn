@@ -405,11 +405,11 @@ img {
     width: 90px;
 }
 #kefu a:hover {
-    width: 104px;
+    width: 80px;
 }
 #sidebar a span {
     display: block;
-    padding: 5px 0 5px 10px;
+    padding: 4px 0 5px 10px;
     color: white;
     white-space: nowrap;
     position: absolute;

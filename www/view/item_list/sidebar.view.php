@@ -15,7 +15,7 @@ if(isset($data['total_count'], $page_size, $page) && ($data['total_count'] / $pa
 ?>
             <div id="next_page"><a href="<?= $page_url . ($page + 1) . '.html' ?>"><span>下一页</span><b></b></a></div>
 <?php } ?>
-            <div id="kefu"><a target="_blank" href="http://wpa.qq.com/msgrd?uin=2038485911"><span>在线客服</span><b></b></a></div>
+            <div id="kefu"><a target="_blank" href="http://wpa.qq.com/msgrd?uin=2038485911"><span>客 服</span><b></b></a></div>
         </div>
         <script type="text/javascript">
             if(navigator.vendor === 'UCWEB') $("#sidebar").css('display', 'none');
