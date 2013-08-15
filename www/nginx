@@ -76,7 +76,12 @@ server {
     location = /cache/404.html {
         internal;
         set $request_document $document_uri;
-        try_files $request_document /error_page.controller.php;
+        try_files $request_document /static_page.controller.php;
+    }
+
+    location = /help.html {
+        set $request_document $document_uri;
+        try_files $request_document /static_page.controller.php?target=help;
     }
 
     location ~ .controller.php$ {
