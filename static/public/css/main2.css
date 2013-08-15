@@ -398,14 +398,11 @@ img {
 #go_top a {
     background-color: #aaa;
 }
-#kefu a {
-    background-color: #ffa405;
-}
 #sidebar a:hover {
     width: 90px;
 }
 #kefu a:hover {
-    width: 80px;
+    font-size: 16px;
 }
 #sidebar a span {
     display: block;
