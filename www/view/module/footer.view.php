@@ -3,7 +3,7 @@
             <a href="/help.html?#trans">交易安全</a>
             <a href="/help.html?#phone">手机版</a>
             <a href="/help.html?#about">关于我们</a>
-            <a href="/help.html?#contat">联系我们</a>
+            <a href="/help.html?#contact">联系我们</a>
             <a href="tencent://message/?uin=2038485911">在线客服</a>
             <div>
                 <span>Copyright © 2013 izheko.cn</span>
