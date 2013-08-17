@@ -58,7 +58,7 @@ if (empty($data['items'])) { ?>
             if(w > 638) s = '628x270';
             else if(w > 360) s = '350x270';
             else s = '290x380';
-            document.write('<a data-type="2" data-keyword="<?= json_encode($word); ?>" data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
+            document.write('<a data-type="2" data-keyword=<?= json_encode($word); ?> data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
 <?php } ?>
             (function(win,doc){
                 var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
