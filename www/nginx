@@ -80,7 +80,7 @@ server {
     }
 
     location = /help.html {
-        set $request_document $document_uri;
+        set $request_document /cache/$document_uri;
         try_files $request_document /static_page.controller.php?target=help;
     }
 
