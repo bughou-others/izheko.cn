@@ -19,10 +19,10 @@
         $header_suffix  = '';
     }
 ?>
-        <link rel="shortcut icon" href="<?= App::static_server() . "/img/favicon$icon_suffix.ico" ?>?v=20130807" />
-        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server(). "/css/main$suffix.css" ?>?v=20130808" />
+        <link rel="shortcut icon" href="<?= App::static_server() . "/img/favicon$icon_suffix.ico" ?>?v=20130817" />
+        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server(). "/css/main$suffix.css" ?>?v=20130817" />
         <script src="<?= App::static_server() ?>/js/jquery.min.js"></script>
-        <script src="<?= App::static_server() ?>/js/main.js?v=20130808"></script>
+        <script src="<?= App::static_server() ?>/js/main.js?v=20130817"></script>
     </head>
     <body>
         <?php require APP_ROOT . "/view/module/header$header_suffix.view.php"; ?>

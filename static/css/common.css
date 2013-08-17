@@ -201,7 +201,7 @@ img {
 }
 
 #no_items {
-    margin: 10em 0;
+    margin: 5em 0;
 }
 
 #item_list{
@@ -462,4 +462,7 @@ img {
 }
 body object {
     display: none;
+}
+tkbox {
+    margin: 0 auto;
 }

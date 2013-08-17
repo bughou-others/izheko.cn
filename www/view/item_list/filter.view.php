@@ -14,8 +14,9 @@ foreach(array(
     }
     else
     {
-        $class = '';
         $count = $data[$target . '_count'];
+        if ($count <= 0) continue;
+        $class = '';
     }
     echo "<a href=\"$page_url$target\"$class>$name<span>($count)</span></a>\n";
 }
