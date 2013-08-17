@@ -11,7 +11,7 @@
             <div id="logo-search">
                 <a href="/" class="logo"></a>
                 <form id="search" action="/search">
-                    <div class="input-wrapper"><input type="text" name="s" /></div>
+                    <div class="input-wrapper"><input type="text" name="s" value="<?= isset($word) ? $word : null ?>" autocomplete="off" /></div>
                     <button type="submit">搜 索</button>
                 </form>
             </div>

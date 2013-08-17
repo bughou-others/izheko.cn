@@ -18,7 +18,7 @@ class ItemListController
                 error_log('search error');
                 return;
             }
-            if($type === '')$type = 'all';
+            unset($type);
             $page_url = "/search/$word/";
         }
         else
