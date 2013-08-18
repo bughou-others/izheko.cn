@@ -1,13 +1,15 @@
 <?php
 if ($argc < 2 || $argc > 3 ||
     !preg_match('/.+\.(png|ico)$/', $argv[1]) ||
-    $argc === 3 && $argv[2] !== 'green' && $argv[2] !== 'red'
-) die("usage: php ${argv[0]} <*.{png | ico}> [green | red] \n");
+    $argc === 3 && $argv[2] !== 'green' && $argv[2] !== 'white' && $argv[2] !== 'red'
+) die("usage: php ${argv[0]} <*.{png | ico}> [green | white | red] \n");
 
 $func = preg_match('/.*\.png$/', $argv[1]) ? 'logo' : 'favicon';
     
 if ($argc == 3 && $argv[2] === 'red')
     $func($argv[1], '#fff',    '#f40'   );
+elseif ($argc == 3 && $argv[2] === 'white')
+    $func($argv[1], '#444',    '#fff'   );
 else
     $func($argv[1], '#010101', '#84d516');
 

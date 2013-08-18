@@ -441,6 +441,13 @@ img {
     color: white;
     margin: 0 10px;
 }
+#footer .footer-logo {
+    display: inline-block;
+    width: 128px;
+    height: 60px;
+    background: no-repeat url(/img/logo_white.png);
+    vertical-align: middle;
+}
 #footer div {
     color: #aaa;
     display: block;
