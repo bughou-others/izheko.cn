@@ -10,6 +10,8 @@ class TaobaoItemCmd
         $num_iid = @$argv[2];
         if ($type ===  'promo_info')
             $result = TaobaoItem::get_promo_info($num_iid);
+        elseif ($type ===  'price_info')
+            $result = TaobaoItem::get_price_info($num_iid);
         elseif ($type ===  'item_info')
             $result = TaobaoItem::get_item_info($num_iid);
         else
