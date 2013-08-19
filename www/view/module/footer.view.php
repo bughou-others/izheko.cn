@@ -1,11 +1,15 @@
         <div id="footer">
-            <a href="/help.html?#faq">常见问题</a>
-            <a href="/help.html?#trans">交易安全</a>
-            <a href="/help.html?#phone">手机版</a>
+            <span>
+                <a href="/help.html?#faq">常见问题</a>
+                <a href="/help.html?#trans">交易安全</a>
+                <a href="/help.html?#phone">手机版</a>
+            </span>
             <a href="/" class="footer-logo"></a>
-            <a href="/help.html?#about">关于我们</a>
-            <a href="/help.html?#contact">联系我们</a>
-            <a href="tencent://message/?uin=2038485911">在线客服</a>
+            <span>
+                <a href="/help.html?#about">关于我们</a>
+                <a href="/help.html?#contact">联系我们</a>
+                <a href="tencent://message/?uin=2038485911">在线客服</a>
+            </span>
             <div>
                 <span>Copyright © 2013 izheko.cn</span>
                 <span>爱折扣 版权所有</span>
