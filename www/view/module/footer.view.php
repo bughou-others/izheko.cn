@@ -8,7 +8,7 @@
             <span>
                 <a href="/help.html?#about">关于我们</a>
                 <a href="/help.html?#contact">联系我们</a>
-                <a href="tencent://message/?uin=2038485911">在线客服</a>
+                <a href="tencent://message/?uin=715091790">在线客服</a>
             </span>
             <div>
                 <span>Copyright © 2013 izheko.cn</span>
