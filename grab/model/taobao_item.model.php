@@ -72,6 +72,21 @@ class TaobaoItem
         return $promo;
     }
 
+    static function parse_change_price($promo)
+    {
+        $type = $promo['type'];
+        if (preg_match(
+            '/^拍下?([0-9一二三四五六七八九十]{1,3})[元块]([0-9零一二三四五六七八九]{1,2})?$/u',
+            $type, $m))
+        {
+        }
+        elseif (preg_match( '/^拍下?([0-9{1,3}(.[0-9]{1,2}))[元块]$/u', $type, $m))
+        {
+            $m[1];
+        }
+    }
+
+
     static function get_price_info($num_iid)
     {
         static $curl;
