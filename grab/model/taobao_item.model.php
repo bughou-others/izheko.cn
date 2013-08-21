@@ -3,6 +3,7 @@ require_once APP_ROOT . '/helper/curl.helper.php';
 require_once APP_ROOT . '/../common/model/taobao_api.model.php';
 require_once APP_ROOT . '/../common/helper/json.helper.php';
 require_once APP_ROOT . '/../common/helper/price.helper.php';
+require_once APP_ROOT . '/../common/helper/number.helper.php';
 
 class TaobaoItem
 {
@@ -56,6 +57,7 @@ class TaobaoItem
             )
             foreach($promo_list as $this_promo)
             {
+                 parse_change_price($this_promo);
                 if (is_array($this_promo) && isset($this_promo['price']) &&
                     ($price = parse_price($this_promo['price'])) &&
                     (is_null($promo) || $price < $promo['price'])
@@ -72,20 +74,22 @@ class TaobaoItem
         return $promo;
     }
 
-    static function parse_change_price($promo)
+    static function parse_change_price(&$promo)
     {
         $type = $promo['type'];
         if (preg_match(
             '/^拍下?([0-9一二三四五六七八九十]{1,3})[元块]([0-9零一二三四五六七八九]{1,2})?$/u',
             $type, $m))
         {
+            if (Number::parse($m[1], $yuan) && Number::parse($m[2], $fen))
+                $price = $yuan '.' $fen;
         }
         elseif (preg_match( '/^拍下?([0-9{1,3}(.[0-9]{1,2}))[元块]$/u', $type, $m))
         {
-            $m[1];
+            $price = $m[1];
         }
+        if (isset($price)) $promo = array('price' => $price, 'type' => '拍下改价');
     }
-
 
     static function get_price_info($num_iid)
     {

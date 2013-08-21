@@ -1,6 +1,17 @@
 <?php
 class Number
 {
+    static function parse($str, &$number)
+    {
+        if (preg_match('/^[0-9]+$/', $str)) $number = $str;
+        else {
+            $number = self::from_chinese($str);
+            if ($number === NULL) echo 'unknow chinese number: ' . $str;
+        }
+        return is_int($str) || is_string($str) && preg_match('/^\d+$/', $str);
+    }
+
+
     static function from_chinese($str)
     {
         $number = array(
