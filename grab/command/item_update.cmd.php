@@ -104,14 +104,12 @@ class ItemUpdate
         }
         unset($item['num_iid']);
         $info['type_id'] = Category::get_type_id($info['cid']);
-        $info['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_POSTAGE_FREE,
-            $info['freight_payer'] === 'seller' ||
-            $info['post_fee']      === '0.00'   ||
-            $info['express_fee']   === '0.00'   ||
-            $info['ems_fee']       === '0.00'
-        );
+        $info['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_POSTAGE_FREE, $info['postage_free']);
         $info['flags'] = self::mask_bits($info['flags'], ItemBase::FLAGS_MASK_VIP_PRICE,
-            $info['vip_price']
+            $info['price_type'] === 'VIP价格'
+        );
+        $info['flags'] = self::mask_bits($info['flags'], ItemBase::FLAGS_MASK_CHANGE_PRICE,
+            $info['price_type'] === '拍下改价'
         );
         $changes = array();
         foreach($item as $k => $v)

@@ -22,8 +22,20 @@ class TaobaoItem
         }
         else return;
 
-        if(isset($item['price']))
-            $item['price'] = parse_price($item['price']);
+        $item['postage_free'] =
+            $item['freight_payer'] === 'seller' ||
+            $item['post_fee']      === '0.00'   ||
+            $item['express_fee']   === '0.00'   ||
+            $item['ems_fee']       === '0.00';
+
+        if(isset($item['price'])) $item['price'] = parse_price($item['price']);
+        self::merge_promo_info($item, $num_iid);
+
+        return $item;
+    }
+
+    static function merge_promo_info(&$item, $num_iid)
+    {
         if(is_array($promo = self::get_promo_info($num_iid)) &&
             $promo['price'] < $item['price']
         ) {
@@ -34,16 +46,14 @@ class TaobaoItem
             $item['end_time']   = is_int($promo['endTime']) && 
                 ($end_time = $promo['endTime'] / 1000)     < strtotime($item['delist_time']) ? 
                 strftime('%F %T', $end_time)   : $item['delist_time'];
-            $item['vip_price']  = $promo['vip_price'];
+            $item['price_type']  = $promo['type'];
         }
         else {
             $item['now_price']  = $item['price'];
             $item['start_time'] = $item['list_time'];
             $item['end_time']   = $item['delist_time'];
-            $item['vip_price']  = false;
+            $item['price_type'] = null;
         }
-
-        return $item;
     }
 
     static function get_promo_info($num_iid)
@@ -57,7 +67,7 @@ class TaobaoItem
             )
             foreach($promo_list as $this_promo)
             {
-                 parse_change_price($this_promo);
+                self::parse_change_price($this_promo);
                 if (is_array($this_promo) && isset($this_promo['price']) &&
                     ($price = parse_price($this_promo['price'])) &&
                     (is_null($promo) || $price < $promo['price'])
@@ -67,9 +77,8 @@ class TaobaoItem
                 }
             }
         }
-        if($promo) {
-            $promo['vip_price'] = isset($promo['type']) &&
-                ($promo['type'] === 'VIP价格' || $promo['type'] === '店铺vip');
+        if ($promo && isset($promo['type']) && $promo['type'] === '店铺vip') {
+            $promo['type'] = 'VIP价格';
         }
         return $promo;
     }
@@ -82,9 +91,9 @@ class TaobaoItem
             $type, $m))
         {
             if (Number::parse($m[1], $yuan) && Number::parse($m[2], $fen))
-                $price = $yuan '.' $fen;
+                $price = $yuan . '.' . $fen;
         }
-        elseif (preg_match( '/^拍下?([0-9{1,3}(.[0-9]{1,2}))[元块]$/u', $type, $m))
+        elseif (preg_match('/^拍下?([0-9]{1,3}(\.[0-9]{1,2}))[元块]$/u', $type, $m))
         {
             $price = $m[1];
         }
