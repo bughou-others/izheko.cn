@@ -8,7 +8,7 @@ class Number
             $number = self::from_chinese($str);
             if ($number === NULL) echo 'unknow chinese number: ' . $str;
         }
-        return is_int($str) || is_string($str) && preg_match('/^\d+$/', $str);
+        return is_int($number) || is_string($number) && preg_match('/^\d+$/', $number);
     }
 
 

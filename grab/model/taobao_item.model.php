@@ -40,10 +40,10 @@ class TaobaoItem
             $promo['price'] < $item['price']
         ) {
             $item['now_price']  = $promo['price'];
-            $item['start_time'] = is_int($promo['startTime']) &&
+            $item['start_time'] = isset($promo['startTime']) && is_int($promo['startTime']) &&
                 ($start_time = $promo['startTime'] / 1000) > strtotime($item['list_time']) ?
                 strftime('%F %T', $start_time) : $item['list_time'];
-            $item['end_time']   = is_int($promo['endTime']) && 
+            $item['end_time']   = isset($promo['endTime']) && is_int($promo['endTime']) && 
                 ($end_time = $promo['endTime'] / 1000)     < strtotime($item['delist_time']) ? 
                 strftime('%F %T', $end_time)   : $item['delist_time'];
             $item['price_type']  = $promo['type'];
@@ -58,7 +58,7 @@ class TaobaoItem
 
     static function get_promo_info($num_iid)
     {
-        if(!$price_info = self::get_price_info($num_iid)) return;
+        if (!$price_info = self::get_price_info($num_iid)) return;
         $promo = null;
         foreach ($price_info as $sku)
         {
