@@ -72,6 +72,7 @@ class TaobaoItem
         }
         if (!isset($promo['price_type']) && $tmall) {
             $subtitle = self::get_subtitle($num_iid);
+            //var_dump($subtitle);
             $change_price = self::parse_change_price($subtitle);
             self::compare_promo($change_price, $promo);
         }
@@ -97,7 +98,8 @@ class TaobaoItem
     static function parse_change_price($str)
     {
         $prefix_array = array(
-            '拍下?后?', '拍下后?变', '拍下后?自动改?', '自动改成', '自动改价为', '自动修改成'
+            '拍下?后?', '拍下(?:后|就)?变', '拍下后?自动改?', '自动改成', '自动改价为', '自动修改成',
+            '自动减价至￥?'
         );
         foreach($prefix_array as $prefix)
         {
@@ -112,7 +114,7 @@ class TaobaoItem
                     'price_type' => '拍下改价'
                 );
             }
-            elseif (preg_match('/' . $prefix . '([0-9]{1,3}(\.[0-9]{1,2}))[元块]?/u', $str, $m))
+            elseif (preg_match('/' . $prefix . '([0-9]{1,3}(\.[0-9]{1,2})?)[元块]?/u', $str, $m))
             {
                 return array('price' => $m[1], 'price_type' => '拍下改价');
             }
