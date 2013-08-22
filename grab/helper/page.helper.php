@@ -9,12 +9,14 @@ class Page
         $this->xpath  = null;
     }
 
-    function query($xpath, $context = null)
+    function query($xpath, $context = null, $charset = null)
     {
         if (!$this->xpath)
         {
-            $doc = new DOMDocument;
-            @$doc->LoadHTML($this->body);
+            $doc = new DOMDocument();
+            @$doc->LoadHTML(($charset ? 
+                '<meta http-equiv="Content-Type" content="text/html; charset=' . $charset .'"/>'
+                : '') . $this->body);
             $this->xpath = new DOMXPath($doc);
         }
         if ($context) return $this->xpath->query($xpath, $context);

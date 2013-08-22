@@ -19,7 +19,7 @@ class Footprints
         foreach($item_ids as $id) {
             $sql .= ($sql === null ? '' : ' union all ') .
                 'select num_iid,title,type_id,flags,ref_price,price,now_price,
-                start_time,end_time,delist_time,detail_url,click_url,pic_url
+                start_time,end_time,delist_time,click_url,pic_url
                 from ' . ($history ? 'items' : 'items_history') . ' where num_iid =  ' . $id;
         }
         $result = DB::query($sql);

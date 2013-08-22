@@ -55,7 +55,7 @@ class TaobaoItem
         }
     }
 
-    static function get_promo_info($num_iid, $tmall)
+    static function get_promo_info($num_iid, $tmall = true)
     {
         if (!$price_info = self::get_price_info($num_iid)) return;
         $promo = null;
@@ -65,14 +65,16 @@ class TaobaoItem
                 is_array($promo_list = $sku['promotionList'])
             )
             foreach($promo_list as $this_promo) {
-                self::parse_change_price($this_promo['type'], $this_promo);
                 self::compare_promo($this_promo, $promo);
+                $change_price = self::parse_change_price($this_promo['type']);
+                self::compare_promo($change_price, $promo);
             }
         }
         if (!isset($promo['price_type']) && $tmall) {
             $subtitle = self::get_subtitle($num_iid);
-            self::parse_change_price($subtitle, $this_promo);
-            self::compare_promo($this_promo, $promo);
+            echo($subtitle);
+            $change_price = self::parse_change_price($subtitle);
+            self::compare_promo($change_price, $promo);
         }
         if ($promo && !isset($promo['price_type'])) {
             $promo['price_type'] = isset($promo['type']) &&
@@ -93,20 +95,25 @@ class TaobaoItem
         }
     }
 
-    static function parse_change_price($str, &$promo)
+    static function parse_change_price($str)
     {
-        if (preg_match(
-            '/拍(?:下(?:自动改?)?)?([0-9一二三四五六七八九十]{1,3})[元块]([0-9零一二三四五六七八九]{1,2})?/u',
-            $str, $m))
+        $prefix_array = array(
+            '拍下?后?', '拍下后?自动改?', '自动改成', '自动改价为', '自动修改成'
+        );
+        foreach($prefix_array as $prefix)
         {
-            if (Number::parse($m[1], $yuan) && Number::parse($m[2], $fen))
-                $price = $yuan . '.' . $fen;
+            if (preg_match('/' . $prefix . 
+                '([0-9一二三四五六七八九十]{1,3})[元块]([0-9零一二三四五六七八九]{1,2})?/u', $str, $m)
+            )
+            {
+                if (Number::parse($m[1], $yuan) && Number::parse($m[2], $fen))
+                    return array('price' => $yuan . '.' . $fen, 'price_type' => '拍下改价');
+            }
+            elseif (preg_match('/' . $prefix . '([0-9]{1,3}(\.[0-9]{1,2}))[元块]?/u', $str, $m))
+            {
+                return array('price' => $m[1], 'price_type' => '拍下改价');
+            }
         }
-        elseif (preg_match('/拍(?:下(?:自动改?)?)?([0-9]{1,3}(\.[0-9]{1,2}))[元块]?$/u', $str, $m))
-        {
-            $price = $m[1];
-        }
-        if (isset($price)) $promo = array('price' => $price, 'price_type' => '拍下改价');
     }
 
     static function get_price_info($num_iid)
@@ -130,8 +137,8 @@ class TaobaoItem
         if (! $curl) $curl = new Curl();
         $url ='http://detail.tmall.com/item.htm?id=' . $num_iid;
         $response = $curl->get($url);
-        $t = $response->query('//div[@id="J_DetailMeta"]/div[@class="tb-property"]/div[@class="tb-wrap"]/div[@class="tb-detail-hd"]/p/@content')->item(0);
-        if($t) return $t->nodeValue;
+        if ($t = $response->query('//div[@id="J_DetailMeta"]/div[@class="tb-property"]/div[@class="tb-wrap"]/div[@class="tb-detail-hd"]/p', null, 'gb2312')->item(0))
+            return trim($t->nodeValue);
     }
 
     static function get_promo_info2($num_iid)

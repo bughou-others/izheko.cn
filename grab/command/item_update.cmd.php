@@ -27,7 +27,7 @@ class ItemUpdate
         register_shutdown_function('ItemUpdate::exit_callback');
 
         $sql = "select num_iid, title, flags, cid, type_id, price, now_price,
-            start_time, end_time, list_time, delist_time, detail_url, pic_url
+            start_time, end_time, list_time, delist_time, pic_url
             from items where updater=$pid order by id asc for update
             ";
         DB::$db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
