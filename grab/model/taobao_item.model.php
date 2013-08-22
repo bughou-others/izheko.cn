@@ -72,7 +72,6 @@ class TaobaoItem
         }
         if (!isset($promo['price_type']) && $tmall) {
             $subtitle = self::get_subtitle($num_iid);
-            echo($subtitle);
             $change_price = self::parse_change_price($subtitle);
             self::compare_promo($change_price, $promo);
         }
@@ -106,8 +105,12 @@ class TaobaoItem
                 '([0-9一二三四五六七八九十]{1,3})[元块]([0-9零一二三四五六七八九]{1,2})?/u', $str, $m)
             )
             {
-                if (Number::parse($m[1], $yuan) && Number::parse($m[2], $fen))
-                    return array('price' => $yuan . '.' . $fen, 'price_type' => '拍下改价');
+                if (Number::parse($m[1], $yuan) &&(
+                    !isset($m[2]) || Number::parse($m[2], $fen)
+                )) return array(
+                    'price'      => $yuan . '.' . (isset($fen) ? $fen : '0'),
+                    'price_type' => '拍下改价'
+                );
             }
             elseif (preg_match('/' . $prefix . '([0-9]{1,3}(\.[0-9]{1,2}))[元块]?/u', $str, $m))
             {
