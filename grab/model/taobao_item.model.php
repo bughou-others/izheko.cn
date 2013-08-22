@@ -97,7 +97,7 @@ class TaobaoItem
     static function parse_change_price($str)
     {
         $prefix_array = array(
-            '拍下?后?', '拍下后?自动改?', '自动改成', '自动改价为', '自动修改成'
+            '拍下?后?', '拍下后?变', '拍下后?自动改?', '自动改成', '自动改价为', '自动修改成'
         );
         foreach($prefix_array as $prefix)
         {

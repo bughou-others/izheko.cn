@@ -33,7 +33,7 @@ server {
         set $request_document /cache/type/all/$1/1.html;
         try_files $request_document /item_list.controller.php?filter=$1;
     }
-    location ~ ^/((new|coming|tomorrow)/)?([1-9]\d?)\.html$ {
+    location ~ ^/((new|coming|tomorrow)/)?([1-9]\d{0,2})\.html$ {
         set $request_document /cache/type/all$document_uri;
         try_files $request_document /item_list.controller.php?filter=$2&page=$3;
     }
@@ -42,7 +42,7 @@ server {
         set $request_document /cache/type/$1/$3/1.html;
         try_files $request_document /item_list.controller.php?type=$1&filter=$3;
     }
-    location ~ ^/([a-z]+)(/(new|coming|tomorrow))?/([1-9]\d?)\.html$ {
+    location ~ ^/([a-z]+)(/(new|coming|tomorrow))?/([1-9]\d{0,2})\.html$ {
         set $request_document /cache/type$document_uri;
         try_files $request_document /item_list.controller.php?type=$1&filter=$3&page=$4;
     }
