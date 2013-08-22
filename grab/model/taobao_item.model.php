@@ -36,7 +36,7 @@ class TaobaoItem
 
     static function merge_promo_info(&$item, $num_iid)
     {
-        if(is_array($promo = self::get_promo_info($num_iid)) &&
+        if(is_array($promo = self::get_promo_info($num_iid, $item['auction_point'] > 0)) &&
             $promo['price'] < $item['price']
         ) {
             $item['now_price']  = $promo['price'];
@@ -46,9 +46,8 @@ class TaobaoItem
             $item['end_time']   = isset($promo['endTime']) && is_int($promo['endTime']) && 
                 ($end_time = $promo['endTime'] / 1000)     < strtotime($item['delist_time']) ? 
                 strftime('%F %T', $end_time)   : $item['delist_time'];
-            $item['price_type']  = $promo['type'];
-        }
-        else {
+            $item['price_type']  = $promo['price_type'];
+        } else {
             $item['now_price']  = $item['price'];
             $item['start_time'] = $item['list_time'];
             $item['end_time']   = $item['delist_time'];
@@ -56,7 +55,7 @@ class TaobaoItem
         }
     }
 
-    static function get_promo_info($num_iid)
+    static function get_promo_info($num_iid, $tmall)
     {
         if (!$price_info = self::get_price_info($num_iid)) return;
         $promo = null;
@@ -65,47 +64,57 @@ class TaobaoItem
             if (isset($sku['promotionList']) &&
                 is_array($promo_list = $sku['promotionList'])
             )
-            foreach($promo_list as $this_promo)
-            {
-                self::parse_change_price($this_promo);
-                if (is_array($this_promo) && isset($this_promo['price']) &&
-                    ($price = parse_price($this_promo['price'])) &&
-                    (is_null($promo) || $price < $promo['price'])
-                ){
-                    $this_promo['price'] = $price;
-                    $promo = $this_promo;
-                }
+            foreach($promo_list as $this_promo) {
+                self::parse_change_price($this_promo['type'], $this_promo);
+                self::compare_promo($this_promo, $promo);
             }
         }
-        if ($promo && isset($promo['type']) && $promo['type'] === '店铺vip') {
-            $promo['type'] = 'VIP价格';
+        if (!isset($promo['price_type']) && $tmall) {
+            $subtitle = self::get_subtitle($num_iid);
+            self::parse_change_price($subtitle, $this_promo);
+            self::compare_promo($this_promo, $promo);
+        }
+        if ($promo && !isset($promo['price_type'])) {
+            $promo['price_type'] = isset($promo['type']) &&
+                ($promo['type'] === 'VIP价格' || $promo['type'] === '店铺vip')
+                ? 'VIP价格' : '';
         }
         return $promo;
     }
 
-    static function parse_change_price(&$promo)
+    static function compare_promo($this_promo, &$promo)
     {
-        $type = $promo['type'];
+        if (is_array($this_promo) && isset($this_promo['price']) &&
+            ($price = parse_price($this_promo['price'])) &&
+            (is_null($promo) || $price < $promo['price'])
+        ){
+            $this_promo['price'] = $price;
+            $promo = $this_promo;
+        }
+    }
+
+    static function parse_change_price($str, &$promo)
+    {
         if (preg_match(
-            '/^拍下?([0-9一二三四五六七八九十]{1,3})[元块]([0-9零一二三四五六七八九]{1,2})?$/u',
-            $type, $m))
+            '/拍(?:下(?:自动改?)?)?([0-9一二三四五六七八九十]{1,3})[元块]([0-9零一二三四五六七八九]{1,2})?/u',
+            $str, $m))
         {
             if (Number::parse($m[1], $yuan) && Number::parse($m[2], $fen))
                 $price = $yuan . '.' . $fen;
         }
-        elseif (preg_match('/^拍下?([0-9]{1,3}(\.[0-9]{1,2}))[元块]$/u', $type, $m))
+        elseif (preg_match('/拍(?:下(?:自动改?)?)?([0-9]{1,3}(\.[0-9]{1,2}))[元块]?$/u', $str, $m))
         {
             $price = $m[1];
         }
-        if (isset($price)) $promo = array('price' => $price, 'type' => '拍下改价');
+        if (isset($price)) $promo = array('price' => $price, 'price_type' => '拍下改价');
     }
 
     static function get_price_info($num_iid)
     {
         static $curl;
         if (! $curl) $curl = new Curl();
-        $refer='http://detail.tmall.com/item.htm?id=' . $num_iid;
-        $url='http://mdskip.taobao.com/core/initItemDetail.htm?queryMaybach=true&itemId=' . $num_iid;
+        $refer = 'http://detail.tmall.com/item.htm?id=' . $num_iid;
+        $url   = 'http://mdskip.taobao.com/core/initItemDetail.htm?queryMaybach=true&itemId=' . $num_iid;
         $response = $curl->get($url, $refer);
 
         $data = decode_json(iconv('GBK', 'UTF-8', $response->body));
@@ -113,6 +122,16 @@ class TaobaoItem
             ($price_info = $data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
             is_array($price_info)
         ) return $price_info;
+    }
+
+    static function get_subtitle($num_iid)
+    {
+        static $curl;
+        if (! $curl) $curl = new Curl();
+        $url ='http://detail.tmall.com/item.htm?id=' . $num_iid;
+        $response = $curl->get($url);
+        $t = $response->query('//div[@id="J_DetailMeta"]/div[@class="tb-property"]/div[@class="tb-wrap"]/div[@class="tb-detail-hd"]/p/@content')->item(0);
+        if($t) return $t->nodeValue;
     }
 
     static function get_promo_info2($num_iid)

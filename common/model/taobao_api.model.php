@@ -63,7 +63,7 @@ class TaobaoApi
 
     static function item_get($num_iid) {
         return self::get_data('taobao.item.get', array(
-            'fields'   => 'num_iid,cid,title,pic_url,price,detail_url,list_time,delist_time,freight_payer,post_fee,express_fee,ems_fee',
+            'fields'   => 'num_iid,cid,title,pic_url,price,detail_url,list_time,delist_time,freight_payer,post_fee,express_fee,ems_fee,auction_point',
             'num_iid'  => $num_iid,
         ));
     }

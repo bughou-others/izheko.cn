@@ -111,6 +111,9 @@ class ItemUpdate
         $info['flags'] = self::mask_bits($info['flags'], ItemBase::FLAGS_MASK_CHANGE_PRICE,
             $info['price_type'] === '拍下改价'
         );
+        $info['flags'] = self::mask_bits($info['flags'], ItemBase::FLAGS_MASK_TMALL,
+            $info['auction_point'] > 0
+        );
         $changes = array();
         foreach($item as $k => $v)
         {

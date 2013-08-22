@@ -26,7 +26,7 @@ class Page
         $href = $this->query($xpath, $context)->item(0);
         if ($href && ($url = $href->value))
         {
-          return $this->curl->get($url, $this->url);
+            return $this->curl->get($url, $this->url);
         }
     }
 
