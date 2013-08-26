@@ -36,15 +36,14 @@ class TaobaoItem
 
     static function merge_promo_info(&$item, $num_iid)
     {
-        if(is_array($promo = self::get_promo_info($num_iid, $item['auction_point'] > 0)) &&
-            $promo['price'] < $item['price']
-        ) {
+        $promo = self::get_promo_info($num_iid, $item['auction_point'] > 0, $item['title']);
+        if(is_array($promo) && $promo['price'] < $item['price']) {
             $item['now_price']  = $promo['price'];
             $item['start_time'] = isset($promo['startTime']) && is_int($promo['startTime']) &&
                 ($start_time = $promo['startTime'] / 1000) > strtotime($item['list_time']) ?
                 strftime('%F %T', $start_time) : $item['list_time'];
             $item['end_time']   = isset($promo['endTime']) && is_int($promo['endTime']) && 
-                ($end_time = $promo['endTime'] / 1000)     < strtotime($item['delist_time']) ? 
+                ($end_time = $promo['endTime'] / 1000)     < strtotime($item['delist_time']) ?
                 strftime('%F %T', $end_time)   : $item['delist_time'];
             $item['price_type']  = $promo['price_type'];
         } else {
@@ -55,7 +54,7 @@ class TaobaoItem
         }
     }
 
-    static function get_promo_info($num_iid, $tmall = true)
+    static function get_promo_info($num_iid, $tmall, $title)
     {
         if (!$price_info = self::get_price_info($num_iid)) return;
         $promo = null;
@@ -74,6 +73,10 @@ class TaobaoItem
             $subtitle = self::get_subtitle($num_iid);
             //var_dump($subtitle);
             $change_price = ChangePrice::parse($subtitle);
+            self::compare_promo($change_price, $promo);
+        }
+        if (!isset($promo['price_type']) && $title) {
+            $change_price = ChangePrice::parse($title);
             self::compare_promo($change_price, $promo);
         }
         if ($promo && !isset($promo['price_type'])) {
