@@ -1,9 +1,9 @@
 <?php
+require_once APP_ROOT . '/model/change_price.model.php';
 require_once APP_ROOT . '/helper/curl.helper.php';
 require_once APP_ROOT . '/../common/model/taobao_api.model.php';
 require_once APP_ROOT . '/../common/helper/json.helper.php';
 require_once APP_ROOT . '/../common/helper/price.helper.php';
-require_once APP_ROOT . '/../common/helper/number.helper.php';
 
 class TaobaoItem
 {
@@ -66,14 +66,14 @@ class TaobaoItem
             )
             foreach($promo_list as $this_promo) {
                 self::compare_promo($this_promo, $promo);
-                $change_price = self::parse_change_price($this_promo['type']);
+                $change_price = ChangePrice::parse($this_promo['type']);
                 self::compare_promo($change_price, $promo);
             }
         }
         if (!isset($promo['price_type']) && $tmall) {
             $subtitle = self::get_subtitle($num_iid);
             //var_dump($subtitle);
-            $change_price = self::parse_change_price($subtitle);
+            $change_price = ChangePrice::parse($subtitle);
             self::compare_promo($change_price, $promo);
         }
         if ($promo && !isset($promo['price_type'])) {
@@ -92,32 +92,6 @@ class TaobaoItem
         ){
             $this_promo['price'] = $price;
             $promo = $this_promo;
-        }
-    }
-
-    static function parse_change_price($str)
-    {
-        $prefix_array = array(
-            '拍下?后?', '拍下(?:后|就)?变', '拍下后?自动改?', '自动改成', '自动改价为', '自动修改成',
-            '自动减价至￥?'
-        );
-        foreach($prefix_array as $prefix)
-        {
-            if (preg_match('/' . $prefix . 
-                '([0-9一二三四五六七八九十]{1,3})[元块]([0-9零一二三四五六七八九]{1,2})?/u', $str, $m)
-            )
-            {
-                if (Number::parse($m[1], $yuan) &&(
-                    !isset($m[2]) || Number::parse($m[2], $fen)
-                )) return array(
-                    'price'      => $yuan . '.' . (isset($fen) ? $fen : '0'),
-                    'price_type' => '拍下改价'
-                );
-            }
-            elseif (preg_match('/' . $prefix . '([0-9]{1,3}(\.[0-9]{1,2})?)[元块]?/u', $str, $m))
-            {
-                return array('price' => $m[1], 'price_type' => '拍下改价');
-            }
         }
     }
 
