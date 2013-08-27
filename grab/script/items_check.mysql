@@ -8,6 +8,7 @@ set names utf8;
 #所有检查只针对 未下架的商品(delist_time > update_time)，已下架的商品我们不关心
 #且已下架的商品的click_url、vip_price、promo_price可能本来就获取不到
 
+/*
 select 'click_url' check_item \G
 select num_iid, ref_price, price, vip_price, promo_price,
  promo_start, promo_end, list_time, delist_time, ref_url
@@ -15,6 +16,7 @@ from items
 where click_url = '' and (flags & 1) #有参考click_url, 我们却没有获取到
 and delist_time > update_time
 ;
+*/
 
 select 'vip_price' check_item \G
 select num_iid, ref_price, price, vip_price, promo_price,
@@ -34,7 +36,6 @@ where promo_price != ref_price and vip_price != ref_price and price != ref_price
 #所以要么是vip价错了， 要么是商品确实更改价格了。
 and delist_time > update_time
 ;
-*/
 
 select 'price' check_item \G
 select id, update_time, num_iid, ref_price, price, vip_price, promo_price,
@@ -43,6 +44,7 @@ from items
 where vip_price > price or promo_price > price
 #or (promo_price > 0 and vip_price > promo_price)
 ;
+*/
 
 SQL_BLOCK
 
