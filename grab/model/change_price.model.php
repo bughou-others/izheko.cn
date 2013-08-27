@@ -11,7 +11,7 @@ class ChangePrice
             "拍下?后?就?立?$change_price?%s",
             "自动$change_price?%s", '^[促改]?%s$',
             '(?:秒杀价?|惊呆价|实付|特惠|价格为)%s',
-            '%s(?:包邮|秒杀)',
+            '%s(?:.*包邮|秒杀)',
         );
         foreach($format_array as $format)
         {
