@@ -23,24 +23,23 @@ class Cache
 
     static function clear_cache($types)
     {
-        $base_dir = APP_ROOT . '/../www/public/cache';
-        $prefixes = array('/type/', '/search/');
-        
         foreach($types as $name => $pinyin)
         {
-            foreach($prefixes as $prefix)
-            {
-                $cache = $prefix . $pinyin;
-                $dir = $base_dir . $cache;
-                if(is_dir($dir))
-                {
-                    $status = null;
-                    system("rm -rf $dir", $status);
-                    if($status === 0) $status = 'ok';
-                    echo "clear cache $name $cache: $status\n";
-                }
-                else echo "clear cache $name $cache: no cache\n";
-            }
+            self::rm_dir($name, '/type/' . $pinyin);
         }
+        self::rm_dir('search', '/search/');
+    }
+
+    static function rm_dir($name, $cache)
+    {
+        $dir = APP_ROOT . '/../www/public/cache' . $cache ;
+        if(is_dir($dir))
+        {
+            $status = null;
+            system("rm -rf $dir", $status);
+            if($status === 0) $status = 'ok';
+            echo "clear cache $name $cache: $status\n";
+        }
+        else echo "clear cache $name $cache: no cache\n";
     }
 }
