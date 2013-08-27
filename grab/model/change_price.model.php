@@ -6,6 +6,16 @@ class ChangePrice
     static function parse($str)
     {
         //var_dump($str);
+        $price = self::parse1($str);
+        if($price === null) $price = self::parse2($str);
+        if($price) return array(
+            'price'      => $price,
+            'price_type' => '拍下改价'
+        );
+    }
+
+    static function parse1($str)
+    {
         $change_price = '(?:修?[改变]价?[成为至到]?|[减降]价?[成为至到]|只要)';
         $format_array = array(
             "拍下?后?就?立?$change_price?%s",
@@ -13,6 +23,22 @@ class ChangePrice
             '(?:秒杀价?|惊呆价|实付|特惠|价格为)%s',
             '%s(?:.*包邮|秒杀)',
         );
+        return self::do_parse($format_array, $str);
+    }
+
+    static function parse2($str)
+    {
+        $change_price = '(?:[减降]价?)';
+        $format_array = array(
+            "拍下?后?就?立?$change_price?%s",
+            "自动$change_price?%s",
+        );
+        $price = self::do_parse($format_array, $str);
+        if($price) return -$price;
+    }
+
+    static function do_parse($format_array, $str)
+    {
         foreach($format_array as $format)
         {
             $re = '/' . sprintf($format,
@@ -20,20 +46,15 @@ class ChangePrice
                 . '/u';
             if (preg_match($re, $str, $m))
             {
-                if (Number::parse($m[1], $yuan) && (
-                    !isset($m[2]) || Number::parse($m[2], $fen)
-                )) return array(
-                    'price'      => $yuan . '.' . (isset($fen) ? $fen : '0'),
-                    'price_type' => '拍下改价'
-                );
+                if (Number::parse($m[1], $yuan) && 
+                    (!isset($m[2]) || Number::parse($m[2], $fen))
+                )
+                return $yuan . '.' . (isset($fen) ? $fen : '0');
             }
             else
             {
                 $re = '/' . sprintf($format, ' *￥?([0-9]{1,3}(\.[0-9]{1,2})?)[元块]?') . '/u';
-                if (preg_match($re, $str, $m))
-                {
-                    return array('price' => $m[1], 'price_type' => '拍下改价');
-                }
+                if (preg_match($re, $str, $m)) return $m[1];
             }
         }
     }

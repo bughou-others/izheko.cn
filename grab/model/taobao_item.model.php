@@ -39,6 +39,8 @@ class TaobaoItem
         $promo = self::get_promo_info($num_iid, $item['auction_point'] > 0, $item['title']);
         if(is_array($promo) && $promo['price'] < $item['price']) {
             $item['now_price']  = $promo['price'];
+            if($promo['price'] < 0) $item['now_price'] += $item['price'];
+
             $item['start_time'] = isset($promo['startTime']) && is_int($promo['startTime']) &&
                 ($start_time = $promo['startTime'] / 1000) > strtotime($item['list_time']) ?
                 strftime('%F %T', $start_time) : $item['list_time'];
@@ -66,6 +68,8 @@ class TaobaoItem
             foreach($promo_list as $this_promo) {
                 self::compare_promo($this_promo, $promo);
                 $change_price = ChangePrice::parse($this_promo['type']);
+                if(isset($change_price['price']) && $change_price['price'] < 0)
+                    $change_price['price'] += $this_promo['price'];
                 self::compare_promo($change_price, $promo);
             }
         }
@@ -89,12 +93,21 @@ class TaobaoItem
 
     static function compare_promo($this_promo, &$promo)
     {
-        if (is_array($this_promo) && isset($this_promo['price']) &&
-            ($price = parse_price($this_promo['price'])) &&
-            (is_null($promo) || $price < $promo['price'])
-        ){
-            $this_promo['price'] = $price;
-            $promo = $this_promo;
+        if (isset($this_promo['price'])) 
+        {
+            if($this_promo['price'] < 0) {
+                $this_promo['price'] = - parse_price(-$this_promo['price']);
+                if(isset($promo['price'])) $this_promo['price'] += $promo['price'];
+                $promo = $this_promo;
+            }
+            elseif (
+                ($price = parse_price($this_promo['price'])) &&
+                (is_null($promo) || $price < $promo['price'])
+            )
+            {
+                $this_promo['price'] = $price;
+                $promo = $this_promo;
+            }
         }
     }
 
