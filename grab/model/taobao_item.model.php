@@ -117,7 +117,7 @@ class TaobaoItem
     {
         static $curl;
         if (! $curl) $curl = new Curl();
-        $url ='http://detail.tmall.com/item.htm?id=' . $num_iid;
+        $url ='http://detail.tmall.com/item.htm?id=' . $num_iid . '&ali_trackid=2:mm_40339139_4152163_13484640';
         $response = $curl->get($url);
         if ($t = $response->query('//div[@id="J_DetailMeta"]/div[@class="tb-property"]/div[@class="tb-wrap"]/div[@class="tb-detail-hd"]/p', null, 'gb2312')->item(0))
             return trim($t->nodeValue);
