@@ -27,7 +27,7 @@ if (empty($data['items'])) { ?>
                     <?php if ($item->original_price_str()) { ?>
                     <small title="原价 ￥<?= $item->original_price_str() ?>">￥<?= $item->original_price_str() ?></small>
                     <?php } ?>
-                    <a class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank">
+                    <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank">
                         <b><?= $item->action() ?></b>
                     </a>
                 </div>
@@ -68,11 +68,7 @@ if (empty($data['items'])) { ?>
                     s.src = "http://a.alimama.cn/tkapi.js";
                     h.insertBefore(s, h.firstChild);
                 };
-                var o = {
-                    pid: "mm_40339139_4152163_13484640",/*推广单元ID，用于区分不同的推广渠道*/
-                    appkey: "",/*通过TOP平台申请的appkey，设置后引导成交会关联appkey*/
-                    unid: ""/*自定义统计字段*/
-                };
+                var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
                 win.alimamatk_onload = win.alimamatk_onload || [];
                 win.alimamatk_onload.push(o);
             })(window,document);

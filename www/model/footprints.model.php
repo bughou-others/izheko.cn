@@ -32,7 +32,6 @@ class Footprints
                 'num_iid'   => $num_iid,
                 'pic_url'   => $item->pic_url(),
                 'title'     => $item->title(),
-                'jump_url'  => $item->jump_url(),
                 'now_price' => format_price($item->get('now_price')),
             );
         }

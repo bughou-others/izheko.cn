@@ -175,8 +175,8 @@ var Footprints = {
                 var item = items_data[num_iid];
                 if(item === undefined) continue;
                 count ++;
-                html += '<div class="footprints-item"><a class="image" data-itemid="' + num_iid +
-                    '"><img src="' + item.pic_url + '" /></a><span class="desc"><a data-itemid="' +
+                html += '<div class="footprints-item"><a data-rd="1" class="image" target="_blank" data-itemid="' + num_iid +
+                    '"><img src="' + item.pic_url + '" /></a><span class="desc"><a data-rd="1" target="_blank" data-itemid="' +
                     num_iid + '">' + item.title   + '</a><b>￥' + item.now_price + '</b></span></div>';
             }
         } else {
