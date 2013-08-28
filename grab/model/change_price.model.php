@@ -41,20 +41,21 @@ class ChangePrice
     {
         foreach($format_array as $format)
         {
-            $re = '/' . sprintf($format,
-                ' *￥?([0-9一二三四五六七八九十]{1,3})[元块点]([0-9零一二三四五六七八九]{1,2})?元?')
-                . '/u';
+            $re = '/' . sprintf($format, ' *￥?([0-9]{1,3}(\.[0-9]{1,2})?)[元块]?') . '/u';
             if (preg_match($re, $str, $m))
             {
-                if (Number::parse($m[1], $yuan) && 
-                    (!isset($m[2]) || Number::parse($m[2], $fen))
-                )
-                return $yuan . '.' . (isset($fen) ? $fen : '0');
+                return $m[1];
             }
             else
             {
-                $re = '/' . sprintf($format, ' *￥?([0-9]{1,3}(\.[0-9]{1,2})?)[元块]?') . '/u';
-                if (preg_match($re, $str, $m)) return $m[1];
+                $re = '/' . sprintf($format,
+                    ' *￥?([0-9一二三四五六七八九十]{1,3})[元块点]([0-9零一二三四五六七八九]{1,2})?元?')
+                    . '/u';
+                if (preg_match($re, $str, $m) &&
+                    Number::parse($m[1], $yuan) && 
+                    (!isset($m[2]) || Number::parse($m[2], $fen))
+                )
+                return $yuan . '.' . (isset($fen) ? $fen : '0');
             }
         }
     }
