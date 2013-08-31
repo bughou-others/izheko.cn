@@ -20,7 +20,7 @@ create table if not exists `items`
  `detail_url`    varchar(1024)    not null default '',
  `click_url`     varchar(1024)    not null default '',
  `pic_url`       varchar(1024)    not null default '',
- `ref_url`       varchar(1024)    not null default '',
+ `ref_pic`       varchar(1024)    not null default '',
  `updater`       int unsigned     not null default 0,
  primary key (`id`),
  unique  key `num_iid` (`num_iid`)

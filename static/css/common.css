@@ -217,26 +217,26 @@ img {
     width: 300px;
     padding: 1em;
     margin: 1em;
-    border: 1px dashed #ccc;
+    border: 2px dashed white;
     text-align: left;
     color: black;
     background-color: white;
 }
 .item:hover {
-    border-color: #666;
+    border-color: #f39;
 }
 .item .pic {
-    width: 300px;
-    height: 300px;
-    line-height: 300px;
-    margin-bottom: 5px;
+    width: 290px;
+    height: 190px;
+    line-height: 190px;
+    margin: 10px 0;
     display: block;
     overflow: hidden;
     text-align: center;
 }
 .item .pic img {
-    max-width: 300px;
-    max-height: 300px;
+    max-width: 290px;
+    max-height: 190px;
     vertical-align: middle;
 }
 .item .pic span {

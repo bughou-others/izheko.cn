@@ -50,8 +50,7 @@ class ItemGrab
         {
             if($item = self::get_one_item($item_node, $page))
             {
-                $item_id = array_shift($item);
-                $items[$item_id] = $item;
+                $items[$item[0]] = $item[1];
             }
         }
         if (!$items) return;
@@ -66,16 +65,30 @@ class ItemGrab
             return;
         }
         $jump_url = $jump_url->getAttribute('href');
-        list($item_id, $has_click_url) = self::get_item_id($jump_url, $page); 
+        $item_id = self::get_item_id($jump_url, $page);
         $item_id = trim($item_id);
         if ($item_id && preg_match('/^\d+$/', $item_id))
         {
             $price = $page->query('./div[@class="good-price"]/span[@class="price-current"]',
                 $item_node)->item(0)->nodeValue;
             $price = preg_match('/\d+(\.\d+)?/', $price, $matches) ? $matches[0] : null;
-            $is_vip_price = $page->query('./h5/a[@class="icon t tao-v"]', $item_node)->length > 0;
-            return array($item_id, $price, $is_vip_price, $has_click_url, $jump_url);
+            self::fetch_pic($item_id, $page->query('./div[@class="good-pic"]//img', $item_node)->item(0), $page);
+            return array($item_id, $price);
         }
+    }
+
+    static function fetch_pic($item_id, $img, $page)
+    {
+        $path = APP_ROOT . '/../static/public/' . ItemBase::pic_path($item_id);
+        if(file_exists($path)) return;
+        
+        $pic = $img->getAttribute('data-original');
+        if($pic === '') $pic = $img->getAttribute('src');
+        if($pic === '') return;
+        $response = $page->get_by_url($pic);
+
+        if(!is_dir($dir = dirname($path))) mkdir($dir, 0755, true);
+        file_put_contents($path, $response->body);
     }
 
     static function get_item_id($jump_url, $page)
@@ -85,10 +98,9 @@ class ItemGrab
         {
             $url = $matches[1];
             if(preg_match('{http://s.click.taobao.com/}i', $url))
-                return array(ClickUrlToItemId::fetch($url, $jump_url), true);
-            #http://item.taobao.com/item.htm?id=17894105049
+                return ClickUrlToItemId::fetch($url, $jump_url);
             else if(preg_match('{http://item.taobao.com/item.htm\?.*(?<=[?&])id=(\d+)}i', $url, $matches))
-                return array($matches[1], false);
+                return $matches[1];
             else error_log("unexpected click url: $url\n");
         }
     }
@@ -98,17 +110,13 @@ class ItemGrab
         if (! $items) return;
         $now = strftime('%F %T');
         $values = '';
-        foreach ($items as $item_id => $item_info)
+        foreach ($items as $item_id => $ref_price)
         {
-            list($ref_price, $vip_price, $has_click_url, $ref_url) = $item_info;
-            $flags = $has_click_url ? (ItemBase::FLAGS_MASK_REF_CLICK_URL) : 0;
-            if($vip_price) $flags |= ItemBase::FLAGS_MASK_REF_VIP_PRICE;
             $ref_price = $ref_price ? parse_price($ref_price) : 'null';
-            $ref_url = DB::escape($ref_url);
-            $values .= ",($item_id, '$now', $flags, $ref_price, '$ref_url')";
+            $values .= ",($item_id, '$now', $ref_price)";
         }
         $values = substr($values, 1);
-        $sql = 'insert ignore into items (`num_iid`, `create_time`, `flags`, `ref_price`, `ref_url`)
+        $sql = 'insert ignore into items (`num_iid`, `create_time`, `ref_price`)
             values ' . $values;
         $count = count($items);
         $affected = DB::affected_rows($sql);

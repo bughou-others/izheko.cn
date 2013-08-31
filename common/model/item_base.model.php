@@ -12,4 +12,10 @@ class ItemBase
     const FLAGS_MASK_ITEM_DELETED  = 128;
 
     const factor_price_risen       = 1.2;
+
+    static function pic_path($num_iid)
+    {
+        return 'pic/' . implode('/', str_split(substr($num_iid, 0, 4)))
+            . '/' . $num_iid . '.jpg';
+    }
 }

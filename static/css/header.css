@@ -144,9 +144,6 @@
 #content {
     background: url(/img/bg.png) repeat center top;
 }
-.item {
-    border: none;
-}
 
 #pagination a {
     background-color: #e3e3e3;
