@@ -487,7 +487,7 @@ tkbox {
 
 #header {
     padding: 3px 5%;
-    color: #c2c2c2;
+    color: #fff;
     background-color: #010101;
 }
 
@@ -608,7 +608,7 @@ tkbox {
     border-radius: 10px;
 }
 #navbar a {
-    color: #ccc;
+    color: #fff;
     display: inline-block;
     padding: 3px 20px;
     _padding: 5px 20px 2px 20px;
@@ -621,11 +621,9 @@ tkbox {
     border-radius: 4px;
 }
 #navbar a:hover {
-    color: white;
     background-color: #4f8a00;
 }
 #navbar a.on {
-    color: white;
     background-color: #4f8a00;
 }
 
