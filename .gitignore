@@ -1,3 +1,5 @@
 tmp
 .*.swp
 /www/public/cache
+/static/public/pic
+
