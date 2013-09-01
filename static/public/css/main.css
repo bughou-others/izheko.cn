@@ -558,6 +558,7 @@ tkbox {
     padding: 10px;
 }
 #footprints {
+    color: #333;
     padding: 10px 10px 30px 10px;
 }
 #sns-share i, #footprints i {
