@@ -5,13 +5,7 @@ if (empty($data['items'])) { ?>
 <?php } else { ?>
         <div id="item_list"><script> Footprints.init_record(); </script><!--
 <?php foreach($data['items'] as $i => $item) { ?>
-         --><div class="item">
-                <div class="title">
-                    <b><?= $item->type_tag() ?></b>
-                    <a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
-                        <span><?= $item->title() ?></span>
-                    </a>
-                </div>
+         --><div class="item-wrapper"><div class="item">
                 <a class="pic" target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
                     <!--[if IE 6]><span></span><![endif]-->
 <?php if ($i < 6) { ?>
@@ -20,21 +14,30 @@ if (empty($data['items'])) { ?>
                     <img src="<?= App::static_server() ?>/img/tears.gif" data-original="<?= $item->pic_url() ?>" />
 <?php } ?>
                 </a>
+                <div class="title">
+                    <b><?= $item->type_tag() ?></b>
+                    <a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
+                        <span><?= $item->title() ?></span>
+                    </a>
+                </div>
                 <div class="buy">
-                    <span title="折扣价 ￥<?= $item->discount_price_str() ?>">
-                        ￥<big><?= $item->discount_price_yuan() ?></big>.<?= $item->discount_price_fen() ?>
+                    <span class="price">
+                        <span title="折扣价 ￥<?= $item->discount_price_str() ?>">
+                            ￥<big><?= $item->discount_price_yuan() ?></big>.<?= $item->discount_price_fen() ?>
+                        </span>
+                        <?php if ($item->original_price_str()) { ?>
+                        <small title="原价 ￥<?= $item->original_price_str() ?>">￥<?= $item->original_price_str() ?></small>
+                        <?php } ?>
                     </span>
-                    <?php if ($item->original_price_str()) { ?>
-                    <small title="原价 ￥<?= $item->original_price_str() ?>">￥<?= $item->original_price_str() ?></small>
-                    <?php } ?>
+                    <?= $item->postage_tag() ?> <?= $item->vip_tag() ?>
                     <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank">
                         <b><?= $item->action() ?></b>
                     </a>
                 </div>
-                <div class="flags"><?= $item->postage_tag() ?><?= $item->vip_tag() ?>
+                <div class="flags">
                     <span class="end_time"><?= $item->end_time() ?> 结束</span>
                 </div>
-            </div><!--
+            </div></div><!--
 <?php } ?>
      --></div>
         <script src="<?= App::static_server() ?>/js/jquery.lazyload.min.js"></script>

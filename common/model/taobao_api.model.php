@@ -13,7 +13,14 @@ class TaobaoApi
 
     static function get_data($method, $app_params){
         $url = self::get_url($method, $app_params);
-        $result = file_get_contents($url);
+        //$result = file_get_contents($url);
+        static $curl;
+        if($curl === null) {
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        }
+        curl_setopt($curl, CURLOPT_URL, $url);
+        $result = curl_exec($curl);
         return json_decode($result, true);
     }
 

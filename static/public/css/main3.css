@@ -209,27 +209,32 @@ img {
     border-collapse: collapse;
 }
 /* item */
-.item {
+.item-wrapper {
+    position: relative;
     display: inline-block;
     *display: inline;
     *zoom: 1;
     vertical-align: top; 
-    width: 300px;
-    padding: 1em;
     margin: 1em;
+}
+.item {
     border: 2px solid white;
-    text-align: left;
+    padding: 1em;
+    width: 300px;
     color: black;
     background-color: white;
+    text-align: left;
 }
 .item:hover {
     border-color: #f39;
+    position: absolute;
+    z-index: 999;
+    height: 400px;
 }
 .item .pic {
     width: 290px;
     height: 190px;
     line-height: 190px;
-    margin: 10px 0;
     display: block;
     overflow: hidden;
     text-align: center;
@@ -247,7 +252,7 @@ img {
     font-size: 0;
 }
 .item .title {
-    margin: 0;
+    margin: 10px 0;
     overflow: hidden;
     line-height: 22px;
     height: 44px;
@@ -268,18 +273,22 @@ img {
     line-height: 30px;
     vertical-align: baseline;
 }
-.item .buy span {
+
+.item .price {
+    margin-right: 10px;
+}
+.item .price span {
     color: #f40;
     font-weight: bold;
 }
-.item .buy span big {
+.item .price span big {
     font-size: 2em;
 }
-.item .buy small {
+.item .price small {
     color: #aaa;
     text-decoration: line-through;
 }
-.item .buy .action {
+.item .action {
     position: absolute;
     top: 0;
     right: 0;
@@ -303,24 +312,23 @@ img {
     background: url(/img/rect.png) 0 -70px;
 }
 
+.item .post, .item .vip {
+    color: white;
+    font: normal 12px/16px '';
+    display: inline-block;
+}
+.item .post {
+    background: url(/img/rect.png) 0 -105px;
+}
+.item .vip {
+    background: url(/img/rect.png) -25px -105px;
+}
+
 .item .flags {
     margin-top: 5px;
     white-space: nowrap;
     height: 22px;
     position: relative;
-}
-.item .flags .post, .item .flags .vip {
-    color: white;
-    font-size: 12px;
-    line-height: 16px;
-    display: inline-block;
-}
-
-.item .flags .post {
-    background: url(/img/rect.png) 0 -105px;
-}
-.item .flags .vip {
-    background: url(/img/rect.png) -25px -105px;
 }
 .item .flags .end_time {
     font-size: 12px;

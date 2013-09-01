@@ -168,13 +168,13 @@ class Item extends ItemBase
     function postage_tag()
     {
         if($this->data['flags'] & self::FLAGS_MASK_POSTAGE_FREE)
-            return '<span class="post">包邮</span> ';
+            return '<b class="post">包邮</b>';
     }
 
     function vip_tag()
     {
         if($this->data['flags'] & self::FLAGS_MASK_VIP_PRICE)
-            return '<span class="vip" title="淘宝VIP用户价哟。">VIP价</span>';
+            return '<b class="vip" title="淘宝VIP用户价哟。">VIP价</b>';
     }
 
     function jump_url()
