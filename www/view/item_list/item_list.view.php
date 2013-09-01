@@ -34,7 +34,7 @@ if (empty($data['items'])) { ?>
                         <b><?= $item->action() ?></b>
                     </a>
                 </div>
-                <div class="flags">
+                <div class="expand">
                     <span class="end_time"><?= $item->end_time() ?> 结束</span>
                 </div>
             </div></div><!--
