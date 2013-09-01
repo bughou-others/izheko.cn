@@ -8,44 +8,30 @@ class ItemGrab
 {
     static function start()
     {
-        global $argv;
-        $target = isset($argv[1]) ? $argv[1] : null;
-        if ($target === null || $target === 'today')
-            $url = 'http://ju.jiukuaiyou.com/jiu/all/today/new/all';
-        elseif ($target === 'tomorrow')
-            $url = 'http://ju.jiukuaiyou.com/r/'. strftime('%Y%m%d', strtotime('tomorrow'));
-        elseif ($target === 'jiu')
-            $url = null;
-        elseif ($target === 'shijiu')
-            $url = 'http://ju.jiukuaiyou.com/shijiu';
-        else
-        {
-            error_log("unknown $target \nusage: {$argv[0]} [tomorow|today|jiu|shijiu]\n");
-            return;
-        }
-        self::grab($url);
+        list($target, $refer) = static::get_target();
+        self::grab($target, $refer);
         system('cd ' . APP_ROOT . '; php run command/item_update.cmd.php');
     }
 
-    static function grab($url)
+    static function grab($target, $refer)
     {
         echo strtotime("%F %T\n");
         $curl = new Curl();
-        $refer = 'http://www.jiukuaiyou.com/';
-        $page = $curl->get($refer);
-        if ($url) $page = $curl->get($url, $refer);
+        if($refer && $refer !== $target)
+            $curl->get($refer);
+        else $refer = null;
+        $page = $curl->get($target, $refer);
 
-        $xpath = '//div[@class="page"]/div[@class="pageNav"]/a[@class="pg-next"]/@href';
         do {
             self::get_all_item($page);
-        } while ($page = $page->get($xpath));
+        } while ($page = $page->get(static::next_page_xpath));
         echo "\n";
     }
 
     static function get_all_item($page)
     {
         $items = array();
-        $node_list = $page->query('//ul[@class="goods-list"]/li/div');
+        $node_list = $page->query(static::item_node_xpath);
         foreach ($node_list as $item_node)
         {
             if($item = self::get_one_item($item_node, $page))
@@ -59,7 +45,7 @@ class ItemGrab
 
     static function get_one_item($item_node, $page)
     {
-        $jump_url = $page->query('./div[@class="good-price"]/a[@href]', $item_node)->item(0);
+        $jump_url = $page->query(static::item_jump_xpath, $item_node)->item(0);
         if (!$jump_url) {
             //echo $page->query('./h5', $item_node)->item(0)->nodeValue, PHP_EOL;
             return;
@@ -69,11 +55,25 @@ class ItemGrab
         $item_id = trim($item_id);
         if ($item_id && preg_match('/^\d+$/', $item_id))
         {
-            $price = $page->query('./div[@class="good-price"]/span[@class="price-current"]',
-                $item_node)->item(0)->nodeValue;
+            $price = $page->query(static::item_price_xpath, $item_node)->item(0)->nodeValue;
             $price = preg_match('/\d+(\.\d+)?/', $price, $matches) ? $matches[0] : null;
-            self::fetch_pic($item_id, $page->query('./div[@class="good-pic"]//img', $item_node)->item(0), $page);
+            $pic_node = $page->query(static::item_pic_xpath, $item_node)->item(0);
+            self::fetch_pic($item_id, $pic_node, $page);
             return array($item_id, $price);
+        }
+    }
+
+    static function get_item_id($jump_url, $page)
+    {
+        $refresh = $page->get_by_url($jump_url)->query(static::click_url_xpath)->item(0);
+        if ($refresh && ($refresh = $refresh->value) && preg_match("/;url='(.+)'/", $refresh, $matches))
+        {
+            $url = $matches[1];
+            if(preg_match('{http://s.click.taobao.com/}i', $url))
+                return ClickUrlToItemId::fetch($url, $jump_url);
+            else if(preg_match('{http://item.taobao.com/item.htm\?.*(?<=[?&])id=(\d+)}i', $url, $matches))
+                return $matches[1];
+            else error_log("unexpected click url: $url\n");
         }
     }
 
@@ -89,20 +89,6 @@ class ItemGrab
 
         if(!is_dir($dir = dirname($path))) mkdir($dir, 0755, true);
         file_put_contents($path, $response->body);
-    }
-
-    static function get_item_id($jump_url, $page)
-    {
-        $refresh = $page->get_by_url($jump_url)->query('//meta[@http-equiv="refresh"]/@content')->item(0);
-        if ($refresh && ($refresh = $refresh->value) && preg_match("/;url='(.+)'/", $refresh, $matches))
-        {
-            $url = $matches[1];
-            if(preg_match('{http://s.click.taobao.com/}i', $url))
-                return ClickUrlToItemId::fetch($url, $jump_url);
-            else if(preg_match('{http://item.taobao.com/item.htm\?.*(?<=[?&])id=(\d+)}i', $url, $matches))
-                return $matches[1];
-            else error_log("unexpected click url: $url\n");
-        }
     }
 
     static function save_items($items)
@@ -126,5 +112,4 @@ class ItemGrab
     }
 }
 
-ItemGrab::start();
 
