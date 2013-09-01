@@ -32,9 +32,23 @@ class Page
         }
     }
 
+    function get_redirect_url($xpath, $context = null)
+    {
+        $href = $this->query($xpath, $context)->item(0);
+        if ($href && ($url = $href->value))
+        {
+            return $this->curl->get_redirect_url($url, $this->url);
+        }
+    }
+
     function get_by_url($url)
     {
         return $this->curl->get($url, $this->url);
+    }
+
+    function get_redirect_url_by_url($url)
+    {
+        return $this->curl->get_redirect_url($url, $this->url);
     }
 }
 

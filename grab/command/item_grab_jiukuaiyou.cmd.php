@@ -5,7 +5,7 @@ class ItemGrabJiukuaiyou extends ItemGrab
 {
     const next_page_xpath = '//div[@class="page"]/div[@class="pageNav"]/a[@class="pg-next"]/@href';
     const item_node_xpath = '//ul[@class="goods-list"]/li/div';
-    const item_jump_xpath  = './div[@class="good-price"]/a[@href]';
+    const item_jump_xpath  = './div[@class="good-price"]/a[@href]/@href';
     const item_price_xpath = './div[@class="good-price"]/span[@class="price-current"]';
     const item_pic_xpath   = './div[@class="good-pic"]//img';
     const click_url_xpath  = '//meta[@http-equiv="refresh"]/@content';
@@ -29,6 +29,15 @@ class ItemGrabJiukuaiyou extends ItemGrab
         }
         return array($url, 'http://www.jiukuaiyou.com/');
     }
+
+    static function get_click_url($item_node, $page)
+    {
+        $response = $page->get(static::item_jump_xpath, $item_node);
+        $refresh = $response->query(static::click_url_xpath)->item(0);
+        if ($refresh && ($refresh = $refresh->value) && preg_match("/;url='(.+)'/", $refresh, $m))
+          return array($m[1], $response->url);
+    }
+
 }
 
 ItemGrabJiukuaiyou::start();
