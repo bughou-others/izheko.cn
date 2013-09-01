@@ -33,9 +33,10 @@ class ItemGrabJiukuaiyou extends ItemGrab
     static function get_click_url($item_node, $page)
     {
         $response = $page->get(static::item_jump_xpath, $item_node);
+        if(!$response) return;
         $refresh = $response->query(static::click_url_xpath)->item(0);
-        if ($refresh && ($refresh = $refresh->value) && preg_match("/;url='(.+)'/", $refresh, $m))
-          return array($m[1], $response->url);
+        if($refresh && ($refresh = $refresh->value) && preg_match("/;url='(.+)'/", $refresh, $m))
+            return array($m[1], $response->url);
     }
 
 }
