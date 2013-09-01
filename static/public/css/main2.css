@@ -328,7 +328,7 @@ img {
 
 .item .expand {
     padding: 10px;
-    margin-top: 5px;
+    background-color: #f4f4f4;
     white-space: nowrap;
     height: 22px;
     position: relative;

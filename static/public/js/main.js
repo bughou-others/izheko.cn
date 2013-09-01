@@ -199,3 +199,30 @@ var Footprints = {
         o.last_count = count;
     }
 };
+
+var item_list_init = function(search){
+    if(search)(function(){
+        var s, w = $(window).width();
+        if(w > 638) s = '628x270';
+        else if(w > 360) s = '350x270';
+        else s = '290x380';
+        document.write('<a data-type="2" data-keyword=<?= json_encode($word); ?> data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
+    })();
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "gbk";
+            s.async = true;
+            s.src = "http://a.alimama.cn/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
+    $(".item").mouseenter(function(){
+        $(this).children('.expand').css('display', 'block');
+    }).mouseleave(function(){
+        $(this).children('.expand').css('display', 'none');
+    });
+};
