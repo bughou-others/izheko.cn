@@ -200,14 +200,13 @@ var Footprints = {
     }
 };
 
-var item_list_init = function(search){
-    if(search)(function(){
-        var s, w = $(window).width();
-        if(w > 638) s = '628x270';
-        else if(w > 360) s = '350x270';
-        else s = '290x380';
-        document.write('<a data-type="2" data-keyword=<?= json_encode($word); ?> data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
-    })();
+function item_list_init(){
+    $("#item_list").on('mouseenter', '.item', function(){
+        $(this).children('.expand').css('display', 'block');
+    }).on('mouseleave', '.item', function(){
+        $(this).children('.expand').css('display', 'none');
+    });
+
     (function(win,doc){
         var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
         if (!win.alimamatk_show) {
@@ -220,9 +219,37 @@ var item_list_init = function(search){
         win.alimamatk_onload = win.alimamatk_onload || [];
         win.alimamatk_onload.push(o);
     })(window,document);
-    $(".item").mouseenter(function(){
-        $(this).children('.expand').css('display', 'block');
-    }).mouseleave(function(){
-        $(this).children('.expand').css('display', 'none');
-    });
 };
+function taobao_search(word){
+        var w = $(window).width(), s;
+        if(w > 638) s = '628x270';
+        else if(w > 360) s = '350x270';
+        else s = '290x380';
+        document.write('<a data-type="2" data-keyword="' + word + '" data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
+}
+
+function lazyload(s){
+    var o = this;
+    var $c = $(window);
+    $c.scroll(function(){
+        var target;
+        if(o.target === undefined){
+            target = $(s);
+            if(o.ready === true) o.target = target;
+        } else target = o.target;
+        console.log(target.size());
+        target.each(function(){
+            var $this = $(this);
+            if((function($c, $e){
+                var ctop = $c.scrollTop() + 100;        /* 容器顶部 */
+                var cbottom = ctop + $c.height() + 100; /* 容器底部 */
+                var etop = $e.offset().top;             /* 元素顶部 */
+                var ebottom = etop + $e.height();       /* 元素底部 */
+                return etop < cbottom && ebottom > ctop;
+            })($c, $this)){
+                $this.attr('src', $this.attr('s')).removeAttr('s');
+            }
+        });
+    });
+}
+

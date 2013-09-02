@@ -3,7 +3,11 @@ require_once APP_ROOT . '/view/item_list/filter.view.php';
 if (empty($data['items'])) { ?>
         <div id="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
-        <div id="item_list"><script> Footprints.init_record(); </script><!--
+        <div id="item_list"><script>
+            item_list_init();
+            Footprints.init_record();
+            var LazyLoad = new lazyload(".item img[s]");
+        </script><!--
 <?php foreach($data['items'] as $i => $item) { ?>
          --><div class="item-wrapper"><div class="item">
                 <a class="pic" target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
@@ -11,7 +15,7 @@ if (empty($data['items'])) { ?>
 <?php if ($i < 6) { ?>
                     <img src="<?= $item->pic_url() ?>" />
 <?php } else { ?>
-                    <img src="<?= App::static_server() ?>/img/tears.gif" data-original="<?= $item->pic_url() ?>" />
+                    <img src="<?= App::static_server() ?>/img/tears.gif" s="<?= $item->pic_url() ?>" />
 <?php } ?>
                 </a>
                 <div class="title">
@@ -52,8 +56,7 @@ if (empty($data['items'])) { ?>
 <?php
 }
 ?>
-        <script src="<?= App::static_server() ?>/js/jquery.lazyload.min.js"></script>
         <script type="text/javascript">
-            $(".item img[data-original]").lazyload({  threshold: 100 });
-            item_list_init(<?= isset($word) && $word !== '' ? 'true' : 'false' ?>);
+            LazyLoad.ready = true;
+            <?= isset($word) && $word !== '' ? 'taobao_search(' . json_encode($word) . ');' : '' ?>
         </script>

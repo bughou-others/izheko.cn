@@ -17,6 +17,3 @@ if(isset($data['total_count'], $page_size, $page) && ($data['total_count'] / $pa
 <?php } ?>
             <div id="kefu"><a href="tencent://message/?uin=715091790"><span>客 服</span><b></b></a></div>
         </div>
-        <script type="text/javascript">
-            if(navigator.vendor === 'UCWEB') $("#sidebar").css('display', 'none');
-        </script>

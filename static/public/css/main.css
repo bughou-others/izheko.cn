@@ -217,6 +217,7 @@ img {
     vertical-align: top; 
     margin: 1em;
     width: 314px;
+    height: 321px;
 }
 .item {
     border: 2px solid white;
@@ -380,6 +381,7 @@ img {
     position: fixed;
     right: 1%;
     bottom: 5em;
+    z-index: 99999;
     _position: absolute;
     _bottom: auto;
     _top: expression(eval(
