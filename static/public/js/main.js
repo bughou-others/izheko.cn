@@ -231,25 +231,21 @@ function taobao_search(word){
 function lazyload(s){
     var o = this;
     var $c = $(window);
-    $c.scroll(function(){
-        var target;
-        if(o.target === undefined){
-            target = $(s);
-            if(o.ready === true) o.target = target;
-        } else target = o.target;
-        console.log(target.size());
-        target.each(function(){
+    $c.on('scroll resize', function(){
+        if(!o.target && o.ready) o.target = $(s);
+        (o.target || $(s)).each(function(){
             var $this = $(this);
             if((function($c, $e){
-                var ctop = $c.scrollTop() + 100;        /* 容器顶部 */
+                var ctop = $c.scrollTop() - 100;        /* 容器顶部 */
                 var cbottom = ctop + $c.height() + 100; /* 容器底部 */
                 var etop = $e.offset().top;             /* 元素顶部 */
                 var ebottom = etop + $e.height();       /* 元素底部 */
                 return etop < cbottom && ebottom > ctop;
             })($c, $this)){
                 $this.attr('src', $this.attr('s')).removeAttr('s');
+                if(o.target) o.target = o.target.not(this);
             }
         });
-    });
+    }).scroll();
 }
 
