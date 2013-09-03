@@ -6,7 +6,7 @@ if (empty($data['items'])) { ?>
         <div id="item_list"><script>
             item_list_init();
             Footprints.init_record();
-            var LazyLoad = new lazyload(".item img[s]");
+            var lazy_img = LazyImg();
         </script><!--
 <?php foreach($data['items'] as $i => $item) { ?>
          --><div class="item-wrapper"><div class="item">
@@ -15,7 +15,7 @@ if (empty($data['items'])) { ?>
 <?php if ($i < 6) { ?>
                     <img src="<?= $item->pic_url() ?>" />
 <?php } else { ?>
-                    <img src="<?= App::static_server() ?>/img/tears.gif" s="<?= $item->pic_url() ?>" />
+                    <img id="img<?= $i-5 ?>" src="<?= App::static_server() ?>/img/tears.gif" s="<?= $item->pic_url() ?>" />
 <?php } ?>
                 </a>
                 <div class="title">
@@ -57,6 +57,6 @@ if (empty($data['items'])) { ?>
 }
 ?>
         <script type="text/javascript">
-            LazyLoad.ready = true;
+            lazy_img.imgs_complete = true;
             <?= isset($word) && $word !== '' ? 'taobao_search(' . json_encode($word) . ');' : '' ?>
         </script>
