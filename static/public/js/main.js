@@ -6,22 +6,18 @@ function alert_time(run){
 
 function LazyImg(){
     var o = {
-        index: 1,
-        imgs: [ ],
+        img_index: 1,
+        imgs: { },
         grids: { },
-        imgs_complete: false,
-        grids_complete: false,
-        container: $(window),
-        update_grids: function(){
-            var ic = this.imgs_complete, e, $e;
-            while(e = document.getElementById('img' + this.index)){
-                this.imgs.push($e);
-                add_to_grids(this.grids, $e = $(e));
-                this.index++;
+        complete: false,
+        get_imgs: function(){
+            if(document.getElementById('pagination')) this.complete = true;
+            for(var e; e = document.getElementById('img' + this.img_index); this.img_index++){
+                var $e = $(e);
+                var id = $e.attr('id');
+                if(!this.imgs[id]) this.imgs[id] = $e;
+                this.add_to_grids(this.grids, $e);
             }
-            if(ic) this.grids_complete = true;
-        },
-        rebuild_grids: function(){
         },
         add_to_grids: function(grids, $e){
             var _top = $e.offset().top;
@@ -32,7 +28,7 @@ function LazyImg(){
                 else grids[n] = [ $e ];
             }
         },
-        remove_from_grids: function(n_top, n_bottom){
+        load_imgs: function(n_top, n_bottom){
             var row, $e, src;
             for(var n = n_top; n <= n_bottom; n++){
                 if(row = this.grids[n]){
@@ -46,32 +42,24 @@ function LazyImg(){
                 }
             }
         },
-        scroll: function(){
-            if(!this.grids_complete) this.update_grids();
-            var _top = this.container.scrollTop();
-            var n_top    = Math.floor((_top                           - 100) / 200);
-            var n_bottom = Math.floor((_top + this.container.height() + 100) / 200);
-
-            this.remove_from_grids();
-            if($.isEmptyObject(this.imgs)) this.container.unbind('scroll resize');
-        },
-        resize: function(){
-            var tmp_grids = new_grids();
-            var t = new Date().getTime();
-            var row, $e;
-                if($.isArray(row = grids[n])){
-                    for(var i = 0; $e = row[i]; i++){
-                        //add_to_grids(tmp_grids, $e);
-                    }
-                }
-            }
-            alert(new Date().getTime() - t + '    ' + grids.size);
-            //tmp_grids.progress = grids.progress;
-            //grids = tmp_grids;
-            //$c.scroll();
-        },
         init: function(){
-            //$c.scroll().resize(); //.scroll();
+            var o = this, $c = $(window);
+            $c.scroll(function(){
+                if(!o.complete) o.get_imgs();
+                var _top = $c.scrollTop();
+                var n_top    = Math.floor((_top                           - 100) / 200);
+                var n_bottom = Math.floor((_top + $c.height() + 100) / 200);
+
+                o.load_imgs(n_top, n_bottom);
+                if($.isEmptyObject(o.imgs)) $c.unbind('scroll resize');
+            }).resize(function(){
+                var tmp_grids = { };
+                for(var id in o.imgs){
+                    o.add_to_grids(tmp_grids, o.imgs[id]);
+                }
+                o.grids = tmp_grids;
+                $c.scroll();
+            });
         }
     };
     o.init();
