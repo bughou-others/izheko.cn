@@ -12,10 +12,10 @@ if (empty($data['items'])) { ?>
          --><div class="item-wrapper"><div class="item">
                 <a class="pic" target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
                     <!--[if IE 6]><span></span><![endif]-->
-<?php if ($i < 0) { ?>
+<?php if ($i < 6) { ?>
                     <img src="<?= $item->pic_url() ?>" />
 <?php } else { ?>
-                    <img id="img<?= $i+1 ?>" src="<?= App::static_server() ?>/img/tears.gif" s="<?= $item->pic_url() ?>" />
+                    <img id="img<?= $i - 5 ?>" src="<?= App::static_server() ?>/img/tears.gif" s="<?= $item->pic_url() ?>" />
 <?php } ?>
                 </a>
                 <div class="title">

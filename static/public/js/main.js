@@ -3,6 +3,11 @@ function alert_time(run){
     run();
     alert(new Date().getTime() - t + '    ' + i);
 }
+  function sleep(n)
+  {
+    var start = new Date().getTime();
+    while(new Date().getTime() - start < n);
+  }
 
 function LazyImg(){
     var o = {
@@ -47,7 +52,7 @@ function LazyImg(){
             $c.scroll(function(){
                 if(!o.complete) o.get_imgs();
                 var _top = $c.scrollTop();
-                var n_top    = Math.floor((_top                           - 100) / 200);
+                var n_top    = Math.floor((_top               - 100) / 200);
                 var n_bottom = Math.floor((_top + $c.height() + 100) / 200);
 
                 o.load_imgs(n_top, n_bottom);
