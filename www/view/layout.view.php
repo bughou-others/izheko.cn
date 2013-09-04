@@ -35,18 +35,5 @@
         <?php require APP_ROOT . '/view/module/sidebar.view.php'; ?>
         <?php require APP_ROOT . "/view/module/footer.view.php"; ?>
         <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21567955"></script>
-<!-- JiaThis Button BEGIN -->
-<script type="text/javascript" >
-var jiathis_config={
-        data_track_clickback:true,
-        summary:"",
-        showClose:false,
-        shortUrl:false,
-        hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?uid=1835099&type=left&btn=l.gif&move=0" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-
     </body>
 </html>
