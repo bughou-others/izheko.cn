@@ -26,7 +26,8 @@
 }
 #sns-share a b {
     margin-right: 5px;
-    vertical-align: middle;
+    vertical-align: -3px;
+    *vertical-align: +2px;
 }
 
 #sns-share-wrapper, #footprints-wrapper {
@@ -35,6 +36,7 @@
     text-align: left;
     white-space: normal;
     display: inline-block;
+    background-color: #010101;
 }
 #sns-share-button, #footprints-button {
     padding: 2px 3px;

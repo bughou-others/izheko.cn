@@ -1,4 +1,4 @@
-            <span id="sns-share">
+            <span id="sns-share" class="sns-share">
                 <i></i>
 <?php
 $title = '我喜欢上了“爱折扣(www.izheko.cn)”每天9块9的小幸福。懂我的商品，懂我的价格，给力的9块9包邮。';
@@ -37,10 +37,10 @@ foreach($sns_array as $sns)
     list($name, $class, $url) = $sns;
     if (isset($no_text) && $no_text)
         echo <<<EOT
-                <a target="_blank" class="$class" href="$url" title="分享到我的$name"><b></b></a>
+                <a target="_blank" href="$url" title="分享到我的$name"><b class="sns-$class"></b></a>
 EOT;
     else echo <<<EOT
-                <a target="_blank" class="$class" href="$url" title="分享到我的$name"><b></b>$name</a>
+                <a target="_blank" href="$url" title="分享到我的$name"><b class="sns-$class"></b>$name</a>
 EOT;
 }
 ?>

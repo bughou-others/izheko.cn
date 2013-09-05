@@ -39,7 +39,7 @@ if (empty($data['items'])) { ?>
                     </a>
                 </div>
                 <div class="expand">
-                    <span class="end_time">结束： <?= $item->end_time() ?></span>
+                    <span class="end_time">结束：<?= $item->end_time() ?></span>
                     <div>小编： <span></span></div>
                 </div>
             </div></div><!--

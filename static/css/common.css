@@ -45,19 +45,19 @@ img {
     background-color: white;
 }
 
-#sns-share a b {
+.sns-share b {
     display: inline-block;
     width: 16px;
     height: 16px;
     background-image: url(/img/sns_icon.png);
 }
 
-#sns-share .sina_weibo b { background-position: -18px 0; }
-#sns-share .qq_weibo   b { background-position: -66px 0; }
-#sns-share .qzone      b { background-position: -114px 0; }
-#sns-share .renren     b { background-position: -34px 0; }
-#sns-share .douban     b { background-position: -82px 0; }
-#sns-share .kaixin     b { background-position: -50px 0; }
+b.sns-sina_weibo { background-position: -18px 0; }
+b.sns-qq_weibo   { background-position: -66px 0; }
+b.sns-qzone      { background-position: -114px 0; }
+b.sns-renren     { background-position: -34px 0; }
+b.sns-douban     { background-position: -82px 0; }
+b.sns-kaixin     { background-position: -50px 0; }
 
 #footprints-bar {
     display: none;
@@ -210,7 +210,6 @@ img {
 }
 /* item */
 .item-wrapper {
-    position: relative;
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -219,19 +218,23 @@ img {
     width: 314px;
     height: 321px;
 }
+.item-hover {
+    position: relative;
+}
 .item {
     border: 2px solid white;
     color: black;
+    background-color: #fff;
     text-align: left;
 }
-.item:hover {
+.item-hover .item {
     border-color: #f39;
-    position: absolute;
-    z-index: 999;
+    _position: absolute;
+    _left: 0;
+    _top: 0;
 }
 .item .pic {
     padding: 10px;
-    background-color: white;
     width: 290px;
     height: 190px;
     line-height: 190px;
@@ -253,7 +256,6 @@ img {
 }
 .item .title {
     padding: 5px 10px;
-    background-color: white;
     overflow: hidden;
     line-height: 22px;
     height: 44px;
@@ -269,7 +271,6 @@ img {
 }
 .item .buy {
     padding: 5px 10px 18px;
-    background-color: white;
     white-space: nowrap;
     position: relative;
     height: 30px;
@@ -328,13 +329,25 @@ img {
 }
 
 .item .expand {
-    position: relative;
     display: none;
-    padding: 10px;
+    padding: 10px 0 10px 10px;
     background-color: #f4f4f4;
     white-space: nowrap;
     color: #aaa;
     font: normal 12px/16px "tahoma", "宋体";
+    /*background: url(/img/b.gif) repeat 0 0;*/
+}
+.item-hover .expand {
+    display: block;
+}
+.item .expand .sns-share {
+    margin-left: 14px;
+}
+.item .expand .sns-share b {
+    margin-right: 5px;
+    vertical-align: -3px;
+    +vertical-align: -1px;
+    _vertical-align: baseline;
 }
 .item .expand div {
     margin-top: 10px;

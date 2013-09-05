@@ -54,7 +54,7 @@ class Item extends ItemBase
     
     function end_time()
     {
-        return strftime('%m月%d日 %H:%M', strtotime($this->data['end_time']));
+        return strftime('%m月%d日%H:%M', strtotime($this->data['end_time']));
     }
 
     function discount_price()

@@ -273,10 +273,20 @@ var Footprints = {
 };
 
 function item_list_init(){
-    $("#item_list").on('mouseenter', '.item', function(){
-        $(this).children('.expand').css('display', 'block');
+    if(navigator.userAgent.indexOf('MSIE 6.') > 0) {
+        $(function(){
+            //$('#item_list').css('height', $('#item_list').height() + 'px');
+        });
+    }
+    $("#item_list").on('mouseenter', '.item-wrapper', function(){
+        var $this = $(this);
+        if(!$this.attr('x')){
+            $this.children('.item').children('.expand').children('.end_time').after('<span class="sns-share">分享：<b class="sns-sina_weibo"></b><b class="sns-qq_weibo"></b><b class="sns-qzone"></b><b class="sns-renren"></b><b class="sns-douban"></b><b class="sns-kaixin"></b></span>');
+            $this.attr('x', 'o');
+        }
+        $this.addClass('item-hover');
     }).on('mouseleave', '.item', function(){
-        $(this).children('.expand').css('display', 'none');
+        $(this).parent().removeClass('item-hover');
     });
 
     (function(win,doc){
@@ -308,3 +318,4 @@ function in_viewport($c, $e){
     return etop < cbottom && ebottom > ctop;
 }
 
+        
