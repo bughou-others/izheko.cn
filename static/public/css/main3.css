@@ -229,9 +229,9 @@ b.sns-kaixin     { background-position: -50px 0; }
 }
 .item-hover .item {
     border-color: #f39;
-    _position: absolute;
-    _left: 0;
-    _top: 0;
+    *position: absolute;
+    *left: 0;
+    *top: 0;
 }
 .item .pic {
     padding: 10px;
@@ -273,6 +273,7 @@ b.sns-kaixin     { background-position: -50px 0; }
     padding: 5px 10px 18px;
     white-space: nowrap;
     position: relative;
+    width: 290px;
     height: 30px;
     line-height: 30px;
     vertical-align: baseline;

@@ -285,8 +285,8 @@ function item_list_init(){
             $this.attr('x', 'o');
         }
         $this.addClass('item-hover');
-    }).on('mouseleave', '.item', function(){
-        $(this).parent().removeClass('item-hover');
+    }).on('mouseleave', '.item-wrapper', function(){
+        $(this).removeClass('item-hover');
     });
 
     (function(win,doc){
