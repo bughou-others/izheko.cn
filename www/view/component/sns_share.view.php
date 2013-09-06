@@ -37,10 +37,10 @@ foreach($sns_array as $sns)
     list($name, $class, $url) = $sns;
     if (isset($no_text) && $no_text)
         echo <<<EOT
-                <a target="_blank" href="$url" title="分享到我的$name"><b class="sns-$class"></b></a>
+                <a target="_blank" href="$url" title="分享到$name"><b class="sns-$class"></b></a>
 EOT;
     else echo <<<EOT
-                <a target="_blank" href="$url" title="分享到我的$name"><b class="sns-$class"></b>$name</a>
+                <a target="_blank" href="$url" title="分享到$name"><b class="sns-$class"></b>$name</a>
 EOT;
 }
 ?>

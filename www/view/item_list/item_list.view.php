@@ -20,9 +20,7 @@ if (empty($data['items'])) { ?>
                 </a>
                 <div class="title">
                     <b><?= $item->type_tag() ?></b>
-                    <a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
-                        <span><?= $item->title() ?></span>
-                    </a>
+                    <a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>"><?= $item->title() ?></a>
                 </div>
                 <div class="buy">
                     <span class="price">

@@ -3,10 +3,25 @@
                 <script> PhoneEdition_and_Bookmark.init(); </script>
                 <span id="sns-share-wrapper">
                     <div id="sns-share-button">分享<b></b></div>
-                    <?php require APP_ROOT . "/view/component/sns_share.view.php"; ?>
+                    <span id="sns-share" class="sns-share">
+                        <i></i>
+                    </span>
                 </span>
                 <script> SnsShare.init(); </script>
-                <?php require APP_ROOT . "/view/component/footprint.view.php"; ?>
+                <span id="footprints-wrapper">
+                    <div id="footprints-button">我的足迹<b></b></div>
+                    <div id="footprints">
+                        <i></i>
+                        <div id="footprints-bar">
+                            <span>清空</span>
+                            <div>
+                                <span>上 ↑</span>
+                                <span>下 ↓</span>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+                <script> Footprints.init(); </script>
             </div>
             <div id="logo-search">
                 <a href="/" class="logo"></a>
