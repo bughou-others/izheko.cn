@@ -29,6 +29,7 @@ server {
         set $request_document /cache/type/all/1.html;
         try_files $request_document /item_list.controller.php;
     }
+
     location ~ ^/(new|coming|tomorrow)$ {
         set $request_document /cache/type/all/$1/1.html;
         try_files $request_document /item_list.controller.php?filter=$1;
@@ -67,6 +68,14 @@ server {
     location ~ "^/search/([^/ ]+)(/(new|coming|tomorrow))?/([1-9]\d?).html$" {
         set $request_document /cache/search/$1/$3/$4.html;
         try_files $request_document /item_list.controller.php?search=$1&filter=$3&page=$4;
+    }
+
+    location ~ "^/item/(\d{8,15})$" {
+        set $request_document /cache/$document_uri.html;
+        try_files $request_document /item.controller.php?num_iid=$1;
+    }
+
+    location ~ "^/go/(\d{8,15})$" {
     }
 
     location ^~ /cache {

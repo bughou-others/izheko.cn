@@ -3,11 +3,7 @@ require_once APP_ROOT . '/view/item_list/filter.view.php';
 if (empty($data['items'])) { ?>
         <div id="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
-        <div id="item_list"><script>
-            item_list_init();
-            Footprints.init_record();
-            var lazy_img = LazyImg();
-        </script><!--
+        <div id="item_list"><script> item_list_init(); </script><!--
 <?php foreach($data['items'] as $i => $item) { ?>
          --><div class="item-wrapper"><div class="item">
                 <a class="pic" target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
@@ -18,10 +14,7 @@ if (empty($data['items'])) { ?>
                     <img id="img<?= $i - 5 ?>" src="<?= App::static_server() ?>/img/tears.gif" s="<?= $item->pic_url() ?>" />
 <?php } ?>
                 </a>
-                <div class="title">
-                    <b><?= $item->type_tag() ?></b>
-                    <a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>"><?= $item->title() ?></a>
-                </div>
+                <div class="title"><?= $item->type_tag() ?><a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>"><?= $item->title() ?></a></div>
                 <div class="buy">
                     <span class="price">
                         <span title="折扣价 ￥<?= $item->discount_price_str() ?>">
@@ -37,8 +30,8 @@ if (empty($data['items'])) { ?>
                     </a>
                 </div>
                 <div class="expand">
-                    <span class="end_time">结束：<?= $item->end_time() ?></span>
-                    <div>小编： <span></span></div>
+                    <div class="time-left"><?= $item->time_left() ?></div>
+                    <div class="tip">小编： <span>茶条卷曲，沉色匀整，色泽砂绿，汤色嫩绿清澈，入口回甘，韵味十足。</span></div>
                 </div>
             </div></div><!--
 <?php } ?>
@@ -53,7 +46,11 @@ if (empty($data['items'])) { ?>
         </div>
 <?php
 }
+if (isset($word) && $word !== ''){
 ?>
         <script type="text/javascript">
-            <?= isset($word) && $word !== '' ? 'taobao_search(' . json_encode($word) . ');' : '' ?>
+            taobao_search(<?=  json_encode($word) ?>);
         </script>
+<?php
+}
+?>

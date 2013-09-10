@@ -1,13 +1,3 @@
-function alert_time(run){
-    var t = new Date().getTime();
-    run();
-    alert(new Date().getTime() - t + '    ' + i);
-}
-  function sleep(n)
-  {
-    var start = new Date().getTime();
-    while(new Date().getTime() - start < n);
-  }
 
 function LazyImg(){
     var o = {
@@ -279,28 +269,77 @@ var Footprints = {
         o.last_count = count;
     }
 };
+var TimeLeftUpdate = {
+    start: function(target){
+        var time = target.attr('s');
+        if(!time) return;
+        time = parseInt(time, 10);
+        var o = this;
+        target.html(o.get_time_left(time));
+        this.timer = setInterval(function(){
+            target.html(o.get_time_left(time));
+        }, 1000);
+    },
+    stop: function(){
+        clearInterval(this.timer);
+    },
+    get_time_left: function(time){
+        var left = time - Math.floor(new Date / 1000);
+        var s = '', n;
+        if((n = Math.floor(left / 86400)) > 0){
+            s +=  n + '天';
+            left = left % 86400;
+        }
+        n = Math.floor(left / 3600);
+        s += (n < 10 ? '0' + n : n) + '小时';
+        left = left % 3600;
 
+        n = Math.floor(left / 60);
+        s += (n < 10 ? '0' + n : n) + '分';
+        left = left % 60;
+
+        n = left;
+        s += (n < 10 ? '0' + n : n) + '秒';
+        return s;
+    }
+}
 function item_list_init(){
     $("#item_list").on('mouseenter', '.item-wrapper', function(){
         var $this = $(this);
+        var time_left = $this.children('.item').children('.expand').children('.time-left');
         if(!$this.attr('x')){
-            $this.children('.item').children('.expand').children('.end_time').after('<span class="sns-share">分享：' + SnsShareLib.icons_b + '</span>');
+            time_left.after('<div class="sns-share">分享到：' + SnsShareLib.icons_b + '</div>');
             $this.attr('x', 'o');
         }
+        TimeLeftUpdate.start(time_left.children('span'));
         $this.addClass('item-hover');
     }).on('mouseleave', '.item-wrapper', function(){
+        TimeLeftUpdate.stop();
         $(this).removeClass('item-hover');
-    }).on('click', '.sns-share b', function(){
-        var $this = $(this);
-        var item = $this.closest('.item');
-        var img = item.children('.pic').children('img');
-        SnsShareLib.share($this, 
+    }).on('click', '.sns-share b', item_sns_share);
+    taodianjin_init();
+    LazyImg();
+    Footprints.init_record();
+}
+function single_item_init(){
+    var item = $('#single-item');
+    TimeLeftUpdate.start(item.children('.right').children('.time-left').children('span'));
+    item.children('.left').children('.pic').after('<div class="sns-share">分享到：' + SnsShareLib.icons_b + '</div>');
+    item.children('.left').children('.sns-share').on('click', 'b', item_sns_share);
+    taodianjin_init();
+}
+function item_sns_share(){
+    var $this = $(this);
+    var item = $this.closest('.item');
+    var img = item.find('.pic img');
+    SnsShareLib.share($this, 
             'http://' + location.host,
-            item.children('.title').children('a').html(),
+            item.children('.title').text(),
             img.attr('s') || img.attr('src')
             );
-    });
+}
 
+function taodianjin_init(){
     (function(win,doc){
         var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
         if (!win.alimamatk_show) {
@@ -313,7 +352,7 @@ function item_list_init(){
         win.alimamatk_onload = win.alimamatk_onload || [];
         win.alimamatk_onload.push(o);
     })(window,document);
-};
+}
 function taobao_search(word){
     var w = $(window).width(), s;
     if(w > 638) s = '628x270';
@@ -322,15 +361,6 @@ function taobao_search(word){
     document.write('<a data-type="2" data-keyword="' + word + '" data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
 }
 
-function in_viewport($c, $e){
-    var ctop = $c.scrollTop() - 100;        /* 容器顶部 */
-    var cbottom = ctop + $c.height() + 100; /* 容器底部 */
-    var etop = $e.offset().top;             /* 元素顶部 */
-    var ebottom = etop + $e.height();       /* 元素底部 */
-    return etop < cbottom && ebottom > ctop;
-}
-
-        
 var SnsShareLib = {
     sites: {
         sina_weibo: [ '新浪微博', function(url, title, pic){

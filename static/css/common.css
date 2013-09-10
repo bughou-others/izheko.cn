@@ -4,9 +4,7 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    font-family: "微软雅黑", Arial, sans-serif, "新宋体";
-    font-size: 14px;
-    line-height: 22px;
+    font: 12px/1.5 "微软雅黑", Arial, sans-serif, "新宋体";
 }
 a {
     color: #06c;
@@ -115,7 +113,6 @@ b.sns-kaixin     { background-position: -50px 0; }
     display: inline-block;
     *display: inline;
     *zoom: 1;
-    font-size: 1em;
     margin-left: 3em;
     vertical-align: text-top;
     width: 30%;
@@ -131,7 +128,7 @@ b.sns-kaixin     { background-position: -50px 0; }
 }
 #search .input-wrapper {
     padding-right: 1em;
-    margin-right: 6em;
+    margin-right: 84px;
     height: 31px;
 }
 #search input {
@@ -139,7 +136,6 @@ b.sns-kaixin     { background-position: -50px 0; }
     margin: 0;
     border: none;
     padding: 7px;
-    font-size: 1em;
     height: 17px;
     line-height: 17px;
     outline: none;
@@ -158,10 +154,8 @@ b.sns-kaixin     { background-position: -50px 0; }
     border: none;
     width: 80px;
     height: 22px;
-    font-size: 14px;
-    line-height: 22px;
+    font: bold 14px/22px '';
     color: white;
-    font-weight: bold;
     cursor: pointer;
 }
 
@@ -191,7 +185,6 @@ b.sns-kaixin     { background-position: -50px 0; }
 }
 #filter span {
     color: #aaa;
-    font-size: 12px;
     padding: 0 0 0 3px;
 }
 #filter a.on {
@@ -235,11 +228,11 @@ b.sns-kaixin     { background-position: -50px 0; }
     *top: 0;
 }
 .item .pic {
+    display: block;
     padding: 10px;
     width: 290px;
     height: 190px;
     line-height: 190px;
-    display: block;
     overflow: hidden;
     text-align: center;
 }
@@ -261,9 +254,12 @@ b.sns-kaixin     { background-position: -50px 0; }
     line-height: 22px;
     height: 44px;
 }
+.item .title .type {
+    font-weight: bold;
+}
 .item .title a {
     color: #333;
-    font-family: "宋体";
+    font: 14px/22px "宋体";
 }
 .item .title a:hover {
     color: #06c;
@@ -286,7 +282,7 @@ b.sns-kaixin     { background-position: -50px 0; }
     font-weight: bold;
 }
 .item .price span big {
-    font-size: 2em;
+    font-size: 28px;
 }
 .item .price small {
     color: #aaa;
@@ -301,9 +297,7 @@ b.sns-kaixin     { background-position: -50px 0; }
     color: white;
     width: 80px;
     height: 20px;
-    font-size: 16px;
-    line-height: 20px;
-    font-weight: bolder;
+    font: bolder 16px/20px '';
     padding: 7px 0 6px 0;
 }
 .item .yellow {
@@ -327,32 +321,83 @@ b.sns-kaixin     { background-position: -50px 0; }
 .item .vip {
     background: url(/img/rect.png) -25px -105px;
 }
+.item .sns-share {
+    margin: 10px 0;
+}
+.item .sns-share b {
+    margin-left: 5px;
+    vertical-align: -3px;
+    +vertical-align: -1px;
+    _vertical-align: baseline;
+}
 
 .item .expand {
     display: none;
-    padding: 10px 0 10px 10px;
+    padding: 10px;
     background-color: #f4f4f4;
-    white-space: nowrap;
     color: #aaa;
-    font: normal 12px/16px "tahoma", "宋体";
+    font: normal 12px/20px "tahoma", "宋体";
     /*background: url(/img/b.gif) repeat 0 0;*/
 }
 .item-hover .expand {
     display: block;
 }
-.item .expand .sns-share {
-    margin-left: 14px;
-}
-.item .expand .sns-share b {
-    margin-right: 5px;
-    vertical-align: -3px;
-    +vertical-align: -1px;
-    _vertical-align: baseline;
-}
-.item .expand div {
-    margin-top: 10px;
+.item .expand .tip {
     border-top: 1px dotted #c5c5c5;
     padding: 5px 0;
+}
+.item .time-left span {
+    color: #999;
+}
+.item .expand .tip span {
+    color: #333;
+}
+#single-item {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin: 20px 0;
+}
+@media (max-width: 650px) {
+    #single-item {
+        width: 314px;
+    }
+    #single-item .right {
+        display: block;
+    }
+}
+#single-item .title {
+    height: auto;
+}
+#single-item .title a {
+    font-weight: bold;
+}
+#single-item .left {
+    display: inline-block;
+}
+#single-item .sns-share {
+    text-align: center;
+}
+#single-item .right {
+    vertical-align: top;
+    display: inline-block;
+    width: 290px;
+    padding: 10px;
+    line-height: 30px;
+}
+#single-item .time-left span {
+    font: 14px "宋体";
+}
+#single-item .tip {
+    color: #9c7e6f;
+    border: 1px solid #f8f3f0;
+    background-color: #fcfaf9;
+    font: normal 14px/30px "宋体";
+}
+#single-item .action {
+    display: inline-block;
+    position: static;
+    margin-top: 10px;
 }
 
 /* pagination */

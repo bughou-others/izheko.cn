@@ -37,7 +37,7 @@ class Item extends ItemBase
         $type_id = $this->data['type_id'];
         if(!isset($types[$type_id])) return;
         list($name, $pinyin) = $types[$type_id];
-        return "<a href=\"/$pinyin\">【{$name}】</a>";
+        return "<a class=\"type\" href=\"/$pinyin\">【{$name}】</a>";
     }
 
     function title()
@@ -55,6 +55,20 @@ class Item extends ItemBase
     function end_time()
     {
         return strftime('%m月%d日%H:%M', strtotime($this->data['end_time']));
+    }
+
+    function time_left()
+    {
+        $start_time = strtotime($this->data['start_time']);
+        $end_time   = strtotime($this->data['end_time']);
+        $end_time   = strtotime('2013-9-15');
+        $now = time();
+        if($now < $start_time)
+            return "剩余时间：<span s=\"$start_time\"></span>";
+        elseif($now < $end_time)
+            return "剩余时间：<span s=\"$end_time\"></span>";
+        else 
+            return '结束时间：' . strftime('%m月%d日%H:%M', $end_time);
     }
 
     function discount_price()

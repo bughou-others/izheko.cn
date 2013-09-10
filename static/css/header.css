@@ -9,7 +9,6 @@
     float: right;
     margin-top: 20px;
     _margin-top: 28px;
-    font: normal 12px/22px "";
 }
 
 #phone-edition, #bookmark {
@@ -68,7 +67,6 @@
     _top: 30px;
     right: 0;
     z-index: 999;
-    font: normal 12px/18px "";
 }
 #sns-share {
     padding: 10px;
@@ -118,11 +116,12 @@
 /* navigation */
 #navbar {
     margin: 10px 0;
-    border: 1px solid #518900;
     padding: 8px;
+    border: 1px solid #518900;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
+    font: 14px/22px '';
 }
 #navbar a {
     color: #fff;
