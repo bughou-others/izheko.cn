@@ -156,12 +156,12 @@ var Footprints = {
             o.show('next');
         });
     },
-    init_record: function() {
+    init_record: function(te) {
         var o = this;
-        var s = '.item > .title > a, .item > a, .item > .buy > a';
-        $('#item_list').on('click mouseup contextmenu', s, function(e){
+        var s = '.title > a:nth-child(2), a.pic, a.action';
+        (te || $('#item_list')).on('click mouseup contextmenu', s, function(e){
             if(e.type === 'mouseup' && e.which !== 2) return false;
-            var item_id = $(this).parents('.item').children('.pic').attr('data-itemid');
+            var item_id = $(this).closest('.item').find('a.pic').attr('data-itemid');
             var a = [ ];
             if(m = document.cookie.match(/(^| )footprints=(\d{8,}(,\d{8,})*)(;|$)/)) {
                 a = m[2].split(',');
@@ -327,6 +327,7 @@ function single_item_init(){
     item.children('.left').children('.pic').after('<div class="sns-share">分享到：' + SnsShareLib.icons_b + '</div>');
     item.children('.left').children('.sns-share').on('click', 'b', item_sns_share);
     taodianjin_init();
+    Footprints.init_record(item);
 }
 function item_sns_share(){
     var $this = $(this);
