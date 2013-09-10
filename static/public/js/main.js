@@ -396,13 +396,18 @@ var SnsShareLib = {
     },
     share: function($e, url, title, pic){
         var url = this.sites[$e.attr('class').substr(4)][1](url, title, pic);
-        if(!this.a){
-            this.a = document.createElement('a');
-            this.a.target = '_blank';
-            document.body.appendChild(this.a);
+        if(this.a === undefined){
+            var a = document.createElement('a');
+            if(a.click) {
+                a.target = '_blank';
+                document.body.appendChild(a);
+                this.a = a;
+            } else this.a = null;
         }
-        this.a.href = url;
-        this.a.click();
+        if(this.a){
+            this.a.href = url;
+            this.a.click();
+        } else location.href = url;
     },
     init: function(){
         this.icons_a = this.gen_icons(true);
