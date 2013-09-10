@@ -58,8 +58,8 @@ class ItemList extends ItemBase
     {
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
         $sql = "select SQL_CALC_FOUND_ROWS 
-            id, num_iid, title,type_id,flags,ref_price,price,now_price,
-            start_time,end_time,delist_time,click_url,pic_url
+            num_iid,title,type_id,flags,ref_price,price,now_price,
+            start_time,end_time,delist_time,click_url,ref_tip
             from items
             where title != '' and !(flags&" . ItemBase::FLAGS_MASK_ITEM_DELETED . ")
             $condition 

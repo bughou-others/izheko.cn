@@ -31,7 +31,7 @@ if (empty($data['items'])) { ?>
                 </div>
                 <div class="expand">
                     <div class="time-left"><?= $item->time_left() ?></div>
-                    <div class="tip">小编： <span>茶条卷曲，沉色匀整，色泽砂绿，汤色嫩绿清澈，入口回甘，韵味十足。</span></div>
+                    <div class="tip">小编： <span><?= $item->get('ref_tip') ?></span></div>
                 </div>
             </div></div><!--
 <?php } ?>

@@ -17,7 +17,7 @@
                     </span>
                     <?= $item->postage_tag() ?> <?= $item->vip_tag() ?>
                     <div class="time-left"><?= $item->time_left() ?></div>
-                    <div class="tip">茶条卷曲，沉色匀整，色泽砂绿，汤色嫩绿清澈，入口回甘，韵味十足。</div>
+                    <div class="tip"><?= $item->get('ref_tip') ?></div>
                     <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank"><?= $item->action() ?></a>
                 </span>
                 <script> single_item_init(); </script>

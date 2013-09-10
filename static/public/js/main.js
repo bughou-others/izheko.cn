@@ -1,65 +1,3 @@
-
-function LazyImg(){
-    var o = {
-        img_index: 1,
-        imgs: { },
-        grids: { },
-        complete: false,
-        get_imgs: function(){
-            if(document.getElementById('pagination')) this.complete = true;
-            for(var e; e = document.getElementById('img' + this.img_index); this.img_index++){
-                var $e = $(e);
-                var id = $e.attr('id');
-                if(!this.imgs[id]) this.imgs[id] = $e;
-                this.add_to_grids(this.grids, $e);
-            }
-        },
-        add_to_grids: function(grids, $e){
-            var _top = $e.offset().top;
-            var n_top    = Math.floor( _top                / 200);
-            var n_bottom = Math.floor((_top + $e.height()) / 200);
-            for(var n = n_top; n <= n_bottom; n++){
-                if(grids[n])grids[n].push($e);
-                else grids[n] = [ $e ];
-            }
-        },
-        load_imgs: function(n_top, n_bottom){
-            var row, $e, src;
-            for(var n = n_top; n <= n_bottom; n++){
-                if(row = this.grids[n]){
-                    for(var i = 0; $e = row[i]; i++){
-                        if(src = $e.attr('s')){
-                            $e.attr('src', src).removeAttr('s');
-                            delete this.imgs[$e.attr('id')];
-                        }
-                    }
-                    delete this.grids[n];
-                }
-            }
-        },
-        init: function(){
-            var o = this, $c = $(window);
-            $c.scroll(function(){
-                if(!o.complete) o.get_imgs();
-                var _top = $c.scrollTop();
-                var n_top    = Math.floor((_top               - 100) / 200);
-                var n_bottom = Math.floor((_top + $c.height() + 100) / 200);
-
-                o.load_imgs(n_top, n_bottom);
-                if($.isEmptyObject(o.imgs)) $c.unbind('scroll resize');
-            }).resize(function(){
-                var tmp_grids = { };
-                for(var id in o.imgs){
-                    o.add_to_grids(tmp_grids, o.imgs[id]);
-                }
-                o.grids = tmp_grids;
-                $c.scroll();
-            });
-        }
-    };
-    o.init();
-    return o;
-}
 var Dialog = {
     show: function(msg, target, delay) {
         var o = this;
@@ -332,9 +270,10 @@ function single_item_init(){
 function item_sns_share(){
     var $this = $(this);
     var item = $this.closest('.item');
-    var img = item.find('.pic img');
+    var pic = item.find('.pic');
+    var img = pic.children('img');
     SnsShareLib.share($this, 
-            'http://' + location.host,
+            'http://' + location.host + '/item/' + pic.attr('data-itemid'),
             item.children('.title').text(),
             img.attr('s') || img.attr('src')
             );
@@ -416,4 +355,66 @@ var SnsShareLib = {
     }
 };
 SnsShareLib.init();
+
+function LazyImg(){
+    var o = {
+        img_index: 1,
+        imgs: { },
+        grids: { },
+        complete: false,
+        get_imgs: function(){
+            if(document.getElementById('pagination')) this.complete = true;
+            for(var e; e = document.getElementById('img' + this.img_index); this.img_index++){
+                var $e = $(e);
+                var id = $e.attr('id');
+                if(!this.imgs[id]) this.imgs[id] = $e;
+                this.add_to_grids(this.grids, $e);
+            }
+        },
+        add_to_grids: function(grids, $e){
+            var _top = $e.offset().top;
+            var n_top    = Math.floor( _top                / 200);
+            var n_bottom = Math.floor((_top + $e.height()) / 200);
+            for(var n = n_top; n <= n_bottom; n++){
+                if(grids[n])grids[n].push($e);
+                else grids[n] = [ $e ];
+            }
+        },
+        load_imgs: function(n_top, n_bottom){
+            var row, $e, src;
+            for(var n = n_top; n <= n_bottom; n++){
+                if(row = this.grids[n]){
+                    for(var i = 0; $e = row[i]; i++){
+                        if(src = $e.attr('s')){
+                            $e.attr('src', src).removeAttr('s');
+                            delete this.imgs[$e.attr('id')];
+                        }
+                    }
+                    delete this.grids[n];
+                }
+            }
+        },
+        init: function(){
+            var o = this, $c = $(window);
+            $c.scroll(function(){
+                if(!o.complete) o.get_imgs();
+                var _top = $c.scrollTop();
+                var n_top    = Math.floor((_top               - 100) / 200);
+                var n_bottom = Math.floor((_top + $c.height() + 100) / 200);
+
+                o.load_imgs(n_top, n_bottom);
+                if($.isEmptyObject(o.imgs)) $c.unbind('scroll resize');
+            }).resize(function(){
+                var tmp_grids = { };
+                for(var id in o.imgs){
+                    o.add_to_grids(tmp_grids, o.imgs[id]);
+                }
+                o.grids = tmp_grids;
+                $c.scroll();
+            });
+        }
+    };
+    o.init();
+    return o;
+}
 

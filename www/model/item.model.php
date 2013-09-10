@@ -61,7 +61,6 @@ class Item extends ItemBase
     {
         $start_time = strtotime($this->data['start_time']);
         $end_time   = strtotime($this->data['end_time']);
-        $end_time   = strtotime('2013-9-15');
         $now = time();
         if($now < $start_time)
             return "剩余时间：<span s=\"$start_time\"></span>";

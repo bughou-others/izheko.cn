@@ -87,7 +87,7 @@ class ItemGrab
         $values = '';
         foreach ($items as $item_id => $tmp)
         {
-            $ref_price = $ref_price ? parse_price($tmp[0]) : 'null';
+            $ref_price = $tmp[0] ? parse_price($tmp[0]) : 'null';
             $ref_tip = DB::escape($tmp[1]);
             $values .= ",($item_id, '$now', $ref_price, '$ref_tip')";
         }
