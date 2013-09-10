@@ -49,6 +49,10 @@ img {
     width: 16px;
     height: 16px;
     background-image: url(/img/sns_icon.png);
+    opacity: 0.6;
+}
+.sns-share b:hover {
+    opacity: 1.0;
 }
 
 b.sns-sina_weibo { background-position: -18px 0; }
@@ -325,7 +329,7 @@ b.sns-kaixin     { background-position: -50px 0; }
     margin: 10px 0;
 }
 .item .sns-share b {
-    margin-left: 5px;
+    margin-left: 10px;
     vertical-align: -3px;
     +vertical-align: -1px;
     _vertical-align: baseline;
