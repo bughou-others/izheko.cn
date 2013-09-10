@@ -8,6 +8,7 @@ class ItemGrabZhe800 extends ItemGrab
     const item_jump_xpath  = './div/h2/a[@href]/@href';
     const item_price_xpath = './div/h4/span[1]/em';
     const item_pic_xpath   = './div/p/a/img';
+    const item_tip_xpath   = './div/h6';
     const click_url_xpath  = null;
 
     static function get_target()
@@ -33,6 +34,14 @@ class ItemGrabZhe800 extends ItemGrab
          }
     }
 
+    static function get_tip_text($item_node, $page)
+    {
+        $tip = $page->query(static::item_tip_xpath, $item_node)->item(0)->nodeValue;
+        $tip = trim($tip);
+        $tip = preg_replace('/^小编：/u', '', $tip);
+        $tip = preg_replace('/举报$/u', '', $tip);
+        return trim($tip);
+    }
 }
 
 ItemGrabZhe800::start();

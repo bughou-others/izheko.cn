@@ -34,16 +34,13 @@ class ItemGrab
         $node_list = $page->query(static::item_node_xpath);
         foreach ($node_list as $item_node)
         {
-            if($item = self::get_one_item($item_node, $page))
-            {
-                $items[$item[0]] = $item[1];
-            }
+            self::get_one_item($item_node, $page, $items);
         }
         if (!$items) return;
         self::save_items($items);
     }
 
-    static function get_one_item($item_node, $page)
+    static function get_one_item($item_node, $page, &$items)
     {
         $item_id = self::get_item_id($item_node, $page);
         if ($item_id && preg_match('/^\d+$/', $item_id))
@@ -52,7 +49,8 @@ class ItemGrab
             $price = preg_match('/\d+(\.\d+)?/', $price, $matches) ? $matches[0] : null;
             $pic_node = $page->query(static::item_pic_xpath, $item_node)->item(0);
             self::fetch_pic($item_id, $pic_node, $page);
-            return array($item_id, $price);
+            $tip = static::get_tip_text($item_node, $page);
+            $items[$item_id] = array($price, $tip);
         }
     }
 
@@ -87,13 +85,14 @@ class ItemGrab
         if (! $items) return;
         $now = strftime('%F %T');
         $values = '';
-        foreach ($items as $item_id => $ref_price)
+        foreach ($items as $item_id => $tmp)
         {
-            $ref_price = $ref_price ? parse_price($ref_price) : 'null';
-            $values .= ",($item_id, '$now', $ref_price)";
+            $ref_price = $ref_price ? parse_price($tmp[0]) : 'null';
+            $ref_tip = DB::escape($tmp[1]);
+            $values .= ",($item_id, '$now', $ref_price, '$ref_tip')";
         }
         $values = substr($values, 1);
-        $sql = 'insert ignore into items (`num_iid`, `create_time`, `ref_price`)
+        $sql = 'insert ignore into items (`num_iid`, `create_time`, `ref_price`, `ref_tip`)
             values ' . $values;
         $count = count($items);
         $affected = DB::affected_rows($sql);

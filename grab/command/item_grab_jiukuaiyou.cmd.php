@@ -8,6 +8,7 @@ class ItemGrabJiukuaiyou extends ItemGrab
     const item_jump_xpath  = './div[@class="good-price"]/a[@href]/@href';
     const item_price_xpath = './div[@class="good-price"]/span[@class="price-current"]';
     const item_pic_xpath   = './div[@class="good-pic"]//img';
+    const item_tip_xpath   = './h5[@class="good-title"]/a[2]';
     const click_url_xpath  = '//meta[@http-equiv="refresh"]/@content';
 
     static function get_target()
@@ -39,6 +40,11 @@ class ItemGrabJiukuaiyou extends ItemGrab
             return array($m[1], $response->url);
     }
 
+    static function get_tip_text($item_node, $page)
+    {
+        $tip = $page->query(static::item_tip_xpath, $item_node)->item(0)->nodeValue;
+        return trim($tip);
+    }
 }
 
 ItemGrabJiukuaiyou::start();
