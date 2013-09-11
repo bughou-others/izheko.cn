@@ -12,6 +12,8 @@ class TaobaoItemCmd
             $item   = TaobaoItem::get_item_info($num_iid);
             $result = TaobaoItem::get_promo_info($num_iid, $item['auction_point'] > 0, $item['title']);
         }
+        elseif ($type ===  'subtitle')
+            $result = TaobaoItem::get_subtitle($num_iid);
         elseif ($type ===  'price_info')
             $result = TaobaoItem::get_price_info($num_iid);
         elseif ($type ===  'item_info')

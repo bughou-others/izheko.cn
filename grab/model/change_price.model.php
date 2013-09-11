@@ -18,10 +18,11 @@ class ChangePrice
     {
         $change_price = '(?:(?:价格)?修?[改变]价?[成为至到]?|(?:价格)?[减降]价?[成为至到]|只要)';
         $format_array = array(
-            "拍下?后?就?立?$change_price?%s",
+            '拍下?%s$',
+            "拍下?后?就?立?$change_price%s",
             "自动$change_price?%s", '^[促改]?%s$',
             '(?:秒杀价?|惊呆价|实付|特惠|价格为)%s',
-            '%s(?:.*包邮|秒杀)',
+            '%s(?:(?:[一二三]件)?包邮|秒杀)',
         );
         return self::do_parse($format_array, $str);
     }
@@ -30,8 +31,8 @@ class ChangePrice
     {
         $change_price = '(?:[减降]价?)';
         $format_array = array(
-            "拍下?后?就?立?$change_price?%s",
-            "自动$change_price?%s",
+            "拍下?后?就?立?$change_price%s",
+            "自动$change_price%s",
         );
         $price = self::do_parse($format_array, $str);
         if($price) return -$price;

@@ -8,7 +8,7 @@ class ItemGrabJiukuaiyou extends ItemGrab
     const item_jump_xpath  = './div[@class="good-price"]/a[@href]/@href';
     const item_price_xpath = './div[@class="good-price"]/span[@class="price-current"]';
     const item_pic_xpath   = './div[@class="good-pic"]//img';
-    const item_tip_xpath   = './h5[@class="good-title"]/a[2]';
+    const item_tip_xpath   = './h5[@class="good-title"]/a[text()!=""]';
     const click_url_xpath  = '//meta[@http-equiv="refresh"]/@content';
 
     static function get_target()

@@ -18,7 +18,7 @@ foreach(array(
         $count = $data[$target . '_count'];
     }
     if ($count <= 0) continue;
-    echo "<a href=\"$page_url$target\"$class>$name<span>($count)</span></a>\n";
+    echo "<a href=\"$page_url$target\"$class>$name ($count)</a>\n";
 }
 ?>
         </div>

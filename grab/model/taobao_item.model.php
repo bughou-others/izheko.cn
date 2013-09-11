@@ -75,7 +75,6 @@ class TaobaoItem
         }
         if (!isset($promo['price_type']) && $tmall) {
             $subtitle = self::get_subtitle($num_iid);
-            //var_dump($subtitle);
             $change_price = ChangePrice::parse($subtitle);
             self::compare_promo($change_price, $promo);
         }

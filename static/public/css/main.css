@@ -4,12 +4,12 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    font: 12px/1.5 "微软雅黑", Arial, sans-serif, "新宋体";
+    font: 12px/1.5 Tahoma, Helvetica, Arial, "宋体", sans-serif, "新宋体";
 }
 a {
     color: #06c;
-    text-decoration: none;
     cursor: pointer;
+    text-decoration: none;
 }
 img {
     margin: 0;
@@ -178,23 +178,21 @@ b.sns-kaixin     { background-position: -50px 0; }
 } 
  */
 #filter a {
+    display: inline-block;
     margin: 0 1em;
-    padding: 0 2px 1px;
-    vertical-align: middle;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
+    padding: 0 20px;
+    color: #5e5e5e;
+    font: 14px/30px '';
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+    _padding-top: 3px;
 }
-#filter span {
-    color: #aaa;
-    padding: 0 0 0 3px;
-}
+#filter a:hover,
 #filter a.on {
-    color: white;
-    background-color: #393;
-}
-#filter a.on span {
-    color: white;
+    color: #e33;
 }
 
 #no_items {
@@ -282,20 +280,20 @@ b.sns-kaixin     { background-position: -50px 0; }
 .item .price span {
     color: #e33;
     font-weight: bold;
+    font-family: '微软雅黑';
 }
 .item .price span big {
     font-size: 28px;
 }
 .item .price small {
     color: #aaa;
-    font: normal 12px/18px 'tahoma';
+    font: normal 12px/18px '';
     text-decoration: line-through;
 }
 .item .action {
     position: absolute;
     top: 5px;
     right: 10px;
-    cursor: pointer;
     text-align: center;
     color: white;
     width: 80px;
