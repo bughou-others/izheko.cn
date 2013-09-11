@@ -25,9 +25,7 @@ if (empty($data['items'])) { ?>
                         <?php } ?>
                     </span>
                     <?= $item->postage_tag() ?> <?= $item->vip_tag() ?>
-                    <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank">
-                        <b><?= $item->action() ?></b>
-                    </a>
+                    <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank"><?= $item->action() ?></a>
                 </div>
                 <div class="expand">
                     <div class="time-left"><?= $item->time_left() ?></div>

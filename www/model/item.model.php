@@ -63,11 +63,11 @@ class Item extends ItemBase
         $end_time   = strtotime($this->data['end_time']);
         $now = time();
         if($now < $start_time)
-            return "剩余时间：<span s=\"$start_time\"></span>";
+            return "折扣剩余时间：<span s=\"$start_time\"></span>";
         elseif($now < $end_time)
-            return "剩余时间：<span s=\"$end_time\"></span>";
+            return "折扣剩余时间：<span s=\"$end_time\"></span>";
         else 
-            return '结束时间：' . strftime('%m月%d日%H:%M', $end_time);
+            return '折扣结束时间：' . strftime('%m月%d日%H:%M', $end_time);
     }
 
     function discount_price()
@@ -117,8 +117,12 @@ class Item extends ItemBase
 
     function original_price_str()
     {
-        if (! isset($this->original_price_str)) $this->original_price_str = 
-            ($price = $this->data['price']) > $this->discount_price() ? format_price($price) : null;
+        if (! isset($this->original_price_str)) {
+            if(($price = $this->data['price']) > $this->discount_price()){
+                $this->original_price_str = floor($price / 100);
+            }
+            else $this->original_price_str = false;
+        }
         return $this->original_price_str;
     }
 
@@ -160,7 +164,7 @@ class Item extends ItemBase
         else
         {
             $this->action        = '去抢购';
-            $this->action_style  = 'yellow';
+            $this->action_style  = 'red';
             $this->action_title  = '折扣正在进行，快去抢购吧！';
         }
         return $this->action;
@@ -181,13 +185,13 @@ class Item extends ItemBase
     function postage_tag()
     {
         if($this->data['flags'] & self::FLAGS_MASK_POSTAGE_FREE)
-            return '<b class="post">包邮</b>';
+            return '<b class="post" title="卖家包邮哦">包邮</b>';
     }
 
     function vip_tag()
     {
         if($this->data['flags'] & self::FLAGS_MASK_VIP_PRICE)
-            return '<b class="vip" title="淘宝VIP用户价哟。">VIP价</b>';
+            return '<b class="vip" title="淘宝VIP用户价哟">VIP价</b>';
     }
 
     function jump_url()

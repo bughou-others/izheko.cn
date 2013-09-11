@@ -49,10 +49,6 @@ img {
     width: 16px;
     height: 16px;
     background-image: url(/img/sns_icon.png);
-    opacity: 0.6;
-}
-.sns-share b:hover {
-    opacity: 1.0;
 }
 
 b.sns-sina_weibo { background-position: -18px 0; }
@@ -81,36 +77,38 @@ b.sns-kaixin     { background-position: -50px 0; }
 
 .footprints-item {
     /* 232px * 112px */
-    width: 200px;
-    height: 80px;
+    width: 220px;
+    height: 100px;
     margin: 5px;
-    padding: 10px;
     display: inline-block;
     *display: inline;
     *zoom: 1;
     border: 1px dashed #ccc;
 }
 .footprints-item .image {
-    width: 80px;
+    width: 100px;
     display: inline-block;
 }
 .footprints-item img {
     width: 80px;
     height: 80px;
+    padding: 10px;
 }
 .footprints-item .desc {
-    width: 100px;
+    width: 115px;
+    padding: 5px 5px 0 0;
     display: inline-block;
     vertical-align: top;
-    padding-left: 10px;
     font-family: "宋体";
 }
 .footprints-item .desc a {
     color: #333;
     display: block;
+    height: 72px;
+    overflow: hidden;
 }
 .footprints-item .desc b {
-    color: #f40;
+    color: #e33;
 }
 
 #search {
@@ -226,7 +224,7 @@ b.sns-kaixin     { background-position: -50px 0; }
     text-align: left;
 }
 .item-hover .item {
-    border-color: #f39;
+    border-color: #e66;
     *position: absolute;
     *left: 0;
     *top: 0;
@@ -255,18 +253,18 @@ b.sns-kaixin     { background-position: -50px 0; }
 .item .title {
     padding: 5px 10px;
     overflow: hidden;
-    line-height: 22px;
-    height: 44px;
+    height: 40px;
 }
 .item .title .type {
     font-weight: bold;
 }
 .item .title a {
     color: #333;
-    font: 14px/22px "宋体";
+    font: 14px/20px "宋体";
 }
 .item .title a:hover {
-    color: #06c;
+    color: #c00;
+    text-decoration: underline;
 }
 .item .buy {
     padding: 5px 10px 18px;
@@ -282,7 +280,7 @@ b.sns-kaixin     { background-position: -50px 0; }
     margin-right: 10px;
 }
 .item .price span {
-    color: #f40;
+    color: #e33;
     font-weight: bold;
 }
 .item .price span big {
@@ -290,6 +288,7 @@ b.sns-kaixin     { background-position: -50px 0; }
 }
 .item .price small {
     color: #aaa;
+    font: normal 12px/18px 'tahoma';
     text-decoration: line-through;
 }
 .item .action {
@@ -303,15 +302,19 @@ b.sns-kaixin     { background-position: -50px 0; }
     height: 20px;
     font: bolder 16px/20px '';
     padding: 7px 0 6px 0;
+    background-image: url(/img/rect.png);
 }
-.item .yellow {
-    background: url(/img/rect.png) 0 0;
+.item .action:hover {
+    opacity: 0.8;
+}
+.item .red {
+    background-position: 0 0;
 }
 .item .green {
-    background: url(/img/rect.png) 0 -35px;
+    background-position: 0 -35px;
 }
 .item .gray {
-    background: url(/img/rect.png) 0 -70px;
+    background-position: 0 -70px;
 }
 
 .item .post, .item .vip {
@@ -346,12 +349,18 @@ b.sns-kaixin     { background-position: -50px 0; }
 .item-hover .expand {
     display: block;
 }
+.item .time-left span {
+    color: #999;
+}
+.item .expand .sns-share b {
+    opacity: 0.8;
+}
+.item .expand .sns-share b:hover {
+    opacity: 1.0;
+}
 .item .expand .tip {
     border-top: 1px dotted #c5c5c5;
     padding: 5px 0;
-}
-.item .time-left span {
-    color: #999;
 }
 .item .expand .tip span {
     color: #333;

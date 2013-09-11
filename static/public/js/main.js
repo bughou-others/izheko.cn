@@ -246,7 +246,7 @@ function item_list_init(){
         var $this = $(this);
         var time_left = $this.children('.item').children('.expand').children('.time-left');
         if(!$this.attr('x')){
-            time_left.after('<div class="sns-share">分享到：' + SnsShareLib.icons_b + '</div>');
+            time_left.after('<div class="sns-share">分享：' + SnsShareLib.icons_b + '</div>');
             $this.attr('x', 'o');
         }
         TimeLeftUpdate.start(time_left.children('span'));
@@ -262,7 +262,7 @@ function item_list_init(){
 function single_item_init(){
     var item = $('#single-item');
     TimeLeftUpdate.start(item.children('.right').children('.time-left').children('span'));
-    item.children('.left').children('.pic').after('<div class="sns-share">分享到：' + SnsShareLib.icons_b + '</div>');
+    item.children('.left').children('.pic').after('<div class="sns-share">分享：' + SnsShareLib.icons_b + '</div>');
     item.children('.left').children('.sns-share').on('click', 'b', item_sns_share);
     taodianjin_init();
     Footprints.init_record(item);
