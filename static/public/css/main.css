@@ -569,7 +569,7 @@ tkbox {
 }
 
 #header {
-    padding: 3px 5%;
+    padding: 3px 5% 10px 5%;
     color: #fff;
     background-color: #010101;
 }
@@ -684,13 +684,14 @@ tkbox {
 
 /* navigation */
 #navbar {
-    margin: 10px 0;
+    margin-top: 10px;
     padding: 8px;
     border: 1px solid #518900;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border-radius: 10px;
     font: 14px/22px '';
+    _width: 100%;
 }
 #navbar a {
     color: #fff;
