@@ -39,6 +39,8 @@ class ItemUpdateDaemonCmd
     }
 
     static function do_work($now) {
+    {
+        echo strftime("%F %T\n", $now);
         $cond = self::get_cond($now);
         system('cd ' . APP_ROOT .
             "; php run command/item_update.cmd.php '$cond' >> tmp/item_update_daemon.log 2>&1 &");
@@ -54,7 +56,7 @@ class ItemUpdateDaemonCmd
             $next = self::get_next($next);
         }
         if ($next) {
-            if (($wait = $next - time()) > 0) sleep($wait);
+            while (($wait = $next - time()) > 0) sleep($wait);
         } else {
             $now = strftime('%F %T');
             exit("$now no one to update, exited\n");
