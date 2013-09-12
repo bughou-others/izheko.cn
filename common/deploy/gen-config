@@ -13,14 +13,12 @@ fi
 if test "$1" = production; then 
     tmp_dir="$dir"/grab/tmp
     test -d "$tmp_dir" || mkdir --mode=755 "$tmp_dir"
-    chown www-data:www-data "$tmp_dir"
-    replace APP_ROOT "$dir/grab"  < "$dir"/grab/crontab | crontab -u www-data -
+    replace APP_ROOT "$dir/grab"  < "$dir"/grab/crontab | crontab -
     (cd "$dir/grab"; php run command/item_update_daemon.cmd.php >> tmp/item_update_daemon.log 2>&1 &)
 fi
 
 pic_dir="$dir"/static/public/pic
 test -d "$pic_dir" || mkdir --mode=755 "$pic_dir"
-chown www-data:www-data "$pic_dir"
 
 
 cache_dir="$dir"/www/public/cache
