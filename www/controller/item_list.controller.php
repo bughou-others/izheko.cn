@@ -9,7 +9,7 @@ class ItemListController
         $word   = isset($_GET['search']) ? trim($_GET['search']) : '';
         $filter = isset($_GET['filter']) ? trim($_GET['filter']) : '';
         $page   = isset($_GET['page'])   ? intval($_GET['page']) : 1;
-        $page_size = 6; // 1 * 2 * 3 * 2 * 5 *  2 * 3
+        $page_size = 60; // 1 * 2 * 3 * 2 * 5 *  2 * 3
 
         $data = ItemList::query($type, $word, $filter, $page, $page_size);
         if(strlen($word) > 0) {

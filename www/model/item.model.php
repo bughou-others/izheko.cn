@@ -63,7 +63,7 @@ class Item extends ItemBase
         $end_time   = strtotime($this->data['end_time']);
         $now = time();
         if($now < $start_time)
-            return "折扣剩余时间：<span s=\"$start_time\"></span>";
+            return "折扣即将开始：<span s=\"$start_time\"></span>";
         elseif($now < $end_time)
             return "折扣剩余时间：<span s=\"$end_time\"></span>";
         else 

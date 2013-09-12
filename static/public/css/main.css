@@ -38,7 +38,7 @@ img {
 #dialog_box div {
     border: 1px solid #ccc;
     padding: 5px 25px 5px 10px;
-    font: normal 12px/22px "宋体";
+    line-height: 22px;
     color: #333;
     background-color: white;
 }
@@ -99,7 +99,6 @@ b.sns-kaixin     { background-position: -50px 0; }
     padding: 5px 5px 0 0;
     display: inline-block;
     vertical-align: top;
-    font-family: "宋体";
 }
 .footprints-item .desc a {
     color: #333;
@@ -171,12 +170,9 @@ b.sns-kaixin     { background-position: -50px 0; }
 }
 
 
-/* 
 #filter {
-    padding-bottom: 14px;
-    background: url(/tmp/color-line.png) left bottom repeat-x;
+    margin: 10px 0;
 } 
- */
 #filter a {
     display: inline-block;
     margin: 0 1em;
@@ -210,7 +206,9 @@ b.sns-kaixin     { background-position: -50px 0; }
     vertical-align: top; 
     margin: 1em;
     width: 314px;
-    height: 321px;
+    height: 317px;
+    border: solid #e2e2e2;
+    border-width: 0 1px 1px 0;
 }
 .item-hover {
     position: relative;
@@ -258,7 +256,7 @@ b.sns-kaixin     { background-position: -50px 0; }
 }
 .item .title a {
     color: #333;
-    font: 14px/20px "宋体";
+    font: 14px/20px '';
 }
 .item .title a:hover {
     color: #c00;
@@ -279,8 +277,7 @@ b.sns-kaixin     { background-position: -50px 0; }
 }
 .item .price span {
     color: #e33;
-    font-weight: bold;
-    font-family: '微软雅黑';
+    font: bold 12px '微软雅黑';
 }
 .item .price span big {
     font-size: 28px;
@@ -298,7 +295,7 @@ b.sns-kaixin     { background-position: -50px 0; }
     color: white;
     width: 80px;
     height: 20px;
-    font: bolder 16px/20px '';
+    font: bolder 16px/20px '微软雅黑';
     padding: 7px 0 6px 0;
     background-image: url(/img/rect.png);
 }
@@ -317,7 +314,7 @@ b.sns-kaixin     { background-position: -50px 0; }
 
 .item .post, .item .vip {
     color: white;
-    font: normal 12px/16px '';
+    font: normal 12px/16px '微软雅黑';
     display: inline-block;
 }
 .item .post {
@@ -341,8 +338,7 @@ b.sns-kaixin     { background-position: -50px 0; }
     padding: 10px;
     background-color: #f4f4f4;
     color: #aaa;
-    font: normal 12px/20px "tahoma", "宋体";
-    /*background: url(/img/b.gif) repeat 0 0;*/
+    font: normal 12px/20px '';
 }
 .item-hover .expand {
     display: block;
@@ -397,13 +393,13 @@ b.sns-kaixin     { background-position: -50px 0; }
     line-height: 30px;
 }
 #single-item .time-left span {
-    font: 14px "宋体";
+    font-size: 14px;
 }
 #single-item .tip {
     color: #9c7e6f;
     border: 1px solid #f8f3f0;
     background-color: #fcfaf9;
-    font: normal 14px/30px "宋体";
+    font: normal 14px/30px "";
 }
 #single-item .action {
     display: inline-block;
@@ -493,6 +489,7 @@ b.sns-kaixin     { background-position: -50px 0; }
     white-space: nowrap;
     position: absolute;
     right: 35px;
+    font: 14px/22px '微软雅黑';
 }
 #sidebar a b {
     display: block;
@@ -570,6 +567,7 @@ tkbox {
     padding: 3px 5% 10px 5%;
     color: #fff;
     background-color: #010101;
+    font-family: '微软雅黑';
 }
 
 #header .right {
