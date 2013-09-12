@@ -46,17 +46,18 @@ img {
 .sns-share b {
     display: inline-block;
     cursor: pointer;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     background-image: url(/img/sns_icon.png);
 }
 
-b.sns-sina_weibo { background-position: -18px 0; }
-b.sns-qq_weibo   { background-position: -66px 0; }
-b.sns-qzone      { background-position: -114px 0; }
-b.sns-renren     { background-position: -34px 0; }
-b.sns-douban     { background-position: -82px 0; }
-b.sns-kaixin     { background-position: -50px 0; }
+b.sns-qq_zone    { background-position: 0 -96px; }
+b.sns-sina_weibo { background-position: 0 -144px; }
+b.sns-tencent_weibo { background-position: 0 -216px; }
+b.sns-renren     { background-position: 0 -240px; }
+b.sns-douban     { background-position: 0 -840px; }
+b.sns-kaixin     { background-position: 0 -264px; }
+b.sns-qq_haoyou  { background-position: 0 -3024px; }
 
 #footprints-bar {
     display: none;
@@ -328,9 +329,8 @@ b.sns-kaixin     { background-position: -50px 0; }
 }
 .item .sns-share b {
     margin-left: 10px;
-    vertical-align: -3px;
-    +vertical-align: -1px;
-    _vertical-align: baseline;
+    vertical-align: -7px;
+    *vertical-align: -5px;
 }
 
 .item .expand {
@@ -345,12 +345,6 @@ b.sns-kaixin     { background-position: -50px 0; }
 }
 .item .time-left span {
     color: #999;
-}
-.item .expand .sns-share b {
-    opacity: 0.8;
-}
-.item .expand .sns-share b:hover {
-    opacity: 1.0;
 }
 .item .expand .tip {
     border-top: 1px dotted #c5c5c5;

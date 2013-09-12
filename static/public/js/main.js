@@ -303,14 +303,14 @@ function taobao_search(word){
 
 var SnsShareLib = {
     sites: {
+        qq_zone: [ 'QQ空间', function(url, title, pic){
+            return "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&pics=" + pic + "&title=" + title;
+        }],
         sina_weibo: [ '新浪微博', function(url, title, pic){
             return "http://v.t.sina.com.cn/share/share.php?url=" + url + "&pic=" + pic + "&title=" + title;
         }],
-        qq_weibo: [ '腾讯微博', function(url, title, pic){
+        tencent_weibo: [ '腾讯微博', function(url, title, pic){
             return "http://share.v.t.qq.com/index.php?c=share&a=index&url=" + url + "&pic=" + pic + "&title=" + title;
-        }],
-        qzone: [ 'QQ空间', function(url, title, pic){
-            return "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&pics=" + pic + "&title=" + title;
         }],
         renren: [ '人人网', function(url, title, pic){ 
             return "http://share.renren.com/share/buttonshare.do?link=" + url;
@@ -320,6 +320,9 @@ var SnsShareLib = {
         }],
         kaixin: [ '开心网', function(url, title, pic){
             return "http://www.kaixin001.com/rest/records.php?style=11&url=" + url + "&pic=" + pic + "&content=" + title;
+        }],
+        qq_haoyou: [ 'QQ好友', function(url, title, pic){
+            return "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&pics=" + pic + "&desc=" + title;
         }]
     },
     gen_icons: function(a){
@@ -335,6 +338,9 @@ var SnsShareLib = {
         return icons;
     },
     share: function($e, url, title, pic){
+        url = encodeURIComponent(url);
+        pic = encodeURIComponent(pic);
+        title = encodeURIComponent(title);
         var url = this.sites[$e.attr('class').substr(4)][1](url, title, pic);
         if(this.a === undefined){
             var a = document.createElement('a');
