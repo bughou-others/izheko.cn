@@ -439,12 +439,12 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 #sidebar {
     position: fixed;
     right: 1%;
-    bottom: 5em;
+    bottom: 60px;
     z-index: 99999;
     _position: absolute;
     _bottom: auto;
     _top: expression(eval(
-        document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 70
+        document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 60
         ));
 }
 #sidebar div {
@@ -470,11 +470,11 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 #go_top a {
     background-color: #aaa;
 }
-#sidebar a:hover {
+#go_top a:hover {
     width: 90px;
 }
 #kefu a:hover {
-    font-size: 16px;
+    width: 80px;
 }
 #sidebar a span {
     display: block;
@@ -493,12 +493,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     position: absolute;
     top: 6px;
     right: 6px;
-}
-#prev_page a b {
-    background-position: -16px -1px;
-}
-#next_page a b {
-    background-position: -31px -1px;
 }
 #kefu a b {
     background-position: -79px -1px;
