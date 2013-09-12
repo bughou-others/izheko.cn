@@ -298,7 +298,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     height: 20px;
     font: bolder 16px/20px '微软雅黑';
     padding: 7px 0 6px 0;
-    background-image: url(/img/rect.png);
+    background-image: url(/img/rect.png?v=20130912);
 }
 .item .action:hover {
     opacity: 0.8;
