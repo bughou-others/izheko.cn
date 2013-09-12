@@ -38,7 +38,7 @@ class ItemUpdateDaemonCmd
         }
     }
 
-    static function do_work($now) {
+    static function do_work($now)
     {
         echo strftime("%F %T\n", $now);
         $cond = self::get_cond($now);
@@ -76,7 +76,7 @@ class ItemUpdateDaemonCmd
     {
         $s = strftime('%F %T', $time);
         $sql = "
-            select min(t) from (
+            select unix_timestamp(min(t)) from (
                 select min(start_time)  t from items where start_time  > '$s'
                 union all
                 select min(end_time)    t from items where end_time    > '$s'
