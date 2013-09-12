@@ -73,11 +73,17 @@ class ItemGrab
         
         $pic = $img->getAttribute('data-original');
         if($pic === '') $pic = $img->getAttribute('src');
-        if($pic === '') return;
+        if($pic === '') {
+            echo "empty pic\n";
+            return;
+        }
         $response = $page->get_by_url($pic);
 
         if(!is_dir($dir = dirname($path))) mkdir($dir, 0755, true);
         file_put_contents($path, $response->body);
+        if(!file_exists($path)) {
+            echo "get pic $pic failed\n";
+        }
     }
 
     static function save_items($items)
