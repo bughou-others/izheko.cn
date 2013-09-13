@@ -1,4 +1,5 @@
 <?php
+libxml_use_internal_errors(true);
 class Page
 {
     function __construct($body, $url, $curl)
@@ -14,9 +15,8 @@ class Page
         if (!$this->xpath)
         {
             $doc = new DOMDocument();
-            @$doc->LoadHTML(($charset ? 
-                '<meta http-equiv="Content-Type" content="text/html; charset=' . $charset .'"/>'
-                : '') . $this->body);
+            $doc->LoadHTML($this->body);
+            libxml_clear_errors();
             $this->xpath = new DOMXPath($doc);
         }
         if ($context) return $this->xpath->query($xpath, $context);
