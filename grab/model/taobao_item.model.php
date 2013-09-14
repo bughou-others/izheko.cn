@@ -131,10 +131,7 @@ class TaobaoItem
         if (! $curl) $curl = new Curl();
         $url ='http://detail.tmall.com/item.htm?id=' . $num_iid . '&ali_trackid=2:mm_40339139_4152163_13484640';
         $response = $curl->get($url);
-        $response->body = str_replace('<meta charset="gbk" />',
-            '<meta http-equiv="Content-Type" content="text/html; charset=gbk"/>',
-            $response->body
-        );
+        $response->fix_charset();
         if ($t = $response->query('//div[@id="J_DetailMeta"]/div[@class="tb-property"]/div[@class="tb-wrap"]/div[@class="tb-detail-hd"]/p')->item(0))
             return trim($t->nodeValue);
     }

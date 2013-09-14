@@ -10,6 +10,15 @@ class Page
         $this->xpath  = null;
     }
 
+    function fix_charset()
+    {
+        $this->body = str_replace(
+            '<meta charset="gbk" />',
+            '<meta http-equiv="Content-Type" content="text/html; charset=gbk"/>',
+            $this->body
+        );
+    }
+
     function query($xpath, $context = null, $charset = null)
     {
         if (!$this->xpath)
@@ -29,6 +38,15 @@ class Page
         if ($href && ($url = $href->value))
         {
             return $this->curl->get($url, $this->url);
+        }
+    }
+
+    function post($xpath, $data, $context = null)
+    {
+        $href = $this->query($xpath, $context)->item(0);
+        if ($href && ($url = $href->value))
+        {
+            return $this->curl->post($url, $data, $this->url);
         }
     }
 

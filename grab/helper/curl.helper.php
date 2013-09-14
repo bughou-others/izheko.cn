@@ -33,6 +33,17 @@ class Curl
         return new Page(curl_exec($this->curl), curl_getinfo($this->curl, CURLINFO_EFFECTIVE_URL), $this);
     }
 
+    function post($url, $data, $refer = null)
+    {
+        curl_setopt_array($this->curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => $data,
+            CURLOPT_REFERER => $refer,
+        ));
+        return new Page(curl_exec($this->curl), curl_getinfo($this->curl, CURLINFO_EFFECTIVE_URL), $this);
+    }
+
     function get_redirect_url($url, $refer = null)
     {
         curl_setopt_array($this->curl, array(
@@ -62,27 +73,39 @@ class Curl
         );
     }
 
-    function debug($url, $refer = null) 
+    function enable_debug()
     {
         curl_setopt_array($this->curl, array(
-            CURLOPT_URL => $url,
-            CURLOPT_REFERER => $refer ? $refer : curl_getinfo($this->curl, CURLINFO_EFFECTIVE_URL),
-            CURLOPT_HEADER  => true,
+            CURLOPT_HEADER         => true,
             CURLINFO_HEADER_OUT    => true,
             CURLOPT_FOLLOWLOCATION => false,
         ));
-        while (true) 
-        {
-            $response = curl_exec($this->curl);
-            echo "##########################\n";
-            echo curl_getinfo($this->curl, CURLINFO_HEADER_OUT);
-            echo $response;
+    }
 
+    function disable_debug()
+    {
+        curl_setopt_array($this->curl, array(
+            CURLOPT_HEADER         => false,
+            CURLINFO_HEADER_OUT    => false,
+            CURLOPT_FOLLOWLOCATION => true,
+        ));
+    }
+
+    function do_debug($response)
+    {
+        echo curl_getinfo($this->curl, CURLINFO_HEADER_OUT);
+        echo $response;
+        while (true)
+        {
             $redirect_url = curl_getinfo($this->curl, CURLINFO_REDIRECT_URL);
             if ($redirect_url)
                 curl_setopt($this->curl, CURLOPT_URL, $redirect_url);
             else break;
+
+            $response = curl_exec($this->curl);
+            echo "##########################\n";
+            echo curl_getinfo($this->curl, CURLINFO_HEADER_OUT);
+            echo $response;
         }
-        curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, true);
     }
 }
