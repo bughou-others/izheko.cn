@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/model/change_price.model.php';
+require_once 'change_price.model.php';
 require_once APP_ROOT . '/helper/curl.helper.php';
 require_once APP_ROOT . '/../common/model/taobao_api.model.php';
 require_once APP_ROOT . '/../common/helper/json.helper.php';

@@ -1,6 +1,6 @@
 <?php
 require_once APP_ROOT . '/helper/curl.helper.php';
-require_once APP_ROOT . '/model/click_url_to_item_id.model.php';
+require_once 'taobao_item/click_url_to_item_id.model.php';
 require_once APP_ROOT . '/../common/helper/price.helper.php';
 require_once APP_ROOT . '/../common/model/item_base.model.php';
 
