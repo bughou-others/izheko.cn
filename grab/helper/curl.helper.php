@@ -21,6 +21,7 @@ class Curl
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_RETURNTRANSFER => true,
 #            CURLOPT_PROXY => '192.168.2.3:8888',
+#            CURLOPT_VERBOSE => true
         ));
     }
 
@@ -33,7 +34,7 @@ class Curl
         return new Page(curl_exec($this->curl), curl_getinfo($this->curl, CURLINFO_EFFECTIVE_URL), $this);
     }
 
-    function post($url, $data, $refer = null)
+    function post($url, $data = null, $refer = null)
     {
         curl_setopt_array($this->curl, array(
             CURLOPT_URL => $url,
@@ -41,7 +42,9 @@ class Curl
             CURLOPT_POSTFIELDS => $data,
             CURLOPT_REFERER => $refer,
         ));
-        return new Page(curl_exec($this->curl), curl_getinfo($this->curl, CURLINFO_EFFECTIVE_URL), $this);
+        $response = curl_exec($this->curl);
+        curl_setopt($this->curl, CURLOPT_POST, false);
+        return new Page($response, curl_getinfo($this->curl, CURLINFO_EFFECTIVE_URL), $this);
     }
 
     function get_redirect_url($url, $refer = null)

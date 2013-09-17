@@ -1,4 +1,6 @@
 <?php
+require_once APP_ROOT . '/../common/helper/url.helper.php';
+
 libxml_use_internal_errors(true);
 class Page
 {
@@ -67,6 +69,29 @@ class Page
     function get_redirect_url_by_url($url)
     {
         return $this->curl->get_redirect_url($url, $this->url);
+    }
+
+    function submit($xpath, $data = null)
+    {
+        $form = $this->query($xpath)->item(0);
+        $fields = $this->query('.//input', $form);
+        $_data = array();
+        foreach($fields as $field) {
+            if ($field && ($name = $field->getAttribute('name')))
+                $_data[$name] = $field->getAttribute('value');
+        }
+        $data = array_merge($_data, $data);
+        $string = '';
+        foreach($data as $key => $value) {
+            $string .= $key . '=' . urlencode($value) . '&';
+        }
+        if(strtolower($form->getAttribute('method')) === 'post')
+            return $this->curl->post($form->getAttribute('action'), $string, $this->url);
+        else
+            return $this->curl->get(
+                url_add_query_string($form->getAttribute('action'), $string),
+                $this->url
+            );
     }
 }
 
