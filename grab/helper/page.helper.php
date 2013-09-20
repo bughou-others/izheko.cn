@@ -71,9 +71,9 @@ class Page
         return $this->curl->get_redirect_url($url, $this->url);
     }
 
-    function submit($xpath, $data = null)
+    function submit($form, $data = null)
     {
-        $form = $this->query($xpath)->item(0);
+        if(is_string($form)) $form = $this->query($form)->item(0);
         $fields = $this->query('.//input', $form);
         $_data = array();
         foreach($fields as $field) {
