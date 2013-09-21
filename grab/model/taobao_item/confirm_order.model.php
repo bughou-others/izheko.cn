@@ -3,7 +3,6 @@ require_once APP_ROOT . '/helper/curl.helper.php';
 
 class ConfirmOrder
 {
-    static $tb_token;
     static function init_curl(&$curl)
     {
         $curl = new Curl();
@@ -14,18 +13,9 @@ class ConfirmOrder
             CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_SSL_VERIFYHOST => false,
-            //CURLOPT_PROXY   => '192.168.2.3:8888',
-            CURLOPT_VERBOSE => true
+            CURLOPT_PROXY   => '192.168.2.3:8888',
+#            CURLOPT_VERBOSE => true
         ));
-        $cookie_file = fopen($cookie_path, 'r');
-        while($line = fgets($cookie_file)) {
-            $fields = explode("\t", $line);
-            if(count($fields) === 7 && $fields[5] === '_tb_token_')
-            {
-                self::$tb_token = trim($fields[6]);
-                break;
-            }
-        }
     }
 
     static function login($curl, $repeat = true)
@@ -49,16 +39,7 @@ class ConfirmOrder
             exit();
             //return self::login($curl, false);
         }
-        if($status === 200) {
-            $size = curl_getinfo($curl->curl, CURLINFO_HEADER_SIZE);
-            $header = substr($response->body, 0, $size);
-            if(preg_match('/^Set-Cookie: _tb_token_=([^;]*); /mi', $header, $m))
-            {
-                self::$tb_token = $m[1];
-                var_dump($m[1]);
-            }
-            self::jump($curl);
-        }
+        if($status === 200) self::jump($curl);
     }
 
     static function jump($curl)
@@ -91,12 +72,16 @@ class ConfirmOrder
         }
         if($tmall && $form->getAttribute('action') === '')
             $form->setAttribute('action', 'http://buy.tmall.com/order/confirm_order.htm');
+        $skuid = self::get_cheapest_sku($detail_page);
         $data = array(
             'item_id' => $num_iid,
             'item_id_num' => $num_iid,
-            'skuId' => self::get_cheapest_sku($detail_page)
+            'quantity' => 1,
+            'skuId' => $skuid
         );
-        if($tmall) $data['_tb_token_'] = self::$tb_token;
+        if($tmall) {
+            $data['buy_param']  = $num_iid . '_1_' . $skuid;
+        }
         var_dump($data);
     }
 
@@ -132,7 +117,7 @@ class ConfirmOrder
 
         if ($status === 200) {
             if(preg_match($tmall ? '/"sum":(\d+),/' : '/"averageSum":"(\d+)"/', $response->body, $m)){
-                echo $m[1];
+                var_dump($m[1]);
             } else {
                 echo 'no price found in confirm page', PHP_EOL;
                 echo iconv('GBK', 'UTF-8', $response->body);
@@ -146,7 +131,7 @@ class ConfirmOrder
         }
     }
 }
-#ConfirmOrder::get_price(26150288998, false);
+ConfirmOrder::get_price(26150288998, false);
 ConfirmOrder::get_price(27206788636, true);
 
 
