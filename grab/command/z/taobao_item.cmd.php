@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/model/taobao_item.model.php';
+require_once APP_ROOT . '/model/taobao_item/taobao_item.model.php';
 
 class TaobaoItemCmd
 {
@@ -9,8 +9,7 @@ class TaobaoItemCmd
         $type    = @$argv[1];
         $num_iid = @$argv[2];
         if ($type ===  'promo_info') {
-            $item   = TaobaoItem::get_item_info($num_iid);
-            $result = TaobaoItem::get_promo_info($num_iid, $item['auction_point'] > 0, $item['title']);
+            $result = TaobaoItem::get_promo_info($num_iid);
         }
         elseif ($type ===  'subtitle')
             $result = TaobaoItem::get_subtitle($num_iid);

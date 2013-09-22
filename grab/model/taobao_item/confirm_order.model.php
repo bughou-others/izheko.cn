@@ -13,7 +13,7 @@ class ConfirmOrder
             CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_SSL_VERIFYHOST => false,
-            CURLOPT_PROXY   => '192.168.2.3:8888',
+#            CURLOPT_PROXY   => '192.168.2.3:8888',
 #            CURLOPT_VERBOSE => true
         ));
     }
@@ -35,6 +35,7 @@ class ConfirmOrder
         curl_setopt($curl->curl, CURLOPT_HEADER, false);
         $status = curl_getinfo($curl->curl, CURLINFO_HTTP_CODE);
         if($repeat && $status === 302) {
+            echo 'login failed', PHP_EOL;
             echo iconv('GBK', 'UTF-8', $response->body);
             exit();
             //return self::login($curl, false);
@@ -54,70 +55,34 @@ class ConfirmOrder
         }
     }
 
-    static function get_detail_page($curl, $tmall, $num_iid, &$detail_page, &$form, &$data)
-    {
-        $url = 'http://' . ($tmall ? 'detail.tmall' : 'item.taobao') . '.com/item.htm?id=' . $num_iid . 
-            '&ali_trackid=2:mm_';
-        $detail_page = $curl->get($url);
-        if($tmall && curl_getinfo($curl->curl, CURLINFO_HTTP_CODE) === 302) {
-            self::login($curl);
-            $detail_page = $curl->get($url);
-        }
-        $detail_page->fix_charset();
-        $form = $detail_page->query('//form[@id="J_FrmBid"]')->item(0);
-        if(!$form) {
-            echo 'no form found in detail page', PHP_EOL;
-            echo iconv('GBK', 'UTF-8', $detail_page->body);
-            return;
-        }
-        if($tmall && $form->getAttribute('action') === '')
-            $form->setAttribute('action', 'http://buy.tmall.com/order/confirm_order.htm');
-        $skuid = self::get_cheapest_sku($detail_page);
-        $data = array(
-            'item_id' => $num_iid,
-            'item_id_num' => $num_iid,
-            'quantity' => 1,
-            'skuId' => $skuid
-        );
-        if($tmall) {
-            $data['buy_param']  = $num_iid . '_1_' . $skuid;
-        }
-        var_dump($data);
-    }
-
-    static function get_cheapest_sku($page)
-    {
-        if(!preg_match('/"skuMap":(.*\}\s*\})/sU', $page->body, $m)) return;
-        $skumap = json_decode($m[1], true);
-        $cheapest = array_shift($skumap);
-        foreach($skumap as $sku){
-            if ($sku['price'] < $cheapest['price'])
-                $cheapest = $sku;
-        }
-        return $cheapest['skuId'];
-    }
-
-    static function get_price($num_iid, $tmall)
+    static function get_price($num_iid, $skuid, $tmall)
     {
         static $curl;
         if (!$curl) self::init_curl($curl);
 
-        self::get_detail_page($curl, $tmall, $num_iid, $detail_page, $form, $data);
-        if(!$form) return;
-        $response = $detail_page->submit($form, $data);
+        $data = "quantity=1&item_id=$num_iid&skuId=$skuid";
+        if($tmall) {
+            $data  .= "&buy_param={$num_iid}_1_{$skuid}";
+            $target = 'http://buy.tmall.com/order/confirm_order.htm';
+            $refer  = 'http://detail.tmall.com/item.htm?id=' . $num_iid;
+        } else {
+            $target = 'http://buy.taobao.com/auction/buy_now.jhtml';
+            $refer = 'http://item.taobao.com/item.htm?id=' . $num_iid ;
+        }
+        $response = $curl->post($target, $data, $refer);
         $status = curl_getinfo($curl->curl, CURLINFO_HTTP_CODE);
 
         if($status === 302 && ($url = curl_getinfo($curl->curl, CURLINFO_REDIRECT_URL))
             && preg_match('@^https?://(login|jump)\.(tmall|taobao)\.com@i', $url)
         ) {
-            self::login($curl, $tmall);
-            $response = $detail_page->submit($form, $data);
+            self::login($curl);
+            $response = $curl->post($target, $data, $refer);
             $status = curl_getinfo($curl->curl, CURLINFO_HTTP_CODE);
         }
 
         if ($status === 200) {
             if(preg_match($tmall ? '/"sum":(\d+),/' : '/"averageSum":"(\d+)"/', $response->body, $m)){
-                var_dump($m[1]);
+                return $m[1];
             } else {
                 echo 'no price found in confirm page', PHP_EOL;
                 echo iconv('GBK', 'UTF-8', $response->body);
@@ -131,7 +96,5 @@ class ConfirmOrder
         }
     }
 }
-ConfirmOrder::get_price(26150288998, false);
-ConfirmOrder::get_price(27206788636, true);
 
 

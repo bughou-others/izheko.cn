@@ -1,5 +1,5 @@
 <?php
-require_once 'change_price.model.php';
+require_once 'confirm_order.model.php';
 require_once APP_ROOT . '/helper/curl.helper.php';
 require_once APP_ROOT . '/../common/model/taobao_api.model.php';
 require_once APP_ROOT . '/../common/helper/json.helper.php';
@@ -27,16 +27,41 @@ class TaobaoItem
             $item['post_fee']      === '0.00'   ||
             $item['express_fee']   === '0.00'   ||
             $item['ems_fee']       === '0.00';
+        unset($item['freight_payer'], $item['post_fee'],
+            $item['express_fee'], $item['ems_fee']);
 
         if(isset($item['price'])) $item['price'] = parse_price($item['price']);
         self::merge_promo_info($item, $num_iid);
+        self::merge_real_price($item, $num_iid);
 
         return $item;
     }
 
+    static function merge_real_price(&$item, $num_iid)
+    {
+        $cheapest = null;
+        if(isset($item['skus']['sku']) && is_array($item['skus']['sku'])) {
+            $skus = $item['skus']['sku'];
+            foreach($skus as $sku) {
+                if ($sku['quantity'] > 0 && (
+                  $cheapest === null ||  $sku['price'] < $cheapest['price']
+                )) $cheapest = $sku;
+            }
+        }
+        unset($item['skus']);
+        $price = ConfirmOrder::get_price($num_iid,
+            isset($cheapest['sku_id']) ? $cheapest['sku_id'] : null,
+            $item['auction_point'] > 0
+        );
+        if($price && $price < $item['now_price']) {
+            $item['now_price']  = $price;
+            $item['price_type'] = '拍下改价';
+        }
+    }
+
     static function merge_promo_info(&$item, $num_iid)
     {
-        $promo = self::get_promo_info($num_iid, $item['auction_point'] > 0, $item['title']);
+        $promo = self::get_promo_info($num_iid);
         if(is_array($promo) && $promo['price'] < $item['price']) {
             $item['now_price']  = $promo['price'];
             if($promo['price'] < 0) $item['now_price'] += $item['price'];
@@ -47,7 +72,7 @@ class TaobaoItem
             $item['end_time']   = isset($promo['endTime']) && is_int($promo['endTime']) && 
                 ($end_time = $promo['endTime'] / 1000)     < strtotime($item['delist_time']) ?
                 strftime('%F %T', $end_time)   : $item['delist_time'];
-            $item['price_type']  = $promo['price_type'];
+            $item['price_type'] = $promo['price_type'];
         } else {
             $item['now_price']  = $item['price'];
             $item['start_time'] = $item['list_time'];
@@ -56,7 +81,7 @@ class TaobaoItem
         }
     }
 
-    static function get_promo_info($num_iid, $tmall, $title)
+    static function get_promo_info($num_iid)
     {
         if (!$price_info = self::get_price_info($num_iid)) return;
         $promo = null;
@@ -67,22 +92,9 @@ class TaobaoItem
             )
             foreach($promo_list as $this_promo) {
                 self::compare_promo($this_promo, $promo);
-                $change_price = ChangePrice::parse($this_promo['type']);
-                if(isset($change_price['price']) && $change_price['price'] < 0)
-                    $change_price['price'] += $this_promo['price'];
-                self::compare_promo($change_price, $promo);
             }
         }
-        if (!isset($promo['price_type']) && $tmall) {
-            $subtitle = self::get_subtitle($num_iid);
-            $change_price = ChangePrice::parse($subtitle);
-            self::compare_promo($change_price, $promo);
-        }
-        if (!isset($promo['price_type']) && $title) {
-            $change_price = ChangePrice::parse($title);
-            self::compare_promo($change_price, $promo);
-        }
-        if ($promo && !isset($promo['price_type'])) {
+        if ($promo) {
             $promo['price_type'] = isset($promo['type']) &&
                 ($promo['type'] === 'VIP价格' || $promo['type'] === '店铺vip')
                 ? 'VIP价格' : '';
