@@ -14,7 +14,7 @@ class ConfirmOrder
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_SSL_VERIFYHOST => false,
 #            CURLOPT_PROXY   => '192.168.2.3:8888',
-#            CURLOPT_VERBOSE => true
+            CURLOPT_VERBOSE => true
         ));
     }
 
@@ -27,16 +27,17 @@ class ConfirmOrder
             echo 'no form found in login page', PHP_EOL;
             echo iconv('GBK', 'UTF-8', $login_page->body);
         }
-        curl_setopt($curl->curl, CURLOPT_HEADER, true);
         $response = $login_page->submit($form,  array(
             'TPL_username' => 'bughou',
             'TPL_password' => 'impy1311',
         ));
-        curl_setopt($curl->curl, CURLOPT_HEADER, false);
         $status = curl_getinfo($curl->curl, CURLINFO_HTTP_CODE);
         if($repeat && $status === 302) {
             echo 'login failed', PHP_EOL;
+            $url = curl_getinfo($curl->curl, CURLINFO_REDIRECT_URL);
+            $response = $curl->get($url, $response->url);
             echo iconv('GBK', 'UTF-8', $response->body);
+
             exit();
             //return self::login($curl, false);
         }
