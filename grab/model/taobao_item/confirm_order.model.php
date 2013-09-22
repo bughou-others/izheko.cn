@@ -81,14 +81,14 @@ class ConfirmOrder
             if(preg_match($tmall ? '/"sum":(\d+),/' : '/"averageSum":"(\d+)"/', $response->body, $m)){
                 return $m[1];
             } else {
-                echo 'no price found in confirm page', PHP_EOL;
+                echo $num_iid, ': no price found in confirm page', PHP_EOL;
                 echo iconv('GBK', 'UTF-8', $response->body);
             }
         } elseif ($url = curl_getinfo($curl->curl, CURLINFO_REDIRECT_URL)) {
-            echo 'unexpected ' . $status . ' redirect: ', $url, PHP_EOL;
+            echo $num_iid, ': unexpected ' . $status . ' redirect: ', $url, PHP_EOL;
             echo iconv('GBK', 'UTF-8', $response->body);
         } else {
-            echo 'unexpected status: ', $status, PHP_EOL;
+            echo $num_iid, ': unexpected status: ', $status, PHP_EOL;
             echo iconv('GBK', 'UTF-8', $response->body);
         }
     }

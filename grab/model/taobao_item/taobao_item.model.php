@@ -44,7 +44,7 @@ class TaobaoItem
             $now > strtotime($item['delist_time'])
         ) return;
         $cheapest = null;
-        if(isset($item['skus']['sku']) && is_array($item['skus']['sku'])) {
+        if (isset($item['skus']['sku']) && is_array($item['skus']['sku'])) {
             $skus = $item['skus']['sku'];
             foreach($skus as $sku) {
                 if ($sku['quantity'] > 0 && (
@@ -57,7 +57,7 @@ class TaobaoItem
             isset($cheapest['sku_id']) ? $cheapest['sku_id'] : null,
             $item['auction_point'] > 0
         );
-        if($price && $price < $item['now_price']) {
+        if ($price && $price < $item['now_price']) {
             $item['now_price']  = $price;
             $item['price_type'] = '拍下改价';
         }
