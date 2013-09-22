@@ -14,7 +14,7 @@ class ConfirmOrder
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_SSL_VERIFYHOST => false,
 #            CURLOPT_PROXY   => '192.168.2.3:8888',
-            CURLOPT_VERBOSE => true
+#            CURLOPT_VERBOSE => true
         ));
     }
 
@@ -34,12 +34,8 @@ class ConfirmOrder
         $status = curl_getinfo($curl->curl, CURLINFO_HTTP_CODE);
         if($repeat && $status === 302) {
             echo 'login failed', PHP_EOL;
-            $url = curl_getinfo($curl->curl, CURLINFO_REDIRECT_URL);
-            $response = $curl->get($url, $response->url);
             echo iconv('GBK', 'UTF-8', $response->body);
-
-            exit();
-            //return self::login($curl, false);
+            return self::login($curl, false);
         }
         if($status === 200) self::jump($curl);
     }
