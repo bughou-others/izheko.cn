@@ -39,6 +39,10 @@ class TaobaoItem
 
     static function merge_real_price(&$item, $num_iid)
     {
+        $now = time();
+        if ($now < strtotime($item['list_time']) ||
+            $now > strtotime($item['delist_time'])
+        ) return;
         $cheapest = null;
         if(isset($item['skus']['sku']) && is_array($item['skus']['sku'])) {
             $skus = $item['skus']['sku'];
