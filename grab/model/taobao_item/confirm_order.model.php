@@ -82,7 +82,7 @@ class ConfirmOrder
                 return $m[1];
             } else {
                 echo $num_iid, ': no price found in confirm page', PHP_EOL;
-                echo iconv('GBK', 'UTF-8', $response->body);
+                //echo iconv('GBK', 'UTF-8', $response->body);
             }
         } elseif ($url = curl_getinfo($curl->curl, CURLINFO_REDIRECT_URL)) {
             echo $num_iid, ': unexpected ' . $status . ' redirect: ', $url, PHP_EOL;
