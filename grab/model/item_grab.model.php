@@ -36,8 +36,7 @@ class ItemGrab
         {
             self::get_one_item($item_node, $page, $items);
         }
-        if ($items) self::save_items($items);
-        else echo "no new item\n";
+        self::save_items($items);
         flush();
     }
 
@@ -99,8 +98,11 @@ class ItemGrab
 
     static function save_items($items)
     {
-        if (! $items) return;
         $now = strftime('%F %T');
+        if (!$items) {
+            echo "$now no new item\n";
+            return;
+        }
         $values = '';
         foreach ($items as $num_iid => $tmp)
         {
@@ -117,7 +119,6 @@ class ItemGrab
             values ' . $values;
         $count = count($items);
         $affected = DB::affected_rows($sql);
-        $now = strftime('%F %T');
         if($affected === false) error_log("$now insert failed: $count");
         else echo "$now insert success: $count, {$affected}\n";
     }
