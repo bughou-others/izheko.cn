@@ -14,6 +14,7 @@ class ConfirmOrder
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_SSL_VERIFYHOST => false,
 #            CURLOPT_PROXY   => '192.168.2.3:8888',
+            CURLOPT_PROXY   => '116.228.55.217:80',
 #            CURLOPT_VERBOSE => true
         ));
     }
