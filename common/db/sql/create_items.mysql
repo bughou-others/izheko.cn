@@ -6,6 +6,7 @@ create table if not exists `items`
  `num_iid`       bigint  unsigned not null,
  `create_time`   datetime         not null,
  `ref_iid`       varchar(50)      not null,
+ `ref_ordinal`   int     unsigned not null default 912345678,
  `ref_update_time` datetime       not null,
  `update_time`   datetime,
  `title`         varchar(100)     not null default '',

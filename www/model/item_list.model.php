@@ -63,7 +63,7 @@ class ItemList extends ItemBase
             from items
             where title != '' and !(flags&" . ItemBase::FLAGS_MASK_ITEM_DELETED . ")
             $condition 
-            order by id desc limit $offset, $page_size";
+            order by ref_ordinal, id desc limit $offset, $page_size";
         $result = DB::query($sql);
         $instances = array();
         while($row = $result->fetch_assoc()) $instances[] = new Item($row);

@@ -36,15 +36,20 @@ class ItemGrab
         {
             self::get_one_item($item_node, $page, $items);
         }
-        if (!$items) return;
-        self::save_items($items);
+        if ($items) self::save_items($items);
+        else echo "no new item\n";
+        flush();
     }
 
     static function get_one_item($item_node, $page, &$items)
     {
+        static $ordinal;
+        if ($ordinal === null) $ordinal = 1;
+        else $ordinal ++;
+
         $ref_iid = static::get_ref_iid($item_node, $page);
         if (DB::affected_rows(
-            "update items set ref_update_time=now() where ref_iid='$ref_iid'"
+            "update items set ref_ordinal=$ordinal, ref_update_time=now() where ref_iid='$ref_iid'"
         )) return;
         
         $num_iid = self::get_num_iid($item_node, $page);
@@ -56,7 +61,7 @@ class ItemGrab
             self::fetch_pic($num_iid, $pic_node, $page);
             $ref_tip = static::get_tip_text($item_node, $page);
             $ref_end_time = static::get_ref_end_time($item_node, $page);
-            $items[$num_iid] = array($ref_iid, $ref_price, $ref_tip, $ref_end_time);
+            $items[$num_iid] = array($ref_iid, $ordinal, $ref_price, $ref_tip, $ref_end_time);
         }
     }
 
@@ -99,16 +104,16 @@ class ItemGrab
         $values = '';
         foreach ($items as $num_iid => $tmp)
         {
-            list($ref_iid, $ref_price, $ref_tip, $ref_end_time) = $tmp;
+            list($ref_iid, $ref_ordinal, $ref_price, $ref_tip, $ref_end_time) = $tmp;
 
             $ref_price = $ref_price ? parse_price($ref_price) : 'null';
             $ref_tip = DB::escape($ref_tip);
             $ref_end_time = $ref_end_time ? "'$ref_end_time'" : 'null';
-            $values .= ",($num_iid, '$ref_iid', '$now', '$now', $ref_price, $ref_end_time, '$ref_tip')";
+            $values .= ",($num_iid, '$ref_iid', '$now', '$ref_ordinal', '$now', $ref_price, $ref_end_time, '$ref_tip')";
         }
         $values = substr($values, 1);
         $sql = 'insert ignore into items 
-            (`num_iid`, `ref_iid`, `create_time`, `ref_update_time`, `ref_price`, `ref_end_time`, `ref_tip`)
+            (`num_iid`, `ref_iid`, `create_time`, `ref_ordinal`, `ref_update_time`, `ref_price`, `ref_end_time`, `ref_tip`)
             values ' . $values;
         $count = count($items);
         $affected = DB::affected_rows($sql);
