@@ -6,10 +6,10 @@ app_root = APP_ROOT
 50    4     *   *   *    cd $app_root; php run command/item_clear.cmd.php         &>> tmp/item_clear.log
 
  0  */4     *   *   *    cd $app_root; php run command/item_grab_zhe800.cmd.php   &>> tmp/item_grab_zhe800.log
-#0    8     *   *   *    cd $app_root; php run command/item_grab_jiukuaiyou.cmd.php jiu      &>> tmp/item_grab_jiu.log
- 0    8     *   *   *    cd $app_root; php run command/item_grab_jiukuaiyou.cmd.php shijiu   &>> tmp/item_grab_shijiu.log
- 3 10,15    *   *   *    cd $app_root; php run command/item_grab_jiukuaiyou.cmd.php today    &>> tmp/item_grab_today.log
- 3 17,23    *   *   *    cd $app_root; php run command/item_grab_jiukuaiyou.cmd.php tomorrow &>> tmp/item_grab_tomorrow.log
 
-#*    *     *   *   *    cd $app_root; php run command/click_url_get.cmd.php      &>> tmp/click_url_get.log
+#0    8     *   *   *    cd $app_root; php run command/item_grab_jiukuaiyou.cmd.php jiu      &>> tmp/item_grab_jiu.log
+#0    8     *   *   *    cd $app_root; php run command/item_grab_jiukuaiyou.cmd.php shijiu   &>> tmp/item_grab_shijiu.log
+#3 10,15    *   *   *    cd $app_root; php run command/item_grab_jiukuaiyou.cmd.php today    &>> tmp/item_grab_today.log
+#3 17,23    *   *   *    cd $app_root; php run command/item_grab_jiukuaiyou.cmd.php tomorrow &>> tmp/item_grab_tomorrow.log
+
 

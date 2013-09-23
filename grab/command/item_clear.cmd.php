@@ -12,11 +12,10 @@ class ItemClear
 
     static function clear()
     {
-        #delisted or risen price(too expensive than ref price) or deleted
+        #promotion ended or deleted
         $common = '
-            from items where end_time < now() or now_price > ' .
-            ItemBase::factor_price_risen . ' * ref_price or (flags & ' .
-            ItemBase::FLAGS_MASK_ITEM_DELETED . ')'
+            from items where ref_update_time < "' . strftime('%F %T', time() - 86400) .
+            '" or end_time < now() or (flags & ' .  ItemBase::FLAGS_MASK_ITEM_DELETED . ')'
             ;
         $type_ids = DB::get_values('select distinct type_id ' . $common);
         $sql    = 'replace into items_history select * ' . $common;
