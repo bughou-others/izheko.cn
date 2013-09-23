@@ -8,7 +8,7 @@ class ItemController
         $num_iid = $_GET['num_iid'];
         $sql_format = 'select 
             num_iid,title,type_id,flags,ref_price,price,now_price,
-            start_time,end_time,delist_time,click_url,ref_tip
+            start_time,end_time,delist_time,ref_tip
             from %s
             where num_iid=' . $num_iid;
         $data = DB::get_row(sprintf($sql_format, 'items'));
