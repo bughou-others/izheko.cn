@@ -42,19 +42,25 @@ class ItemGrab
 
     static function get_one_item($item_node, $page, &$items)
     {
-        $item_id = self::get_item_id($item_node, $page);
-        if ($item_id && preg_match('/^\d+$/', $item_id))
+        $ref_iid = static::get_ref_iid($item_node, $page);
+        if (DB::affected_rows(
+            "update items set ref_update_time=now() where ref_iid='$ref_iid'"
+        )) return;
+        
+        $num_iid = self::get_num_iid($item_node, $page);
+        if ($num_iid && preg_match('/^\d+$/', $num_iid))
         {
-            $price = $page->query(static::item_price_xpath, $item_node)->item(0)->nodeValue;
-            $price = preg_match('/\d+(\.\d+)?/', $price, $matches) ? $matches[0] : null;
+            $ref_price = $page->query(static::item_price_xpath, $item_node)->item(0)->nodeValue;
+            $ref_price = preg_match('/\d+(\.\d+)?/', $ref_price, $matches) ? $matches[0] : null;
             $pic_node = $page->query(static::item_pic_xpath, $item_node)->item(0);
-            self::fetch_pic($item_id, $pic_node, $page);
-            $tip = static::get_tip_text($item_node, $page);
-            $items[$item_id] = array($price, $tip);
+            self::fetch_pic($num_iid, $pic_node, $page);
+            $ref_tip = static::get_tip_text($item_node, $page);
+            $ref_end_time = static::get_ref_end_time($item_node, $page);
+            $items[$num_iid] = array($ref_iid, $ref_price, $ref_tip, $ref_end_time);
         }
     }
 
-    static function get_item_id($item_node, $page)
+    static function get_num_iid($item_node, $page)
     {
         list($url, $refer) = static::get_click_url($item_node, $page);
         if($url === null) return;
@@ -66,9 +72,9 @@ class ItemGrab
         else error_log("unexpected click url: $url\n");
     }
 
-    static function fetch_pic($item_id, $img, $page)
+    static function fetch_pic($num_iid, $img, $page)
     {
-        $path = APP_ROOT . '/../static/public/' . ItemBase::pic_path($item_id);
+        $path = APP_ROOT . '/../static/public/' . ItemBase::pic_path($num_iid);
         if(file_exists($path)) return;
         
         $pic = $img->getAttribute('data-original');
@@ -91,14 +97,18 @@ class ItemGrab
         if (! $items) return;
         $now = strftime('%F %T');
         $values = '';
-        foreach ($items as $item_id => $tmp)
+        foreach ($items as $num_iid => $tmp)
         {
-            $ref_price = $tmp[0] ? parse_price($tmp[0]) : 'null';
-            $ref_tip = DB::escape($tmp[1]);
-            $values .= ",($item_id, '$now', $ref_price, '$ref_tip')";
+            list($ref_iid, $ref_price, $ref_tip, $ref_end_time) = $tmp;
+
+            $ref_price = $ref_price ? parse_price($ref_price) : 'null';
+            $ref_tip = DB::escape($ref_tip);
+            $ref_end_time = $ref_end_time ? "'$ref_end_time'" : 'null';
+            $values .= ",($num_iid, '$ref_iid', '$now', '$now', $ref_price, $ref_end_time, '$ref_tip')";
         }
         $values = substr($values, 1);
-        $sql = 'insert ignore into items (`num_iid`, `create_time`, `ref_price`, `ref_tip`)
+        $sql = 'insert ignore into items 
+            (`num_iid`, `ref_iid`, `create_time`, `ref_update_time`, `ref_price`, `ref_end_time`, `ref_tip`)
             values ' . $values;
         $count = count($items);
         $affected = DB::affected_rows($sql);

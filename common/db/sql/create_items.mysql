@@ -5,7 +5,9 @@ create table if not exists `items`
  `id`            int     unsigned not null auto_increment,
  `num_iid`       bigint  unsigned not null,
  `create_time`   datetime         not null,
- `update_time`   datetime,       
+ `ref_iid`       varchar(50)      not null,
+ `ref_update_time` datetime       not null,
+ `update_time`   datetime,
  `title`         varchar(100)     not null default '',
  `flags`         tinyint unsigned not null default 0,
  `cid`           int unsigned,
@@ -15,15 +17,15 @@ create table if not exists `items`
  `now_price`     int unsigned,
  `start_time`    datetime,
  `end_time`      datetime,
+ `ref_end_time`  datetime,
  `list_time`     datetime,
  `delist_time`   datetime,
  `ref_tip`       varchar(255)     not null default '',
- `detail_url`    varchar(1024)    not null default '',
- `click_url`     varchar(1024)    not null default '',
  `pic_url`       varchar(1024)    not null default '',
  `updater`       int unsigned     not null default 0,
  primary key (`id`),
- unique  key `num_iid` (`num_iid`)
-) engine=InnoDB default charset=utf8; 
+ unique  key `num_iid` (`num_iid`),
+ unique  key `ref_iid` (`ref_iid`)
+) engine=InnoDB default charset=utf8;
 
 create table if not exists `items_history` like `items`;

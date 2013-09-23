@@ -25,6 +25,18 @@ class ItemGrabZhe800 extends ItemGrab
         return array($url, 'http://www.zhe800.com/');
     }
 
+    static function get_ref_iid($item_node, $page)
+    {
+        $info = explode(',', $item_node->getAttribute('info'));
+        if (isset($info[1])) return $info[1];
+    }
+
+    static function get_ref_end_time($item_node, $page)
+    {
+        $info = explode(',', $item_node->getAttribute('info'));
+        if (isset($info[2])) return strftime('%F %T', substr($info[2], 0, -3));
+    }
+
     static function get_click_url($item_node, $page)
     {
          $href = $page->query(static::item_jump_xpath, $item_node)->item(0);
