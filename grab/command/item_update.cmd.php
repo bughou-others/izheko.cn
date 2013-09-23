@@ -51,18 +51,13 @@ class ItemUpdate
         echo "$now {$result->num_rows} item to update\n";
 
         for($i = 1; $item = $result->fetch_assoc(); $i++)
-            self::update_one($item, $i);
-        if(--$i) echo "$now finished updating $i item\n";
-
-/*
-        if(self::$list_time_change)
         {
-            $now = strftime('%F %T');
-            echo "$now restart click_url_daemon\n";
-            system('cd ' . APP_ROOT .
-                '; php run command/click_url_daemon.cmd.php >> tmp/click_url_daemon.log 2>&1 &');
+            self::update_one($item, $i);
         }
- */
+        if (--$i) {
+            $now = strftime('%F %T');
+            echo "$now finished updating $i item\n";
+        }
 
         if(self::$changes_type_id)
         {
