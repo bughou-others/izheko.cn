@@ -32,7 +32,7 @@ class TaobaoItem
 
         if(isset($item['price'])) $item['price'] = parse_price($item['price']);
         self::merge_promo_info($item, $num_iid);
-        self::merge_real_price($item, $num_iid);
+        #self::merge_real_price($item, $num_iid);
 
         return $item;
     }

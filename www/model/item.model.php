@@ -70,55 +70,32 @@ class Item extends ItemBase
             return '折扣结束时间：' . strftime('%m月%d日%H:%M', $end_time);
     }
 
-    function discount_price()
-    {
-        if (isset($this->discount_price)) return $this->discount_price;
-        $now_price = $this->data['now_price'];
-        $ref_price = $this->data['ref_price'];
-        if ($ref_price <= 0 || $now_price <= $ref_price * self::factor_price_risen)
-        {
-            $this->discount_price = $now_price;
-            $this->risen_price    = null;
-        }
-        else
-        {
-            $this->discount_price = $ref_price;
-            $this->risen_price    = $now_price;
-        }
-        return $this->discount_price;
-    }
 
     function discount_price_str()
     {
         if (! isset($this->discount_price_str)) 
-            $this->discount_price_str = format_price($this->discount_price());
+            $this->discount_price_str = format_price($this->data['ref_price']);
         return $this->discount_price_str;
     }
 
     function discount_price_yuan()
     {
         if (! isset($this->discount_price_yuan))
-            list($this->discount_price_yuan, $this->discount_price_fen) = split_price($this->discount_price());
+            list($this->discount_price_yuan, $this->discount_price_fen) = split_price($this->data['ref_price']);
         return $this->discount_price_yuan;
     }
 
     function discount_price_fen()
     {
         if (! isset($this->discount_price_fen))
-            list($this->discount_price_yuan, $this->discount_price_fen) = split_price($this->discount_price());
+            list($this->discount_price_yuan, $this->discount_price_fen) = split_price($this->data['ref_price']);
         return $this->discount_price_fen;
-    }
-
-    function risen_price()
-    {
-        isset($this->risen_price) || $this->discount_price();
-        return $this->risen_price;
     }
 
     function original_price_str()
     {
         if (! isset($this->original_price_str)) {
-            if(($price = $this->data['price']) > $this->discount_price()){
+            if(($price = $this->data['price']) > $this->data['ref_price']){
                 $this->original_price_str = floor($price / 100);
             }
             else $this->original_price_str = false;
@@ -144,22 +121,15 @@ class Item extends ItemBase
         }
         elseif ($now > strtotime($this->data['delist_time']))
         {
-            $this->action        = '已抢光';
+            $this->action        = '已下架';
             $this->action_style  = 'gray';
             $this->action_title  = '宝贝被抢光，已经下架啦。';
         }
-        elseif (($risen_price = $this->risen_price()) || $now > strtotime($this->data['end_time']))
+        elseif ($now > strtotime($this->data['end_time']))
         {
-            if ($risen_price === null || $risen_price === $this->data['price']) {
-                $this->action        = '已结束';
-                $this->action_style  = 'gray';
-                $this->action_title  = '折扣已经结束啦。';
-            } else {
-                $risen_price         = format_price($risen_price);
-                $this->action        = "￥$risen_price";
-                $this->action_style  = 'gray';
-                $this->action_title  = "宝贝已经涨价为 ￥$risen_price 啦。";
-            }
+            $this->action        = '已结束';
+            $this->action_style  = 'gray';
+            $this->action_title  = '折扣已经结束啦。';
         }
         else
         {
