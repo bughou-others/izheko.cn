@@ -6,17 +6,55 @@ class ConfirmOrder
     static function init_curl(&$curl)
     {
         $curl = new Curl();
-        $cookie_path = APP_ROOT . '/tmp/cookie.txt';
+        $path = APP_ROOT . '/tmp/cookie.txt';
         curl_setopt_array($curl->curl, array(
-            CURLOPT_COOKIEFILE => $cookie_path,
-            CURLOPT_COOKIEJAR  => $cookie_path,
+            CURLOPT_COOKIEFILE => $path,
+            CURLOPT_COOKIEJAR  => $path,
             CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_SSL_VERIFYPEER => false,
             CURLOPT_SSL_VERIFYHOST => false,
-#            CURLOPT_PROXY   => '192.168.2.3:8888',
-            CURLOPT_PROXY   => '116.228.55.217:80',
 #            CURLOPT_VERBOSE => true
         ));
+    }
+
+    static function update_proxy($curl, $path)
+    {
+        if (file_exists($path) && filemtime($path) > (time() - 3600 * 5)) return;
+        $page = $curl->get('http://taobaofou.com/http_anonymous.html');
+        $trs = $page->query('//table/tr');
+        $data = '';
+        foreach ($trs as $tr) {
+            $tds = $page->query('./td', $tr);
+            if ($tds->length === 4) {
+                $state = trim($tds->item(3)->nodeValue);
+                if ($state !== 'CN') continue;
+                $host = trim($tds->item(1)->nodeValue);
+                $port = trim($tds->item(2)->nodeValue);
+                if (preg_match('/^[a-zA-Z0-9-.]+$/', $host) &&
+                    preg_match('/^\d+$/', $port)
+                ) $data .= "$host:$port\n";
+            }
+        }
+        file_put_contents($path, $data);
+    }
+
+    static function set_proxy($curl)
+    {
+        static $data, $max;
+        if ($data === null) {
+            $path = APP_ROOT . '/tmp/proxy.txt';
+            self::update_proxy($curl, $path);
+            $file = fopen($path, 'r');
+            $data = array();
+            while ($line = trim(fgets($file))) {
+                $data[] = $line;
+            }
+            $max = count($data) - 1;
+        }
+        if ($max > 0) {
+            $proxy = $data[rand(0, $max)];
+            curl_setopt($curl->curl, CURLOPT_PROXY, $proxy);
+        }
     }
 
     static function login($curl, $repeat = true)
@@ -57,6 +95,7 @@ class ConfirmOrder
     {
         static $curl;
         if (!$curl) self::init_curl($curl);
+        #self::set_proxy($curl);
 
         $data = "quantity=1&item_id=$num_iid&skuId=$skuid";
         if($tmall) {
