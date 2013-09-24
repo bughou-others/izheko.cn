@@ -59,15 +59,18 @@ class Item extends ItemBase
 
     function time_left()
     {
-        $start_time = strtotime($this->data['start_time']);
-        $end_time   = strtotime($this->data['end_time']);
         $now = time();
-        if($now < $start_time)
+        $start_time = strtotime($this->data['start_time']);
+        if ($now < $start_time)
             return "折扣即将开始：<span s=\"$start_time\"></span>";
-        elseif($now < $end_time)
+
+        $end_time = strtotime($this->data['end_time']);
+        $ref_end_time = strtotime($this->data['ref_end_time']);
+        if ($ref_end_time < $end_time) $end_time = $ref_end_time;
+        if ($now < $end_time)
             return "折扣剩余时间：<span s=\"$end_time\"></span>";
-        else 
-            return '折扣结束时间：' . strftime('%m月%d日%H:%M', $end_time);
+
+        return '折扣结束时间：' . strftime('%m月%d日%H:%M', $end_time);
     }
 
 
