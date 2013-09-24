@@ -20,12 +20,12 @@ class TypeCmd
 
     static function update_all_type_id()
     { 
-        $sql = "select num_iid,cid,type_id from items where cid > 0";
+        $sql = "select num_iid,cid,title,type_id from items where cid > 0";
         $result = DB::query($sql);
-        while(list($num_iid, $cid, $old_type_id) = $result->fetch_row())
+        while(list($num_iid, $cid, $title, $old_type_id) = $result->fetch_row())
         {
-            $type_id = Category::get_type_id($cid);
-            if($type_id !== $old_type_id)
+            $type_id = Category::get_type_id($cid, $title);
+            if($type_id != $old_type_id)
             {
                 $sql = "update items set type_id=%s where num_iid=$num_iid";
                 $affected = DB::update_affected_rows($sql, $type_id);
