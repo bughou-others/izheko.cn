@@ -6,7 +6,7 @@ app_root = APP_ROOT
  0    3     * * * cd $app_root; php run command/item_update.cmd.php all &>> tmp/item_update.log
 50    4     * * * cd $app_root; php run command/item_clear.cmd.php      &>> tmp/item_clear.log
 
- *    *     * * * cd $app_root/../www/public/cache; find -mmin +2 -exec echo {} +
+ 9    *     * * * cd $app_root/../www/public/cache; find -type f -mmin +2 -exec rm -f {} +
 
 
 #0    8   * * * cd $app_root; php run command/grab_jky.cmd.php jiu      &>> tmp/grab_jky_jiu.log
