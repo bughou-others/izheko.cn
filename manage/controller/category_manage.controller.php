@@ -30,10 +30,8 @@ class CategoryManageController
 
     static function update()
     {
-        if (!($id = $_POST['update']) ||
-            !isset($_POST['type_id']) ||
-            !($type_id = trim($_POST['type_id']))
-        ) return;
+        if (!($id = $_POST['update']) || !isset($_POST['type_id'])) return;
+        $type_id = trim($_POST['type_id']);
 
         require_once APP_ROOT . '/model/category_manage.model.php';
         if ($r = CategoryManage::update($id, $type_id));

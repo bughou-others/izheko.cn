@@ -70,7 +70,7 @@ class TaobaoApi
 
     static function item_get($num_iid) {
         return self::get_data('taobao.item.get', array(
-            'fields'   => 'num_iid,cid,title,pic_url,price,list_time,delist_time,freight_payer,post_fee,express_fee,ems_fee,auction_point,sku.sku_id,sku.quantity,sku.price',
+            'fields'   => 'num_iid,cid,title,pic_url,price,list_time,delist_time,freight_payer,post_fee,express_fee,ems_fee,auction_point', #,sku.sku_id,sku.quantity,sku.price
             'num_iid'  => $num_iid,
         ));
     }

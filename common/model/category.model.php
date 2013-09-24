@@ -4,13 +4,23 @@ require_once APP_ROOT . '/../common/model/taobao_api.model.php';
 
 class Category
 {
-    static function get_type_id($cid)
+    static function get_type_id($cid, $title = null)
     { 
         while( ($category = self::get($cid)) &&
-            (!isset($category['type_id']) || $category['type_id'] <= 0) &&
+            !(isset($category['type_id']) && $category['type_id'] > 0) &&
             ($parent_cid = $category['parent_cid']) > 0 
         ) $cid = $parent_cid;
-        if(isset($category['type_id'])) return $category['type_id'];
+        if(isset($category['type_id'])) {
+            if($category['type_id'] <= 0 &&
+                $category['cid'] == 1625 #女士内衣/男士内衣/家居服
+                && $title
+            ) {
+                if (strpos($title, '女') !== false) return 1;
+                elseif (strpos($title, '男') !== false) return 2;
+                else return 3;
+            }
+            return $category['type_id'];
+        }
     }
 
     static function get($cid)

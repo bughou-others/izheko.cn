@@ -62,8 +62,7 @@ class CategoryManage
     {
         if (!($id = trim($id)) ||
             !(preg_match('/^\d+$/', $id)) ||
-            !(preg_match('/^\d+$/', $type_id)) ||
-            $type_id <= 0
+            !(preg_match('/^\d+$/', $type_id))
         ) return;
 
         $sql = "update categories set type_id=$type_id, update_time=now()

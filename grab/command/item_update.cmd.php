@@ -1,7 +1,5 @@
 <?php
 require_once APP_ROOT . '/model/taobao_item/taobao_item.model.php';
-require_once APP_ROOT . '/../common/model/category.model.php';
-require_once APP_ROOT . '/../common/model/item_base.model.php';
 
 declare(ticks = 1);
 class ItemUpdate
@@ -98,17 +96,6 @@ class ItemUpdate
             return $flags === $item['flags'] ? null : array('flags' => $flags);
         }
         unset($item['num_iid']);
-        $info['type_id'] = Category::get_type_id($info['cid']);
-        $info['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_POSTAGE_FREE, $info['postage_free']);
-        $info['flags'] = self::mask_bits($info['flags'], ItemBase::FLAGS_MASK_VIP_PRICE,
-            $info['price_type'] === 'VIP价格'
-        );
-        $info['flags'] = self::mask_bits($info['flags'], ItemBase::FLAGS_MASK_CHANGE_PRICE,
-            $info['price_type'] === '拍下改价'
-        );
-        $info['flags'] = self::mask_bits($info['flags'], ItemBase::FLAGS_MASK_TMALL,
-            $info['auction_point'] > 0
-        );
         $changes = array();
         foreach($item as $k => $v)
         {
@@ -123,11 +110,6 @@ class ItemUpdate
         $data['update_time'] = strftime('%F %T');
         $sql = "update items set %s where num_iid = $num_iid ";
         return DB::update_affected_rows($sql, $data);
-    }
-
-    static function mask_bits($bits, $mask, $bool)
-    {
-        return $bool ? ($bits | $mask) : ($bits & ~$mask);
     }
 }
 
