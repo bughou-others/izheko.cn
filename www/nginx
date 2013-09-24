@@ -17,7 +17,7 @@ server {
 
     root APP_ROOT/public;
 
-    error_page 404 /cache/404.html;
+    error_page 404 /cache/other/404.html;
 
     merge_slashes on;
 
@@ -79,14 +79,14 @@ server {
         internal;
     }
 
-    location = /cache/404.html {
+    location = /cache/other/404.html {
         internal;
         set $request_document $document_uri;
         try_files $request_document /static_page.controller.php;
     }
 
     location = /help.html {
-        set $request_document /cache/$document_uri;
+        set $request_document /cache/other/$document_uri;
         try_files $request_document /static_page.controller.php?target=help;
     }
 
