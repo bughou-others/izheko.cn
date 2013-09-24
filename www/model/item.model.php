@@ -65,10 +65,11 @@ class Item extends ItemBase
             return "折扣即将开始：<span s=\"$start_time\"></span>";
 
         $end_time = strtotime($this->data['end_time']);
-        $ref_end_time = strtotime($this->data['ref_end_time']);
-        if ($ref_end_time < $end_time) $end_time = $ref_end_time;
-        if ($now < $end_time)
+        if ($now < $end_time) {
+            $ref_end_time = strtotime($this->data['ref_end_time']);
+            if ($now < $ref_end_time && $ref_end_time < $end_time) $end_time = $ref_end_time;
             return "折扣剩余时间：<span s=\"$end_time\"></span>";
+        }
 
         return '折扣结束时间：' . strftime('%m月%d日%H:%M', $end_time);
     }
@@ -98,7 +99,7 @@ class Item extends ItemBase
     function original_price_str()
     {
         if (! isset($this->original_price_str)) {
-            if(($price = $this->data['price']) > $this->data['ref_price']){
+            if (($price = $this->data['price']) > $this->data['ref_price']){
                 $this->original_price_str = floor($price / 100);
             }
             else $this->original_price_str = false;
