@@ -156,7 +156,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     border: none;
     width: 80px;
     height: 22px;
-    font: bold 14px/22px '';
+    font: bold 14px/22px '宋体';
     color: white;
     cursor: pointer;
 }
@@ -179,13 +179,18 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     margin: 0 1em;
     padding: 0 20px;
     color: #5e5e5e;
-    font: 14px/30px '';
+    font-size: 14px;
+    line-height: 30px;
     background-color: #fff;
     border: 1px solid #e2e2e2;
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px;
     _padding-top: 3px;
+    /*
+    behavior: url(/PIE.htc);
+    position: relative;
+    */
 }
 #filter a:hover,
 #filter a.on {
@@ -257,7 +262,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 }
 .item .title a {
     color: #333;
-    font: 14px/20px '';
+    font: 14px/20px '宋体';
 }
 .item .title a:hover {
     color: #c00;
@@ -278,14 +283,14 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 }
 .item .price span {
     color: #e33;
-    font: bold 12px '微软雅黑';
+    font: bold 12px '微软雅黑', Tahoma, Arial;
 }
 .item .price span big {
     font-size: 28px;
 }
 .item .price small {
     color: #aaa;
-    font: normal 12px/18px '';
+    font: normal 12px/18px 'Tahoma';
     text-decoration: line-through;
 }
 .item .action {
@@ -317,7 +322,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     color: white;
     font: normal 12px/16px '微软雅黑';
     display: inline-block;
-    background-image: url(/img/rect.png);
+    background-image: url(/img/rect.png?v=20130912);
 }
 .item .post {
     background-position: 0 -105px;
@@ -339,7 +344,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     padding: 10px;
     background-color: #f4f4f4;
     color: #aaa;
-    font: normal 12px/20px '';
+    line-height: 20px;
 }
 .item-hover .expand {
     display: block;
@@ -394,7 +399,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     color: #9c7e6f;
     border: 1px solid #f8f3f0;
     background-color: #fcfaf9;
-    font: normal 14px/30px "";
+    font: normal 14px/30px '宋体';
 }
 #single-item .action {
     display: inline-block;
