@@ -75,9 +75,6 @@ server {
         try_files $request_document /item.controller.php?num_iid=$1;
     }
 
-    location ~ "^/go/(\d{8,15})$" {
-    }
-
     location ^~ /cache {
         internal;
     }

@@ -121,7 +121,7 @@ class Item extends ItemBase
         }
         elseif ($now > strtotime($this->data['delist_time']))
         {
-            $this->action        = '已下架';
+            $this->action        = '已抢光';
             $this->action_style  = 'gray';
             $this->action_title  = '宝贝被抢光，已经下架啦。';
         }
