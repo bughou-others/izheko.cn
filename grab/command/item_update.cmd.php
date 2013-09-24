@@ -4,16 +4,19 @@ require_once APP_ROOT . '/model/taobao_item/taobao_item.model.php';
 declare(ticks = 1);
 class ItemUpdate
 {
-    static $list_time_change = false;
     static $changes_type_id  = array();
 
     static function start()
     {
         global $argv;
         $condition = isset($argv[1]) ? $argv[1] : null;
-        if($condition === null)
+        if ($condition === null)
             $condition = 'and title="" and !(flags&' . ItemBase::FLAGS_MASK_ITEM_DELETED . ')';
-        elseif($condition === 'all') $condition = '';
+        elseif ($condition === 'dated') {
+            $ago = strftime('%F %T', time() - 3600 * 8);
+            $condition = "and update_time < '$ago'";
+        }
+        elseif ($condition === 'all') $condition = '';
         else $condition = "and $condition";
 
         $pid = posix_getpid();
@@ -77,13 +80,16 @@ class ItemUpdate
 
         if($info === 'deleted') $json = 'deleted';
         elseif($item['title'] === '') $json = 'new';
-        else $json = json_encode($changes);
+        else {
+            $json = '{';
+            foreach($changes as $k => $v) $json .= " $k: $v,";
+            $json .= ' }';
+        }
         
         if($affected = self::update_db($num_iid, $changes))
             echo "$now $i $num_iid update success: {$affected} $json\n";
         else echo "$now $i $num_iid update failed $json\n";
 
-        if(isset($changes['list_time'])) self::$list_time_change = true;
         if(isset($item['type_id'])) self::$changes_type_id[$item['type_id']] = 1;
         if(isset($changes['type_id'])) self::$changes_type_id[$changes['type_id']] = 1;
     }
