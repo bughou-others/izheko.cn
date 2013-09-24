@@ -21,7 +21,10 @@ class ItemUpdate
 
         $pid = posix_getpid();
         $sql = "update items set updater=$pid where updater=0 $condition";
-        if(!DB::affected_rows($sql))return;
+        if(!DB::affected_rows($sql)){
+            echo 'no item to update', PHP_EOL;
+            return;
+        }
 
         pcntl_signal(SIGINT, 'ItemUpdate::exit_callback');
         pcntl_signal(SIGTERM, 'ItemUpdate::exit_callback');
@@ -76,7 +79,7 @@ class ItemUpdate
             error_log("$now $i $num_iid get item info failded");
             return;
         }
-        if(!$changes = self::get_changes($item, $info)) return;
+        $changes = self::get_changes($item, $info);
 
         if($info === 'deleted') $json = 'deleted';
         elseif($item['title'] === '') $json = 'new';
@@ -114,7 +117,7 @@ class ItemUpdate
     static function update_db($num_iid, $data)
     {
         $data['update_time'] = strftime('%F %T');
-        $sql = "update items set %s where num_iid = $num_iid ";
+        $sql = "update items set updater=0, %s where num_iid = $num_iid ";
         return DB::update_affected_rows($sql, $data);
     }
 }

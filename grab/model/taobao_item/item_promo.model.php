@@ -38,8 +38,14 @@ class ItemPromo
         $refer = 'http://detail.tmall.com/item.htm?id=' . $num_iid;
         $url   = 'http://mdskip.taobao.com/core/initItemDetail.htm?queryMaybach=true&itemId=' . $num_iid;
         $response = $curl->get($url, $refer);
+        $body = iconv('GBK', 'UTF-8', $response->body);
 
-        $data = decode_json(iconv('GBK', 'UTF-8', $response->body));
+        $data = decode_json($body);
+        if (!$data) {
+            echo 'get promo info failed', PHP_EOL;
+            var_dump(curl_getinfo($curl->curl, CURLINFO_HTTP_CODE));
+            var_dump($body);
+        }
         if ( isset($data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
             ($price_info = $data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
             is_array($price_info)

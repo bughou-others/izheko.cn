@@ -20,8 +20,8 @@ class Curl
             CURLOPT_AUTOREFERER    => false,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT        => 3,
-            CURLOPT_CONNECTTIMEOUT => 9,
+            CURLOPT_TIMEOUT        => 9,
+            CURLOPT_CONNECTTIMEOUT => 19,
 #            CURLOPT_PROXY => '192.168.2.3:8888',
 #            CURLOPT_VERBOSE => true
         ));
