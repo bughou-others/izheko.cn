@@ -3,17 +3,9 @@ require_once APP_ROOT . '/../common/helper/db.helper.php';
 
 class CategoryManage
 {
-    static function select($condition, $page, $limit)
+    static function select($parent, $page, $limit)
     {
-        if (isset($condition['traceup']) &&
-            ($traceup = $condition['traceup']) &&
-            preg_match('/^\d+$/', $traceup)
-        ) return self::traceup($traceup);
-
-        if(isset($condition['parent']) &&
-            ($parent = $condition['parent']) &&
-            preg_match('/^\d+$/', $parent)
-        )
+        if($parent)
         {
             require_once APP_ROOT . '/../common/model/category.model.php';
             Category::fetch_children($parent);
