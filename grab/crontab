@@ -1,17 +1,17 @@
 #MAILTO  = ""
 SHELL    = /bin/bash
-app_root = APP_ROOT
+www_root = ROOT_DIR/www
+grab_root= ROOT_DIR/grab
 #m    h     d m w command
- 0 3,6,9-22 * * * cd $app_root; php run command/grab_zhe800.cmd.php     &>> tmp/grab_zhe800.log
- 0    3     * * * cd $app_root; php run command/item_update.cmd.php all &>> tmp/item_update.log
-50    4     * * * cd $app_root; php run command/item_clear.cmd.php      &>> tmp/item_clear.log
+ 0 3,6,9-22 * * * cd $grab_root; php run command/grab_zhe800.cmd.php     &>> tmp/grab_zhe800.log
+20    3     * * * cd $grab_root; php run command/item_update.cmd.php all &>> tmp/item_update.log
+50    4     * * * cd $grab_root; php run command/item_clear.cmd.php      &>> tmp/item_clear.log
+ 9    *     * * * cd $www_root;  find -type f -mmin +2 -exec rm -f {} +
 
- 9    *     * * * cd $app_root/../www/public/cache; find -type f -mmin +2 -exec rm -f {} +
 
-
-#0    8   * * * cd $app_root; php run command/grab_jky.cmd.php jiu      &>> tmp/grab_jky_jiu.log
-#0    8   * * * cd $app_root; php run command/grab_jky.cmd.php shijiu   &>> tmp/grab_jky_shijiu.log
-#3  10,15 * * * cd $app_root; php run command/grab_jky.cmd.php today    &>> tmp/grab_jky_today.log
-#3  17,23 * * * cd $app_root; php run command/grab_jky.cmd.php tomorrow &>> tmp/grab_jky_tomorrow.log
+#0    8   * * * cd $grab_root; php run command/grab_jky.cmd.php jiu      &>> tmp/grab_jky_jiu.log
+#0    8   * * * cd $grab_root; php run command/grab_jky.cmd.php shijiu   &>> tmp/grab_jky_shijiu.log
+#3  10,15 * * * cd $grab_root; php run command/grab_jky.cmd.php today    &>> tmp/grab_jky_today.log
+#3  17,23 * * * cd $grab_root; php run command/grab_jky.cmd.php tomorrow &>> tmp/grab_jky_tomorrow.log
 
 
