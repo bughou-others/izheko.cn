@@ -34,9 +34,12 @@
             border-spacing: 0;
             margin: 0 auto;
         }
+        tr:hover {
+            background-color: #ccc;
+        }
         th, td {
             border: 1px solid #ddd;
-            padding: 0 0.5em; 
+            padding: 0.2em 0.5em; 
         }
         .pagination {
             margin: 1em 0;
