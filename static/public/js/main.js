@@ -216,13 +216,13 @@ var TimeLeftUpdate = {
         target.html(o.get_time_left(time));
         this.timer = setInterval(function(){
             target.html(o.get_time_left(time));
-        }, 1000);
+        }, 100);
     },
     stop: function(){
         clearInterval(this.timer);
     },
-    get_time_left: function(time){
-        var left = time - Math.floor(new Date / 1000);
+    get_time_left: function(time) {
+        var left = time - new Date / 1000;
         var s = '', n;
         if((n = Math.floor(left / 86400)) > 0){
             s +=  n + '天';
@@ -236,7 +236,7 @@ var TimeLeftUpdate = {
         s += (n < 10 ? '0' + n : n) + '分';
         left = left % 60;
 
-        n = left;
+        n = left.toFixed(1);
         s += (n < 10 ? '0' + n : n) + '秒';
         return s;
     }
