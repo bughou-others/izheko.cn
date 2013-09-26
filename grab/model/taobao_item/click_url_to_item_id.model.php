@@ -31,6 +31,9 @@ class ClickUrlToItemId
             error_log("no url4 from url3: $url3\n");
             return;
         }
+        if (preg_match('@^http://s\.click\.tmall\.com/g\?tar=([^&]+)@', $url4, $m)) {
+            $url4 = urldecode($m[1]);
+        }
         parse_str(parse_url($url4, PHP_URL_QUERY), $params);
         if (isset($params['id']) && ($item_id = $params['id']))
         {
