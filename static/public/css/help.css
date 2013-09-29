@@ -1,0 +1,93 @@
+#help-wrapper {
+    position: relative;
+    margin: 20px 5%;
+    text-align: center;
+}
+#help-catalog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    padding: 20px;
+    line-height: 24px;
+    background-color: #fff;
+    text-align: left;
+    display: inline-block;
+}
+#help-catalog div {
+    margin-bottom: 20px;
+}
+#help-catalog span {
+    font-size: 14px;
+}
+#help-catalog a {
+    display: block;
+}
+
+#help-content {
+    margin-left: 260px;
+    padding: 20px;
+    background-color: #fff;
+    text-align: left;
+}
+@media (max-width: 650px) {
+    #help-catalog { position: static; }
+    #help-content { margin: 20px 0 0 0; }
+}
+@media (max-width: 380px) {
+    #help-wrapper { margin: 20px 0; }
+}
+
+#help-content .help-section {
+    padding-bottom: 50px;
+}
+#help-content h2 {
+    color: #c00;
+    font: 800 20px/30px "微软雅黑";
+    margin: 0;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e2e2e2;
+}
+#help-content .newbile {
+    margin-top: 20px;
+}
+#help-content .newbile span {
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+#help-content .newbile span b {
+    font: 30px/30px "微软雅黑";
+    color: #E22A10;
+}
+#help-content .newbile span strong {
+    margin-left: 20px;
+    font: 18px/30px "微软雅黑"
+}
+#help-content .newbile span p {
+    color: #666;
+    margin-left: 35px;
+}
+#help-content .newbile img {
+    display: inline-block;
+    border: 1px dashed #ccc;
+}
+
+#help-content dt, #help-content dd {
+    margin: 10px;
+    font: normal 14px/22px "宋体";
+}
+#help-content dt span { 
+    color: #5aae22;
+}
+#help-content dd {
+    color: #af7105;
+}
+#help-content dt span, #help-content dd span {
+    margin-right: 6px;
+    font: normal 16px/22px "宋体";
+}
+#help-content p {
+    margin: 10px;
+    font: normal 14px/22px "宋体";
+}
