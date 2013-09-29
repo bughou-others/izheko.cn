@@ -3,8 +3,8 @@
     <span id="help-catalog">
         <div>
             <span>认识爱折扣</span>
-            <a href="#about">爱折扣 - 精选优质折扣商品</a>
-            <a href="tencent://message/?uin=715091790">爱折扣 - 意见和建议</a>
+            <a href="#about">精选优质折扣商品</a>
+            <a href="tencent://message/?uin=715091790">意见和建议</a>
             用户交流QQ群：<b>72250699</b>
         </div>
         <div>
