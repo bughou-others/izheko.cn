@@ -69,11 +69,11 @@
 }
 #help-content .newbile span p {
     color: #666;
-    margin-left: 35px;
 }
 #help-content .newbile img {
     display: inline-block;
     border: 1px dashed #ccc;
+    max-width: 100%;
 }
 #help-content .seckill {
     font-size: 14px;
@@ -90,6 +90,9 @@
 }
 #help-content .seckill p {
     color: #666;
+}
+#help-content .seckill img {
+    max-width: 100%;
 }
 
 #help-content dt, #help-content dd {
