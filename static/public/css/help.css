@@ -23,6 +23,9 @@
 #help-catalog a {
     display: block;
 }
+#help-catalog b {
+    color: #c00;
+}
 
 #help-content {
     margin-left: 260px;
@@ -71,6 +74,22 @@
 #help-content .newbile img {
     display: inline-block;
     border: 1px dashed #ccc;
+}
+#help-content .seckill {
+    font-size: 14px;
+    margin-top: 30px;
+}
+#help-content .seckill b {
+    color: #c00;
+    font-weight: 800;
+    margin-left: 10px;
+}
+#help-content .seckill strong {
+    color: #333;
+    font-weight: normal;
+}
+#help-content .seckill p {
+    color: #666;
 }
 
 #help-content dt, #help-content dd {
