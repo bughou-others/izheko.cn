@@ -56,16 +56,16 @@
             <a name="faq"></a>
             <h2>常见问题</h2>
             <a name="faq-vip"></a>
-            <dt><span>问题:</span> 什么是VIP价？</dt>
-            <dd><span>回答:</span> VIP价格是淘宝卖家设定的一种促销方式，只有淘宝VIP账号才能享受到优惠价，VIP账号登录后直接拍下即可。</dd>
-            <dt><span>问题:</span> 如何查看我的淘宝账号是否是VIP？</dt>
-            <dd><span>回答:</span> 登陆淘宝，在淘宝会员页面（http://vip.taobao.com/growth_info.htm）查看会员等级。V1-V6可以享受VIP价。</dd>
-            <dt><span>问题:</span> 如果还不是VIP，怎么买VIP价的商品？</dt>
-            <dd><span>回答:</span> 如果不是淘宝VIP账号，需要联系卖家，按照卖家的指示进行购买才能享受VIP价。</dd>
+            <dt><b>问题:</b> <div>什么是VIP价？</div></dt>
+            <dd><b>回答:</b> <div>VIP价格是淘宝卖家设定的一种促销方式，只有淘宝VIP账号才能享受到优惠价，VIP账号登录后直接拍下即可。</div></dd>
+            <dt><b>问题:</b> <div>如何查看我的淘宝账号是否是VIP？</div></dt>
+            <dd><b>回答:</b> <div>登陆淘宝，在淘宝会员页面（http://vip.taobao.com/growth_info.htm）查看会员等级。V1-V6可以享受VIP价。</div></dd>
+            <dt><b>问题:</b> <div>如果还不是VIP，怎么买VIP价的商品？</div></dt>
+            <dd><b>回答:</b> <div>如果不是淘宝VIP账号，需要联系卖家，按照卖家的指示进行购买才能享受VIP价。</div></dd>
 
             <a name="faq-safe"></a>
-            <dt><span>问题:</span> 在爱折扣购买商品，安全吗？</dt>
-            <dd><span>回答:</span> 爱折扣仅提供到淘宝、天猫的商品链接，不涉及任何交易行为，所有交易都在淘宝、天猫进行，所以爱折扣不存在交易安全问题，请放心购买。</dd>
+            <dt><b>问题:</b> <div>在爱折扣购买商品，安全吗？</div></dt>
+            <dd><b>回答:</b> <div>爱折扣仅提供到淘宝、天猫的商品链接，不涉及任何交易行为，所有交易都在淘宝、天猫进行，所以爱折扣不存在交易安全问题，请放心购买。</div></dd>
         </div>
 
         <div class="help-section">

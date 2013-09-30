@@ -104,18 +104,23 @@
 }
 
 #help-content dt, #help-content dd {
+    position: relative;
     margin: 10px;
     font: normal 14px/22px "宋体";
 }
-#help-content dt span { 
+#help-content dt b { 
     color: #5aae22;
 }
 #help-content dd {
     color: #af7105;
 }
-#help-content dt span, #help-content dd span {
+#help-content dt b, #help-content dd b {
     margin-right: 6px;
     font: normal 16px/22px "宋体";
+    position: absolute;
+}
+#help-content dt div, #help-content dd div {
+    margin-left: 50px;
 }
 #help-content p {
     margin: 10px;
