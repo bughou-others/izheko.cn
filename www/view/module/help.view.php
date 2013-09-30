@@ -24,16 +24,20 @@
             var $window = $(window);
             var $wrapper = $('#help-wrapper');
             var $catalog = $('#help-catalog');
+            var timer;
             $window.bind('scroll resize', function(){
                 if ($catalog.css('position') !== 'static') {
                     var _top = $window.scrollTop() - $wrapper.offset().top;
                     if (_top <= 0) _top = 0;
                     else {
-                        var max_top = $wrapper.height() - $catalog.height();
+                        var max_top = $wrapper.height() - $catalog.innerHeight();
                         if (_top > max_top) _top = max_top;
                     }
-                    $catalog.css('top', _top + 'px');
-                } else $catalog.css('top', '0');
+                    if (timer) clearTimeout(timer);
+                    setTimeout(function(){
+                        $catalog.css('top', _top + 'px');
+                    }, 500)
+                }
             });
         })();
     </script>
