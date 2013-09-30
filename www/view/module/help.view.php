@@ -19,6 +19,26 @@
             <a href="#newbile">爱折扣 - 新手上路</a>
         </div>
     </span>
+    <script>
+        (function(){
+            var $window = $(window);
+            var $wrapper = $('#help-wrapper');
+            var $catalog = $('#help-catalog');
+            $window.bind('scroll resize', function(){
+                if ($catalog.css('position') !== 'static') {
+                    if ($window.scrollTop() < $wrapper.offset().top) {
+                        $catalog.removeClass('fixed bottom');
+                    } else if ($window.scrollTop() + $catalog.height()
+                        < $wrapper.offset().top + $wrapper.height()
+                    ) {
+                        $catalog.removeClass('bottom').addClass('fixed');
+                    } else {
+                        $catalog.removeClass('fixed').addClass('bottom');
+                    }
+                } else $catalog.removeClass('fixed bottom');
+            });
+        })();
+    </script>
 
     <div id="help-content">
         <div class="help-section">

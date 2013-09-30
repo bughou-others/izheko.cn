@@ -33,9 +33,17 @@
     background-color: #fff;
     text-align: left;
 }
+#help-catalog.fixed {
+    position: fixed;
+    margin-left: 5%;
+}
+#help-catalog.bottom {
+    top: auto;
+    bottom: 0;
+}
 @media (max-width: 650px) {
-    #help-catalog { position: static; }
-    #help-content { margin: 20px 0 0 0; }
+    #help-wrapper #help-catalog { position: static; }
+    #help-wrapper #help-content { margin: 20px 0 0 0; }
 }
 @media (max-width: 380px) {
     #help-wrapper { margin: 20px 0; }
