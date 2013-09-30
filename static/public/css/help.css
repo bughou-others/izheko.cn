@@ -1,13 +1,14 @@
 #help-wrapper {
     position: relative;
-    margin: 20px 5%;
+    margin: 20px auto;
+    max-width: 1000px;
+    _margin: 20px 5%;
     text-align: center;
     *zoom: 1;
 }
 #help-catalog {
     position: absolute;
     top: 0;
-    _top: expression(0);
     left: 0;
     width: 200px;
     padding: 20px;
@@ -35,18 +36,6 @@
     background-color: #fff;
     text-align: left;
 }
-#help-catalog.fixed {
-    position: fixed;
-    margin-left: 5%;
-    _position: absolute;
-    _margin-left: 0;
-    _top: expression(document.documentElement.scrollTop - this.offsetParent.offsetTop + 'px');
-}
-#help-catalog.bottom {
-    top: auto;
-    bottom: 0;
-    _top: expression('auto');
-}
 @media (max-width: 650px) {
     #help-wrapper #help-catalog { position: static; }
     #help-wrapper #help-content { margin: 20px 0 0 0; }
@@ -67,8 +56,10 @@
 }
 #help-content .newbile {
     margin-top: 20px;
+    text-align: center;
 }
 #help-content .newbile span {
+    text-align: left;
     width: 300px;
     display: inline-block;
     vertical-align: top;
