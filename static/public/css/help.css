@@ -26,6 +26,10 @@
 #help-catalog a {
     display: block;
 }
+#help-catalog a.on {
+    color: #c00;
+    font-weight: bold;
+}
 #help-catalog b {
     color: #c00;
 }

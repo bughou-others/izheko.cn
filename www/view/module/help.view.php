@@ -19,29 +19,6 @@
             用户交流QQ群：<b>72250699</b>
         </div>
     </span>
-    <script>
-        (function(){
-            var $window = $(window);
-            var $wrapper = $('#help-wrapper');
-            var $catalog = $('#help-catalog');
-            var timer;
-            $window.bind('scroll resize', function(){
-                if ($catalog.css('position') !== 'static') {
-                    var _top = $window.scrollTop() - $wrapper.offset().top;
-                    if (_top <= 0) _top = 0;
-                    else {
-                        var max_top = $wrapper.height() - $catalog.innerHeight();
-                        if (_top > max_top) _top = max_top;
-                    }
-                    if (timer) clearTimeout(timer);
-                    setTimeout(function(){
-                        $catalog.css('top', _top + 'px');
-                    }, 500)
-                }
-            });
-        })();
-    </script>
-
     <div id="help-content">
         <div class="help-section">
             <a name="newbile"></a>
@@ -135,8 +112,8 @@
             <p>爱折扣在电脑、手机、平板等设备上都表现完美。只需要用您喜欢的浏览器打开www.izheko.cn，无论是在电脑、平板，还是手机上，您都会获得一致的用户体验。</p>
         </div>
 
+        <a name="faq"></a>
         <div class="help-section">
-            <a name="faq"></a>
             <h2>常见问题</h2>
             <a name="faq-vip"></a>
             <dt><b>问题:</b> <div>什么是VIP价？</div></dt>
@@ -163,4 +140,38 @@
         </div>
 
     </div>
+    <script>
+        (function(){
+            var $window = $(window);
+            var $wrapper = $('#help-wrapper');
+            var $catalog = $('#help-catalog');
+            var anchors  = $('.help-section a[name]');
+            var cats = $('#help-catalog a[href^="#"]');
+            var timer;
+            $window.bind('scroll resize', function(){
+                if ($catalog.css('position') === 'static') return;
+                if (timer) clearTimeout(timer);
+                setTimeout(function(){
+                    var wtop = $window.scrollTop();
+                    var _top = wtop - $wrapper.offset().top;
+                    if (_top <= 0) _top = 0;
+                    else {
+                        var max_top = $wrapper.height() - $catalog.innerHeight();
+                        if (_top > max_top) _top = max_top;
+                    }
+                    $catalog.css('top', _top + 'px');
+                    for (var i = 1; i < anchors.length; i++) {
+                        var $a = $(anchors[i]);
+                        if (wtop < $a.offset().top - 200) break;
+                    };
+                    var href = '#' + $(anchors[ i - 1 ]).attr('name');
+                    console.log(href);
+                    cats.each(function(){
+                        if ($(this).attr('href') === href) $(this).addClass('on');
+                        else $(this).removeClass('on');
+                    });
+                }, 500)
+            });
+        })();
+    </script>
 </div>
