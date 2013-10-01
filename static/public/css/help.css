@@ -9,6 +9,7 @@
 #help-catalog {
     position: absolute;
     top: 0;
+    _top: expression(0);
     left: 0;
     width: 200px;
     padding: 20px;
@@ -39,6 +40,19 @@
     padding: 20px;
     background-color: #fff;
     text-align: left;
+}
+#help-catalog.fixed {
+    position: fixed;
+    _position: absolute;
+    _top: expression(document.documentElement.scrollTop - this.offsetParent.offsetTop + 'px');
+}
+#help-catalog.bottom {
+    top: auto;
+    bottom: 0;
+    /*
+    _top: expression('auto') !important;
+    _top: expression(this.offsetParent.clientHeight - this.clientHeight + 'px') !important;
+    */
 }
 @media (max-width: 650px) {
     #help-wrapper #help-catalog { position: static; }
