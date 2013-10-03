@@ -13,6 +13,13 @@
             <a href="#faq-post-free">爱折扣上显示包邮，实际却不包邮</a>
             <a href="#faq-price-diff">商品价格跟爱折扣上显示的不一样</a>
             <a href="#faq-vip">什么是VIP价</a>
+            <a href="#faq-vip2">如何查看我的淘宝账号是否是VIP</a>
+            <a href="#faq-vip3">非VIP淘宝账号，怎么够买VIP价的商品</a>
+            <a href="#faq-less">为什么成交记录比说的促销量少</a>
+            <a href="#faq-combo">“套餐不存在”是否属于虚假活动</a>
+            <a href="#faq-seckill-who">如何查看秒杀商品被谁买走了</a>
+            <a href="#faq-all-anonym">为什么成交记录都是匿名</a>
+            <a href="#faq-oversold">遇到超卖怎么办</a>
             <a href="#faq-safe">在爱折扣购买商品，安全吗</a>
         </div>
         <div>
@@ -140,27 +147,33 @@
             <a name="faq-vip"></a>
             <dt><b>问题:</b> <div>什么是VIP价？</div></dt>
             <dd><b>回答:</b> <div>VIP价格是淘宝卖家设定的一种促销方式，只有淘宝VIP账号才能享受到优惠价，VIP账号登录后直接拍下即可。</div></dd>
+            <a name="faq-vip2"></a>
             <dt><b>问题:</b> <div>如何查看我的淘宝账号是否是VIP？</div></dt>
             <dd><b>回答:</b> <div>登陆淘宝，在淘宝会员页面（http://vip.taobao.com/growth_info.htm）查看会员等级。V1-V6可以享受VIP价。</div></dd>
+            <a name="faq-vip3"></a>
             <dt><b>问题:</b> <div>如果还不是VIP，怎么买VIP价的商品？</div></dt>
             <dd><b>回答:</b> <div>如果不是淘宝VIP账号，需要联系卖家，按照卖家的指示进行购买才能享受VIP价。</div></dd>
 
+            <a name="faq-less"></a>
             <dt><b>问题:</b> <div>说是限量200件促销，为什么宝贝成交记录里显示的不够200个成交？</div></dt>
             <dd><b>回答:</b> <div>淘宝网宝贝页面上的成交记录里显示的是已付款的订单，如果有人拍下商品，可没有付款，成交记录里是没有记录的。但是只要拍下商品，无论是否付款，都会消耗库存（库存消耗光就会显示已下架），这种情况下卖家又不能主动关闭交易，会有被投诉的风险。所以如果选好商品，请大家拍下后尽快付款，以免浪费名额。</div></dd>
-            <a name="faq-safe"></a>
-            <dt><b>问题:</b> <div>在爱折扣购买商品，安全吗？</div></dt>
-            <dd><b>回答:</b> <div>爱折扣仅提供到淘宝、天猫的商品链接，不涉及任何交易行为，所有交易都在淘宝、天猫进行，所以爱折扣不存在交易安全问题，请放心购买。</div></dd>
-
+            <a name="faq-combo"></a>
             <dt><b>问题:</b> <div>淘宝网页上显示“很抱歉，您查看的套餐不存在，可能已下架或者被转移。”字样，这种是否属于虚假活动？</div></dt>
             <dd><b>回答:</b> <div>“搭配套餐”是淘宝店铺促销的一种工具，当其中一个商品库存被拍光后，套餐自动失效，所以当您看到以上文字提示，一般是其中某个商品已经售罄！</div></dd>
+            <a name="faq-seckill-who"></a>
             <dt><b>问题:</b> <div>我们如何查看秒杀商品被谁买走了！秒杀活动是否真实？</div></dt>
             <dd><b>回答:</b> <div>每个淘宝商品成交后都会有成交记录，在商品详情页内可以查询到，其中包括成交时间 、买家名称、成交价格、成交数量等信息。其中主要关注活动开始时段的成交记录。便可知晓活动是否真实。</div></dd>
+            <a name="faq-all-anonym"></a>
             <dt><b>问题:</b> <div>为什么宝贝的成交记录里的会员名都显示匿名购买？</div></dt>
             <dd><b>回答:</b> <div>这个是淘宝系统设置的原因，如果商家在商品后台设置的是秒杀形式，当拍下商品后，买家的账号自动显示为匿名。</div></dd>
+            <a name="faq-oversold"></a>
             <dt><b>问题:</b> <div>遇到超卖怎么办？</div></dt>
             <dd><b>回答:</b> <div>淘宝的官方解释：当宝贝库存接近0时，如果多个买家同时付款购买此宝贝，将会出现“超卖”现象，这种现象是商家无法控制的，发生这种现象请买家申请退款即可。<br/>
 小编提醒：由于发生这种情况的概率较低，如果在能承受的范围内一般卖家都会照常发货，但也不能保证超卖数量超出商家承受范围，遇到超卖情况请与卖家客服联系，如果不能发货请申请退款。
 </div></dd>
+            <a name="faq-safe"></a>
+            <dt><b>问题:</b> <div>在爱折扣购买商品，安全吗？</div></dt>
+            <dd><b>回答:</b> <div>爱折扣仅提供到淘宝、天猫的商品链接，不涉及任何交易行为，所有交易都在淘宝、天猫进行，所以爱折扣不存在交易安全问题，请放心购买。</div></dd>
         </div>
 
         <div class="help-section">
@@ -197,11 +210,15 @@
                 } else {
                     $catalog.css('margin-left', 0).removeClass('fixed').addClass('bottom');
                 }
+                var begin = $(anchors[0]).offset().top;
                 for (var i = 1; i < anchors.length; i++) {
-                    var $a = $(anchors[i]);
-                    if (wtop < $a.offset().top) break;
+                    var end = $(anchors[i]).offset().top;
+                    var pre = (end - begin) / 3;
+                    if (pre > 100) pre = 100;
+                    if (wtop < (end - pre)) break;
+                    begin = end;
                 };
-                var href = '#' + $(anchors[ i - 1 ]).attr('name');
+                var href = '#' + $(anchors[i - 1]).attr('name');
                 cats.each(function(){
                     if ($(this).attr('href') === href) $(this).addClass('on');
                     else $(this).removeClass('on');
