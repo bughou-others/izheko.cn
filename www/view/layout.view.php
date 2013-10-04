@@ -20,7 +20,7 @@
     }
 ?>
         <link rel="shortcut icon" href="<?= App::static_server() . "/img/favicon$icon_suffix.ico" ?>?v=20130817" />
-        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server(). "/css/main$suffix.css" ?>?v=20130923" />
+        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server(). "/css/main$suffix.css" ?>?v=20131003" />
         <script src="<?= App::static_server() ?>/js/jquery.min.js"></script>
         <script src="<?= App::static_server() ?>/js/main.js?v=20130922"></script>
     </head>

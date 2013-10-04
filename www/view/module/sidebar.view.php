@@ -1,9 +1,10 @@
         <div id="sidebar">
-            <div id="go_top"><a href="#"><span>回顶部</span><b></b></a></div>
+            <a id="go_top" href="#"><b></b><span>回顶部</span></a><br/>
             <script>
                 $(window).scroll(function(){
-                    $('#go_top').css('display', $(this).scrollTop() > 100 ? 'block' : 'none');
+                    $('#go_top').css('display', $(window).scrollTop() > 100 ? 'inline-block' : 'none');
+                    console.log($(window).scrollTop() > 100 ? 'inline-block' : 'none');
                 }).scroll();
             </script>
-            <div id="kefu"><a href="tencent://message/?uin=715091790"><span>客 服</span><b></b></a></div>
+            <a id="kefu" href="tencent://message/?uin=715091790"><b></b><span>意见反馈</span></a>
         </div>
