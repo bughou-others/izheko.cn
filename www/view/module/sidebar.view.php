@@ -3,7 +3,6 @@
             <script>
                 $(window).scroll(function(){
                     $('#go_top').css('display', $(window).scrollTop() > 100 ? 'inline-block' : 'none');
-                    console.log($(window).scrollTop() > 100 ? 'inline-block' : 'none');
                 }).scroll();
             </script>
             <a id="kefu" href="tencent://message/?uin=715091790"><b></b><span>意见反馈</span></a>
