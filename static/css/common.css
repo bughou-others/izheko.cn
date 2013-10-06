@@ -214,7 +214,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     *display: inline;
     *zoom: 1;
     vertical-align: top; 
-    margin: 1em;
+    margin: 12px;
     width: 314px;
     height: 317px;
     border: solid #e2e2e2;
@@ -222,6 +222,9 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 }
 .item-hover {
     position: relative;
+}
+.auto-height {
+    height: auto;
 }
 .item {
     border: 2px solid white;

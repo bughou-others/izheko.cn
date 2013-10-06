@@ -242,6 +242,7 @@ var TimeLeftUpdate = {
     }
 }
 function item_list_init(){
+    $w = $(window);
     $("#item_list").on('mouseenter', '.item-wrapper', function(){
         var $this = $(this);
         var time_left = $this.children('.item').children('.expand').children('.time-left');
@@ -250,10 +251,10 @@ function item_list_init(){
             $this.attr('x', 'o');
         }
         TimeLeftUpdate.start(time_left.children('span'));
-        $this.addClass('item-hover');
+        $this.addClass('item-hover' + ($w.width() < 678 ? ' auto-height' : ''));
     }).on('mouseleave', '.item-wrapper', function(){
         TimeLeftUpdate.stop();
-        $(this).removeClass('item-hover');
+        $(this).removeClass('item-hover auto-height');
     }).on('click', '.sns-share b', item_sns_share);
     taodianjin_init();
     LazyImg();
