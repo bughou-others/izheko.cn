@@ -25,6 +25,7 @@
         <div>
             <span>关于爱折扣</span>
             <a href="#about">精选优质折扣商品</a>
+            <a href="#friendlink">友情链接</a>
             <a href="tencent://message/?uin=715091790">意见和建议</a>
             用户交流QQ群：<b>72250699</b>
         </div>
@@ -187,43 +188,13 @@
             <p>每天来逛逛，收获您的小幸福。</p>
         </div>
 
+        <div class="help-section">
+            <a name="friendlink"></a>
+            <h2>友情链接</h2>
+            <p>
+                <a href="http://www.0460.com/">0460网站之家</a>
+            </p>
+        </div>
     </div>
-    <script>
-        (function(){
-            var $window = $(window);
-            var $wrapper = $('#help-wrapper');
-            var $catalog = $('#help-catalog');
-            var anchors  = $('.help-section a[name]');
-            var cats = $('#help-catalog a[href^="#"]');
-            var ie6 = navigator.userAgent.indexOf(' MSIE 6.') > 0;
-            $window.bind('scroll resize', function(){
-                if ($catalog.css('position') === 'static'){
-                    $catalog.css('margin-left', 0); return;
-                }
-                var wtop = $window.scrollTop();
-                var _top = wtop - $wrapper.offset().top;
-                if (_top < 0) {
-                    $catalog.css('margin-left', 0).removeClass('fixed bottom');
-                } else if (ie6 || _top < $wrapper.innerHeight() - $catalog.innerHeight()) {
-                    $catalog.removeClass('bottom').css('margin-left',
-                      ie6 ? 0 : ($wrapper.offset().left + 'px')).addClass('fixed');
-                } else {
-                    $catalog.css('margin-left', 0).removeClass('fixed').addClass('bottom');
-                }
-                var begin = $(anchors[0]).offset().top;
-                for (var i = 1; i < anchors.length; i++) {
-                    var end = $(anchors[i]).offset().top;
-                    var pre = (end - begin) / 3;
-                    if (pre > 100) pre = 100;
-                    if (wtop < (end - pre)) break;
-                    begin = end;
-                };
-                var href = '#' + $(anchors[i - 1]).attr('name');
-                cats.each(function(){
-                    if ($(this).attr('href') === href) $(this).addClass('on');
-                    else $(this).removeClass('on');
-                });
-            });
-        })();
-    </script>
+    <script src="<?= App::static_server() ?>/js/help.js?v=20131006"></script>
 </div>

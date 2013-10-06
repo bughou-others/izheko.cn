@@ -8,7 +8,7 @@
             <span>
                 <a href="/help.html?#faq">常见问题</a>
                 <a href="/help.html?#about">关于爱折扣</a>
-                <a href="tencent://message/?uin=715091790">意见和建议</a>
+                <a href="/help.html?#friendlink">友情链接</a>
             </span>
             <div>
                 <span>Copyright © 2013 izheko.cn</span>
