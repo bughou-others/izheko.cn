@@ -256,7 +256,6 @@ function item_list_init(){
         TimeLeftUpdate.stop();
         $(this).removeClass('item-hover auto-height');
     }).on('click', '.sns-share b', item_sns_share);
-    taodianjin_init();
     LazyImg();
     Footprints.init_record();
 }
@@ -265,7 +264,6 @@ function single_item_init(){
     TimeLeftUpdate.start(item.children('.right').children('.time-left').children('span'));
     item.children('.left').children('.pic').after('<div class="sns-share">分享：' + SnsShareLib.icons_b + '</div>');
     item.children('.left').children('.sns-share').on('click', 'b', item_sns_share);
-    taodianjin_init();
     Footprints.init_record(item);
 }
 function item_sns_share(){
@@ -280,20 +278,19 @@ function item_sns_share(){
             );
 }
 
-function taodianjin_init(){
-    (function(win,doc){
-        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
-        if (!win.alimamatk_show) {
-            s.charset = "gbk";
-            s.async = true;
-            s.src = "http://a.alimama.cn/tkapi.js";
-            h.insertBefore(s, h.firstChild);
-        };
-        var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
-        win.alimamatk_onload = win.alimamatk_onload || [];
-        win.alimamatk_onload.push(o);
-    })(window,document);
-}
+(function(win,doc){
+    var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+    if (!win.alimamatk_show) {
+        s.charset = "gbk";
+        s.async = true;
+        s.src = "http://a.alimama.cn/tkapi.js";
+        h.insertBefore(s, h.firstChild);
+    };
+    var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
+    win.alimamatk_onload = win.alimamatk_onload || [];
+    win.alimamatk_onload.push(o);
+})(window,document);
+
 function taobao_search(word){
     var w = $(window).width(), s;
     if(w > 638) s = '628x270';
