@@ -3,7 +3,7 @@ require_once APP_ROOT . '/view/item_list/filter.view.php';
 if (empty($data['items'])) { ?>
         <div id="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
-        <div id="item_list"><script> item_list_init(); </script><!--
+        <div id="item_list"><script> item_count = <?= count($data['items']) ?>; item_list_init(); </script><!--
 <?php foreach($data['items'] as $i => $item) { ?>
          --><div class="item-wrapper"><div class="item">
                 <a class="pic" target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
@@ -11,7 +11,10 @@ if (empty($data['items'])) { ?>
 <?php if ($i < 6) { ?>
                     <img src="<?= $item->pic_url() ?>" />
 <?php } else { ?>
-                    <img id="img<?= $i - 5 ?>" src="<?= App::static_server() ?>/img/tears.gif" s="<?= $item->pic_url() ?>" />
+                    <?php if ($i === 6) { ?>
+                    <script> lazy_img(); </script>
+                    <?php } ?>
+                    <img id="img<?= $i + 1 ?>" src="<?= App::static_server() ?>/img/tears.gif" s="<?= $item->pic_url() ?>" />
 <?php } ?>
                 </a>
                 <div class="title"><?= $item->type_tag() ?><a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>"><?= $item->title() ?></a></div>

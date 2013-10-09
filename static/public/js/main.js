@@ -207,97 +207,6 @@ var Footprints = {
         o.last_count = count;
     }
 };
-var TimeLeftUpdate = {
-    start: function(target){
-        var time = target.attr('s');
-        if(!time) return;
-        time = parseInt(time, 10);
-        var o = this;
-        target.html(o.get_time_left(time));
-        this.timer = setInterval(function(){
-            target.html(o.get_time_left(time));
-        }, 100);
-    },
-    stop: function(){
-        clearInterval(this.timer);
-    },
-    get_time_left: function(time) {
-        var left = time - new Date / 1000;
-        var s = '', n;
-        if((n = Math.floor(left / 86400)) > 0){
-            s +=  n + '天';
-            left = left % 86400;
-        }
-        n = Math.floor(left / 3600);
-        s += (n < 10 ? '0' + n : n) + '小时';
-        left = left % 3600;
-
-        n = Math.floor(left / 60);
-        s += (n < 10 ? '0' + n : n) + '分';
-        left = left % 60;
-
-        n = left.toFixed(1);
-        s += (n < 10 ? '0' + n : n) + '秒';
-        return s;
-    }
-}
-function item_list_init(){
-    $w = $(window);
-    $("#item_list").on('mouseenter', '.item-wrapper', function(){
-        var $this = $(this);
-        var time_left = $this.children('.item').children('.expand').children('.time-left');
-        if(!$this.attr('x')){
-            time_left.after('<div class="sns-share">分享：' + SnsShareLib.icons_b + '</div>');
-            $this.attr('x', 'o');
-        }
-        TimeLeftUpdate.start(time_left.children('span'));
-        $this.addClass('item-hover' + ($w.width() < 678 ? ' auto-height' : ''));
-    }).on('mouseleave', '.item-wrapper', function(){
-        TimeLeftUpdate.stop();
-        $(this).removeClass('item-hover auto-height');
-    }).on('click', '.sns-share b', item_sns_share);
-    LazyImg();
-    Footprints.init_record();
-}
-function single_item_init(){
-    var item = $('#single-item');
-    TimeLeftUpdate.start(item.children('.right').children('.time-left').children('span'));
-    item.children('.left').children('.pic').after('<div class="sns-share">分享：' + SnsShareLib.icons_b + '</div>');
-    item.children('.left').children('.sns-share').on('click', 'b', item_sns_share);
-    Footprints.init_record(item);
-}
-function item_sns_share(){
-    var $this = $(this);
-    var item = $this.closest('.item');
-    var pic = item.find('.pic');
-    var img = pic.children('img');
-    SnsShareLib.share($this, 
-            'http://' + location.host + '/item/' + pic.attr('data-itemid'),
-            item.children('.title').text(),
-            img.attr('s') || img.attr('src')
-            );
-}
-
-(function(win,doc){
-    var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
-    if (!win.alimamatk_show) {
-        s.charset = "gbk";
-        s.async = true;
-        s.src = "http://a.alimama.cn/tkapi.js";
-        h.insertBefore(s, h.firstChild);
-    };
-    var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
-    win.alimamatk_onload = win.alimamatk_onload || [];
-    win.alimamatk_onload.push(o);
-})(window,document);
-
-function taobao_search(word){
-    var w = $(window).width(), s;
-    if(w > 638) s = '628x270';
-    else if(w > 360) s = '350x270';
-    else s = '290x380';
-    document.write('<a data-type="2" data-keyword="' + word + '" data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
-}
 
 var SnsShareLib = {
     sites: {
@@ -360,66 +269,159 @@ var SnsShareLib = {
 };
 SnsShareLib.init();
 
-function LazyImg(){
-    var o = {
-        img_index: 1,
-        imgs: { },
-        grids: { },
-        complete: false,
-        get_imgs: function(){
-            if(document.getElementById('pagination')) this.complete = true;
-            for(var e; e = document.getElementById('img' + this.img_index); this.img_index++){
-                var $e = $(e);
-                var id = $e.attr('id');
-                if(!this.imgs[id]) this.imgs[id] = $e;
-                this.add_to_grids(this.grids, $e);
-            }
-        },
-        add_to_grids: function(grids, $e){
-            var _top = $e.offset().top;
-            var n_top    = Math.floor( _top                / 200);
-            var n_bottom = Math.floor((_top + $e.height()) / 200);
-            for(var n = n_top; n <= n_bottom; n++){
-                if(grids[n])grids[n].push($e);
-                else grids[n] = [ $e ];
-            }
-        },
-        load_imgs: function(n_top, n_bottom){
-            var row, $e, src;
-            for(var n = n_top; n <= n_bottom; n++){
-                if(row = this.grids[n]){
-                    for(var i = 0; $e = row[i]; i++){
-                        if(src = $e.attr('s')){
-                            $e.attr('src', src).removeAttr('s');
-                            delete this.imgs[$e.attr('id')];
-                        }
-                    }
-                    delete this.grids[n];
-                }
-            }
-        },
-        init: function(){
-            var o = this, $c = $(window);
-            $c.scroll(function(){
-                if(!o.complete) o.get_imgs();
-                var _top = $c.scrollTop();
-                var n_top    = Math.floor((_top               - 100) / 200);
-                var n_bottom = Math.floor((_top + $c.height() + 100) / 200);
+var TimeLeftUpdate = {
+    start: function(target){
+        var time = target.attr('s');
+        if(!time) return;
+        time = parseInt(time, 10);
+        var o = this;
+        target.html(o.get_time_left(time));
+        this.timer = setInterval(function(){
+            target.html(o.get_time_left(time));
+        }, 100);
+    },
+    stop: function(){
+        clearInterval(this.timer);
+    },
+    get_time_left: function(time) {
+        var left = time - new Date / 1000;
+        var s = '', n;
+        if((n = Math.floor(left / 86400)) > 0){
+            s +=  n + '天';
+            left = left % 86400;
+        }
+        n = Math.floor(left / 3600);
+        s += (n < 10 ? '0' + n : n) + '小时';
+        left = left % 3600;
 
-                o.load_imgs(n_top, n_bottom);
-                if($.isEmptyObject(o.imgs)) $c.unbind('scroll resize');
-            }).resize(function(){
-                var tmp_grids = { };
-                for(var id in o.imgs){
-                    o.add_to_grids(tmp_grids, o.imgs[id]);
-                }
-                o.grids = tmp_grids;
-                $c.scroll();
-            });
-            $(function(){ $c.resize() });
+        n = Math.floor(left / 60);
+        s += (n < 10 ? '0' + n : n) + '分';
+        left = left % 60;
+
+        n = left.toFixed(1);
+        s += (n < 10 ? '0' + n : n) + '秒';
+        return s;
+    }
+}
+
+function item_list_init(){
+    $w = $(window);
+    $("#item_list").on('mouseenter', '.item-wrapper', function(){
+        var $this = $(this);
+        var time_left = $this.children('.item').children('.expand').children('.time-left');
+        if(!$this.attr('x')){
+            time_left.after('<div class="sns-share">分享：' + SnsShareLib.icons_b + '</div>');
+            $this.attr('x', 'o');
+        }
+        TimeLeftUpdate.start(time_left.children('span'));
+        $this.addClass('item-hover' + ($w.width() < 678 ? ' auto-height' : ''));
+    }).on('mouseleave', '.item-wrapper', function(){
+        TimeLeftUpdate.stop();
+        $(this).removeClass('item-hover auto-height');
+    }).on('click', '.sns-share b', item_sns_share);
+    Footprints.init_record();
+}
+
+function single_item_init(){
+    var item = $('#single-item');
+    TimeLeftUpdate.start(item.children('.right').children('.time-left').children('span'));
+    item.children('.left').children('.pic').after('<div class="sns-share">分享：' + SnsShareLib.icons_b + '</div>');
+    item.children('.left').children('.sns-share').on('click', 'b', item_sns_share);
+    Footprints.init_record(item);
+}
+
+function item_sns_share(){
+    var $this = $(this);
+    var item = $this.closest('.item');
+    var pic = item.find('.pic');
+    var img = pic.children('img');
+    SnsShareLib.share($this, 
+            'http://' + location.host + '/item/' + pic.attr('data-itemid'),
+            item.children('.title').text(),
+            img.attr('s') || img.attr('src')
+            );
+}
+
+(function(win,doc){
+    var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+    if (!win.alimamatk_show) {
+        s.charset = "gbk";
+        s.async = true;
+        s.src = "http://a.alimama.cn/tkapi.js";
+        h.insertBefore(s, h.firstChild);
+    };
+    var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
+    win.alimamatk_onload = win.alimamatk_onload || [];
+    win.alimamatk_onload.push(o);
+})(window,document);
+
+function taobao_search(word){
+    var w = $(window).width(), s;
+    if(w > 638) s = '628x270';
+    else if(w > 360) s = '350x270';
+    else s = '290x380';
+    document.write('<a data-type="2" data-keyword="' + word + '" data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
+}
+
+var item_count;
+function lazy_img(){
+    var first_row_top, row_size, loaded = { }, loaded_count = 6; $c = $(window);
+    var load_imgs_in_viewport = function(){
+        var _top = $c.scrollTop() - first_row_top;
+        var _bottom = _top + $c.height();
+        var min = Math.floor(_top   / 342) * row_size + 1;
+        if (min < 7) min = 7;
+        var max = Math.ceil(_bottom / 342) * row_size;
+        if (max > item_count) max = item_count;
+        for (var n = min; n <= max; n++){
+            if (loaded[n]) continue;
+            var $img = $('#img' + n);
+            var s = $img.attr('s');
+            if (s) {
+                $img.attr('src', s).removeAttr('s');
+                loaded[n] = true;
+                loaded_count ++;
+            }
+        }
+        if (loaded_count >= item_count) {
+            $c.unbind('scroll', load_imgs_in_viewport).unbind('resize', init_row_model);
         }
     };
-    o.init();
-    return o;
+    var init_row_model = function(){
+        var item = $('#item_list > .item-wrapper:first');
+        first_row_top = item.offset().top;
+        row_size = 1;
+        while (
+            (item = item.next('.item-wrapper')) &&
+            item.offset().top === first_row_top
+            ) row_size ++;
+        first_row_top -= 12;
+    }
+    $(init_row_model);
+    $c.scroll(load_imgs_in_viewport).resize(init_row_model);
+    init_row_model();
+    load_imgs_in_viewport();
 }
+
+function bookmark2_init(){
+    if (document.all) { //IE
+        document.write('<a id="bookmark2" title="收藏爱折扣"><span>收藏<br/>爱折扣</span></a><br/>');
+        $('#bookmark2').click(function(){
+            var url   = 'http://' + location.hostname +'/';
+            var title = '爱折扣 - 精选优质折扣商品';
+            window.external.AddFavorite(url, title);
+        });
+    }
+}
+
+function gotop_init(){
+    var $c = $(window);
+    var gotop = $('#go_top');
+    var state = 1;
+    $c.scroll(function(){
+        if ($c.scrollTop() > 100 === state) return;
+        state = !state;
+        gotop.css('visibility', state ? 'visible' : 'hidden');
+    }).scroll();
+};
 

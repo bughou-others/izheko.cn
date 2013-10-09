@@ -276,11 +276,11 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     text-decoration: underline;
 }
 .item .buy {
-    padding: 5px 10px 18px;
+    padding: 5px 10px 8px;
     white-space: nowrap;
     position: relative;
     width: 290px;
-    height: 30px;
+    height: 40px;
     line-height: 30px;
     vertical-align: baseline;
 }
@@ -294,6 +294,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 }
 .item .price span big {
     font-size: 28px;
+    line-height: 1.0;
 }
 .item .price small {
     color: #aaa;
@@ -457,7 +458,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     _position: absolute;
     _bottom: auto;
     _top: expression(eval(
-        document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 60
+        document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight 
         ));
 }
 #sidebar a {
