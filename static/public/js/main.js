@@ -416,6 +416,7 @@ function LazyImg(){
                 o.grids = tmp_grids;
                 $c.scroll();
             });
+            $(function(){ $c.resize() });
         }
     };
     o.init();

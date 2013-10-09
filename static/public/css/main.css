@@ -470,11 +470,9 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     -webkit-border-radius: 4px;
     border-radius: 4px;
     text-decoration: none;
-}
-#sidebar #go_top {
     background-color: #aaa;
 }
-#sidebar #kefu {
+#sidebar #bookmark2 {
     background-color: #f39;
 }
 #sidebar a b {
@@ -493,6 +491,9 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     font: 12px/12px '微软雅黑';
     *vertical-align: bottom;
     _padding-top: 3px; 
+}
+#sidebar #bookmark2 span {
+    line-height: 16px;
 }
 
 #footer {
