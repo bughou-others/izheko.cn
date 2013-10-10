@@ -12,9 +12,9 @@
     </head>
     <body>
         <?php require APP_ROOT . '/view/module/header.view.php'; ?>
-        <script> Izheko.taodianjin_init(); </script>
         <?php require APP_ROOT . '/view/module/sidebar.view.php'; ?>
         <div id="content">
+            <script> Izheko.taodianjin_init(); </script>
             <?php
                 if (isset($target_view)) require APP_ROOT . "/view/$target_view.view.php";
                 else echo '<img id="error_content" src="' . App::static_server() . '/img3/404.png" />';
