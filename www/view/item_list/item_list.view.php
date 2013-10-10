@@ -14,7 +14,7 @@ if (empty($data['items'])) { ?>
                     <?php if ($i === 6) { ?>
                     <script> lazy_img(); </script>
                     <?php } ?>
-                    <img id="img<?= $i + 1 ?>" src="<?= App::static_server() ?>/img/tears.gif" s="<?= $item->pic_url() ?>" />
+                    <img id="img<?= $i + 1 ?>" src="<?= App::static_server() ?>/img3/tears.gif" s="<?= $item->pic_url() ?>" />
 <?php } ?>
                 </a>
                 <div class="title"><?= $item->type_tag() ?><a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>"><?= $item->title() ?></a></div>

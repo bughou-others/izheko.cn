@@ -20,7 +20,7 @@
     }
 ?>
         <link rel="shortcut icon" href="<?= App::static_server() . "/img/favicon$icon_suffix.ico" ?>?v=20130817" />
-        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server(). "/css/main$suffix.css" ?>?v=20131009" />
+        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server(). "/css/main$suffix.css" ?>?v=20131010" />
         <script src="<?= App::static_server() ?>/js/jquery.min.js"></script>
         <script src="<?= App::static_server() ?>/js/main.js?v=20131009"></script>
     </head>
@@ -29,7 +29,7 @@
         <div id="content">
             <?php
                 if (isset($target_view)) require APP_ROOT . "/view/$target_view.view.php";
-                else echo '<img id="error_content" src="' . App::static_server() . '/img/404.png" />';
+                else echo '<img id="error_content" src="' . App::static_server() . '/img3/404.png" />';
             ?>
         </div>
         <?php require APP_ROOT . '/view/module/sidebar.view.php'; ?>

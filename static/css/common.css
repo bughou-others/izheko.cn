@@ -31,7 +31,7 @@ h1,h2,h3,h4,h5,h6,p,img {
     width: 12px;
     height: 10px;
     border: 1px solid white;
-    background: url(/img/tool.png) 0 -19px;
+    background: url(/img2/tool.png) 0 -19px;
     position: absolute;
     top: 5px;
     right: 5px;
@@ -52,7 +52,7 @@ h1,h2,h3,h4,h5,h6,p,img {
     cursor: pointer;
     width: 24px;
     height: 24px;
-    background-image: url(/img/sns_icon.png?v=20130912);
+    background-image: url(/img3/sns_icon.png?v=20130912);
 }
 
 b.sns-qq_zone    { background-position: 0 -96px; }
@@ -480,7 +480,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     width:  17px;
     height: 17px;
     display: inline-block;
-    background: no-repeat url(/img/tool.png);
+    background: no-repeat url(/img2/tool.png);
 }
 #sidebar #kefu b {
     background-position: -79px -1px;
