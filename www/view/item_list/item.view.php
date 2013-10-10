@@ -20,5 +20,5 @@
                     <div class="tip"><?= $item->get('ref_tip') ?></div>
                     <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank"><?= $item->action() ?></a>
                 </span>
-                <script> single_item_init(); </script>
+                <script> Izheko.single_item_init(); </script>
             </div>

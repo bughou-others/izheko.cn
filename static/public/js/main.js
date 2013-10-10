@@ -1,75 +1,93 @@
-var Dialog = {
+var Izheko = { };
+
+Izheko.is_mobile = (function() {
+    var s = navigator.userAgent; 
+    var a = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"); 
+    var t;
+    for (var i = 0; t = a[i]; i++) {
+        if (s.indexOf(t) > 0) return true;
+    }
+    return false;
+})();
+
+Izheko.Dialog = {
     show: function(msg, target, delay) {
-        var o = this;
-        if(o.box === undefined) {
-            o.box = $('<div id="dialog_box"><b></b><div></div></div>').appendTo('body');
-            o.box.children('b').click(o.hide);
+        if(this.box === undefined) {
+            this.box = $('<div id="dialog_box"><b></b><div></div></div>').appendTo('body');
+            this.box.children('b').click(this.hide);
         }
-        o.box.children('div').html(msg);
+        this.box.children('div').html(msg);
         var pos = target.position();
-        o.box.css({
+        this.box.css({
             'left': pos.left + 'px',
             'top':  (pos.top + target.height() + 10) + 'px',
             'display': 'block'
         });
-        if(o.timer !== undefined) clearTimeout(o.timer);
-        o.timer = setTimeout(o.hide, (delay ? delay : 5) * 1000);
+        if(this.timer !== undefined) clearTimeout(this.timer);
+        this.timer = setTimeout(this.hide, (delay ? delay : 5) * 1000);
     },
     hide: function(){
-        $(Dialog.box).css('display', 'none');
+        $(this.box).css('display', 'none');
     }
 };
-var PhoneEdition_and_Bookmark = {
-    is_mobile: function(){ 
-        var s = navigator.userAgent; 
-        var a = new Array("Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"); 
-        var o;
-        for (var i = 0; o = a[i]; i++) if (s.indexOf(o) > 0) return true; 
-        return false; 
-    },
-    init: function(){
-        if (this.is_mobile()) return;
-        document.write('<span id="phone-edition" title="手机版爱折扣">手机版</span>');
-        $('#phone-edition').click(function(){
-            Dialog.show('手机同样访问 www.izheko.cn 哟<br />爱折扣在所有设备上都表现完美！',
-                $(this), 10);
-        });
-        document.write('<span id="bookmark" title="收藏爱折扣">收藏</span>');
-        $('#bookmark').click(function(){
-            if (document.all) { //IE
-                var url   = 'http://' + location.hostname +'/';
-                var title = '爱折扣 - 精选优质折扣商品';
-                window.external.AddFavorite(url, title);
-            } else {
-                Dialog.show('亲，请按 Ctrl+D 哦', $(this));
-            }
-        });
-    }
+
+Izheko.phone_init = function() {
+    if (Izheko.is_mobile) return;
+    document.write('<span id="phone-edition" title="手机版爱折扣">手机版</span>');
+    $('#phone-edition').click(function(){
+        Izheko.Dialog.show('手机同样访问 www.izheko.cn 哟<br />爱折扣在所有设备上都表现完美！',
+            $(this), 10);
+    });
 };
-var SnsShare = {
-    init: function(){
-        $('#sns-share').append(SnsShareLib.icons_a).on('click', 'a', function(){
-            SnsShareLib.share(
-                $(this).children('b'),
-                'http://www.izheko.cn/',
-                '我喜欢上了“爱折扣(www.izheko.cn)”每天9块9的小幸福。懂我的商品，懂我的价格，给力的9块9包邮。',
-                'http://static.izheko.cn/img/logo.png'
-                );
-        });
-        $('#sns-share-button').bind('click mouseenter', function(){
-            Dialog.hide();
-            $('#sns-share').css('display', 'block');
-            $('#sns-share-button').addClass('on');
-            $('#sns-share-button b').addClass('on');
-        });
-        $('#sns-share-wrapper').mouseleave(function(){
-            $('#sns-share').css('display', 'none');
-            $('#sns-share-button').removeClass('on');
-            $('#sns-share-button b').removeClass('on');
-        });
-    }
+
+Izheko.bookmark_init = function() {
+    if (Izheko.is_mobile) return;
+    document.write('<a id="bookmark" title="收藏爱折扣"><span>收藏<br/>爱折扣</span></a><br/>');
+    $('#bookmark').click(function(){
+        if (document.all) { //IE
+            var url   = 'http://' + location.hostname +'/';
+            var title = '爱折扣 - 精选优质折扣商品';
+            window.external.AddFavorite(url, title);
+        } else {
+            Izheko.Dialog.show('亲，请按 Ctrl+D 哦', $(this));
+        }
+    });
+}
+
+Izheko.gotop_init = function(){
+    var $c = $(window);
+    var gotop = $('#go_top');
+    var state = 1;
+    $c.scroll(function(){
+        if ($c.scrollTop() > 100 === state) return;
+        state = !state;
+        gotop.css('visibility', state ? 'visible' : 'hidden');
+    }).scroll();
 };
-var Footprints = {
+
+Izheko.share_init = function(){
+    $('#sns-share').append(Izheko.SnsShareLib.icons_a).on('click', 'a', function(){
+        Izheko.SnsShareLib.share(
+            $(this).children('b'),
+            'http://www.izheko.cn/',
+            '我喜欢上了“爱折扣(www.izheko.cn)”每天9块9的小幸福。懂我的商品，懂我的价格，给力的9块9包邮。',
+            'http://static.izheko.cn/img/logo.png'
+            );
+    });
+    $('#sns-share-button').bind('click mouseenter', function(){
+        Izheko.Dialog.hide();
+        $('#sns-share').css('display', 'block');
+        $('#sns-share-button').addClass('on');
+        $('#sns-share-button b').addClass('on');
+    });
+    $('#sns-share-wrapper').mouseleave(function(){
+        $('#sns-share').css('display', 'none');
+        $('#sns-share-button').removeClass('on');
+        $('#sns-share-button b').removeClass('on');
+    });
+};
+
+Izheko.Footprints = {
     init: function(){
         var o = this;
         $('#footprints-button').bind('click mouseenter', function(){
@@ -126,13 +144,9 @@ var Footprints = {
             var m;
             if(m = document.cookie.match(/(^| )footprints=(\d+(,\d+)*)(;|$)/)) {
                 o.items = m[2].split(',');
-            }        
-            else o.items = [ ];
+            } else o.items = [ ];
         }
-        if (o.items.length <= 0) {
-            o.set();
-            return;
-        }
+        if (o.items.length <= 0) { o.set(); return; }
 
         if(flag === 'next') o.page ++;
         else if(flag === 'prev') o.page --;
@@ -200,7 +214,7 @@ var Footprints = {
         if(o.page === 0) {
             $('#footprints-bar').css('display', count > 0 ? 'block' : 'none');
         }
-        Dialog.hide();
+        Izheko.Dialog.hide();
         $('#footprints').css('height', height).prepend(html).css('display', 'block');
         $('#footprints-button').addClass('on');
         $('#footprints-button b').addClass('on');
@@ -208,7 +222,7 @@ var Footprints = {
     }
 };
 
-var SnsShareLib = {
+Izheko.SnsShareLib = {
     sites: {
         qq_zone: [ 'QQ空间', function(url, title, pic){
             return "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&pics=" + pic + "&title=" + title;
@@ -267,9 +281,9 @@ var SnsShareLib = {
         this.icons_b = this.gen_icons(false);
     }
 };
-SnsShareLib.init();
+Izheko.SnsShareLib.init();
 
-var TimeLeftUpdate = {
+Izheko.TimeLeftUpdate = {
     start: function(target){
         var time = target.attr('s');
         if(!time) return;
@@ -302,60 +316,62 @@ var TimeLeftUpdate = {
         s += (n < 10 ? '0' + n : n) + '秒';
         return s;
     }
-}
+};
 
-function item_list_init(){
+Izheko.item_list_init = function() {
     $w = $(window);
     $("#item_list").on('mouseenter', '.item-wrapper', function(){
         var $this = $(this);
         var time_left = $this.children('.item').children('.expand').children('.time-left');
         if(!$this.attr('x')){
-            time_left.after('<div class="sns-share">分享：' + SnsShareLib.icons_b + '</div>');
+            time_left.after('<div class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</div>');
             $this.attr('x', 'o');
         }
-        TimeLeftUpdate.start(time_left.children('span'));
+        Izheko.TimeLeftUpdate.start(time_left.children('span'));
         $this.addClass('item-hover' + ($w.width() < 678 ? ' auto-height' : ''));
     }).on('mouseleave', '.item-wrapper', function(){
-        TimeLeftUpdate.stop();
+        Izheko.TimeLeftUpdate.stop();
         $(this).removeClass('item-hover auto-height');
-    }).on('click', '.sns-share b', item_sns_share);
-    Footprints.init_record();
-}
+    }).on('click', '.sns-share b', Izheko.item_sns_share);
+    Izheko.Footprints.init_record();
+};
 
-function single_item_init(){
+Izheko.single_item_init = function() {
     var item = $('#single-item');
-    TimeLeftUpdate.start(item.children('.right').children('.time-left').children('span'));
-    item.children('.left').children('.pic').after('<div class="sns-share">分享：' + SnsShareLib.icons_b + '</div>');
-    item.children('.left').children('.sns-share').on('click', 'b', item_sns_share);
-    Footprints.init_record(item);
-}
+    Izheko.TimeLeftUpdate.start(item.children('.right').children('.time-left').children('span'));
+    item.children('.left').children('.pic').after('<div class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</div>');
+    item.children('.left').children('.sns-share').on('click', 'b', Izheko.item_sns_share);
+    Izheko.Footprints.init_record(item);
+};
 
-function item_sns_share(){
+Izheko.item_sns_share = function(){
     var $this = $(this);
     var item = $this.closest('.item');
     var pic = item.find('.pic');
     var img = pic.children('img');
-    SnsShareLib.share($this, 
+    Izheko.SnsShareLib.share($this, 
             'http://' + location.host + '/item/' + pic.attr('data-itemid'),
             item.children('.title').text(),
             img.attr('s') || img.attr('src')
             );
-}
+};
 
-(function(win,doc){
-    var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
-    if (!win.alimamatk_show) {
-        s.charset = "gbk";
-        s.async = true;
-        s.src = "http://a.alimama.cn/tkapi.js";
-        h.insertBefore(s, h.firstChild);
-    };
-    var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
-    win.alimamatk_onload = win.alimamatk_onload || [];
-    win.alimamatk_onload.push(o);
-})(window,document);
+Izheko.taodianjin_init = function(){
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "gbk";
+            s.async = true;
+            s.src = "http://a.alimama.cn/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
+};
 
-function taobao_search(word){
+Izheko.taobao_search = function(word){
     var w = $(window).width(), s;
     if(w > 638) s = '628x270';
     else if(w > 360) s = '350x270';
@@ -363,8 +379,7 @@ function taobao_search(word){
     document.write('<a data-type="2" data-keyword="' + word + '" data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
 }
 
-var item_count;
-function lazy_img(){
+Izheko.lazy_img = function(){
     var first_row_top, row_size, loaded = { }, loaded_count = 6; $c = $(window);
     var load_imgs_in_viewport = function(){
         var _top = $c.scrollTop() - first_row_top;
@@ -372,7 +387,7 @@ function lazy_img(){
         var min = Math.floor(_top   / 342) * row_size + 1;
         if (min < 7) min = 7;
         var max = Math.ceil(_bottom / 342) * row_size;
-        if (max > item_count) max = item_count;
+        if (max > Izheko.item_count) max = Izheko.item_count;
         for (var n = min; n <= max; n++){
             if (loaded[n]) continue;
             var $img = $('#img' + n);
@@ -383,7 +398,7 @@ function lazy_img(){
                 loaded_count ++;
             }
         }
-        if (loaded_count >= item_count) {
+        if (loaded_count >= Izheko.item_count) {
             $c.unbind('scroll', load_imgs_in_viewport).unbind('resize', init_row_model);
         }
     };
@@ -401,27 +416,5 @@ function lazy_img(){
     $c.scroll(load_imgs_in_viewport).resize(init_row_model);
     init_row_model();
     load_imgs_in_viewport();
-}
-
-function bookmark2_init(){
-    if (document.all) { //IE
-        document.write('<a id="bookmark2" title="收藏爱折扣"><span>收藏<br/>爱折扣</span></a><br/>');
-        $('#bookmark2').click(function(){
-            var url   = 'http://' + location.hostname +'/';
-            var title = '爱折扣 - 精选优质折扣商品';
-            window.external.AddFavorite(url, title);
-        });
-    }
-}
-
-function gotop_init(){
-    var $c = $(window);
-    var gotop = $('#go_top');
-    var state = 1;
-    $c.scroll(function(){
-        if ($c.scrollTop() > 100 === state) return;
-        state = !state;
-        gotop.css('visibility', state ? 'visible' : 'hidden');
-    }).scroll();
 };
 

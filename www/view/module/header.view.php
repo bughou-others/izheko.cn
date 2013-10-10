@@ -1,13 +1,13 @@
         <div id="header">
             <div class="right">
-                <script> PhoneEdition_and_Bookmark.init(); </script>
+                <script> Izheko.phone_init(); </script>
                 <span id="sns-share-wrapper">
                     <div id="sns-share-button">分享<b></b></div>
                     <span id="sns-share" class="sns-share">
                         <i></i>
                     </span>
                 </span>
-                <script> SnsShare.init(); </script>
+                <script> Izheko.share_init(); </script>
                 <span id="footprints-wrapper">
                     <div id="footprints-button">我的足迹<b></b></div>
                     <div id="footprints">
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                 </span>
-                <script> Footprints.init(); </script>
+                <script> Izheko.Footprints.init(); </script>
             </div>
             <div id="logo-search">
                 <a href="/" class="logo"></a>

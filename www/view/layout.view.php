@@ -22,11 +22,12 @@
         <link rel="shortcut icon" href="<?= App::static_server() . "/img/favicon$icon_suffix.ico" ?>?v=20130817" />
         <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server(). "/css/main$suffix.css" ?>?v=20131010.8" />
         <script src="<?= App::static_server() ?>/js/jquery.min.js"></script>
-        <script src="<?= App::static_server() ?>/js/main.js?v=20131009"></script>
+        <script src="<?= App::static_server() ?>/js/main.js?v=20131010.0"></script>
     </head>
     <body>
         <?php require APP_ROOT . "/view/module/header$header_suffix.view.php"; ?>
         <div id="content">
+            <script> Izheko.taodianjin_init(); </script>
             <?php
                 if (isset($target_view)) require APP_ROOT . "/view/$target_view.view.php";
                 else echo '<img id="error_content" src="' . App::static_server() . '/img3/404.png" />';

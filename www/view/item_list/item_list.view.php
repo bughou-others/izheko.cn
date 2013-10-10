@@ -3,7 +3,7 @@ require_once APP_ROOT . '/view/item_list/filter.view.php';
 if (empty($data['items'])) { ?>
         <div id="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
-        <div id="item_list"><script> item_count = <?= count($data['items']) ?>; item_list_init(); </script><!--
+        <div id="item_list"><script> Izheko.item_count = <?= count($data['items']) ?>; Izheko.item_list_init(); </script><!--
 <?php foreach($data['items'] as $i => $item) { ?>
          --><div class="item-wrapper"><div class="item">
                 <a class="pic" target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
@@ -12,7 +12,7 @@ if (empty($data['items'])) { ?>
                     <img src="<?= $item->pic_url() ?>" />
 <?php } else { ?>
                     <?php if ($i === 6) { ?>
-                    <script> lazy_img(); </script>
+                    <script> Izheko.lazy_img(); </script>
                     <?php } ?>
                     <img id="img<?= $i + 1 ?>" src="<?= App::static_server() ?>/img3/tears.gif" s="<?= $item->pic_url() ?>" />
 <?php } ?>
