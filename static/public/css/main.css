@@ -24,7 +24,7 @@ h1,h2,h3,h4,h5,h6,p,img {
 #dialog_box {
     position: absolute;
     border: 5px solid #ddd;
-    z-index: 9999;
+    z-index: 999999;
 }
 #dialog_box b {
     display: inline-block;
@@ -621,7 +621,7 @@ tkbox {
     margin-left: 5px;
     vertical-align: -4px;
 }
-#sns-share-button b.on, #footprints-button b.on {
+#sns-share-button.on b, #footprints-button.on b {
     border-top-color: #99e000;
 }
 #sns-share, #footprints {

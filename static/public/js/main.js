@@ -17,17 +17,17 @@ Izheko.Dialog = {
             this.box.children('b').click(this.hide);
         }
         this.box.children('div').html(msg);
-        var pos = target.position();
+        var offset = target.offset();
         this.box.css({
-            'left': pos.left + 'px',
-            'top':  (pos.top + target.height() + 10) + 'px',
+            'left': (offset.left - 150) + 'px',
+            'top':  (offset.top + target.height() + 10) + 'px',
             'display': 'block'
         });
         if(this.timer !== undefined) clearTimeout(this.timer);
-        this.timer = setTimeout(this.hide, (delay ? delay : 5) * 1000);
+        this.timer = setTimeout(this.hide, (delay ? delay : 3) * 1000);
     },
     hide: function(){
-        $(this.box).css('display', 'none');
+        Izheko.Dialog.box.css('display', 'none');
     }
 };
 
