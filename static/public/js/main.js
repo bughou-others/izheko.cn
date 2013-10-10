@@ -27,7 +27,7 @@ Izheko.Dialog = {
         this.timer = setTimeout(this.hide, (delay ? delay : 3) * 1000);
     },
     hide: function(){
-        Izheko.Dialog.box.css('display', 'none');
+        if (Izheko.Dialog.box) Izheko.Dialog.box.css('display', 'none');
     }
 };
 

@@ -486,7 +486,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     text-decoration: none;
     background-color: #aaa;
 }
-#sidebar #bookmark2 {
+#sidebar #bookmark {
     background-color: #f39;
 }
 #sidebar a b {
@@ -506,7 +506,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     *vertical-align: bottom;
     _padding-top: 3px; 
 }
-#sidebar #bookmark2 span {
+#sidebar #bookmark span {
     line-height: 16px;
 }
 
@@ -576,7 +576,7 @@ tkbox {
     _margin-top: 28px;
 }
 
-#phone-edition, #bookmark {
+#phone-edition {
     cursor: pointer;
     margin-right:  2em;
     +vertical-align: 26px;
