@@ -26,7 +26,7 @@ class App
     {
         static $cache;
         if(!isset($cache)){
-            $cache = self::sub_domain() === 'www' && !is_file(APP_ROOT . '/tmp/no_cache');
+            $cache = !is_file(APP_ROOT . '/tmp/no_cache');
         }
         return $cache;
     }
