@@ -27,7 +27,7 @@ if (empty($data['items'])) { ?>
                         <small title="原价 ￥<?= $item->original_price_str() ?>">￥<?= $item->original_price_str() ?></small>
                         <?php } ?>
                     </span>
-                    <?= $item->postage_tag() ?> <?= $item->vip_tag() ?>
+                    <?= $item->postage_tag() ?> <?= $item->vip_tag() ?> <?= $item->paigai_tag() ?>
                     <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank"><?= $item->action() ?></a>
                 </div>
                 <div class="expand">

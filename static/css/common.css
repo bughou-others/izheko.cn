@@ -281,7 +281,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     position: relative;
     width: 290px;
     height: 40px;
-    line-height: 30px;
+    line-height: 40px;
     vertical-align: baseline;
 }
 
@@ -294,11 +294,10 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 }
 .item .price span big {
     font-size: 28px;
-    line-height: 1.0;
 }
 .item .price small {
     color: #aaa;
-    font: normal 12px/18px 'Tahoma';
+    font: normal 12px 'Tahoma';
     text-decoration: line-through;
 }
 .item .action {
@@ -308,35 +307,45 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     text-align: center;
     color: white;
     width: 80px;
-    height: 20px;
-    font: bolder 16px/20px '微软雅黑';
-    padding: 7px 0 6px 0;
-    background-image: url(/img/rect.png?v=20130912);
+    height: 33px;
+    background-image: url(/img/button.png);
+    background-position-x: 0;
 }
 .item .action:hover {
     opacity: 0.8;
 }
-.item .red {
-    background-position: 0 0;
+.item .qqg {
+    background-position-y: 0;
 }
-.item .green {
-    background-position: 0 -35px;
+.item .yjs {
+    background-position-y: -34px;
 }
-.item .gray {
-    background-position: 0 -70px;
+.item .yqg {
+    background-position-y: -68px;
+}
+.item .wks {
+    background-position-y: -102px;
 }
 
-.item .post, .item .vip {
-    color: white;
-    font: normal 12px/16px '微软雅黑';
+.item .post, .item .vip, .item .gai {
     display: inline-block;
-    background-image: url(/img/rect.png?v=20130912);
+    height: 17px;
+    vertical-align: text-bottom;
+    background-image: url(/img/button.png);
 }
 .item .post {
-    background-position: 0 -105px;
+    width: 26px;
+    background-position: 0 -136px;
+    *margin-right: 5px;
 }
 .item .vip {
-    background-position: -25px -105px;
+    width: 34px;
+    background-position: -27px -136px;
+    *margin-right: 5px;
+}
+.item .gai {
+    width: 26px;
+    background-position: 0 -154px;
 }
 .item .sns-share {
     margin: 10px 0;

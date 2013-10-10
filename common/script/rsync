@@ -1,5 +1,5 @@
 #!/bin/bash
-src="$(dirname $0)/../.."
-dest='root@izheko.cn:~/izheko.cn'
-rsync -rlptvz --exclude-from $src/.gitignore $src $dest
+src='root@izheko.cn:~/izheko.cn/static/public/pic/'
+dest="$(dirname $0)/../../static/public/pic/"
+rsync -rlptvz  $src $dest
 

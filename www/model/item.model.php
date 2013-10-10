@@ -116,7 +116,7 @@ class Item extends ItemBase
         {
             $time = strftime('%H:%M', $start_time);
             $this->action        = $time;
-            $this->action_style  = 'green';
+            $this->action_style  = 'wks';
             $tomorrow = strtotime('tomorrow');
             if($start_time < $tomorrow) $time = strftime('今天%H:%M', $start_time);
             elseif($start_time < $tomorrow + 86400) $time = strftime('明天%H:%M', $start_time);
@@ -125,20 +125,20 @@ class Item extends ItemBase
         }
         elseif ($now > strtotime($this->data['delist_time']))
         {
-            $this->action        = '已抢光';
-            $this->action_style  = 'gray';
+            $this->action        = '';
+            $this->action_style  = 'yqg';
             $this->action_title  = '宝贝被抢光，已经下架啦。';
         }
         elseif ($now > strtotime($this->data['end_time']))
         {
-            $this->action        = '已结束';
-            $this->action_style  = 'gray';
+            $this->action        = '';
+            $this->action_style  = 'yjs';
             $this->action_title  = '折扣已经结束啦。';
         }
         else
         {
-            $this->action        = '去抢购';
-            $this->action_style  = 'red';
+            $this->action        = '';
+            $this->action_style  = 'qqg';
             $this->action_title  = '折扣正在进行，快去抢购吧！';
         }
         return $this->action;
@@ -159,13 +159,19 @@ class Item extends ItemBase
     function postage_tag()
     {
         if($this->data['flags'] & self::FLAGS_MASK_POSTAGE_FREE)
-            return '<b class="post" title="卖家包邮哦">包邮</b>';
+            return '<b class="post" title="卖家包邮哦"></b>';
     }
 
     function vip_tag()
     {
         if($this->data['flags'] & self::FLAGS_MASK_VIP_PRICE)
-            return '<b class="vip" title="淘宝VIP用户价哟">VIP价</b>';
+            return '<b class="vip" title="淘宝VIP用户价哟"></b>';
+    }
+
+    function paigai_tag()
+    {
+        if($this->data['ref_price'] !== $this->data['now_price'])
+            return '<b class="gai" title="拍下自动改价哟"></b>';
     }
 
     function jump_url()
