@@ -22,7 +22,7 @@ class ItemController
             return;
         }
         $item = new Item($data);
-        App::render('item_list/item', array('item' => $item));
+        App::render('item', array('item' => $item));
     }
 }
 

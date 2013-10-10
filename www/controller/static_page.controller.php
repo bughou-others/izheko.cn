@@ -14,7 +14,7 @@ class StaticPage
 
     static function help_page()
     {
-        App::render('module/help');
+        App::render('help');
     }
 }
 

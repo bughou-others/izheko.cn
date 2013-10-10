@@ -30,5 +30,5 @@
                     <button type="submit">搜 索</button>
                 </form>
             </div>
-            <?php require APP_ROOT . '/view/module/navbar.view.php'; ?>
+            <?php require_once 'navbar.view.php'; ?>
         </div>

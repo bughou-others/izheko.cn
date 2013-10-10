@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/view/item_list/filter.view.php';
+require_once 'filter.view.php';
 if (empty($data['items'])) { ?>
         <div id="no_items">很抱歉，没有符合条件的宝贝。</div>
 <?php } else { ?>
@@ -50,7 +50,7 @@ if (empty($data['items'])) { ?>
 if (isset($word) && $word !== ''){
 ?>
         <script type="text/javascript">
-            taobao_search(<?=  json_encode($word) ?>);
+            Izheko.taobao_search(<?=  json_encode($word) ?>);
         </script>
 <?php
 }
