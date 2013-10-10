@@ -307,12 +307,16 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     color: white;
     width: 80px;
     height: 33px;
-    font: bolder 16px/33px '';
+    font-weight: bolder;
+    font-size: 16px;
+    line-height: 33px;
     background-image: url(/img/button.png);
     background-position-x: 0;
 }
 .item .action:hover {
     opacity: 0.8;
+    color: white;
+    text-decoration: none;
 }
 .item .qqg {
     background-position-y: 0;
