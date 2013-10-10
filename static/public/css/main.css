@@ -281,7 +281,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     position: relative;
     width: 290px;
     height: 40px;
-    line-height: 40px;
     vertical-align: baseline;
 }
 
@@ -308,6 +307,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     color: white;
     width: 80px;
     height: 33px;
+    font: bolder 16px/33px '';
     background-image: url(/img/button.png);
     background-position-x: 0;
 }

@@ -159,19 +159,19 @@ class Item extends ItemBase
     function postage_tag()
     {
         if($this->data['flags'] & self::FLAGS_MASK_POSTAGE_FREE)
-            return '<b class="post" title="卖家包邮哦"></b>';
+            return '<b class="post" title="卖家包邮"></b>';
     }
 
     function vip_tag()
     {
         if($this->data['flags'] & self::FLAGS_MASK_VIP_PRICE)
-            return '<b class="vip" title="淘宝VIP用户价哟"></b>';
+            return '<b class="vip" title="淘宝VIP用户价"></b>';
     }
 
     function paigai_tag()
     {
         if($this->data['ref_price'] !== $this->data['now_price'])
-            return '<b class="gai" title="拍下自动改价哟"></b>';
+            return '<b class="gai" title="拍下自动改价"></b>';
     }
 
     function jump_url()
