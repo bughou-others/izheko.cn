@@ -19,6 +19,7 @@
                     <div class="time-left"><?= $item->time_left() ?></div>
                     <div class="tip"><?= $item->get('ref_tip') ?></div>
                     <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank"><?= $item->action() ?></a>
+                    <a data-rd="2" class="remai" title="与这个宝贝相关的热卖宝贝" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank"></a>
                 </span>
                 <script> Izheko.single_item_init(); </script>
             </div>

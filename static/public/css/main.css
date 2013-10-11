@@ -546,8 +546,14 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 }
 .item .remai {
     width: 53px;
-    float: right;
     background-position: -27px -154px;
+}
+.item .expand .remai {
+    float: right;
+}
+.item .right .remai {
+    margin-left: 30px;
+    vertical-align: baseline;
 }
 .item .remai:hover {
     opacity: 0.8;
