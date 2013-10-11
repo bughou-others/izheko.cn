@@ -1,0 +1,51 @@
+*html{
+    background-image:url(about:blank);
+    background-attachment:fixed;
+}
+#sidebar {
+    position: fixed;
+    right: 1%;
+    bottom: 1%;
+    z-index: 99999;
+    _position: absolute;
+    _bottom: auto;
+    _top: expression(eval(
+        document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 10
+        ));
+}
+#sidebar a {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 5px 5px 7px 5px;
+    background-color: #f39;
+    overflow: hidden;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: #aaa;
+}
+#sidebar #bookmark {
+    background-color: #f39;
+}
+#sidebar a b {
+    width:  17px;
+    height: 17px;
+    display: inline-block;
+    background: no-repeat url(/img2/tool.png);
+}
+#sidebar #kefu b {
+    background-position: -79px -1px;
+}
+#sidebar a span {
+    display: block;
+    color: white;
+    white-space: nowrap;
+    font: 12px/12px '微软雅黑';
+    *vertical-align: bottom;
+    _padding-top: 3px; 
+}
+#sidebar #bookmark span {
+    line-height: 16px;
+}
+

@@ -78,12 +78,10 @@ Izheko.share_init = function(){
         Izheko.Dialog.hide();
         $('#sns-share').css('display', 'block');
         $('#sns-share-button').addClass('on');
-        $('#sns-share-button b').addClass('on');
     });
     $('#sns-share-wrapper').mouseleave(function(){
         $('#sns-share').css('display', 'none');
         $('#sns-share-button').removeClass('on');
-        $('#sns-share-button b').removeClass('on');
     });
 };
 
@@ -96,7 +94,6 @@ Izheko.Footprints = {
         $('#footprints-wrapper').mouseleave(function(){
             $('#footprints').css('display', 'none');
             $('#footprints-button').removeClass('on');
-            $('#footprints-button b').removeClass('on');
         });
         $('#footprints-bar > span').click(function(){
             var time = new Date();
@@ -217,7 +214,6 @@ Izheko.Footprints = {
         Izheko.Dialog.hide();
         $('#footprints').css('height', height).prepend(html).css('display', 'block');
         $('#footprints-button').addClass('on');
-        $('#footprints-button b').addClass('on');
         o.last_count = count;
     }
 };

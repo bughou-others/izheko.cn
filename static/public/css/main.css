@@ -21,6 +21,17 @@ h1,h2,h3,h4,h5,h6,p,img {
     border-width: 0;
 }
 
+#content {
+    margin: 0;
+    padding: 20px 0;
+    background: url(/img3/bg.png) repeat center top;
+}
+
+#error_content {
+    margin: 4em 0;
+}
+
+
 #dialog_box {
     position: absolute;
     border: 5px solid #ddd;
@@ -54,7 +65,6 @@ h1,h2,h3,h4,h5,h6,p,img {
     height: 24px;
     background-image: url(/img3/sns_icon.png?v=20130912);
 }
-
 b.sns-qq_zone    { background-position: 0 -96px; }
 b.sns-sina_weibo { background-position: 0 -144px; }
 b.sns-tencent_weibo { background-position: 0 -216px; }
@@ -62,6 +72,104 @@ b.sns-renren     { background-position: 0 -240px; }
 b.sns-douban     { background-position: 0 -840px; }
 b.sns-kaixin     { background-position: 0 -264px; }
 b.sns-qq_haoyou  { background-position: 0 -3024px; }
+
+#header {
+    padding: 3px 5% 10px 5%;
+    color: #fff;
+    background-color: #010101;
+    font-family: '微软雅黑';
+}
+
+#header .right {
+    float: right;
+    margin-top: 20px;
+    _margin-top: 28px;
+}
+
+#phone-edition {
+    cursor: pointer;
+    margin-right:  2em;
+    +vertical-align: 26px;
+    _vertical-align: 23px;
+}
+
+#sns-share-wrapper, #footprints-wrapper {
+    position: relative;
+    z-index: 999;
+    text-align: left;
+    white-space: normal;
+    display: inline-block;
+    background-color: #010101;
+}
+#sns-share-button, #footprints-button {
+    padding: 2px 3px;
+    margin: 0 0 20px 20px;
+}
+#sns-share-button.on, #footprints-button.on {
+    color: #99e000;
+}
+#sns-share-button b, #footprints-button b {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    border: 5px solid #010101;
+    border-top-color: #666;
+    margin-left: 5px;
+    vertical-align: -4px;
+}
+#sns-share-button.on b, #footprints-button.on b {
+    border-top-color: #99e000;
+}
+#sns-share, #footprints {
+    display: none;
+    background-color: white;
+    border: 1px solid #ddd;
+    position: absolute;
+    top: 35px;
+    _top: 30px;
+    right: 0;
+    z-index: 999;
+}
+#sns-share {
+    padding: 10px;
+}
+#footprints {
+    color: #333;
+    padding: 10px 10px 30px 10px;
+}
+#sns-share i, #footprints i {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    border: 7px solid transparent;
+    _border-color: pink;
+    _filter: chroma(color=pink);
+    border-bottom-color: white;
+    position: absolute;
+    top: -14px;
+}
+#sns-share i {
+    right: 20px;
+}
+#footprints i {
+    right: 32px;
+}
+
+#sns-share a {
+    display: block;
+    margin: 5px 0;
+    white-space: nowrap;
+}
+#sns-share a b {
+    margin-right: 5px;
+    vertical-align: -7px;
+    +vertical-align: -3px;
+    _vertical-align: -5px;
+}
 
 #footprints-bar {
     display: none;
@@ -115,10 +223,20 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     color: #e33;
 }
 
+.logo {
+    cursor: pointer;
+    display: inline-block;
+    width: 128px;
+    height: 60px;
+    background: no-repeat url(/img/logo.png);
+    vertical-align: middle;
+}
+
 #search {
     display: inline-block;
     *display: inline;
     *zoom: 1;
+    background-color: #518900; 
     margin-left: 3em;
     vertical-align: text-top;
     width: 30%;
@@ -152,8 +270,10 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 }
 #search button {
     position: absolute;
+    top: 5px;
     right: 0;
     text-align: center;
+    background-color: #518900; 
 
     margin: 0;
     padding: 0;
@@ -165,15 +285,91 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     cursor: pointer;
 }
 
-#content {
-    margin: 0;
-    padding: 20px 0;
+/* navigation */
+#navbar {
+    margin-top: 10px;
+    padding: 8px;
+    border: 1px solid #518900;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    font: 14px/22px '';
+    _width: 100%;
+}
+#navbar a {
+    color: #fff;
+    display: inline-block;
+    padding: 3px 20px;
+    _padding: 5px 20px 2px 20px;
+    margin: 2px 0;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+#navbar a:hover {
+    background-color: #4f8a00;
+}
+#navbar a.on {
+    background-color: #4f8a00;
 }
 
-#error_content {
-    margin: 4em 0;
+*html{
+    background-image:url(about:blank);
+    background-attachment:fixed;
+}
+#sidebar {
+    position: fixed;
+    right: 1%;
+    bottom: 1%;
+    z-index: 99999;
+    _position: absolute;
+    _bottom: auto;
+    _top: expression(eval(
+        document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 10
+        ));
+}
+#sidebar a {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 5px 5px 7px 5px;
+    background-color: #f39;
+    overflow: hidden;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    background-color: #aaa;
+}
+#sidebar #bookmark {
+    background-color: #f39;
+}
+#sidebar a b {
+    width:  17px;
+    height: 17px;
+    display: inline-block;
+    background: no-repeat url(/img2/tool.png);
+}
+#sidebar #kefu b {
+    background-position: -79px -1px;
+}
+#sidebar a span {
+    display: block;
+    color: white;
+    white-space: nowrap;
+    font: 12px/12px '微软雅黑';
+    *vertical-align: bottom;
+    _padding-top: 3px; 
+}
+#sidebar #bookmark span {
+    line-height: 16px;
 }
 
+#no_items {
+    margin: 3em 0;
+}
 
 #filter {
     margin: 10px 0;
@@ -199,10 +395,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 #filter a:hover,
 #filter a.on {
     color: #e33;
-}
-
-#no_items {
-    margin: 3em 0;
 }
 
 #item_list{
@@ -443,6 +635,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 #pagination a {
     color: #929292;
     text-decoration: none;
+    background-color: #e3e3e3;
 }
 #pagination a.on {
     color: white;
@@ -457,57 +650,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     color: #f39;
     font-weight: bold;
     background-color: #ffdcee;
-}
-
-*html{
-    background-image:url(about:blank);
-    background-attachment:fixed;
-}
-#sidebar {
-    position: fixed;
-    right: 1%;
-    bottom: 1%;
-    z-index: 99999;
-    _position: absolute;
-    _bottom: auto;
-    _top: expression(eval(
-        document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 10
-        ));
-}
-#sidebar a {
-    display: inline-block;
-    margin: 5px 0;
-    padding: 5px 5px 7px 5px;
-    background-color: #f39;
-    overflow: hidden;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    text-decoration: none;
-    background-color: #aaa;
-}
-#sidebar #bookmark {
-    background-color: #f39;
-}
-#sidebar a b {
-    width:  17px;
-    height: 17px;
-    display: inline-block;
-    background: no-repeat url(/img2/tool.png);
-}
-#sidebar #kefu b {
-    background-position: -79px -1px;
-}
-#sidebar a span {
-    display: block;
-    color: white;
-    white-space: nowrap;
-    font: 12px/12px '微软雅黑';
-    *vertical-align: bottom;
-    _padding-top: 3px; 
-}
-#sidebar #bookmark span {
-    line-height: 16px;
 }
 
 #footer {
@@ -561,159 +703,4 @@ body object {
 }
 tkbox {
     margin: 3em auto;
-}
-
-#header {
-    padding: 3px 5% 10px 5%;
-    color: #fff;
-    background-color: #010101;
-    font-family: '微软雅黑';
-}
-
-#header .right {
-    float: right;
-    margin-top: 20px;
-    _margin-top: 28px;
-}
-
-#phone-edition {
-    cursor: pointer;
-    margin-right:  2em;
-    +vertical-align: 26px;
-    _vertical-align: 23px;
-}
-
-#sns-share a {
-    display: block;
-    margin: 5px 0;
-    white-space: nowrap;
-}
-#sns-share a b {
-    margin-right: 5px;
-    vertical-align: -7px;
-    +vertical-align: -3px;
-    _vertical-align: -5px;
-}
-
-#sns-share-wrapper, #footprints-wrapper {
-    position: relative;
-    z-index: 999;
-    text-align: left;
-    white-space: normal;
-    display: inline-block;
-    background-color: #010101;
-}
-#sns-share-button, #footprints-button {
-    padding: 2px 3px;
-    margin: 0 0 20px 20px;
-}
-#sns-share-button.on, #footprints-button.on {
-    color: #99e000;
-}
-#sns-share-button b, #footprints-button b {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    font-size: 0;
-    line-height: 0;
-    border: 5px solid #010101;
-    border-top-color: #666;
-    margin-left: 5px;
-    vertical-align: -4px;
-}
-#sns-share-button.on b, #footprints-button.on b {
-    border-top-color: #99e000;
-}
-#sns-share, #footprints {
-    display: none;
-    background-color: white;
-    border: 1px solid #ddd;
-    position: absolute;
-    top: 35px;
-    _top: 30px;
-    right: 0;
-    z-index: 999;
-}
-#sns-share {
-    padding: 10px;
-}
-#footprints {
-    color: #333;
-    padding: 10px 10px 30px 10px;
-}
-#sns-share i, #footprints i {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    font-size: 0;
-    line-height: 0;
-    border: 7px solid transparent;
-    _border-color: pink;
-    _filter: chroma(color=pink);
-    border-bottom-color: white;
-    position: absolute;
-    top: -14px;
-}
-#sns-share i {
-    right: 20px;
-}
-#footprints i {
-    right: 32px;
-}
-
-
-.logo {
-    cursor: pointer;
-    display: inline-block;
-    width: 128px;
-    height: 60px;
-    background: no-repeat url(/img/logo.png);
-    vertical-align: middle;
-}
-
-#search {
-    background-color: #518900; 
-}
-#search button {
-    top: 5px;
-    background-color: #518900; 
-}
-
-/* navigation */
-#navbar {
-    margin-top: 10px;
-    padding: 8px;
-    border: 1px solid #518900;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-    font: 14px/22px '';
-    _width: 100%;
-}
-#navbar a {
-    color: #fff;
-    display: inline-block;
-    padding: 3px 20px;
-    _padding: 5px 20px 2px 20px;
-    margin: 2px 0;
-    white-space: nowrap;
-    text-decoration: none;
-    vertical-align: baseline;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-}
-#navbar a:hover {
-    background-color: #4f8a00;
-}
-#navbar a.on {
-    background-color: #4f8a00;
-}
-
-#content {
-    background: url(/img3/bg.png) repeat center top;
-}
-
-#pagination a {
-    background-color: #e3e3e3;
 }
