@@ -6,7 +6,7 @@
         <meta name="viewport"   content="width=device-width,initial-scale=1.0" />
         <?php require 'module/seo.view.php'; ?>
         <link rel="shortcut icon" href="<?= App::static_server() ?>/img/favicon.ico?v=20130817" />
-        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server() ?>/css/main.css?v=20131011.2" />
+        <link charset="utf-8" rel="stylesheet" type="text/css" href="<?= App::static_server() ?>/css/main.css?v=20131011.4" />
         <script src="<?= App::static_server() ?>/js/jquery.min.js"></script>
         <script src="<?= App::static_server() ?>/js/main.js?v=20131011.2"></script>
     </head>

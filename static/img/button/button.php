@@ -7,57 +7,70 @@ button_img($argv[1]);
 function button_img($file)
 {
     $img = new Imagick();
-    $img->newImage(80, 172, '#fff', 'png');
+    $img->newImage(192, 154, 'transparent', 'png');
 
     $draw = new ImagickDraw();
-    //$draw->setStrokeWidth(0);
-    $draw->setFont('./msyhbd.ttf');
-    //in pixel ? doc say point
-    $draw->setFontSize(16);
-    $draw->setFontWeight(700);
     $draw->setTextAlignment(Imagick::ALIGN_CENTER);
 
+    $draw->setFont('./msyhbd.ttf');
+    $draw->setFontSize(16); //in pixel? doc say point.
+    $draw->setFontWeight(700);
+
+    $x = 0; $y = 0;
+    draw_button($draw, $x, $y, 80, 33, 5, '#e33',    '去抢购', 24, 'v');
+    draw_button($draw, $x, $y, 80, 33, 5, '#808080', '已结束', 24, 'v');
+    draw_button($draw, $x, $y, 80, 33, 5, '#808080', '已抢光', 24, 'v');
+    draw_button($draw, $x, $y, 80, 33, 5, '#393',     null,    24, 'hv');
+    $x1 = $x; $y1 = $y;
+
     $y = 0;
-    draw_button($draw, $y, '#e33',    '去抢购');
-    draw_button($draw, $y, '#808080', '已结束');
-    draw_button($draw, $y, '#808080', '已抢光');
-    draw_button($draw, $y, '#393',     null);
+    draw_circle($draw, $x, $y, 55, '#cc0000', "频道", 'h');
+    draw_circle($draw, $x, $y, 55, '#cc0000', "收藏", 'v');
+    $x = $x1;
+    draw_circle($draw, $x, $y, 55, '#cc0000', '反馈', 'h');
+    draw_circle($draw, $x, $y, 55, '#aaa',    '顶部');
 
     $draw->setFont('./msyh.ttf');
     $draw->setFontSize(12);
     $draw->setFontWeight(500);
 
-    $x = 0;
-    draw_button2($draw, $x, $y, 26, '#393', '包邮');
-    draw_button2($draw, $x, $y, 34, '#ffa405', 'VIP价');
-    $x = 0;
-    $y += 18;
-    draw_button2($draw, $x, $y, 26, '#f39', '拍改');
-    draw_button2($draw, $x, $y, 53, '#e33', '相关热卖');
-    $x = 0;
-    $y += 18;
+    $x = 0; $y = $y1;
+    draw_button($draw, $x, $y, 26, 17, 3, '#393',    '包邮',     13, 'h');
+    draw_button($draw, $x, $y, 26, 17, 3, '#f39',    '拍改',     13, 'h');
+    draw_button($draw, $x, $y, 34, 17, 3, '#ffa405', 'VIP价',    13, 'h');
+    draw_button($draw, $x, $y, 54, 17, 3, '#e33',    '相关热卖', 13, 'h');
+
     
     $img->drawImage($draw);
     $img->writeImage($file);
 }
 
-function draw_button($draw, &$y, $bg, $text)
+function draw_button($draw, &$x, &$y, $width, $height, $br, $bg, $text, $baseline, $flag = null)
 {
     $draw->setFillColor($bg);
-    $draw->roundRectangle(0, $y, 80, $y += 32, 5, 5);
+    $draw->roundRectangle($x, $y, $x + $width - 1, $y + $height - 1, $br, $br);
     if ($text) {
         $draw->setFillColor('#fff');
-        $draw->annotation(40, $y - 8, $text);
+        $draw->annotation($x + ($width + 1) / 2, $y + $baseline, $text);
     }
-    $y += 2;
+    if ($flag === null) return;
+    else if ($flag === 'h')    $x += $width  + 1;
+    else if ($flag === 'v')    $y += $height + 1;
+    else if ($flag === 'hv') { $x += $width  + 1; $y += $height + 1; }
 }
 
-function draw_button2($draw, &$x, $y, $width, $bg, $text)
+function draw_circle($draw, &$x, &$y, $diameter, $bg, $text, $flag = null)
 {
     $draw->setFillColor($bg);
-    $draw->roundRectangle($x, $y, $x + $width - 1, $y + 16, 3, 3);
-    $draw->setFillColor('#fff');
-    $draw->annotation($x + $width / 2, $y + 13, $text);
-    $x += $width + 1;
+    $radius = floor($diameter / 2);
+    $draw->circle($x + $radius, $y + $radius, $x, $y + $radius);
+    if ($text) {
+        $draw->setFillColor('#fff');
+        $draw->annotation($x + ($diameter + 1) / 2, $y + $radius, $text);
+    }
+    if ($flag === null) return;
+    else if ($flag === 'h')    $x += $diameter + 1;
+    else if ($flag === 'v')    $y += $diameter + 1;
+    else if ($flag === 'hv') { $x += $diameter + 1; $y += $diameter + 1; }
 }
 

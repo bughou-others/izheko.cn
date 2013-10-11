@@ -502,7 +502,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     font-weight: bolder;
     font-size: 16px;
     line-height: 33px;
-    background-image: url(/img/button.png?v=20131011);
+    background-image: url(/img/button.png?v=20131011.1);
     background-position-x: 0;
 }
 .item .action:hover {
@@ -528,7 +528,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     display: inline-block;
     height: 17px;
     vertical-align: text-bottom;
-    background-image: url(/img/button.png?v=20131011);
+    background-image: url(/img/button.png?v=20131011.1);
 }
 .item .post {
     width: 26px;
@@ -545,7 +545,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     background-position: 0 -154px;
 }
 .item .remai {
-    width: 53px;
+    width: 54px;
     background-position: -27px -154px;
 }
 .item .expand .remai {
