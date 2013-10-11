@@ -318,9 +318,10 @@ Izheko.item_list_init = function() {
     $w = $(window);
     $("#item_list").on('mouseenter', '.item-wrapper', function(){
         var $this = $(this);
-        var time_left = $this.children('.item').children('.expand').children('.time-left');
+        var item = $this.children('.item');
+        var time_left = item.children('.expand').children('.time-left');
         if(!$this.attr('x')){
-            time_left.after('<div class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</div>');
+            time_left.prepend('<a data-itemid="' + item.children('.pic').attr('data-itemid') + '" data-rd="2" class="remai" title="与这个宝贝相关的热卖宝贝" target="_blank"></a>').after('<div class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</div>');
             $this.attr('x', 'o');
         }
         Izheko.TimeLeftUpdate.start(time_left.children('span'));

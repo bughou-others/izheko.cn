@@ -133,11 +133,12 @@
     font-weight: bolder;
     font-size: 16px;
     line-height: 33px;
-    background-image: url(/img/button.png);
+    background-image: url(/img/button.png?v=20131011);
     background-position-x: 0;
 }
 .item .action:hover {
     opacity: 0.8;
+    filter: alpha(opacity=80);
     color: white;
     text-decoration: none;
 }
@@ -154,11 +155,11 @@
     background-position-y: -102px;
 }
 
-.item .post, .item .vip, .item .gai {
+.item .post, .item .vip, .item .gai, .item .remai {
     display: inline-block;
     height: 17px;
     vertical-align: text-bottom;
-    background-image: url(/img/button.png);
+    background-image: url(/img/button.png?v=20131011);
 }
 .item .post {
     width: 26px;
@@ -173,6 +174,15 @@
 .item .gai {
     width: 26px;
     background-position: 0 -154px;
+}
+.item .remai {
+    width: 53px;
+    float: right;
+    background-position: -27px -154px;
+}
+.item .remai:hover {
+    opacity: 0.8;
+    filter: alpha(opacity=80);
 }
 .item .sns-share {
     margin: 10px 0;

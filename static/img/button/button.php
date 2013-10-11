@@ -33,6 +33,9 @@ function button_img($file)
     $x = 0;
     $y += 18;
     draw_button2($draw, $x, $y, 26, '#f39', '拍改');
+    draw_button2($draw, $x, $y, 53, '#e33', '相关热卖');
+    $x = 0;
+    $y += 18;
     
     $img->drawImage($draw);
     $img->writeImage($file);
