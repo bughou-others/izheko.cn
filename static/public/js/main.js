@@ -12,7 +12,7 @@ Izheko.is_mobile = (function() {
 
 Izheko.Dialog = {
     show: function(msg, target, delay) {
-        if(this.box === undefined) {
+        if (this.box === undefined) {
             this.box = $('<div id="dialog_box"><b></b><div></div></div>').appendTo('body');
             this.box.children('b').click(this.hide);
         }
@@ -23,7 +23,7 @@ Izheko.Dialog = {
             'top':  (offset.top + target.height() + 10) + 'px',
             'display': 'block'
         });
-        if(this.timer !== undefined) clearTimeout(this.timer);
+        if (this.timer !== undefined) clearTimeout(this.timer);
         this.timer = setTimeout(this.hide, (delay ? delay : 3) * 1000);
     },
     hide: function(){
@@ -393,12 +393,11 @@ Izheko.lazy_img = function(){
         for (var n = min; n <= max; n++){
             if (loaded[n]) continue;
             var $img = $('#img' + n);
-            var s = $img.attr('s');
-            if (s) {
-                $img.attr('src', s).removeAttr('s');
-                loaded[n] = true;
-                loaded_count ++;
-            }
+            var numiid = $img.parent().attr('data-itemid');
+            $img.attr('src', 'http://static.izheko.cn/pic/' + 
+                    numiid.substr(0, 4).split('').join('/') + '/' + numiid + '.jpg');
+            loaded[n] = true;
+            loaded_count ++;
         }
         if (loaded_count >= Izheko.item_count) {
             $c.unbind('scroll', load_imgs_in_viewport).unbind('resize', init_row_model);
