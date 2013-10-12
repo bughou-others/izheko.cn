@@ -40,9 +40,13 @@ Izheko.phone_init = function() {
     });
 };
 
-Izheko.bookmark_init = function() {
+Izheko.sidebar_init = function() {
     if (Izheko.is_mobile) return;
-    document.write('<a id="bookmark" title="收藏爱折扣"><span>收藏<br/>爱折扣</span></a><br/>');
+    document.write(
+            '<a id="pindao" href="#"></a>' +
+            '<a id="bookmark" href="#"></a>' + 
+            '<a id="fankui" href="tencent://message/?uin=715091790"></a>'
+            );
     $('#bookmark').click(function(){
         if (document.all) { //IE
             var url   = 'http://' + location.hostname +'/';
@@ -51,12 +55,13 @@ Izheko.bookmark_init = function() {
         } else {
             Izheko.Dialog.show('亲，请按 Ctrl+D 哦', $(this));
         }
+        return false;
     });
 }
 
 Izheko.gotop_init = function(){
     var $c = $(window);
-    var gotop = $('#go_top');
+    var gotop = $('#gotop');
     var state = 1;
     $c.scroll(function(){
         if ($c.scrollTop() > 100 === state) return;
@@ -408,10 +413,10 @@ Izheko.lazy_img = function(){
             item.offset().top === first_row_top
             ) row_size ++;
         first_row_top -= 12;
+        load_imgs_in_viewport();
     }
     $(init_row_model);
     $c.scroll(load_imgs_in_viewport).resize(init_row_model);
     init_row_model();
-    load_imgs_in_viewport();
 };
 

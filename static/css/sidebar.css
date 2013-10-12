@@ -14,38 +14,29 @@
         ));
 }
 #sidebar a {
-    display: inline-block;
-    margin: 5px 0;
-    padding: 5px 5px 7px 5px;
-    background-color: #f39;
-    overflow: hidden;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
-    text-decoration: none;
-    background-color: #aaa;
+    display: block;
+    margin-top: 3px;
+    padding: 0;
+    width: 55px;
+    height: 55px;
+    background-image: url(/img/button.png?v=20131012.1);
+    _background-image: url(/img/button-fs8.png?v=20131012.1);
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+#sidebar a:hover {
+    opacity: 1.0;
+    filter: alpha(opacity=100);
+}
+#sidebar #pindao {
+    background-position: -81px 0;
 }
 #sidebar #bookmark {
-    background-color: #f39;
+    background-position: -137px 0;
 }
-#sidebar a b {
-    width:  17px;
-    height: 17px;
-    display: inline-block;
-    background: no-repeat url(/img2/tool.png);
+#sidebar #fankui {
+    background-position: -81px -56px;
 }
-#sidebar #kefu b {
-    background-position: -79px -1px;
+#sidebar #gotop {
+    background-position: -137px -56px;
 }
-#sidebar a span {
-    display: block;
-    color: white;
-    white-space: nowrap;
-    font: 12px/12px '微软雅黑';
-    *vertical-align: bottom;
-    _padding-top: 3px; 
-}
-#sidebar #bookmark span {
-    line-height: 16px;
-}
-

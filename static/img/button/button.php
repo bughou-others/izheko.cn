@@ -8,6 +8,7 @@ function button_img($file)
 {
     $img = new Imagick();
     $img->newImage(192, 154, 'transparent', 'png');
+    $img->setImageDepth(8);
 
     $draw = new ImagickDraw();
     $draw->setTextAlignment(Imagick::ALIGN_CENTER);
@@ -24,11 +25,18 @@ function button_img($file)
     $x1 = $x; $y1 = $y;
 
     $y = 0;
+    draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '频道',       'h');
+    draw_hexagon($draw, $x, $y, 55, 15, 'r', '#cc0000', '收藏izheko', 'v');
+    $x = $x1;
+    draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '反馈',   'h');
+    draw_hexagon($draw, $x, $y, 55, 15, 'r', '#888',    '回到顶部');
+    /*
     draw_circle($draw, $x, $y, 55, '#cc0000', "频道", 'h');
     draw_circle($draw, $x, $y, 55, '#cc0000', "收藏", 'v');
     $x = $x1;
     draw_circle($draw, $x, $y, 55, '#cc0000', '反馈', 'h');
     draw_circle($draw, $x, $y, 55, '#aaa',    '顶部');
+     */
 
     $draw->setFont('./msyh.ttf');
     $draw->setFontSize(12);
@@ -40,7 +48,6 @@ function button_img($file)
     draw_button($draw, $x, $y, 34, 17, 3, '#ffa405', 'VIP价',    13, 'h');
     draw_button($draw, $x, $y, 54, 17, 3, '#e33',    '相关热卖', 13, 'h');
 
-    
     $img->drawImage($draw);
     $img->writeImage($file);
 }
@@ -51,7 +58,7 @@ function draw_button($draw, &$x, &$y, $width, $height, $br, $bg, $text, $baselin
     $draw->roundRectangle($x, $y, $x + $width - 1, $y + $height - 1, $br, $br);
     if ($text) {
         $draw->setFillColor('#fff');
-        $draw->annotation($x + ($width + 1) / 2, $y + $baseline, $text);
+        $draw->annotation($x + ($width + 1) / 2, $y + $height / 2 + 0.4 * $draw->getFontSize(), $text);
     }
     if ($flag === null) return;
     else if ($flag === 'h')    $x += $width  + 1;
@@ -59,18 +66,46 @@ function draw_button($draw, &$x, &$y, $width, $height, $br, $bg, $text, $baselin
     else if ($flag === 'hv') { $x += $width  + 1; $y += $height + 1; }
 }
 
-function draw_circle($draw, &$x, &$y, $diameter, $bg, $text, $flag = null)
+function draw_hexagon($draw, &$x, &$y, $width, $w, $dr, $bg, $text, $flag = null)
 {
     $draw->setFillColor($bg);
-    $radius = floor($diameter / 2);
-    $draw->circle($x + $radius, $y + $radius, $x, $y + $radius);
-    if ($text) {
-        $draw->setFillColor('#fff');
-        $draw->annotation($x + ($diameter + 1) / 2, $y + $radius, $text);
+    if ($dr === 'l') $draw->polygon(array(
+        array('x' => $x, 'y' => $y),
+        array('x' => $x + $width - 1 - $w, 'y' => $y),
+        array('x' => $x + $width - 1, 'y' => $y + $w),
+        array('x' => $x + $width - 1, 'y' => $y + $width - 1),
+        array('x' => $x + $w, 'y' => $y + $width - 1),
+        array('x' => $x, 'y' => $y + $width - 1 - $w),
+    ));
+    else if ($dr === 'r') $draw->polygon(array(
+        array('x' => $x + $w, 'y' => $y),
+        array('x' => $x + $width - 1, 'y' => $y),
+        array('x' => $x + $width - 1, 'y' => $y + $width - 1 - $w),
+        array('x' => $x + $width - 1 - $w, 'y' => $y + $width - 1),
+        array('x' => $x, 'y' => $y + $width - 1),
+        array('x' => $x, 'y' => $y + $w),
+    ));
+
+    $draw->setFillColor('#fff');
+    $mx = $x + ($width + 1) / 2;
+    $my = $y + ($width + 1) / 2;
+    mb_internal_encoding('UTF-8');
+    if (mb_strlen($text) <= 2) {
+        $draw->annotation($mx, $my + 6 , $text);
+    } else if ($text === '收藏izheko') {
+        $draw->annotation($mx, $my - 3 , mb_substr($text, 0, 2));
+        $fs = $draw->getFontSize();
+        $draw->setFontSize(12);
+        $draw->annotation($mx, $my + 12, mb_substr($text, 2));
+        $draw->setFontSize($fs);
+    } else if ($text === '回到顶部') {
+        $draw->annotation($mx, $my - 3 , mb_substr($text, 0, 2));
+        $draw->annotation($mx, $my + 15, mb_substr($text, 2));
     }
+
     if ($flag === null) return;
-    else if ($flag === 'h')    $x += $diameter + 1;
-    else if ($flag === 'v')    $y += $diameter + 1;
-    else if ($flag === 'hv') { $x += $diameter + 1; $y += $diameter + 1; }
+    else if ($flag === 'h')    $x += $width + 1;
+    else if ($flag === 'v')    $y += $width + 1;
+    else if ($flag === 'hv') { $x += $width + 1; $y += $width + 1; }
 }
 
