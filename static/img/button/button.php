@@ -3,6 +3,7 @@ if ($argc !== 2 || !preg_match('/.+\.png$/', $argv[1]))
     die("usage: php ${argv[0]} <*.png>\n");
 
 button_img($argv[1]);
+#pngquant -force 256 ../../public/img/button.png
 
 function button_img($file)
 {

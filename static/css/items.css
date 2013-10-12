@@ -160,25 +160,25 @@
     height: 17px;
     vertical-align: text-bottom;
     background-image: url(/img/button.png?v=20131012.1);
-    background-position-y: -136px;
+    background-position-x: 0;
 }
 .item .post {
     width: 26px;
-    background-position-x: 0;
+    background-position-y: -136px;
     *margin-right: 5px;
 }
 .item .gai {
     width: 26px;
-    background-position-x: -27px;
+    background-position-y: -154px;
 }
 .item .vip {
     width: 34px;
-    background-position-x: -54px;
+    background-position-y: -172px;
     *margin-right: 5px;
 }
 .item .remai {
     width: 54px;
-    background-position-x: -89px;
+    background-position-y: -190px;
 }
 .item .expand .remai {
     float: right;

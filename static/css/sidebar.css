@@ -21,6 +21,7 @@
     height: 55px;
     background-image: url(/img/button.png?v=20131012.1);
     _background-image: url(/img/button-fs8.png?v=20131012.1);
+    background-position-x: -81px;
     opacity: 0.7;
     filter: alpha(opacity=70);
 }
@@ -29,14 +30,14 @@
     filter: alpha(opacity=100);
 }
 #sidebar #pindao {
-    background-position: -81px 0;
+    background-position-y: 0;
 }
 #sidebar #bookmark {
-    background-position: -137px 0;
+    background-position-y: -56px;
 }
 #sidebar #fankui {
-    background-position: -81px -56px;
+    background-position-y: -112px;
 }
 #sidebar #gotop {
-    background-position: -137px -56px;
+    background-position-y: -168px;
 }
