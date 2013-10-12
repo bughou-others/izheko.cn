@@ -43,7 +43,7 @@
                     未开始时，可以点击图片、标题或按钮提前进入淘宝网等候。
                     </p>
                 </span>
-                <img src="<?= App::static_server() ?>/other/wks.png" />
+                <img src="<?= App::static_server() ?>/pic2/wks.png" />
             </div>
 
             <div class="newbile">
@@ -56,7 +56,7 @@
                     过程中涨价了。
                     </p>
                 </span>
-                <img src="<?= App::static_server() ?>/other/qqg.png" />
+                <img src="<?= App::static_server() ?>/pic2/qqg.png" />
             </div>
 
             <div class="newbile">
@@ -67,7 +67,7 @@
                     还是可以点击图片到淘宝网去看看商品详情，如果真心喜欢，可以原价购买。
                     </p>
                 </span>
-                <img src="<?= App::static_server() ?>/other/yjs.png" />
+                <img src="<?= App::static_server() ?>/pic2/yjs.png" />
             </div>
 
             <div class="newbile">
@@ -79,7 +79,7 @@
                     即使已抢光，也可以去看看，确定是不是真的抢光了，说不定折扣还在继续呢。
                     </p>
                 </span>
-                <img src="<?= App::static_server() ?>/other/yqg.png" />
+                <img src="<?= App::static_server() ?>/pic2/yqg.png" />
             </div>
         </div>
 
@@ -106,7 +106,7 @@
                 <p>
                 一秒钟内的决战绝对需要充分的准备，看准宝贝秒杀开始时间、提前打开宝贝页面等待、确保支付宝中有充裕的余额，最好设个闹钟提醒，还有别忘了提前登录，时间一到迅速刷新
                 <br>
-                <img src="<?= App::static_server() ?>/other/seckill.jpg" />
+                <img src="<?= App::static_server() ?>/pic2/seckill.jpg" />
                 </p>
             </div>
             <div class="seckill">
