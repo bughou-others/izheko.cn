@@ -16,4 +16,5 @@
                 <small>蜀ICP备09019425号</small>
                 <sub><script src="http://s25.cnzz.com/stat.php?id=5503631&web_id=5503631"></script></sub>
             </div>
+            <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21567955"></script>
         </div>
