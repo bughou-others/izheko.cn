@@ -68,6 +68,10 @@ Izheko.gotop_init = function(){
         state = !state;
         gotop.css('visibility', state ? 'visible' : 'hidden');
     }).scroll();
+    gotop.click(function(){
+        $c.scrollTop(0);
+        return false;
+    });
 };
 
 Izheko.share_init = function(){
