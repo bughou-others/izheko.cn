@@ -31,6 +31,67 @@ Izheko.Dialog = {
     }
 };
 
+Izheko.SnsShareLib = {
+    sites: {
+        qq_zone: [ 'QQ空间', function(url, title, pic){
+            return "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&pics=" + pic + "&title=" + title;
+        }],
+        sina_weibo: [ '新浪微博', function(url, title, pic){
+            return "http://v.t.sina.com.cn/share/share.php?url=" + url + "&pic=" + pic + "&title=" + title;
+        }],
+        tencent_weibo: [ '腾讯微博', function(url, title, pic){
+            return "http://share.v.t.qq.com/index.php?c=share&a=index&url=" + url + "&pic=" + pic + "&title=" + title;
+        }],
+        renren: [ '人人网', function(url, title, pic){ 
+            return "http://share.renren.com/share/buttonshare.do?link=" + url;
+        }],
+        douban: [ '豆瓣网', function(url, title, pic){
+            return "http://www.douban.com/recommend/?url=" + url + "&title=" + title + "&image=" + pic;
+        }],
+        kaixin: [ '开心网', function(url, title, pic){
+            return "http://www.kaixin001.com/rest/records.php?style=11&url=" + url + "&pic=" + pic + "&content=" + title;
+        }],
+        qq_haoyou: [ 'QQ好友', function(url, title, pic){
+            return "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&pics=" + pic + "&desc=" + title;
+        }]
+    },
+    gen_icons: function(a){
+        var icons = '';
+        var sites = this.sites;
+        for(var key in sites){
+            icons += (a ?
+                    '<a><b class="sns-' + key + '"></b>' + sites[key][0] + '</a>'
+                    :
+                    '<b class="sns-' + key + '" title="' + sites[key][0] + '"></b>'
+                    );
+        }
+        return icons;
+    },
+    share: function($e, url, title, pic){
+        url = encodeURIComponent(url);
+        pic = encodeURIComponent(pic);
+        title = encodeURIComponent(title);
+        var url = this.sites[$e.attr('class').substr(4)][1](url, title, pic);
+        if(this.a === undefined){
+            var a = document.createElement('a');
+            if(a.click) {
+                a.target = '_blank';
+                document.body.appendChild(a);
+                this.a = a;
+            } else this.a = null;
+        }
+        if(this.a){
+            this.a.href = url;
+            this.a.click();
+        } else location.href = url;
+    },
+    init: function(){
+        this.icons_a = this.gen_icons(true);
+        this.icons_b = this.gen_icons(false);
+    }
+};
+Izheko.SnsShareLib.init();
+
 Izheko.phone_init = function() {
     if (Izheko.is_mobile) return;
     document.write('<span id="phone-edition" title="手机版爱折扣">手机版</span>');
@@ -59,41 +120,6 @@ Izheko.share_init = function(){
         $('#sns-share-button').removeClass('on');
     });
 };
-
-Izheko.sidebar_init = function() {
-    if (Izheko.is_mobile) return;
-    document.write(
-            '<a id="pindao" href="#"></a>' +
-            '<a id="bookmark" href="#"></a>' + 
-            '<a id="fankui" href="tencent://message/?uin=715091790"></a>'
-            );
-    $('#bookmark').click(function(){
-        if (document.all) { //IE
-            var url   = 'http://' + location.hostname +'/';
-            var title = '爱折扣 - 精选优质折扣商品';
-            window.external.AddFavorite(url, title);
-        } else {
-            Izheko.Dialog.show('亲，请按 Ctrl+D 哦', $(this));
-        }
-        return false;
-    });
-}
-
-Izheko.gotop_init = function(){
-    var $c = $(window);
-    var gotop = $('#gotop');
-    var state = true;
-    $c.scroll(function(){
-        if ($c.scrollTop() > 100 === state) return;
-        state = !state;
-        gotop.css('visibility', state ? 'visible' : 'hidden');
-    }).scroll();
-    gotop.click(function(){
-        $c.scrollTop(0);
-        return false;
-    });
-};
-
 
 Izheko.Footprints = {
     init: function(){
@@ -228,101 +254,56 @@ Izheko.Footprints = {
     }
 };
 
-Izheko.SnsShareLib = {
-    sites: {
-        qq_zone: [ 'QQ空间', function(url, title, pic){
-            return "http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + url + "&pics=" + pic + "&title=" + title;
-        }],
-        sina_weibo: [ '新浪微博', function(url, title, pic){
-            return "http://v.t.sina.com.cn/share/share.php?url=" + url + "&pic=" + pic + "&title=" + title;
-        }],
-        tencent_weibo: [ '腾讯微博', function(url, title, pic){
-            return "http://share.v.t.qq.com/index.php?c=share&a=index&url=" + url + "&pic=" + pic + "&title=" + title;
-        }],
-        renren: [ '人人网', function(url, title, pic){ 
-            return "http://share.renren.com/share/buttonshare.do?link=" + url;
-        }],
-        douban: [ '豆瓣网', function(url, title, pic){
-            return "http://www.douban.com/recommend/?url=" + url + "&title=" + title + "&image=" + pic;
-        }],
-        kaixin: [ '开心网', function(url, title, pic){
-            return "http://www.kaixin001.com/rest/records.php?style=11&url=" + url + "&pic=" + pic + "&content=" + title;
-        }],
-        qq_haoyou: [ 'QQ好友', function(url, title, pic){
-            return "http://connect.qq.com/widget/shareqq/index.html?url=" + url + "&pics=" + pic + "&desc=" + title;
-        }]
-    },
-    gen_icons: function(a){
-        var icons = '';
-        var sites = this.sites;
-        for(var key in sites){
-            icons += (a ?
-                    '<a><b class="sns-' + key + '"></b>' + sites[key][0] + '</a>'
-                    :
-                    '<b class="sns-' + key + '" title="' + sites[key][0] + '"></b>'
-                    );
+
+Izheko.sidebar_init = function() {
+    if (Izheko.is_mobile) return;
+    document.write(
+            '<a id="pindao" href="#"></a>' +
+            '<a id="bookmark" href="#"></a>' + 
+            '<a id="fankui" href="tencent://message/?uin=715091790"></a>'
+            );
+    $('#bookmark').click(function(){
+        if (document.all) { //IE
+            var url   = 'http://' + location.hostname +'/';
+            var title = '爱折扣 - 精选优质折扣商品';
+            window.external.AddFavorite(url, title);
+        } else {
+            Izheko.Dialog.show('亲，请按 Ctrl+D 哦', $(this));
         }
-        return icons;
-    },
-    share: function($e, url, title, pic){
-        url = encodeURIComponent(url);
-        pic = encodeURIComponent(pic);
-        title = encodeURIComponent(title);
-        var url = this.sites[$e.attr('class').substr(4)][1](url, title, pic);
-        if(this.a === undefined){
-            var a = document.createElement('a');
-            if(a.click) {
-                a.target = '_blank';
-                document.body.appendChild(a);
-                this.a = a;
-            } else this.a = null;
-        }
-        if(this.a){
-            this.a.href = url;
-            this.a.click();
-        } else location.href = url;
-    },
-    init: function(){
-        this.icons_a = this.gen_icons(true);
-        this.icons_b = this.gen_icons(false);
-    }
+        return false;
+    });
+}
+
+Izheko.gotop_init = function(){
+    var $c = $(window);
+    var gotop = $('#gotop');
+    var state = true;
+    $c.scroll(function(){
+        if ($c.scrollTop() > 100 === state) return;
+        state = !state;
+        gotop.css('visibility', state ? 'visible' : 'hidden');
+    }).scroll();
+    gotop.click(function(){
+        $c.scrollTop(0);
+        return false;
+    });
 };
-Izheko.SnsShareLib.init();
 
-Izheko.TimeLeftUpdate = {
-    start: function(target){
-        var time = target.attr('s');
-        if(!time) return;
-        time = parseInt(time, 10);
-        var o = this;
-        target.html(o.get_time_left(time));
-        this.timer = setInterval(function(){
-            target.html(o.get_time_left(time));
-        }, 100);
-    },
-    stop: function(){
-        clearInterval(this.timer);
-    },
-    get_time_left: function(time) {
-        var left = time - new Date / 1000;
-        var s = '', n;
-        if((n = Math.floor(left / 86400)) > 0){
-            s +=  n + '天';
-            left = left % 86400;
-        }
-        n = Math.floor(left / 3600);
-        s += (n < 10 ? '0' + n : n) + '小时';
-        left = left % 3600;
-
-        n = Math.floor(left / 60);
-        s += (n < 10 ? '0' + n : n) + '分';
-        left = left % 60;
-
-        n = left.toFixed(1);
-        s += (n < 10 ? '0' + n : n) + '秒';
-        return s;
-    }
+Izheko.taodianjin_init = function(){
+    (function(win,doc){
+        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
+        if (!win.alimamatk_show) {
+            s.charset = "gbk";
+            s.async = true;
+            s.src = "http://a.alimama.cn/tkapi.js";
+            h.insertBefore(s, h.firstChild);
+        };
+        var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
+        win.alimamatk_onload = win.alimamatk_onload || [];
+        win.alimamatk_onload.push(o);
+    })(window,document);
 };
+
 
 Izheko.item_list_init = function() {
     $w = $(window);
@@ -350,41 +331,6 @@ Izheko.single_item_init = function() {
     item.children('.left').children('.sns-share').on('click', 'b', Izheko.item_sns_share);
     Izheko.Footprints.init_record(item);
 };
-
-Izheko.item_sns_share = function(){
-    var $this = $(this);
-    var item = $this.closest('.item');
-    var pic = item.find('.pic');
-    var img = pic.children('img');
-    Izheko.SnsShareLib.share($this, 
-            'http://' + location.host + '/item/' + pic.attr('data-itemid'),
-            item.children('.title').text(),
-            img.attr('s') || img.attr('src')
-            );
-};
-
-Izheko.taodianjin_init = function(){
-    (function(win,doc){
-        var s = doc.createElement("script"), h = doc.getElementsByTagName("head")[0];
-        if (!win.alimamatk_show) {
-            s.charset = "gbk";
-            s.async = true;
-            s.src = "http://a.alimama.cn/tkapi.js";
-            h.insertBefore(s, h.firstChild);
-        };
-        var o = { pid: "mm_40339139_4152163_13484640", rd: "1" };
-        win.alimamatk_onload = win.alimamatk_onload || [];
-        win.alimamatk_onload.push(o);
-    })(window,document);
-};
-
-Izheko.taobao_search = function(word){
-    var w = $(window).width(), s;
-    if(w > 638) s = '628x270';
-    else if(w > 360) s = '350x270';
-    else s = '290x380';
-    document.write('<a data-type="2" data-keyword="' + word + '" data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
-}
 
 Izheko.lazy_img = function(){
     var first_row_top, row_size, loaded = { }, loaded_count = 6; $c = $(window);
@@ -423,4 +369,59 @@ Izheko.lazy_img = function(){
     $c.scroll(load_imgs_in_viewport).resize(init_row_model);
     init_row_model();
 };
+
+Izheko.TimeLeftUpdate = {
+    start: function(target){
+        var time = target.attr('s');
+        if(!time) return;
+        time = parseInt(time, 10);
+        var o = this;
+        target.html(o.get_time_left(time));
+        this.timer = setInterval(function(){
+            target.html(o.get_time_left(time));
+        }, 100);
+    },
+    stop: function(){
+        clearInterval(this.timer);
+    },
+    get_time_left: function(time) {
+        var left = time - new Date / 1000;
+        var s = '', n;
+        if((n = Math.floor(left / 86400)) > 0){
+            s +=  n + '天';
+            left = left % 86400;
+        }
+        n = Math.floor(left / 3600);
+        s += (n < 10 ? '0' + n : n) + '小时';
+        left = left % 3600;
+
+        n = Math.floor(left / 60);
+        s += (n < 10 ? '0' + n : n) + '分';
+        left = left % 60;
+
+        n = left.toFixed(1);
+        s += (n < 10 ? '0' + n : n) + '秒';
+        return s;
+    }
+};
+
+Izheko.item_sns_share = function(){
+    var $this = $(this);
+    var item = $this.closest('.item');
+    var pic = item.find('.pic');
+    var img = pic.children('img');
+    Izheko.SnsShareLib.share($this, 
+            'http://' + location.host + '/item/' + pic.attr('data-itemid'),
+            item.children('.title').text(),
+            img.attr('s') || img.attr('src')
+            );
+};
+
+Izheko.taobao_search = function(word){
+    var w = $(window).width(), s;
+    if(w > 638) s = '628x270';
+    else if(w > 360) s = '350x270';
+    else s = '290x380';
+    document.write('<a data-type="2" data-keyword="' + word + '" data-rd="1" data-style="2" data-tmpl="' + s + '" target="_blank"></a>');
+}
 
