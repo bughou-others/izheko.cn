@@ -20,7 +20,7 @@
             </div>
             <?php
                 if (isset($target_view)) require "content/$target_view.view.php";
-                else echo '<img id="error_content" src="' . App::static_server() . '/img3/404.png" />';
+                else echo '<img id="error_content" src="' . App::static_server() . '/img2/404.png" />';
             ?>
         </div>
         <?php require 'module/footer.view.php'; ?>

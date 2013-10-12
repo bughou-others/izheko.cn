@@ -24,7 +24,7 @@ h1,h2,h3,h4,h5,h6,p,img {
 #content {
     margin: 0;
     padding: 20px 0;
-    background: url(/img3/bg.png) repeat center top;
+    background: url(/img2/bg.png) repeat center top;
 }
 
 #error_content {
@@ -63,7 +63,7 @@ h1,h2,h3,h4,h5,h6,p,img {
     cursor: pointer;
     width: 24px;
     height: 24px;
-    background-image: url(/img3/sns_icon.png?v=20130912);
+    background-image: url(/img2/sns_icon.png);
 }
 b.sns-qq_zone    { background-position: 0 -96px; }
 b.sns-sina_weibo { background-position: 0 -144px; }
