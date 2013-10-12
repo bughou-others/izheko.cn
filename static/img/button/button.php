@@ -7,7 +7,7 @@ button_img($argv[1]);
 function button_img($file)
 {
     $img = new Imagick();
-    $img->newImage(192, 154, 'transparent', 'png');
+    $img->newImage(136, 224, 'transparent', 'png');
     $img->setImageDepth(8);
 
     $draw = new ImagickDraw();
@@ -22,31 +22,24 @@ function button_img($file)
     draw_button($draw, $x, $y, 80, 33, 5, '#808080', '已结束', 24, 'v');
     draw_button($draw, $x, $y, 80, 33, 5, '#808080', '已抢光', 24, 'v');
     draw_button($draw, $x, $y, 80, 33, 5, '#393',     null,    24, 'hv');
-    $x1 = $x; $y1 = $y;
+    $y1 = $y;
 
     $y = 0;
-    draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '频道',       'h');
+    draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '频道',       'v');
     draw_hexagon($draw, $x, $y, 55, 15, 'r', '#cc0000', '收藏izheko', 'v');
-    $x = $x1;
-    draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '反馈',   'h');
+    draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '反馈',       'v');
     draw_hexagon($draw, $x, $y, 55, 15, 'r', '#888',    '回到顶部');
-    /*
-    draw_circle($draw, $x, $y, 55, '#cc0000', "频道", 'h');
-    draw_circle($draw, $x, $y, 55, '#cc0000', "收藏", 'v');
-    $x = $x1;
-    draw_circle($draw, $x, $y, 55, '#cc0000', '反馈', 'h');
-    draw_circle($draw, $x, $y, 55, '#aaa',    '顶部');
-     */
 
     $draw->setFont('./msyh.ttf');
     $draw->setFontSize(12);
     $draw->setFontWeight(500);
 
-    $x = 0; $y = $y1;
-    draw_button($draw, $x, $y, 26, 17, 3, '#393',    '包邮',     13, 'h');
-    draw_button($draw, $x, $y, 26, 17, 3, '#f39',    '拍改',     13, 'h');
-    draw_button($draw, $x, $y, 34, 17, 3, '#ffa405', 'VIP价',    13, 'h');
-    draw_button($draw, $x, $y, 54, 17, 3, '#e33',    '相关热卖', 13, 'h');
+    $x = 0;
+    $y = $y1;
+    draw_button($draw, $x, $y, 26, 17, 3, '#393',    '包邮',     13, 'v');
+    draw_button($draw, $x, $y, 26, 17, 3, '#f39',    '拍改',     13, 'v');
+    draw_button($draw, $x, $y, 34, 17, 3, '#ffa405', 'VIP价',    13, 'v');
+    draw_button($draw, $x, $y, 54, 17, 3, '#e33',    '相关热卖', 13, 'v');
 
     $img->drawImage($draw);
     $img->writeImage($file);

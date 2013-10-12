@@ -62,7 +62,7 @@ Izheko.sidebar_init = function() {
 Izheko.gotop_init = function(){
     var $c = $(window);
     var gotop = $('#gotop');
-    var state = 1;
+    var state = true;
     $c.scroll(function(){
         if ($c.scrollTop() > 100 === state) return;
         state = !state;
