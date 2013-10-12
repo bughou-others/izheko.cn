@@ -40,6 +40,26 @@ Izheko.phone_init = function() {
     });
 };
 
+Izheko.share_init = function(){
+    $('#sns-share').append(Izheko.SnsShareLib.icons_a).on('click', 'a', function(){
+        Izheko.SnsShareLib.share(
+            $(this).children('b'),
+            'http://www.izheko.cn/',
+            '我喜欢上了“爱折扣(www.izheko.cn)”每天9块9的小幸福。懂我的商品，懂我的价格，给力的9块9包邮。',
+            'http://static.izheko.cn/img/logo.png'
+            );
+    });
+    $('#sns-share-button').bind('click mouseenter', function(){
+        Izheko.Dialog.hide();
+        $('#sns-share').css('display', 'block');
+        $('#sns-share-button').addClass('on');
+    });
+    $('#sns-share-wrapper').mouseleave(function(){
+        $('#sns-share').css('display', 'none');
+        $('#sns-share-button').removeClass('on');
+    });
+};
+
 Izheko.sidebar_init = function() {
     if (Izheko.is_mobile) return;
     document.write(
@@ -74,25 +94,6 @@ Izheko.gotop_init = function(){
     });
 };
 
-Izheko.share_init = function(){
-    $('#sns-share').append(Izheko.SnsShareLib.icons_a).on('click', 'a', function(){
-        Izheko.SnsShareLib.share(
-            $(this).children('b'),
-            'http://www.izheko.cn/',
-            '我喜欢上了“爱折扣(www.izheko.cn)”每天9块9的小幸福。懂我的商品，懂我的价格，给力的9块9包邮。',
-            'http://static.izheko.cn/img/logo.png'
-            );
-    });
-    $('#sns-share-button').bind('click mouseenter', function(){
-        Izheko.Dialog.hide();
-        $('#sns-share').css('display', 'block');
-        $('#sns-share-button').addClass('on');
-    });
-    $('#sns-share-wrapper').mouseleave(function(){
-        $('#sns-share').css('display', 'none');
-        $('#sns-share-button').removeClass('on');
-    });
-};
 
 Izheko.Footprints = {
     init: function(){

@@ -13,8 +13,11 @@
     <body>
         <?php require 'module/header.view.php'; ?>
         <div id="content">
-            <?php require 'module/sidebar.view.php'; ?>
-            <script> Izheko.taodianjin_init(); </script>
+            <div id="sidebar">
+                <script> Izheko.sidebar_init(); </script>
+                <a id="gotop" href="#"></a>
+                <script> Izheko.gotop_init(); Izheko.taodianjin_init(); </script>
+            </div>
             <?php
                 if (isset($target_view)) require "content/$target_view.view.php";
                 else echo '<img id="error_content" src="' . App::static_server() . '/img3/404.png" />';
