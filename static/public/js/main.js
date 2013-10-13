@@ -258,7 +258,7 @@ Izheko.Footprints = {
 Izheko.sidebar_init = function() {
     if (Izheko.is_mobile) return;
     document.write(
-            '<a id="pindao" href="#"></a>' +
+            //'<a id="pindao" href="#"></a>' +
             '<a id="bookmark" href="#"></a>' + 
             '<a id="fankui" href="tencent://message/?uin=715091790"></a>'
             );
