@@ -337,13 +337,14 @@ Izheko.lazy_img = function(){
     var load_imgs_in_viewport = function(){
         var _top = $c.scrollTop() - first_row_top;
         var _bottom = _top + $c.height();
-        var min = Math.floor(_top   / 342) * row_size + 1;
+        var min = (Math.floor(_top   / 342)) * row_size + 1;
         if (min < 7) min = 7;
-        var max = Math.ceil(_bottom / 342) * row_size;
+        var max = (Math.ceil(_bottom / 342) + 1) * row_size;
         if (max > Izheko.item_count) max = Izheko.item_count;
         for (var n = min; n <= max; n++){
             if (loaded[n]) continue;
             var $img = $('#img' + n);
+            if ($img.length === 0) return;
             var numiid = $img.parent().attr('data-itemid');
             $img.attr('src', 'http://static.izheko.cn/pic/' + 
                     numiid.substr(0, 4).split('').join('/') + '/' + numiid + '.jpg');
@@ -363,15 +364,20 @@ Izheko.lazy_img = function(){
             item.offset().top === first_row_top
             ) row_size ++;
         first_row_top -= 12;
-        load_imgs_in_viewport();
     }
     var timer;
     $c.scroll(function(){
         if (timer) clearTimeout(timer);
         setTimeout(load_imgs_in_viewport, 1000);
-    }).resize(init_row_model);
+    }).resize(function(){
+        init_row_model();
+        load_imgs_in_viewport();
+    });
     init_row_model();
-    $(init_row_model);
+    $(function(){
+        init_row_model();
+        load_imgs_in_viewport();
+    });
 };
 
 Izheko.TimeLeftUpdate = {
