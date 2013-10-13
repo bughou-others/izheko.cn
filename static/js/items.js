@@ -59,9 +59,13 @@ Izheko.lazy_img = function(){
         first_row_top -= 12;
         load_imgs_in_viewport();
     }
-    $(init_row_model);
-    $c.scroll(load_imgs_in_viewport).resize(init_row_model);
+    var timer;
+    $c.scroll(function(){
+        if (timer) clearTimeout(timer);
+        setTimeout(load_imgs_in_viewport, 1000);
+    }).resize(init_row_model);
     init_row_model();
+    $(init_row_model);
 };
 
 Izheko.TimeLeftUpdate = {
