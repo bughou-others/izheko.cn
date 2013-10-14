@@ -8,14 +8,12 @@
                 </span>
                 <span class="right">
                     <?php if ($item->original_price_str()) { ?>
-                    <div class="price">
                         原价： <small><?= $item->original_price_str() ?>元</small>
-                    </div>
                     <?php } ?>
-                    <span class="price">
+                    <div>
                         折扣价： <span><big><?= $item->discount_price_yuan() ?></big>.<?= $item->discount_price_fen() ?>元</span>
-                    </span>
-                    <?= $item->postage_tag() ?> <?= $item->vip_tag() ?> <?= $item->paigai_tag() ?>
+                        <?= $item->postage_tag() ?><?= $item->paigai_tag() ?><?= $item->vip_tag() ?> 
+                    </div>
                     <div class="time-left"><?= $item->time_left() ?></div>
                     <div class="tip"><?= $item->get('ref_tip') ?></div>
                     <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank"><?= $item->action() ?></a>

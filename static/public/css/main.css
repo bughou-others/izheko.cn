@@ -468,17 +468,14 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     vertical-align: baseline;
 }
 
-.item .price {
-    margin-right: 10px;
-}
-.item .price span {
+.item .buy span, .item .right span {
     color: #e33;
     font: bold 12px '微软雅黑', Tahoma, Arial;
 }
-.item .price span big {
+.item .buy span big, .item .right span big {
     font-size: 28px;
 }
-.item .price small {
+.item .buy small, .item .right small {
     color: #aaa;
     font: normal 12px 'Tahoma';
     text-decoration: line-through;
@@ -519,6 +516,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 .item .post, .item .vip, .item .gai, .item .remai {
     display: inline-block;
     height: 17px;
+    margin-left: 5px;
     vertical-align: text-bottom;
     background-image: url(/img/button.png?v=20131012.1);
     background-position-x: 0;
@@ -526,7 +524,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 .item .post {
     width: 26px;
     background-position-y: -136px;
-    *margin-right: 5px;
 }
 .item .gai {
     width: 26px;
@@ -535,7 +532,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 .item .vip {
     width: 34px;
     background-position-y: -172px;
-    *margin-right: 5px;
 }
 .item .remai {
     width: 54px;

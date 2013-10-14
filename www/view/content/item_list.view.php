@@ -19,15 +19,13 @@ if (empty($data['items'])) { ?>
                 </a>
                 <div class="title"><?= $item->type_tag() ?><a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>"><?= $item->title() ?></a></div>
                 <div class="buy">
-                    <span class="price">
-                        <span title="折扣价 ￥<?= $item->discount_price_str() ?>">
-                            ￥<big><?= $item->discount_price_yuan() ?></big>.<?= $item->discount_price_fen() ?>
-                        </span>
-                        <?php if ($item->original_price_str()) { ?>
-                        <small title="原价 ￥<?= $item->original_price_str() ?>">￥<?= $item->original_price_str() ?></small>
-                        <?php } ?>
+                    <span title="折扣价 ￥<?= $item->discount_price_str() ?>">
+                        ￥<big><?= $item->discount_price_yuan() ?></big>.<?= $item->discount_price_fen() ?>
                     </span>
-                    <?= $item->postage_tag() ?> <?= $item->vip_tag() ?> <?= $item->paigai_tag() ?>
+                    <?php if ($item->original_price_str()) { ?>
+                    <small title="原价 ￥<?= $item->original_price_str() ?>">￥<?= $item->original_price_str() ?></small>
+                    <?php } ?>
+                    <?= $item->postage_tag() ?><?= $item->paigai_tag() ?><?= $item->vip_tag() ?>
                     <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank"><?= $item->action() ?></a>
                 </div>
                 <div class="expand">
