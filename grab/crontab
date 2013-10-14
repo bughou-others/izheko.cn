@@ -7,7 +7,7 @@ cache_root = ROOT_DIR/www/public/cache
 20    *     * * * cd $grab_root; php run command/item_update.cmd.php dated &>> tmp/item_update.log
 30    3     * * * cd $grab_root; php run command/update_daemon.cmd.php     &>> tmp/update_daemon.log
 50    4     * * * cd $grab_root; php run command/item_clear.cmd.php        &>> tmp/item_clear.log
- 9    *     * * * cd $cache_root; find -type f -mmin +2 -exec rm -f {} +
+ *    *     * * * cd $cache_root; find -type f -mmin +2 -exec rm -f {} +
 
 
 #0    8   * * * cd $grab_root; php run command/grab_jky.cmd.php jiu      &>> tmp/grab_jky_jiu.log
