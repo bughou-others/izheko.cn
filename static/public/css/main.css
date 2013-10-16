@@ -331,7 +331,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
         document.documentElement.scrollTop + document.documentElement.clientHeight - this.offsetHeight - 10
         ));
 }
-#sidebar a {
+#pindao-button, #bookmark, #fankui, #gotop {
     display: block;
     margin-top: 3px;
     padding: 0;
@@ -343,22 +343,62 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     opacity: 0.7;
     filter: alpha(opacity=70);
 }
-#sidebar a:hover {
+#pindao-button:hover, #bookmark:hover, #fankui:hover, #gotop:hover {
     opacity: 1.0;
     filter: alpha(opacity=100);
 }
-#sidebar #pindao {
+#pindao-button {
     background-position-y: 0;
+    position: relative;
 }
-#sidebar #bookmark {
+#bookmark {
     background-position-y: -56px;
 }
-#sidebar #fankui {
+#fankui {
     background-position-y: -112px;
 }
-#sidebar #gotop {
+#gotop {
     background-position-y: -168px;
 }
+#pindao-wrapper {
+    padding-left: 10px;
+    position: relative;
+    left: -10px;
+    +left: -5px;
+    _width: 55px;
+    _background: url(/img2/bg.png) repeat center top;
+}
+#pindao-wrapper div {
+    position: absolute;
+    top: 0;
+    right: 63px;
+    width: 224px;
+    padding: 10px;
+    border: 1px solid #999;
+    background-color: #f7f7f7;
+}
+#pindao-wrapper div i {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    border: 7px solid transparent;
+    _border-color: pink;
+    _filter: chroma(color=pink);
+    border-left-color: #999;
+    position: absolute;
+    top: 20px;
+    right: -15px;
+}
+#pindao-wrapper div a {
+    display: inline-block;
+    margin: 5px;
+    padding: 5px 10px;
+    border: 1px solid #e6e6e6;
+    background-color: white;
+}
+
 #no_items {
     margin: 3em 0;
 }
