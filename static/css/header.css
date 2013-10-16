@@ -24,7 +24,7 @@
     text-align: left;
     white-space: normal;
     display: inline-block;
-    background-color: #010101;
+    _background-color: #010101;
 }
 #sns-share-button, #footprints-button {
     padding: 2px 3px;
