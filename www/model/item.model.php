@@ -170,7 +170,7 @@ class Item extends ItemBase
 
     function paigai_tag()
     {
-        if($this->data['ref_price'] !== $this->data['now_price'])
+        if($this->data['ref_price'] < $this->data['now_price'])
             return '<b class="gai" title="拍下自动改价"></b>';
     }
 
