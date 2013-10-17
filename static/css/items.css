@@ -131,7 +131,6 @@
     font-size: 16px;
     line-height: 33px;
     background-image: url(/img/button.png?v=20131012.1);
-    background-position-x: 0;
 }
 .item .action:hover {
     opacity: 0.8;
@@ -140,16 +139,16 @@
     text-decoration: none;
 }
 .item .qqg {
-    background-position-y: 0;
+    background-position: 0 0;
 }
 .item .yjs {
-    background-position-y: -34px;
+    background-position: 0 -34px;
 }
 .item .yqg {
-    background-position-y: -68px;
+    background-position: 0 -68px;
 }
 .item .wks {
-    background-position-y: -102px;
+    background-position: 0 -102px;
 }
 
 .item .post, .item .vip, .item .gai, .item .remai {
@@ -158,23 +157,22 @@
     margin-left: 5px;
     vertical-align: text-bottom;
     background-image: url(/img/button.png?v=20131012.1);
-    background-position-x: 0;
 }
 .item .post {
     width: 26px;
-    background-position-y: -136px;
+    background-position: 0 -136px;
 }
 .item .gai {
     width: 26px;
-    background-position-y: -154px;
+    background-position: 0 -154px;
 }
 .item .vip {
     width: 34px;
-    background-position-y: -172px;
+    background-position: 0 -172px;
 }
 .item .remai {
     width: 54px;
-    background-position-y: -190px;
+    background-position: 0 -190px;
 }
 .item .expand .remai {
     float: right;

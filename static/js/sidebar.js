@@ -2,10 +2,21 @@
 Izheko.sidebar_init = function() {
     if (Izheko.is_mobile) return;
     document.write(
-            //'<a id="pindao" href="#"></a>' +
+            '<div id="pindao-wrapper"><a id="pindao-button" href="#"></a></div>' +
             '<a id="bookmark" href="#"></a>' + 
             '<a id="fankui" href="tencent://message/?uin=715091790"></a>'
             );
+    var pindao_inited;
+    $('#pindao-button').bind('click mouseenter', function(){
+        if (!pindao_inited) {
+            $('<div><i></i></div>').append($('#navbar > a').clone()).appendTo('#pindao-wrapper');
+            pindao_inited = true;
+        }
+        $('#pindao-wrapper > div').css('display', 'block');
+    });
+    $('#pindao-wrapper').mouseleave(function(){
+        $('#pindao-wrapper > div').css('display', 'none');
+    });
     $('#bookmark').click(function(){
         if (document.all) { //IE
             var url   = 'http://' + location.hostname +'/';
