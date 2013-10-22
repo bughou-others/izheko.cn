@@ -151,9 +151,9 @@
 .logo {
     cursor: pointer;
     display: inline-block;
-    width: 128px;
+    width: 290px;
     height: 60px;
-    background: no-repeat url(/img/logo.png);
+    background: no-repeat url(/img/logo.png?v=20131022.1);
     vertical-align: middle;
 }
 

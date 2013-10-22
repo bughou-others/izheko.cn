@@ -226,9 +226,9 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 .logo {
     cursor: pointer;
     display: inline-block;
-    width: 128px;
+    width: 290px;
     height: 60px;
-    background: no-repeat url(/img/logo.png);
+    background: no-repeat url(/img/logo.png?v=20131022.1);
     vertical-align: middle;
 }
 
@@ -710,9 +710,9 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 }
 #footer .footer-logo {
     display: inline-block;
-    width: 128px;
+    width: 290px;
     height: 60px;
-    background: no-repeat url(/img/logo_white.png);
+    background: no-repeat url(/img/logo_white.png?v=20131022.1);
     vertical-align: bottom;
     margin: 0 10%;
 }

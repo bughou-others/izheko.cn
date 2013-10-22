@@ -14,7 +14,7 @@ if (empty($data['items'])) { ?>
                     <?php if ($i === 6) { ?>
                     <script> Izheko.lazy_img(); </script>
                     <?php } ?>
-                    <img id="img<?= $i + 1 ?>" src="/tears.gif" />
+                    <img id="img<?= $i + 1 ?>" src="/b.png" />
 <?php } ?>
                 </a>
                 <div class="title"><?= $item->type_tag() ?><a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>"><?= $item->title() ?></a></div>
