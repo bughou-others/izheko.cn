@@ -469,6 +469,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     line-height: 190px;
     overflow: hidden;
     text-align: center;
+    background: url(/img/logo_gray.png) no-repeat center center;
 }
 .item .pic img {
     max-width: 290px;
