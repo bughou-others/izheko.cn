@@ -1,4 +1,4 @@
-        <div id="filter">
+            <div id="filter">
 <?php
 foreach(array(
     ''         => '正在抢购',
@@ -18,7 +18,9 @@ foreach(array(
         $count = $data[$target . '_count'];
     }
     if ($count <= 0) continue;
-    echo "<a href=\"$page_url$target\"$class>$name ($count)</a>\n";
+?>
+                <a href="<?= "$page_url$target\"$class>$name ($count)" ?></a>
+<?php
 }
 ?>
-        </div>
+            </div>
