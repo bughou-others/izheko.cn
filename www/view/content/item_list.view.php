@@ -24,12 +24,12 @@ if (empty($data['items'])) { ?>
 </div></div>
 <?php } ?>
             </div>
-            <div id="pagination"><?php
+<?php
 require_once APP_ROOT . '/../common/helper/page.helper.php';
 if($filter) $page_url .= $filter . '/';
-echo paginate($page_url, '.html', $page, $data['total_count'], $page_size);
-?></div>
+?>
+            <div id="pagination"><?= paginate($page_url, '.html', $page, $data['total_count'], $page_size); ?></div>
 <?php } ?>
 <?php if (isset($word) && $word !== ''){ ?>
-        <script> Izheko.taobao_search(<?=  json_encode($word) ?>); </script>
+            <script> Izheko.taobao_search(<?=  json_encode($word) ?>); </script>
 <?php } ?>
