@@ -45,7 +45,7 @@
     left: -10px;
     +left: -5px;
     _width: 55px;
-    _background: url(/img2/bg.png) repeat center top;
+    _background: url(/img2/b.gif) repeat center top;
 }
 #pindao-wrapper div {
     position: absolute;
