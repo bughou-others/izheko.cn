@@ -8,7 +8,7 @@ function paginate($prefix, $suffix, $current, $total, $size, $left = 3, $middle 
 
     $nav = '';
     if(($prev = $current - 1) >= 1) $nav .= <<<EOT
-<a href="$prefix$prev$suffix" class="on">上一页</a>\n
+<a href="$prefix$prev$suffix" class="on">上一页</a>
 EOT;
     /* 
      * divide all page number into three parts: left, middle, right。
@@ -28,27 +28,27 @@ EOT;
     {
         if($i == $left_last && $now < $left_end)
         {
-            $nav .= "<span>...</span>\n";
+            $nav .= "<span>...</span>";
             $now  = $left_end + 1;
         }
         elseif($i == $right_first && $now < $right_start)
         {
-            $nav .= "<span>...</span>\n";
+            $nav .= "<span>...</span>";
             $now  = $right_start + 1;
         }
         else 
         {
             if($now == $current)
-                $nav .= "<span class=\"on\">$now</span>\n";
+                $nav .= "<span class=\"on\">$now</span>";
             else $nav .= <<<EOT
-<a href="$prefix$now$suffix">$now</a>\n
+<a href="$prefix$now$suffix">$now</a>
 EOT;
             $now++;
         }
     }
 
     if(($next = $current + 1) <= $last) $nav .= <<<EOT
-            <a href="$prefix$next$suffix" class="on">下一页</a>\n
+            <a href="$prefix$next$suffix" class="on">下一页</a>
 EOT;
     return $nav;
 }

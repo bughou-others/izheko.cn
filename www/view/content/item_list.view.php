@@ -22,20 +22,14 @@ if (empty($data['items'])) { ?>
         <div class="tip">小编： <span><?= $item->get('ref_tip') ?></span></div>
     </div>
 </div></div>
-
 <?php } ?>
             </div>
-            <div id="pagination">
-<?php
-    require_once APP_ROOT . '/../common/helper/page.helper.php';
-    if($filter) $page_url .= $filter . '/';
-    echo paginate($page_url, '.html', $page, $data['total_count'], $page_size);
-?>
-            </div>
-<?php
-}
-?>
-
+            <div id="pagination"><?php
+require_once APP_ROOT . '/../common/helper/page.helper.php';
+if($filter) $page_url .= $filter . '/';
+echo paginate($page_url, '.html', $page, $data['total_count'], $page_size);
+?></div>
+<?php } ?>
 <?php if (isset($word) && $word !== ''){ ?>
         <script> Izheko.taobao_search(<?=  json_encode($word) ?>); </script>
 <?php } ?>
