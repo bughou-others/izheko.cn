@@ -42,6 +42,8 @@ function button_img($file)
     draw_button($draw, $x, $y, 34, 17, 3, '#ffa405', 'VIP价',    13, 'v');
     draw_button($draw, $x, $y, 54, 17, 3, '#e33',    '相关热卖', 13, 'v');
 
+    draw_arrow($draw, $x, $y, 7, 14, '#999' );
+
     $img->drawImage($draw);
     $img->writeImage($file);
 }
@@ -103,3 +105,20 @@ function draw_hexagon($draw, &$x, &$y, $width, $w, $dr, $bg, $text, $flag = null
     else if ($flag === 'hv') { $x += $width + 1; $y += $width + 1; }
 }
 
+function draw_arrow($draw, &$x, &$y, $width, $height, $color, $flag = null)
+{
+    $draw->setStrokeWidth(1);
+    $draw->setStrokeColor($color);
+    #$draw->setFillColor('transparent');
+    $draw->setFillColor('#f7f7f7');
+    $draw->polyline(array(
+        array('x' => $x, 'y' => $y),
+        array('x' => $x + $width - 1, 'y' => $y + $height / 2),
+        array('x' => $x, 'y' => $y + $height - 1),
+    ));
+
+    if ($flag === null) return;
+    else if ($flag === 'h')    $x += $width  + 1;
+    else if ($flag === 'v')    $y += $height + 1;
+    else if ($flag === 'hv') { $x += $width  + 1; $y += $height + 1; }
+}
