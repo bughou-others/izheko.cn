@@ -455,7 +455,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     position: relative;
     border-color: #e66;
 }
-.auto-height {
+#item_list .auto-height {
     height: auto;
 }
 .item .pic {
@@ -612,7 +612,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     display: block;
 }
 .item h3 span {
-    color: #333;
+    color: #555;
 }
 .item div p {
     color: #333;
@@ -624,6 +624,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 }
 #single-item {
     margin: 20px 0;
+    padding: 10px 0;
 }
 @media (max-width: 650px) {
     #single-item {
