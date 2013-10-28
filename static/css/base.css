@@ -19,6 +19,8 @@ h1,h2,h3,h4,h5,h6,p,img {
     margin: 0;
     padding: 0;
     border-width: 0;
+    font-size: 12px;
+    font-weight: normal;
 }
 
 #content {
@@ -73,7 +75,7 @@ b.sns-douban     { background-position: 0 -840px; }
 b.sns-kaixin     { background-position: 0 -264px; }
 b.sns-qq_haoyou  { background-position: 0 -3024px; }
 
-.item .action, .item .post, .item .vip, .item .gai, .item .remai, 
+.item h2 a, .item .action, .item .post, .item .vip, .item .gai, .item .remai, 
 #pindao-button, #bookmark, #fankui, #gotop, #pindao-wrapper div i {
     background-image: url(/img/button.png?v=20131024.0);
 }

@@ -321,9 +321,11 @@ Izheko.item_list_init = function() {
     $("#item_list").on('mouseenter', '.item-wrapper', function(){
         var $this = $(this);
         var item = $this.children('.item');
-        var time_left = item.children('.expand').children('.time-left');
-        if(!$this.attr('x')){
-            time_left.prepend('<a data-itemid="' + item.children('.pic').attr('data-itemid') + '" data-rd="2" class="remai" title="与这个宝贝相关的热卖宝贝" target="_blank"></a>').after('<div class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</div>');
+        var time_left = item.children('div').children('h3');
+        if(!$this.attr('x')){ time_left
+        .prepend('<a data-itemid="' + item.children('h1').children('a:nth-child(2)').attr('data-itemid') + '" data-rd="2" class="remai" title="与这个宝贝相关的热卖宝贝" target="_blank"></a>')
+        .next('p').prepend('<span>小编： </span>')
+        .before('<h4 class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</h4>');
             $this.attr('x', 'o');
         }
         Izheko.TimeLeftUpdate.start(time_left.children('span'));
@@ -337,8 +339,8 @@ Izheko.item_list_init = function() {
 
 Izheko.single_item_init = function() {
     var item = $('#single-item');
-    Izheko.TimeLeftUpdate.start(item.children('.right').children('.time-left').children('span'));
-    item.children('.left').children('.pic').after('<div class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</div>');
+    Izheko.TimeLeftUpdate.start(item.children('.right').children('h3').children('span'));
+    item.children('.left').children('.pic').after('<h4 class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</h4>');
     item.children('.left').children('.sns-share').on('click', 'b', Izheko.item_sns_share);
     Izheko.Footprints.init_record(item);
 };
@@ -356,12 +358,18 @@ Izheko.lazy_img = (function(){
         //console.log(min, max);
         for (var n = min; n <= max; n++){
             if (loaded[n]) continue;
-            var $pic = $('#pic' + n);
-            if ($pic.length === 0) return;
-            var numiid = $pic.attr('data-itemid');
-            $('<img/>').load(function(){ $(this).parent().css('background-image', 'none'); }).attr('src', 
-                'http://static.izheko.cn/pic/' + numiid.substr(0, 4).split('').join('/') + '/' + numiid + '.jpg'
-                ).appendTo($pic);
+            var title = $('#item' + n).children('h1');
+            if (title.length === 0) return;
+            var numiid = title.children('a:nth-child(2)').attr('data-itemid');
+            title.after(
+                $('<a class="pic" data-itemid="' + numiid + '" href="#" target="_blank"></a>').prepend(
+                    $('<img/>').load(function(){
+                        $(this).parent().parent().css('background-image', 'none');
+                    }).attr('src',
+                        'http://static.izheko.cn/pic/' + numiid.substr(0, 4).split('').join('/') + '/' + numiid + '.jpg'
+                    )
+                )
+            );
             loaded[n] = true;
             loaded_count ++;
         }
@@ -427,11 +435,11 @@ Izheko.TimeLeftUpdate = {
 Izheko.item_sns_share = function(){
     var $this = $(this);
     var item = $this.closest('.item');
-    var pic = item.find('.pic');
+    var title = item.children('h1');
     Izheko.SnsShareLib.share($this, 
-            'http://' + location.host + '/item/' + pic.attr('data-itemid'),
-            item.children('.title').text(),
-            pic.children('img').attr('src')
+            'http://' + location.host + '/item/' + title.children('a:nth-child(2)').attr('data-itemid'),
+            title.text(),
+            item.find('.pic').children('img').attr('src')
             );
 };
 
