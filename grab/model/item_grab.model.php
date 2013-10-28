@@ -47,17 +47,18 @@ class ItemGrab
         else $ordinal ++;
 
         $ref_iid = static::get_ref_iid($item_node, $page);
-        if (DB::affected_rows(
-            "update items set ref_ordinal=$ordinal, ref_update_time=now() where ref_iid='$ref_iid'"
-        )) return;
-        
-        $num_iid = self::get_num_iid($item_node, $page);
-        if ($num_iid && preg_match('/^\d+$/', $num_iid))
-        {
+        $num_iid = DB::get_value("select num_iid from items where ref_iid='$ref_iid'");
+        if ($num_iid) {
+            self::fetch_pic($num_iid, $item_node, $page);
+            DB::affected_rows(
+                "update items set ref_ordinal=$ordinal, ref_update_time=now() where ref_iid='$ref_iid'"
+            );
+        } else {
+            $num_iid = self::get_num_iid($item_node, $page);
+            if (!$num_iid || !preg_match('/^\d+$/', $num_iid)) return;
+            self::fetch_pic($num_iid, $item_node, $page);
             $ref_price = $page->query(static::item_price_xpath, $item_node)->item(0)->nodeValue;
             $ref_price = preg_match('/\d+(\.\d+)?/', $ref_price, $matches) ? $matches[0] : null;
-            $pic_node = $page->query(static::item_pic_xpath, $item_node)->item(0);
-            self::fetch_pic($num_iid, $pic_node, $page);
             $ref_tip = static::get_tip_text($item_node, $page);
             $ref_end_time = static::get_ref_end_time($item_node, $page);
             $items[$num_iid] = array($ref_iid, $ordinal, $ref_price, $ref_tip, $ref_end_time);
@@ -76,24 +77,20 @@ class ItemGrab
         else error_log("unexpected click url: $url\n");
     }
 
-    static function fetch_pic($num_iid, $img, $page)
+    static function fetch_pic($num_iid, $item_node, $page)
     {
         $path = APP_ROOT . '/../static/public/' . ItemBase::pic_path($num_iid);
-        if(file_exists($path)) return;
+        if (is_file($path) && filesize($path) > 0) return;
         
+        $img = $page->query(static::item_pic_xpath, $item_node)->item(0);
         $pic = $img->getAttribute('data-original');
         if($pic === '') $pic = $img->getAttribute('src');
-        if($pic === '') {
-            echo "empty pic\n";
-            return;
-        }
+        if($pic === '') { echo "empty pic\n"; return; }
         $response = $page->get_by_url($pic);
 
-        if(!is_dir($dir = dirname($path))) mkdir($dir, 0755, true);
-        file_put_contents($path, $response->body);
-        if(!file_exists($path)) {
-            echo "get pic $pic failed\n";
-        }
+        if (!is_dir($dir = dirname($path))) mkdir($dir, 0755, true);
+        $n = file_put_contents($path, $response->body);
+        if ($n <= 0) echo "get pic $pic failed\n";
     }
 
     static function save_items($items)
