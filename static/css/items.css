@@ -32,36 +32,29 @@
     border-collapse: collapse;
 }
 /* item */
-.item-wrapper {
+.item {
     display: inline-block;
     *display: inline;
     *zoom: 1;
+    text-align: left;
     vertical-align: top; 
+    border: 2px solid;
+    border-color: white #e2e2e2 #e2e2e2 white;
+    color: black;
+    background-color: #fff;
+}
+#item_list .item {
     margin: 12px;
-    width: 314px;
-    height: 317px;
-    border: solid #e2e2e2;
-    border-width: 0 1px 1px 0;
-    position: relative;
+    width: 310px;
+    height: 313px;
+    background: #fff url(/img/logo_gray.png) no-repeat 10px 10px;
 }
 .item-hover {
-    z-index: 100;
+    position: relative;
+    border-color: #e66;
 }
 .auto-height {
     height: auto;
-}
-.item {
-    border: 2px solid white;
-    color: black;
-    text-align: left;
-    background: #fff url(/img/logo_gray.png) no-repeat 10px 10px;
-    position: relative;
-    *position: absolute;
-    *left: 0;
-    *top: 0;
-}
-.item-hover .item {
-    border-color: #e66;
 }
 .item .pic {
     display: block;
@@ -71,11 +64,6 @@
     line-height: 190px;
     overflow: hidden;
     text-align: center;
-}
-#item_list .pic {
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 .item .pic img {
     max-width: 290px;
@@ -124,7 +112,7 @@
 .item h2 span big {
     font-size: 28px;
 }
-.item h2 small {
+.item h2 small, .item .right small {
     color: #aaa;
     font: normal 12px 'Tahoma';
     text-decoration: line-through;
@@ -203,14 +191,22 @@
     *vertical-align: -5px;
 }
 
-#item_list .item div {
+.item div {
     display: none;
+    width: 290px;
     padding: 10px;
-    background-color: #f4f4f4;
+    border: solid #e66;
+    border-width: 0 2px 2px 2px;
     color: #aaa;
     line-height: 20px;
+    background-color: #f4f4f4;
+    position: relative;
+    top: 0;
+    left: -2px;
+    _position: absolute;
+    _top: 313px;
 }
-#item_list .item-hover div {
+.item-hover div {
     display: block;
 }
 .item h3 span {
@@ -225,12 +221,7 @@
     color: #aaa;
 }
 #single-item {
-    display: inline-block;
-    *display: inline;
-    *zoom: 1;
-    *position: relative;
     margin: 20px 0;
-    background-image: none;
 }
 @media (max-width: 650px) {
     #single-item {

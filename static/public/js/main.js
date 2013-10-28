@@ -318,19 +318,18 @@ Izheko.taodianjin_init = function(){
 
 Izheko.item_list_init = function() {
     $w = $(window);
-    $("#item_list").on('mouseenter', '.item-wrapper', function(){
-        var $this = $(this);
-        var item = $this.children('.item');
+    $("#item_list").on('mouseenter', '.item', function(){
+        var item = $(this);
         var time_left = item.children('div').children('h3');
-        if(!$this.attr('x')){ time_left
+        if(!item.attr('x')){ time_left
         .prepend('<a data-itemid="' + item.children('h1').children('a:nth-child(2)').attr('data-itemid') + '" data-rd="2" class="remai" title="与这个宝贝相关的热卖宝贝" target="_blank"></a>')
         .next('p').prepend('<span>小编： </span>')
         .before('<h4 class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</h4>');
-            $this.attr('x', 'o');
+            item.attr('x', 'o');
         }
         Izheko.TimeLeftUpdate.start(time_left.children('span'));
-        $this.addClass('item-hover' + ($w.width() < 678 ? ' auto-height' : ''));
-    }).on('mouseleave', '.item-wrapper', function(){
+        item.addClass('item-hover' + ($w.width() < 678 ? ' auto-height' : ''));
+    }).on('mouseleave', '.item', function(){
         Izheko.TimeLeftUpdate.stop();
         $(this).removeClass('item-hover auto-height');
     }).on('click', '.sns-share b', Izheko.item_sns_share);
@@ -351,9 +350,9 @@ Izheko.lazy_img = (function(){
         if (!first_row_top) return;
         var _top = $c.scrollTop() - first_row_top;
         var _bottom = _top + $c.height();
-        var min = (Math.floor(_top   / 342)) * row_size + 1;
+        var min = (Math.floor(_top   / 341)) * row_size + 1;
         if (min < 1) min = 1;
-        var max = (Math.ceil(_bottom / 342) + 1) * row_size;
+        var max = (Math.ceil(_bottom / 341) + 1) * row_size;
         if (max > Izheko.item_count) max = Izheko.item_count;
         //console.log(min, max);
         for (var n = min; n <= max; n++){
@@ -361,7 +360,7 @@ Izheko.lazy_img = (function(){
             var title = $('#item' + n).children('h1');
             if (title.length === 0) return;
             var numiid = title.children('a:nth-child(2)').attr('data-itemid');
-            title.after(
+            title.before(
                 $('<a class="pic" data-itemid="' + numiid + '" href="#" target="_blank"></a>').prepend(
                     $('<img/>').load(function(){
                         $(this).parent().parent().css('background-image', 'none');
@@ -369,7 +368,7 @@ Izheko.lazy_img = (function(){
                         'http://static.izheko.cn/pic/' + numiid.substr(0, 4).split('').join('/') + '/' + numiid + '.jpg'
                     )
                 )
-            );
+            ).css('margin-top', '0');
             loaded[n] = true;
             loaded_count ++;
         }
@@ -378,11 +377,11 @@ Izheko.lazy_img = (function(){
         }
     };
     var init_row_model = function(){
-        var item = $('#item_list > .item-wrapper:first');
+        var item = $('#item_list > .item:first');
         first_row_top = item.offset().top;
         row_size = 1;
         while (
-            (item = item.next('.item-wrapper')) &&
+            (item = item.next('.item')) &&
             item.offset().top === first_row_top
             ) row_size ++;
         first_row_top -= 12;
