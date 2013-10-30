@@ -29,6 +29,24 @@ Izheko.single_item_init = function() {
 
 Izheko.lazy_img = (function(){
     var first_row_top, row_size, loaded = { }, loaded_count = 0; $c = $(window);
+    var load_img = function(n){
+            var item = $('#item' + n);
+            if (item.length === 0) return;
+            var title = item.children('h1');
+            var img = $('<img/>').load(function(){
+                $(this).parent().parent().css('background-image', 'none');
+            });
+            title.before(
+                $('<a class="pic" data-itemid="' + numiid + '" href="#" target="_blank"></a>').prepend(img)
+            ).css('margin-top', '0');
+            var pic_url = item.attr('p');
+            if (!pic_url) {
+                var numiid = title.children('a:nth-child(2)').attr('data-itemid');
+                pic_url = 'http://static.izheko.cn/pic/' + 
+                    numiid.substr(0, 4).split('').join('/') + '/' + numiid + '.jpg';
+            }
+            img.attr('src', pic_url)
+    };
     var load_imgs_in_viewport = function(){
         if (!first_row_top) return;
         var _top = $c.scrollTop() - first_row_top;
@@ -40,18 +58,7 @@ Izheko.lazy_img = (function(){
         //console.log(min, max);
         for (var n = min; n <= max; n++){
             if (loaded[n]) continue;
-            var title = $('#item' + n).children('h1');
-            if (title.length === 0) return;
-            var numiid = title.children('a:nth-child(2)').attr('data-itemid');
-            title.before(
-                $('<a class="pic" data-itemid="' + numiid + '" href="#" target="_blank"></a>').prepend(
-                    $('<img/>').load(function(){
-                        $(this).parent().parent().css('background-image', 'none');
-                    }).attr('src',
-                        'http://static.izheko.cn/pic/' + numiid.substr(0, 4).split('').join('/') + '/' + numiid + '.jpg'
-                    )
-                )
-            ).css('margin-top', '0');
+            load_img(n);
             loaded[n] = true;
             loaded_count ++;
         }

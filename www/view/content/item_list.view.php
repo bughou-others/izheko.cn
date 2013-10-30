@@ -6,7 +6,11 @@ if (empty($data['items'])) { ?>
             <div id="item_list">
                 <script> Izheko.item_count = <?= $item_count = count($data['items']) ?>; Izheko.item_list_init(); </script>
 <?php foreach($data['items'] as $i => $item) { ?>
-<div class="item" id="item<?= ++$i ?>"><?php if ($i === 10 || $i === $item_count) { ?><script> Izheko.lazy_img(); </script><?php } ?>
+<div class="item" id="item<?= ++$i ?>"<?=
+    ($p = $item->pic_url(true)) ? " p=\"$p\"" : '' 
+?>><?php 
+if ($i === 10 || $i === $item_count) { 
+?><script> Izheko.lazy_img(); </script><?php } ?>
 
     <h1><?= $item->type_tag() ?><a data-itemid="<?= $item->get('num_iid') ?>" href="#" target="_blank"><?= $item->title() ?></a></h1>
     <h2>
