@@ -49,7 +49,7 @@ class Item extends ItemBase
     {
         if ($this->data['flags'] & self::FLAGS_MASK_NO_REF_PIC) {
             #170 190 210 240 270 290 300 310 320 350 360 400 430
-            return $this->data['pic_url'] . '_290x290.jpg';
+            return $this->data['pic_url'] . '_190x190.jpg';
         }
         if ($empty_ref) return;
         return 'http://static.izheko.cn/' . self::pic_path($this->data['num_iid']);
