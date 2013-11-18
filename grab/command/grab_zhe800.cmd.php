@@ -45,7 +45,11 @@ class ItemGrabZhe800 extends ItemGrab
     static function get_type_id($item_node, $page)
     {
         static $types;
-        if ($types === null) $types = array_flip(ItemBase::$types);
+        if ($types === null) {
+            $types = array();
+            foreach(ItemBase::$types as $type_id => $tmp) 
+                $types[$tmp[0]] => $type_id;
+        }
 
         $type = $page->query(static::item_type_xpath, $item_node)->item(0)->nodeValue;
         if (preg_match('/【(.+)】/', trim($type), $m) && isset($types[$m[1]])) {

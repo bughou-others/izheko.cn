@@ -7,8 +7,14 @@ class ItemList extends ItemBase
     static function query($type, $word, $filter, $page, $page_size)
     {
         if($type && $type !== 'all') {
-            $type_id = DB::get_value("select id from types where pinyin = '$type'");
-            if(!$type_id) return;
+            $type_id = null;
+            foreach(ItemBase::$types as $this_id => $tmp) {
+                if ($tmp[1] === $type) {
+                    $type_id = $this_id;
+                    break;
+                }
+            }
+            if($type_id === null) return;
             $condition = "and type_id=$type_id";
         }
         else $condition = '';

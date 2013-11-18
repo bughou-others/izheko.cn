@@ -12,16 +12,16 @@ class ItemBase
 
     const factor_price_risen       = 1.2;
     static $types = array(
-        1 => '女装',
-        2 => '男装',
-        3 => '居家',
-        4 => '母婴',
-        5 => '鞋包',
-        6 => '配饰',
-        7 => '美食',
-        8 => '数码家电',
-        9 => '化妆品',
-        10 => '文体'
+        1 => array('女装', 'nvzhuang'),
+        2 => array('男装', 'nanzhuang'),
+        3 => array('居家', 'jujia'),
+        4 => array('母婴', 'muying'),
+        5 => array('鞋包', 'xiebao'),
+        6 => array('配饰', 'peishi'),
+        7 => array('美食', 'meishi'),
+        8 => array('数码家电', 'shumajiadian'),
+        9 => array('化妆品', 'huazhuangpin'),
+        10 => array('文体', 'wenti')
     );
 
     static function mask_bits($bits, $mask, $bool)

@@ -32,11 +32,9 @@ class Item extends ItemBase
 
     function type_tag()
     {
-        static $types;
-        if(!$types) $types = Type::all();
         $type_id = $this->data['type_id'];
-        if(!isset($types[$type_id])) return;
-        list($name, $pinyin) = $types[$type_id];
+        if(!isset(ItemBase::$types[$type_id])) return;
+        list($name, $pinyin) = ItemBase::$types[$type_id];
         return "<a class=\"type\" href=\"/$pinyin\">【{$name}】</a>";
     }
 
