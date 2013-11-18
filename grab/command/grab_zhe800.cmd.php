@@ -8,6 +8,7 @@ class ItemGrabZhe800 extends ItemGrab
     const item_jump_xpath  = './div/h2/a[@href]/@href';
     const item_price_xpath = './div/h4/span[1]/em';
     const item_pic_xpath   = './div/p/a/img';
+    const item_type_xpath   = './div/h2/strong/a';
     const item_tip_xpath   = './div/h6';
     const click_url_xpath  = null;
 
@@ -39,6 +40,18 @@ class ItemGrabZhe800 extends ItemGrab
                 strftime('%F %T', substr($info[3], 0, -3)),
                 strftime('%F %T', substr($info[2], 0, -3))
             );
+    }
+
+    static function get_type_id($item_node, $page)
+    {
+        static $types;
+        if ($types === null) $types = array_flip(ItemBase::$types);
+
+        $type = $page->query(static::item_type_xpath, $item_node)->item(0)->nodeValue;
+        if (preg_match('/【(.+)】/', trim($type), $m) && isset($types[$m[1]])) {
+            return $types[$m[1]];
+        }
+        return 'null';
     }
 
     static function get_click_url($item_node, $page)

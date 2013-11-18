@@ -8,6 +8,7 @@ create table if not exists `items`
 
  `start_time`    datetime,
  `end_time`      datetime,
+ `type_id`       int unsigned,
  `ref_ordinal`   int     unsigned not null default 912345678,
  `ref_price`     int     unsigned not null,
  `ref_tip`       varchar(255)     not null default '',
@@ -17,8 +18,6 @@ create table if not exists `items`
  `update_time`   datetime,
  `title`         varchar(100)     not null default '',
  `flags`         tinyint unsigned not null default 0,
- `cid`           int unsigned,
- `type_id`       int unsigned,
  `price`         int unsigned,
  `now_price`     int unsigned,
  `pic_url`       varchar(1024)    not null default '',

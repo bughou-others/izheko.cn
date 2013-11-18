@@ -34,15 +34,16 @@ class DetailPage
             if (preg_match('/"itemDO" : (\{[^}]+\})/', $response->body, $m)) {
                 $item_do = decode_json($m[1], true);
                 $info['price'] = $item_do['reservePrice'];
-                $info['cid']   = (int)$item_do['categoryId'];
+                #$info['cid']   = (int)$item_do['categoryId'];
             }
         } else {
             if ($pic) $info['pic_url'] = preg_replace('/_\d+x\d+\.jpg$/', '', $pic->getAttribute('data-src'));
             $price = $response->query('//strong[@id="J_StrPrice"]/em[@class="tb-rmb-num"]')->item(0);
             if ($price) $info['price'] = $price->nodeValue;
+            /*
             if (preg_match('/cid:\'(\d+)\',/', $response->body, $m)) {
                 $info['cid'] = (int)$m[1];
-            }
+            } */
         }
         return $info;
     }

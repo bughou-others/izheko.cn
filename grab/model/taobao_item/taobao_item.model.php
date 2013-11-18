@@ -10,11 +10,9 @@ class TaobaoItem
     static function get_item_info($num_iid)
     {
         $item = DetailPage::get($num_iid);
-        if (!isset($item['title'], $item['cid'], $item['price'])) return;
+        if (!isset($item['title'], $item['price'])) return;
 
-        $item['type_id'] = Category::get_type_id($item['cid'], $item['title']);
-
-        if(isset($item['price'])) $item['price'] = parse_price($item['price']);
+        if (isset($item['price'])) $item['price'] = parse_price($item['price']);
         self::merge_promo_info($item, $num_iid);
         #self::merge_real_price($item, $num_iid);
 

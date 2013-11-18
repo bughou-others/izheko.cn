@@ -30,7 +30,7 @@ class ItemUpdate
         pcntl_signal(SIGTERM, 'ItemUpdate::exit_callback');
         register_shutdown_function('ItemUpdate::exit_callback');
 
-        $sql = "select num_iid, title, flags, cid, type_id, price, now_price, pic_url
+        $sql = "select num_iid, title, flags, price, now_price, pic_url
             from items where updater=$pid order by id desc for update
             ";
         DB::$db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);

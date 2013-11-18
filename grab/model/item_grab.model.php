@@ -61,9 +61,10 @@ class ItemGrab
             $no_ref_pic = !self::fetch_pic($num_iid, $item_node, $page);
             $ref_price = $page->query(static::item_price_xpath, $item_node)->item(0)->nodeValue;
             $ref_price = preg_match('/\d+(\.\d+)?/', $ref_price, $matches) ? $matches[0] : null;
+            $type_id = static::get_type_id($item_node, $page);
             $ref_tip = static::get_tip_text($item_node, $page);
             list($start_time, $end_time) = static::get_start_end_time($item_node, $page);
-            $items[$num_iid] = array($ref_iid, $ordinal, $ref_price, $ref_tip, $start_time, $end_time, $no_ref_pic);
+            $items[$num_iid] = array($ref_iid, $ordinal, $ref_price, $type_id, $ref_tip, $start_time, $end_time, $no_ref_pic);
         }
     }
 
@@ -106,18 +107,18 @@ class ItemGrab
         $values = '';
         foreach ($items as $num_iid => $tmp)
         {
-            list($ref_iid, $ref_ordinal, $ref_price, $ref_tip, $start_time, $end_time, $no_ref_pic) = $tmp;
+            list($ref_iid, $ref_ordinal, $ref_price, $type_id, $ref_tip, $start_time, $end_time, $no_ref_pic) = $tmp;
 
             $ref_price = $ref_price ? parse_price($ref_price) : 'null';
             $ref_tip = DB::escape($ref_tip);
             $start_time = $start_time ? "'$start_time'" : 'null';
             $end_time = $end_time ? "'$end_time'" : 'null';
             $flags = $no_ref_pic ? ItemBase::FLAGS_MASK_NO_REF_PIC : 0;
-            $values .= ",($num_iid, $flags, '$ref_iid', '$now', '$ref_ordinal', '$now', $ref_price, $start_time, $end_time, '$ref_tip')";
+            $values .= ",($num_iid, $flags, '$ref_iid', '$now', '$ref_ordinal', '$now', $ref_price, $type_id, $start_time, $end_time, '$ref_tip')";
         }
         $values = substr($values, 1);
         $sql = 'insert ignore into items 
-            (`num_iid`, `flags`, `ref_iid`, `create_time`, `ref_ordinal`, `ref_update_time`, `ref_price`, `start_time`, `end_time`, `ref_tip`)
+            (`num_iid`, `flags`, `ref_iid`, `create_time`, `ref_ordinal`, `ref_update_time`, `ref_price`, `type_id`, `start_time`, `end_time`, `ref_tip`)
             values ' . $values;
         $count = count($items);
         $affected = DB::affected_rows($sql);
