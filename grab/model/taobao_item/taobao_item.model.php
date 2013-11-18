@@ -10,6 +10,7 @@ class TaobaoItem
     static function get_item_info($num_iid)
     {
         $item = DetailPage::get($num_iid);
+        if (!isset($item['title'], $item['cid'], $item['price'])) return;
 
         $item['type_id'] = Category::get_type_id($item['cid'], $item['title']);
 

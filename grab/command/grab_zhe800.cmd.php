@@ -31,10 +31,14 @@ class ItemGrabZhe800 extends ItemGrab
         if (isset($info[1])) return $info[1];
     }
 
-    static function get_ref_end_time($item_node, $page)
+    static function get_start_end_time($item_node, $page)
     {
         $info = explode(',', $item_node->getAttribute('info'));
-        if (isset($info[2])) return strftime('%F %T', substr($info[2], 0, -3));
+        if (isset($info[3], $info[2])) 
+            return array(
+                strftime('%F %T', substr($info[3], 0, -3)),
+                strftime('%F %T', substr($info[2], 0, -3))
+            );
     }
 
     static function get_click_url($item_node, $page)

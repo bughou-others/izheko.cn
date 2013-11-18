@@ -69,8 +69,6 @@ class Item extends ItemBase
 
         $end_time = strtotime($this->data['end_time']);
         if ($now < $end_time) {
-            $ref_end_time = strtotime($this->data['ref_end_time']);
-            if ($now < $ref_end_time && $ref_end_time < $end_time) $end_time = $ref_end_time;
             return "折扣剩余时间：<span s=\"$end_time\"></span>";
         }
 
@@ -126,17 +124,11 @@ class Item extends ItemBase
             else $time = strftime('%F %H:%M', $start_time);
             $this->action_title  = "折扣 $time 开始哟";
         }
-        elseif ($now > strtotime($this->data['delist_time']))
-        {
-            $this->action        = '';
-            $this->action_style  = 'yqg';
-            $this->action_title  = '宝贝被抢光，已经下架啦。';
-        }
         elseif ($now > strtotime($this->data['end_time']))
         {
             $this->action        = '';
-            $this->action_style  = 'yjs';
-            $this->action_title  = '折扣已经结束啦。';
+            $this->action_style  = 'yqg';
+            $this->action_title  = '宝贝已经被抢光啦。';
         }
         else
         {

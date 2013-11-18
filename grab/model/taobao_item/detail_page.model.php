@@ -9,7 +9,15 @@ class DetailPage
         if (! $curl) $curl = new Curl();
         $url ='http://item.taobao.com/item.htm?id=' . $num_iid . '&ali_trackid=2:mm_40339139';
         $response = $curl->get($url);
-        //var_dump( curl_getinfo($curl->curl, CURLINFO_HTTP_CODE));
+        $code = curl_getinfo($curl->curl, CURLINFO_HTTP_CODE);
+        if ($code !== 200) {
+            $response = $curl->get($url);
+            $code = curl_getinfo($curl->curl, CURLINFO_HTTP_CODE);
+            if ($code !== 200) {
+                echo 'unexpected ', $code, ' response';
+                return;
+            }
+        }
         $response->fix_charset();
 
         $info = array();
