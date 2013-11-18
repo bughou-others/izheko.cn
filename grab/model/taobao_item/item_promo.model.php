@@ -7,19 +7,21 @@ class ItemPromo
 {
     static function get_promo_info($num_iid)
     {
-        if (!$price_info = self::get_price_info($num_iid)) return;
+        list($postage_free, $price_info) = self::get_price_info($num_iid);
         $promo = null;
-        foreach ($price_info as $sku)
-        {
-            if (isset($sku['promotionList']) &&
-                is_array($promo_list = $sku['promotionList'])
-            )
-            foreach($promo_list as $this_promo) {
-                if (($price = parse_price($this_promo['price'])) &&
-                    (is_null($promo) || $price < $promo['price'])
-                ) {
-                    $this_promo['price'] = $price;
-                    $promo = $this_promo;
+        if (is_array($price_info)) {
+            foreach ($price_info as $sku)
+            {
+                if (isset($sku['promotionList']) &&
+                    is_array($promo_list = $sku['promotionList'])
+                )
+                foreach($promo_list as $this_promo) {
+                    if (($price = parse_price($this_promo['price'])) &&
+                        (is_null($promo) || $price < $promo['price'])
+                    ) {
+                        $this_promo['price'] = $price;
+                        $promo = $this_promo;
+                    }
                 }
             }
         }
@@ -27,7 +29,8 @@ class ItemPromo
             $promo['price_type'] = isset($promo['type']) &&
                 ($promo['type'] === 'VIP价格' || $promo['type'] === '店铺vip')
                 ? 'VIP价格' : '';
-        }
+        } else $promo = array();
+        $promo['postage_free'] = $postage_free;
         return $promo;
     }
 
@@ -46,10 +49,24 @@ class ItemPromo
             var_dump(curl_getinfo($curl->curl, CURLINFO_HTTP_CODE));
             var_dump($body);
         }
+        if ( isset($data['defaultModel']['deliveryDO']['deliverySkuMap']['default'][0]) &&
+            ($post_info = $data['defaultModel']['deliveryDO']['deliverySkuMap']['default'][0]) &&
+            is_array($post_info)
+        ) $postage_free = $post_info['postage'] === '快递: 0.00 ' || $post_info['postageFree'];
+        else {
+            echo 'no default post info', PHP_EOL;
+            $postage_free = null;
+        }
+
         if ( isset($data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
             ($price_info = $data['defaultModel']['itemPriceResultDO']['priceInfo']) &&
             is_array($price_info)
-        ) return $price_info;
+        ) ;
+        else {
+            $price_info = null;
+        }
+
+        return array($postage_free, $price_info);
     }
 
     static function get_subtitle($num_iid)

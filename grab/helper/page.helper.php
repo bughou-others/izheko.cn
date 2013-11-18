@@ -15,8 +15,8 @@ class Page
     function fix_charset()
     {
         $this->body = str_replace(
-            '<meta charset="gbk" />',
-            '<meta http-equiv="Content-Type" content="text/html; charset=gbk"/>',
+            '<meta charset="gbk"',
+            '<meta http-equiv="Content-Type" content="text/html; charset=gbk"',
             $this->body
         );
     }
