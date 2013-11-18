@@ -48,7 +48,7 @@ class ItemGrabZhe800 extends ItemGrab
         if ($types === null) {
             $types = array();
             foreach(ItemBase::$types as $type_id => $tmp) 
-                $types[$tmp[0]] => $type_id;
+                $types[$tmp[0]] = $type_id;
         }
 
         $type = $page->query(static::item_type_xpath, $item_node)->item(0)->nodeValue;
