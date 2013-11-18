@@ -30,8 +30,7 @@ class ItemUpdate
         pcntl_signal(SIGTERM, 'ItemUpdate::exit_callback');
         register_shutdown_function('ItemUpdate::exit_callback');
 
-        $sql = "select num_iid, title, flags, cid, type_id, price, now_price,
-            start_time, end_time, list_time, delist_time, pic_url
+        $sql = "select num_iid, title, flags, cid, type_id, price, now_price, pic_url
             from items where updater=$pid order by id desc for update
             ";
         DB::$db->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
@@ -105,6 +104,9 @@ class ItemUpdate
             return $flags === $item['flags'] ? null : array('flags' => $flags);
         }
         unset($item['num_iid']);
+        $info['flags'] = ItemBase::mask_bits($info['flags'], ItemBase::FLAGS_MASK_NO_REF_PIC,
+            $item['flags'] & ItemBase::FLAGS_MASK_NO_REF_PIC
+        );
         $changes = array();
         foreach($item as $k => $v)
         {

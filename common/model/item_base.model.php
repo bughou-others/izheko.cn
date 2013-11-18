@@ -12,6 +12,11 @@ class ItemBase
 
     const factor_price_risen       = 1.2;
 
+    static function mask_bits($bits, $mask, $bool)
+    {
+        return $bool ? ($bits | $mask) : ($bits & ~$mask);
+    }
+
     static function pic_path($num_iid)
     {
         return 'pic/' . implode('/', str_split(substr($num_iid, 0, 4)))

@@ -52,7 +52,7 @@ class ItemPromo
         if ( isset($data['defaultModel']['deliveryDO']['deliverySkuMap']['default'][0]) &&
             ($post_info = $data['defaultModel']['deliveryDO']['deliverySkuMap']['default'][0]) &&
             is_array($post_info)
-        ) $postage_free = $post_info['postage'] === '快递: 0.00 ' || $post_info['postageFree'];
+        ) $postage_free = strpos($post_info['postage'], ' 0.00 ') !== false || $post_info['postageFree'];
         else {
             echo 'no default post info', PHP_EOL;
             $postage_free = null;

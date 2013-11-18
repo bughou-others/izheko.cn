@@ -36,23 +36,18 @@ class TaobaoItem
 
     static function set_flags(&$item)
     {
-        $item['flags'] = self::mask_bits(0, ItemBase::FLAGS_MASK_POSTAGE_FREE,
+        $item['flags'] = ItemBase::mask_bits(0, ItemBase::FLAGS_MASK_POSTAGE_FREE,
             $item['postage_free']
         );
-        $item['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_VIP_PRICE,
+        $item['flags'] = ItemBase::mask_bits($item['flags'], ItemBase::FLAGS_MASK_VIP_PRICE,
             $item['price_type'] === 'VIP价格'
         );
-        $item['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_CHANGE_PRICE,
+        $item['flags'] = ItemBase::mask_bits($item['flags'], ItemBase::FLAGS_MASK_CHANGE_PRICE,
             $item['price_type'] === '拍下改价'
         );
-        $item['flags'] = self::mask_bits($item['flags'], ItemBase::FLAGS_MASK_TMALL,
+        $item['flags'] = ItemBase::mask_bits($item['flags'], ItemBase::FLAGS_MASK_TMALL,
             $item['tmall']
         );
-    }
-
-    static function mask_bits($bits, $mask, $bool)
-    {
-        return $bool ? ($bits | $mask) : ($bits & ~$mask);
     }
 
     static function merge_real_price(&$item, $num_iid)
