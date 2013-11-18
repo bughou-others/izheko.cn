@@ -3,9 +3,9 @@ SHELL    = /bin/bash
 grab_root= ROOT_DIR/grab
 cache_root = ROOT_DIR/www/public/cache
 #m    h     d m w command
-10 3,6,9-22 * * * cd $grab_root; php run command/grab_zhe800.cmd.php       &>> tmp/grab_zhe800.log
+10    *     * * * cd $grab_root; php run command/grab_zhe800.cmd.php       &>> tmp/grab_zhe800.log
 20    *     * * * cd $grab_root; php run command/item_update.cmd.php dated &>> tmp/item_update.log
-50    4     * * * cd $grab_root; php run command/item_clear.cmd.php        &>> tmp/item_clear.log
+30    *     * * * cd $grab_root; php run command/item_clear.cmd.php        &>> tmp/item_clear.log
  *    *     * * * cd $cache_root; find -type f -mmin +2 -exec rm -f {} +
 
 #30    3     * * * cd $grab_root; php run command/update_daemon.cmd.php     &>> tmp/update_daemon.log

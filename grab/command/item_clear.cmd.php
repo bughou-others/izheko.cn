@@ -14,7 +14,7 @@ class ItemClear
     {
         #promotion ended or deleted
         $common = '
-            from items where ref_update_time < "' . strftime('%F %T', time() - 86400) .
+            from items where ref_update_time < "' . strftime('%F %T', time() - 7200) .
             '" or end_time < now() or (flags & ' .  ItemBase::FLAGS_MASK_ITEM_DELETED . ')'
             ;
         $type_ids = DB::get_values('select distinct type_id ' . $common);
