@@ -35,7 +35,7 @@ class ItemGrab
         foreach ($node_list as $item_node)
         {
             self::get_one_item($item_node, $page, $items);
-            break;
+            // break;
         }
         self::save_items($items);
         flush();
