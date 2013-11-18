@@ -14,7 +14,7 @@ if test "$1" = production; then
     tmp_dir="$dir"/grab/tmp
     test -d "$tmp_dir" || mkdir --mode=755 "$tmp_dir"
     replace ROOT_DIR "$dir"  < "$dir"/grab/crontab | crontab -
-    (cd "$dir/grab"; php run command/update_daemon.cmd.php >> tmp/update_daemon.log 2>&1 &)
+    #(cd "$dir/grab"; php run command/update_daemon.cmd.php >> tmp/update_daemon.log 2>&1 &)
 fi
 
 pic_dir="$dir"/static/public/pic
