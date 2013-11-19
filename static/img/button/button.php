@@ -8,7 +8,7 @@ button_img($argv[1]);
 function button_img($file)
 {
     $img = new Imagick();
-    $img->newImage(136, 224, 'transparent', 'png');
+    $img->newImage(136, 292, 'transparent', 'png');
     $img->setImageDepth(8);
 
     $draw = new ImagickDraw();
@@ -29,7 +29,14 @@ function button_img($file)
     draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '频道',       'v');
     draw_hexagon($draw, $x, $y, 55, 15, 'r', '#cc0000', '收藏izheko', 'v');
     draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '反馈',       'v');
-    draw_hexagon($draw, $x, $y, 55, 15, 'r', '#888',    '回到顶部');
+    draw_hexagon($draw, $x, $y, 55, 15, 'r', '#888',    '回到顶部',   'v');
+
+    $x = 0;
+    draw_button2($draw, $x, $y, 60, 33, '#e33',    '最热', 'h');
+    draw_button3($draw, $x, $y, 60, 33, '#808080', '最新', 'v');
+    $x = 0;
+    draw_button2($draw, $x, $y, 60, 33, '#808080', '最热', 'h');
+    draw_button3($draw, $x, $y, 60, 33, '#e33',    '最新', 'v');
 
     $draw->setFont('./msyh.ttf');
     $draw->setFontSize(12);
@@ -56,10 +63,7 @@ function draw_button($draw, &$x, &$y, $width, $height, $br, $bg, $text, $baselin
         $draw->setFillColor('#fff');
         $draw->annotation($x + ($width + 1) / 2, $y + $height / 2 + 0.4 * $draw->getFontSize(), $text);
     }
-    if ($flag === null) return;
-    else if ($flag === 'h')    $x += $width  + 1;
-    else if ($flag === 'v')    $y += $height + 1;
-    else if ($flag === 'hv') { $x += $width  + 1; $y += $height + 1; }
+    move_position($x, $y, $width, $height, $flag);
 }
 
 function draw_hexagon($draw, &$x, &$y, $width, $w, $dr, $bg, $text, $flag = null)
@@ -98,11 +102,7 @@ function draw_hexagon($draw, &$x, &$y, $width, $w, $dr, $bg, $text, $flag = null
         $draw->annotation($mx, $my - 3 , mb_substr($text, 0, 2));
         $draw->annotation($mx, $my + 15, mb_substr($text, 2));
     }
-
-    if ($flag === null) return;
-    else if ($flag === 'h')    $x += $width + 1;
-    else if ($flag === 'v')    $y += $width + 1;
-    else if ($flag === 'hv') { $x += $width + 1; $y += $width + 1; }
+    move_position($x, $y, $width, $width, $flag);
 }
 
 function draw_arrow($draw, &$x, &$y, $width, $height, $color, $flag = null)
@@ -116,9 +116,38 @@ function draw_arrow($draw, &$x, &$y, $width, $height, $color, $flag = null)
         array('x' => $x + $width - 1, 'y' => $y + $height / 2),
         array('x' => $x, 'y' => $y + $height - 1),
     ));
+    move_position($x, $y, $width, $height, $flag);
+}
 
+function draw_button2($draw, &$x, &$y, $width, $height, $bg, $text, $flag = null)
+{
+    $draw->setFillColor($bg);
+    $draw->arc($x, $y, $x + $height - 1, $y + $height - 1, 90, 270);
+    $draw->rectangle($x + $height / 2, $y, $x + $width - 1, $y + $height - 1);
+    if ($text) {
+        $draw->setFillColor('#fff');
+        $draw->annotation($x + $height / 8 + ($width + 1) / 2, $y + $height / 2 + 0.4 * $draw->getFontSize(), $text);
+    }
+    move_position($x, $y, $width, $height, $flag);
+}
+
+function draw_button3($draw, &$x, &$y, $width, $height, $bg, $text, $flag = null)
+{
+    $draw->setFillColor($bg);
+    $draw->arc($x + $width - $height, $y, $x + $width - 1, $y + $height - 1, 270, 90);
+    $draw->rectangle($x, $y, $x + $width - $height / 2 - 1, $y + $height - 1);
+    if ($text) {
+        $draw->setFillColor('#fff');
+        $draw->annotation($x - $height / 8 + ($width + 1) / 2, $y + $height / 2 + 0.4 * $draw->getFontSize(), $text);
+    }
+    move_position($x, $y, $width, $height, $flag);
+}
+
+function move_position(&$x, &$y, $width, $height, $flag = null)
+{
     if ($flag === null) return;
     else if ($flag === 'h')    $x += $width  + 1;
     else if ($flag === 'v')    $y += $height + 1;
     else if ($flag === 'hv') { $x += $width  + 1; $y += $height + 1; }
 }
+

@@ -71,7 +71,6 @@ class ItemGrab
     static function get_num_iid($item_node, $page)
     {
         list($url, $refer) = static::get_click_url($item_node, $page);
-        if($url === null) return;
             
         if(preg_match('{http://s.click.taobao.com/}i', $url))
             return ClickUrlToItemId::fetch($url, $refer);

@@ -1,10 +1,9 @@
             <div id="filter">
 <?php
 foreach(array(
-    ''         => '正在抢购',
-    'new'      => '今日新品',
-    'coming'   => '即将开始',
-    'tomorrow' => '明日预告'
+    ''         => '全部折扣',
+    '9kuai9'   => '9块9包邮',
+    '20yuan'   => '20元封顶',
 ) as $target => $name)
 {
     if($target == $filter)
@@ -17,7 +16,6 @@ foreach(array(
         $class = '';
         $count = $data[$target . '_count'];
     }
-    if ($count <= 0) continue;
 ?>
                 <a href="<?= "$page_url$target\"$class>$name ($count)" ?></a>
 <?php

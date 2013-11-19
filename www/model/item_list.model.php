@@ -23,22 +23,14 @@ class ItemList extends ItemBase
             $word = DB::escape($word);
             $condition .= " and title like '%$word%'";
         } 
-        $today_time   = strtotime('today');
-        $now          = strftime('%F %T');
-        $today        = strftime('%F %T', $today_time);
-        $today_end    = strftime('%F %T', $today_time + 86399);
-        $tomorrow     = strftime('%F %T', $today_time + 86400);
-        $tomorrow_end = strftime('%F %T', $today_time + 86400 + 86399);
-        $new_cond      = $condition . " and start_time between '$today' and '$today_end'";
-        $coming_cond   = $condition . " and start_time between '$now'   and '$today_end'";
-        $tomorrow_cond = $condition . " and start_time between '$tomorrow' and '$tomorrow_end'";
-        $default_cond  = $condition . (strlen($word) > 0 ? '' : " and start_time < '$now'");
+
+        $cond_9kuai9 = $condition . " and ref_price < 1000";
+        $cond_20yuan = $condition . " and ref_price between 1000 and 2000";
 
         $data = array();
-        self::filter($data, $filter, 'new',      $new_cond,      $page, $page_size);
-        self::filter($data, $filter, 'coming',   $coming_cond,   $page, $page_size);
-        self::filter($data, $filter, 'tomorrow', $tomorrow_cond, $page, $page_size);
-        self::filter($data, $filter, '',         $default_cond,  $page, $page_size);
+        self::filter($data, $filter, '9kuai9', $cond_9kuai9, $page, $page_size);
+        self::filter($data, $filter, '20yuan', $cond_20yuan, $page, $page_size);
+        self::filter($data, $filter, '',       $condition,   $page, $page_size);
 
         return $data;
     }

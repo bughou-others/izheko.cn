@@ -30,20 +30,20 @@ server {
         try_files $request_document /item_list.controller.php;
     }
 
-    location ~ ^/(new|coming|tomorrow)$ {
+    location ~ ^/(9kuai9|20yuan)$ {
         set $request_document /cache/type/all/$1/1.html;
         try_files $request_document /item_list.controller.php?filter=$1;
     }
-    location ~ "^/((new|coming|tomorrow)/)?([1-9]\d{0,2})\.html$" {
+    location ~ "^/((9kuai9|20yuan)/)?([1-9]\d{0,2})\.html$" {
         set $request_document /cache/type/all$document_uri;
         try_files $request_document /item_list.controller.php?filter=$2&page=$3;
     }
 
-    location ~ ^/([a-z]+)(/(new|coming|tomorrow))?/?$ {
+    location ~ ^/([a-z]+)(/(9kuai9|20yuan))?/?$ {
         set $request_document /cache/type/$1/$3/1.html;
         try_files $request_document /item_list.controller.php?type=$1&filter=$3;
     }
-    location ~ "^/([a-z]+)(/(new|coming|tomorrow))?/([1-9]\d{0,2})\.html$" {
+    location ~ "^/([a-z]+)(/(9kuai9|20yuan))?/([1-9]\d{0,2})\.html$" {
         set $request_document /cache/type$document_uri;
         try_files $request_document /item_list.controller.php?type=$1&filter=$3&page=$4;
     }
@@ -60,12 +60,12 @@ server {
         rewrite ^ /item_list.controller.php?search=$arg_s last;
     }
 
-    location ~ "^/search/([^/ ]+)(/(new|coming|tomorrow))?/?$" {
+    location ~ "^/search/([^/ ]+)(/(9kuai9|20yuan))?/?$" {
         set $request_document /cache/search/$1/$3/1.html;
         try_files $request_document /item_list.controller.php?search=$1&filter=$3;
     }
 
-    location ~ "^/search/([^/ ]+)(/(new|coming|tomorrow))?/([1-9]\d?).html$" {
+    location ~ "^/search/([^/ ]+)(/(9kuai9|20yuan))?/([1-9]\d?).html$" {
         set $request_document /cache/search/$1/$3/$4.html;
         try_files $request_document /item_list.controller.php?search=$1&filter=$3&page=$4;
     }
