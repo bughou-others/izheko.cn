@@ -8,8 +8,7 @@ class App
     {
         if (!isset($_SERVER['DOCUMENT_URI']) || !($target = $_SERVER['DOCUMENT_URI']))
         {
-            #header("HTTP/1.0 404 Not Found");
-            header("X-Accel-Redirect: /cache/404.html");
+            self::render404();
             error_log('no DOCUMENT_URI given');
             return;
         }
@@ -17,9 +16,14 @@ class App
         $target = APP_ROOT . '/controller' . $target;
         if (file_exists($target)) require_once $target;
         else {
-            header("X-Accel-Redirect: /cache/404.html");
+            self::render404();
             error_log('controller not exist: ' . $target);
         }
+    }
+
+    static function render404(){
+        #header("HTTP/1.0 404 Not Found");
+        header("X-Accel-Redirect: /cache/other/404.html");
     }
 
     static function cache()

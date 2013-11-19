@@ -17,7 +17,7 @@ class ItemController
         }
 
         if(!$data) {
-            header('X-Accel-Redirect: /cache/404.html');
+            App::render404();
             error_log('no item: '. $num_iid);
             return;
         }

@@ -15,7 +15,7 @@ class ItemListController
         $data = ItemList::query($type, $word, $filter, $sort, $page, $page_size);
         if(strlen($word) > 0) {
             if(!is_array($data['items'])) {
-                header('X-Accel-Redirect: /cache/404.html');
+                App::render404();
                 error_log('search error');
                 return;
             }
@@ -25,7 +25,7 @@ class ItemListController
         else
         {
             if(!is_array($data['items'])) {
-                header('X-Accel-Redirect: /cache/404.html');
+                App::render404();
                 error_log('no items gotten');
                 return;
             }

@@ -13,17 +13,13 @@ server {
 server {
     server_name www.TOP_DOMAIN www2.TOP_DOMAIN www3.TOP_DOMAIN;
     access_log  /var/log/nginx/www.TOP_DOMAIN.access.log general_format;
-    error_log   /var/log/nginx/www.TOP_DOMAIN.error.log;
+    error_log   /var/log/nginx/www.TOP_DOMAIN.error.log; # debug
 
     root APP_ROOT/public;
 
-    error_page 404 /cache/other/404.html;
-
     merge_slashes on;
 
-    location = /footprints {
-        rewrite ^ /footprints.controller.php last;
-    }
+    error_page 404 /cache/other/404.html;
 
     location ~ "^(?:/(nvzhuang|nanzhuang|jujia|muying|xiebao|peishi|meishi|shumajiadian|huazhuangpin|wenti))?(?:/(9kuai9|20yuan))?(?:/(newest))?/?$" {
         set $request_document /cache/$document_uri/1.html;
@@ -62,8 +58,13 @@ server {
         try_files $request_document /item.controller.php?num_iid=$1;
     }
 
-    location ^~ /cache {
-        internal;
+    location = /footprints {
+        rewrite ^ /footprints.controller.php last;
+    }
+
+    location = /help.html {
+        set $request_document /cache/other/$document_uri;
+        try_files $request_document /static_page.controller.php?target=help;
     }
 
     location = /cache/other/404.html {
@@ -72,9 +73,8 @@ server {
         try_files $request_document /static_page.controller.php;
     }
 
-    location = /help.html {
-        set $request_document /cache/other/$document_uri;
-        try_files $request_document /static_page.controller.php?target=help;
+    location ^~ /cache {
+        internal;
     }
 
     location ~ .controller.php$ {
