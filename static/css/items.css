@@ -2,32 +2,6 @@
     margin: 3em 0;
 }
 
-#filter {
-    margin: 10px 0;
-} 
-#filter a {
-    display: inline-block;
-    margin: 0 1em;
-    padding: 0 20px;
-    color: #5e5e5e;
-    font-size: 14px;
-    line-height: 30px;
-    background-color: #fff;
-    border: 1px solid #e2e2e2;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    border-radius: 15px;
-    _padding-top: 3px;
-    /*
-    behavior: url(/PIE.htc);
-    position: relative;
-    */
-}
-#filter a:hover,
-#filter a.on {
-    color: #e33;
-}
-
 #item_list{
     border-collapse: collapse;
 }

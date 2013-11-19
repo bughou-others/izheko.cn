@@ -1,24 +1,31 @@
-            <div id="filter">
+            <div id="condition">
+                <span id="filter">
 <?php
 foreach(array(
     ''         => '全部折扣',
     '9kuai9'   => '9块9包邮',
     '20yuan'   => '20元封顶',
-) as $target => $name)
+) as $f => $name)
 {
-    if($target == $filter)
-    {
-        $class = ' class="on"';
+    if ($f === '') $class = 'lrc';
+    else if ($f === '20yuan') $class = 'rrc';
+    else $class = '';
+
+    if($f == $filter) {
         $count = $data['total_count'];
+        echo "<span class=\"$class\">$name ($count)</span>";
+    } else {
+        $count = $data[$f . '_count'];
+        echo "<a href=\"$type_url$f\" class=\"$class\">$name ($count)</a>";
     }
-    else
-    {
-        $class = '';
-        $count = $data[$target . '_count'];
-    }
-?>
-                <a href="<?= "$page_url$target\"$class>$name ($count)" ?></a>
-<?php
 }
 ?>
+                </span>
+                <span id="sort">
+<?php if ($sort === 'newest') { ?>
+                    <a class="lrc" href="<?= $filter_url ?>">最热</a><span class="rrc">最新</span>
+<?php } else { ?>
+                    <span class="lrc">最热</span><a class="rrc" href="<?= $filter_url ?>newest">最新</a>
+<?php } ?>
+                </span>
             </div>

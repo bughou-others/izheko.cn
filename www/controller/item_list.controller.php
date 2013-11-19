@@ -8,10 +8,11 @@ class ItemListController
         $type   = isset($_GET['type'])   ? trim($_GET['type'])   : '';
         $word   = isset($_GET['search']) ? trim($_GET['search']) : '';
         $filter = isset($_GET['filter']) ? trim($_GET['filter']) : '';
+        $sort   = isset($_GET['sort'])   ? trim($_GET['sort']) : '';
         $page   = isset($_GET['page'])   ? intval($_GET['page']) : 1;
-        $page_size = 360; // 1 * 2 * 3 * 2 * 5 *  2 * 3
+        $page_size = 180; // 1 * 2 * 3 * 2 * 5 *  2 * 3
 
-        $data = ItemList::query($type, $word, $filter, $page, $page_size);
+        $data = ItemList::query($type, $word, $filter, $sort, $page, $page_size);
         if(strlen($word) > 0) {
             if(!is_array($data['items'])) {
                 header('X-Accel-Redirect: /cache/404.html');
@@ -19,7 +20,7 @@ class ItemListController
                 return;
             }
             unset($type);
-            $page_url = "/search/$word/";
+            $type_url = "/search/$word/";
         }
         else
         {
@@ -28,10 +29,13 @@ class ItemListController
                 error_log('no items gotten');
                 return;
             }
-            $page_url = $type && $type !== 'all' ? "/$type/" : '/';
+            $type_url = $type && $type !== 'all' ? "/$type/" : '/';
         }
-        App::render('item_list', compact('type', 'word', 'filter',  'page', 'page_size',
-            'data', 'page_url'));
+        $filter_url = $filter ? $type_url . $filter . '/' : $type_url;
+        $sort_url   = $sort   ? $filter_url . $sort . '/' : $filter_url;
+
+        App::render('item_list', compact('type', 'word', 'filter', 'sort', 'page', 'page_size',
+            'data', 'type_url', 'filter_url', 'sort_url'));
     }
 }
 

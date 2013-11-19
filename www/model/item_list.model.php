@@ -4,7 +4,7 @@ require_once APP_ROOT . '/model/item.model.php';
 
 class ItemList extends ItemBase
 {
-    static function query($type, $word, $filter, $page, $page_size)
+    static function query($type, $word, $filter, $sort, $page, $page_size)
     {
         if($type && $type !== 'all') {
             $type_id = null;
@@ -28,17 +28,17 @@ class ItemList extends ItemBase
         $cond_20yuan = $condition . " and ref_price between 1000 and 2000";
 
         $data = array();
-        self::filter($data, $filter, '9kuai9', $cond_9kuai9, $page, $page_size);
-        self::filter($data, $filter, '20yuan', $cond_20yuan, $page, $page_size);
-        self::filter($data, $filter, '',       $condition,   $page, $page_size);
+        self::filter($data, $filter, '9kuai9', $cond_9kuai9, $sort, $page, $page_size);
+        self::filter($data, $filter, '20yuan', $cond_20yuan, $sort, $page, $page_size);
+        self::filter($data, $filter, '',       $condition,   $sort, $page, $page_size);
 
         return $data;
     }
 
-    static function filter(&$data, $filter, $target, $condition, $page, $page_size)
+    static function filter(&$data, $filter, $target, $condition, $sort, $page, $page_size)
     {
         if($filter === $target) {
-            self::select($data, $condition, $page, $page_size);
+            self::select($data, $condition, $sort, $page, $page_size);
         } else {
             $data[$target . '_count'] = self::count($condition);
         }
@@ -52,8 +52,9 @@ class ItemList extends ItemBase
         return DB::get_value($sql);
     }
 
-    static function select(&$data, $condition, $page, $page_size)
+    static function select(&$data, $condition, $sort, $page, $page_size)
     {
+        $order = $sort === 'newest' ? 'id' : 'ref_ordinal, id';
         $offset = $page >= 1 ? ($page - 1) * $page_size : 0;
         $sql = "select SQL_CALC_FOUND_ROWS 
             num_iid,title,type_id,flags,ref_price,price,now_price,
@@ -61,7 +62,7 @@ class ItemList extends ItemBase
             from items
             where title != '' and !(flags&" . ItemBase::FLAGS_MASK_ITEM_DELETED . ")
             $condition 
-            order by ref_ordinal, id desc limit $offset, $page_size";
+            order by $order desc limit $offset, $page_size";
         $result = DB::query($sql);
         $instances = array();
         while($row = $result->fetch_assoc()) $instances[] = new Item($row);

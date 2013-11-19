@@ -33,7 +33,8 @@ Izheko.lazy_img = (function(){
             var item = $('#item' + n);
             if (item.length === 0) return;
             var title = item.children('h1');
-            var numiid = title.children('a:nth-child(2)').attr('data-itemid');
+            var numiid = title.children('a[data-itemid]').attr('data-itemid');
+            if (!numiid) return;
             var img = $('<img/>').load(function(){
                 $(this).parent().parent().css('background-image', 'none');
             });
@@ -42,6 +43,8 @@ Izheko.lazy_img = (function(){
             ).css('margin-top', '0');
             var pic_url = item.attr('p') || 'http://static.izheko.cn/pic/' + numiid.substr(0, 4).split('').join('/') + '/' + numiid + '.jpg';
             img.attr('src', pic_url)
+            loaded[n] = true;
+            loaded_count ++;
     };
     var load_imgs_in_viewport = function(){
         if (!first_row_top) return;
@@ -55,8 +58,6 @@ Izheko.lazy_img = (function(){
         for (var n = min; n <= max; n++){
             if (loaded[n]) continue;
             load_img(n);
-            loaded[n] = true;
-            loaded_count ++;
         }
         if (loaded_count >= Izheko.item_count) {
             $c.unbind('scroll', load_imgs_in_viewport).unbind('resize', init_row_model);

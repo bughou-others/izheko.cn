@@ -1,0 +1,44 @@
+
+#condition {
+    margin: 5px 0;
+} 
+#condition span a, #condition span span {
+    display: inline-block;
+    margin: 5px 1px;
+    padding: 0 20px;
+    font-size: 14px;
+    line-height: 30px;
+    background-color: #fff;
+    border: 1px solid #e2e2e2;
+    _padding-top: 3px;
+}
+#condition span a {
+    color: #5e5e5e;
+}
+#condition span a:hover {
+    color: #e33;
+}
+#condition span span {
+    color: #e33;
+    font-weight: bold;
+}
+
+#condition .lrc {
+    -moz-border-radius: 15px 0 0 15px;
+    -webkit-border-radius: 15px 0 0 15px;
+    border-radius: 15px 0 0 15px;
+    /*
+    behavior: url(/PIE.htc);
+    position: relative;
+    */
+}
+#condition .rrc {
+    -moz-border-radius: 0 15px 15px 0;
+    -webkit-border-radius: 0 15px 15px 0;
+    border-radius: 0 15px 15px 0;
+}
+
+#sort {
+    margin-left: 30%;
+    white-space: nowrap;
+}

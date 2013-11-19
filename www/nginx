@@ -25,27 +25,14 @@ server {
         rewrite ^ /footprints.controller.php last;
     }
 
-    location = / {
-        set $request_document /cache/type/all/1.html;
-        try_files $request_document /item_list.controller.php;
+    location ~ "^(?:/(nvzhuang|nanzhuang|jujia|muying|xiebao|peishi|meishi|shumajiadian|huazhuangpin|wenti))?(?:/(9kuai9|20yuan))?(?:/(newest))?/?$" {
+        set $request_document /cache/$document_uri/1.html;
+        try_files $request_document /item_list.controller.php?type=$1&filter=$2&sort=$3;
     }
 
-    location ~ ^/(9kuai9|20yuan)$ {
-        set $request_document /cache/type/all/$1/1.html;
-        try_files $request_document /item_list.controller.php?filter=$1;
-    }
-    location ~ "^/((9kuai9|20yuan)/)?([1-9]\d{0,2})\.html$" {
-        set $request_document /cache/type/all$document_uri;
-        try_files $request_document /item_list.controller.php?filter=$2&page=$3;
-    }
-
-    location ~ ^/([a-z]+)(/(9kuai9|20yuan))?/?$ {
-        set $request_document /cache/type/$1/$3/1.html;
-        try_files $request_document /item_list.controller.php?type=$1&filter=$3;
-    }
-    location ~ "^/([a-z]+)(/(9kuai9|20yuan))?/([1-9]\d{0,2})\.html$" {
-        set $request_document /cache/type$document_uri;
-        try_files $request_document /item_list.controller.php?type=$1&filter=$3&page=$4;
+    location ~ "^(?:/(nvzhuang|nanzhuang|jujia|muying|xiebao|peishi|meishi|shumajiadian|huazhuangpin|wenti))?(?:/(9kuai9|20yuan))?(?:/(newest))?/([1-9]\d{0,2})\.html$" {
+        set $request_document /cache/$document_uri;
+        try_files $request_document /item_list.controller.php?type=$1&filter=$2&sort=$3&page=$4;
     }
 
     location = /search {
@@ -53,21 +40,21 @@ server {
             set $request_document /1.html;
             rewrite ^ $request_document last;
         }
-        set $request_document "/cache/search/$arg_s/all/1.html";
+        set $request_document "/cache/search/$arg_s/1.html";
         if (-f $request_document) {
             rewrite ^ $request_document break;
         }
         rewrite ^ /item_list.controller.php?search=$arg_s last;
     }
 
-    location ~ "^/search/([^/ ]+)(/(9kuai9|20yuan))?/?$" {
-        set $request_document /cache/search/$1/$3/1.html;
-        try_files $request_document /item_list.controller.php?search=$1&filter=$3;
+    location ~ "^/search/([^/ ]+)(?:/(9kuai9|20yuan))?(?:/(newest))?/?$" {
+        set $request_document /cache/$document_uri/1.html;
+        try_files $request_document /item_list.controller.php?search=$1&filter=$2&sort=$3;
     }
 
-    location ~ "^/search/([^/ ]+)(/(9kuai9|20yuan))?/([1-9]\d?).html$" {
-        set $request_document /cache/search/$1/$3/$4.html;
-        try_files $request_document /item_list.controller.php?search=$1&filter=$3&page=$4;
+    location ~ "^/search/([^/ ]+)(?:/(9kuai9|20yuan))?(?:/(newest))?/([1-9]\d?).html$" {
+        set $request_document /cache/$document_uri;
+        try_files $request_document /item_list.controller.php?search=$1&filter=$2&sort=$3&page=$4;
     }
 
     location ~ "^/item/(\d{8,15})$" {

@@ -75,12 +75,13 @@ b.sns-douban     { background-position: 0 -840px; }
 b.sns-kaixin     { background-position: 0 -264px; }
 b.sns-qq_haoyou  { background-position: 0 -3024px; }
 
+
 .item h2 a, .item .action, .item .post, .item .vip, .item .gai, .item .remai, 
 #pindao-button, #bookmark, #fankui, #gotop, #pindao-wrapper div i {
-    background-image: url(/img/button.png?v=20131024.0);
+    background-image: url(/img/button.png?v=20131119.0);
 }
 #pindao-button, #bookmark, #fankui, #gotop, #pindao-wrapper div i {
-    _background-image: url(/img/button-fs8.png?v=20131024.0);
+    _background-image: url(/img/button-fs8.png?v=20131119.0);
 }
 #header {
     padding: 3px 5% 10px 5%;
@@ -400,34 +401,52 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     background-color: white;
 }
 
-#no_items {
-    margin: 3em 0;
-}
 
-#filter {
-    margin: 10px 0;
+#condition {
+    margin: 5px 0;
 } 
-#filter a {
+#condition span a, #condition span span {
     display: inline-block;
-    margin: 0 1em;
+    margin: 5px 1px;
     padding: 0 20px;
-    color: #5e5e5e;
     font-size: 14px;
     line-height: 30px;
     background-color: #fff;
     border: 1px solid #e2e2e2;
-    -moz-border-radius: 15px;
-    -webkit-border-radius: 15px;
-    border-radius: 15px;
     _padding-top: 3px;
+}
+#condition span a {
+    color: #5e5e5e;
+}
+#condition span a:hover {
+    color: #e33;
+}
+#condition span span {
+    color: #e33;
+    font-weight: bold;
+}
+
+#condition .lrc {
+    -moz-border-radius: 15px 0 0 15px;
+    -webkit-border-radius: 15px 0 0 15px;
+    border-radius: 15px 0 0 15px;
     /*
     behavior: url(/PIE.htc);
     position: relative;
     */
 }
-#filter a:hover,
-#filter a.on {
-    color: #e33;
+#condition .rrc {
+    -moz-border-radius: 0 15px 15px 0;
+    -webkit-border-radius: 0 15px 15px 0;
+    border-radius: 0 15px 15px 0;
+}
+
+#sort {
+    margin-left: 30%;
+    white-space: nowrap;
+}
+#no_items {
+    margin: 3em 0;
 }
 
 #item_list{

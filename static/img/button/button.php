@@ -8,7 +8,7 @@ button_img($argv[1]);
 function button_img($file)
 {
     $img = new Imagick();
-    $img->newImage(136, 292, 'transparent', 'png');
+    $img->newImage(136, 224, 'transparent', 'png');
     $img->setImageDepth(8);
 
     $draw = new ImagickDraw();
@@ -31,17 +31,20 @@ function button_img($file)
     draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '反馈',       'v');
     draw_hexagon($draw, $x, $y, 55, 15, 'r', '#888',    '回到顶部',   'v');
 
-    $x = 0;
-    draw_button2($draw, $x, $y, 60, 33, '#e33',    '最热', 'h');
-    draw_button3($draw, $x, $y, 60, 33, '#808080', '最新', 'v');
-    $x = 0;
-    draw_button2($draw, $x, $y, 60, 33, '#808080', '最热', 'h');
-    draw_button3($draw, $x, $y, 60, 33, '#e33',    '最新', 'v');
-
     $draw->setFont('./msyh.ttf');
-    $draw->setFontSize(12);
+    $draw->setFontSize(14);
     $draw->setFontWeight(500);
 
+    /*
+    $x = 0;
+    draw_button2($draw, $x, $y, 60, 30, '#cc0000', '最热', 'h');
+    draw_button3($draw, $x, $y, 60, 30, '#ccc',    '最新', 'v');
+    $x = 0;
+    draw_button2($draw, $x, $y, 60, 20, '#ccc',    '最热', 'h');
+    draw_button3($draw, $x, $y, 60, 20, '#cc0000', '最新', 'v');
+     */
+
+    $draw->setFontSize(12);
     $x = 0;
     $y = $y1;
     draw_button($draw, $x, $y, 26, 17, 3, '#393',    '包邮',     13, 'v');

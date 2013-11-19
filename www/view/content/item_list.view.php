@@ -29,9 +29,8 @@ if ($i === 10 || $i === $item_count) {
             </div>
 <?php
 require_once APP_ROOT . '/../common/helper/page.helper.php';
-if($filter) $page_url .= $filter . '/';
 ?>
-            <div id="pagination"><?= paginate($page_url, '.html', $page, $data['total_count'], $page_size); ?></div>
+            <div id="pagination"><?= paginate($sort_url, '.html', $page, $data['total_count'], $page_size); ?></div>
 <?php } ?>
 <?php if (isset($word) && $word !== ''){ ?>
             <script> Izheko.taobao_search(<?=  json_encode($word) ?>); </script>

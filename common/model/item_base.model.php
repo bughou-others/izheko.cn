@@ -35,3 +35,4 @@ class ItemBase
             . '/' . $num_iid . '.jpg';
     }
 }
+
