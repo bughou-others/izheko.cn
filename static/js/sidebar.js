@@ -9,7 +9,7 @@ Izheko.sidebar_init = function() {
     var pindao_inited;
     $('#pindao-button').bind('click mouseenter', function(){
         if (!pindao_inited) {
-            $('<div><i></i></div>').append($('#navbar > a').clone()).appendTo('#pindao-wrapper');
+            $('<div><i></i></div>').append($('#navbar a').clone()).appendTo('#pindao-wrapper');
             pindao_inited = true;
         }
         $('#pindao-wrapper > div').css('display', 'block');
