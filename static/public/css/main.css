@@ -83,6 +83,15 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 #pindao-button, #bookmark, #fankui, #gotop, #pindao-wrapper div i {
     _background-image: url(/img/button-fs8.png?v=20131119.0);
 }
+
+#search, #search input, 
+#navbar, #navbar a, 
+#condition .lrc, #condition .rrc, 
+#pagination a, #pagination span, 
+{
+    behavior: url(/PIE.htc);
+    position: relative;
+}
 #header {
     padding: 3px 5% 10px 5%;
     color: #fff;
@@ -259,7 +268,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     -webkit-border-radius: 4px;
     border-radius: 4px;
     position: relative;
-    behavior: url(/PIE.htc);
 }
 #search .input-wrapper {
     padding-right: 1em;
@@ -278,8 +286,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     -moz-border-radius: 4px 0 0 4px;
     -webkit-border-radius: 4px 0 0 4px;
     border-radius: 4px 0 0 4px;
-    behavior: url(/PIE.htc);
-    position: relative;
 }
 #search button {
     position: absolute;
@@ -308,8 +314,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     border-radius: 10px;
     font: 14px/22px '';
     _width: 100%;
-    behavior: url(/PIE.htc);
-    position: relative;
 }
 #navbar a {
     color: #fff;
@@ -323,8 +327,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    behavior: url(/PIE.htc);
-    position: relative;
 }
 #navbar a:hover {
     background-color: #4f8a00;
@@ -437,15 +439,11 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     -moz-border-radius: 15px 0 0 15px;
     -webkit-border-radius: 15px 0 0 15px;
     border-radius: 15px 0 0 15px;
-    behavior: url(/PIE.htc);
-    position: relative;
 }
 #condition .rrc {
     -moz-border-radius: 0 15px 15px 0;
     -webkit-border-radius: 0 15px 15px 0;
     border-radius: 0 15px 15px 0;
-    behavior: url(/PIE.htc);
-    position: relative;
 }
 
 #sort {
@@ -702,8 +700,6 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    behavior: url(/PIE.htc);
-    position: relative;
 }
 #pagination a {
     color: #929292;

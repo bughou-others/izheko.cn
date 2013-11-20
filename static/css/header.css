@@ -174,7 +174,6 @@
     -webkit-border-radius: 4px;
     border-radius: 4px;
     position: relative;
-    behavior: url(/PIE.htc);
 }
 #search .input-wrapper {
     padding-right: 1em;
@@ -193,8 +192,6 @@
     -moz-border-radius: 4px 0 0 4px;
     -webkit-border-radius: 4px 0 0 4px;
     border-radius: 4px 0 0 4px;
-    behavior: url(/PIE.htc);
-    position: relative;
 }
 #search button {
     position: absolute;
@@ -223,8 +220,6 @@
     border-radius: 10px;
     font: 14px/22px '';
     _width: 100%;
-    behavior: url(/PIE.htc);
-    position: relative;
 }
 #navbar a {
     color: #fff;
@@ -238,8 +233,6 @@
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
-    behavior: url(/PIE.htc);
-    position: relative;
 }
 #navbar a:hover {
     background-color: #4f8a00;

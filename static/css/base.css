@@ -83,3 +83,12 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 #pindao-button, #bookmark, #fankui, #gotop, #pindao-wrapper div i {
     _background-image: url(/img/button-fs8.png?v=20131119.0);
 }
+
+#search, #search input, 
+#navbar, #navbar a, 
+#condition .lrc, #condition .rrc, 
+#pagination a, #pagination span, 
+{
+    behavior: url(/PIE.htc);
+    position: relative;
+}
