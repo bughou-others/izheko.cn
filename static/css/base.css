@@ -87,7 +87,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
 #search, #search input, 
 #navbar, #navbar a, 
 #condition .lrc, #condition .rrc, 
-#pagination a, #pagination span, 
+#pagination a, #pagination span
 {
     behavior: url(/PIE.htc);
     position: relative;
