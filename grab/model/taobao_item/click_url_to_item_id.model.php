@@ -35,6 +35,12 @@ class ClickUrlToItemId
             parse_str(parse_url($url4, PHP_URL_QUERY), $params);
             if (isset($params['tar'])) $url4 = $params['tar'];
         }
+        if (preg_match('@^http://re.taobao.com/@', $url4))
+        {
+            $page = self::$curl->get($url4);
+            if (preg_match('/ data-item="(\d+)" /', $page->body, $m)) return $m[1];
+            return;
+        }
         parse_str(parse_url($url4, PHP_URL_QUERY), $params);
         if (isset($params['id']) && ($item_id = $params['id']))
         {

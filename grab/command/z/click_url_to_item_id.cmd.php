@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT . '/model/click_url_to_item_id.model.php';
+require_once APP_ROOT . '/model/taobao_item/click_url_to_item_id.model.php';
 
 class ClickUrlToItemIdCmd
 {
