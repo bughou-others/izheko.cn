@@ -23,72 +23,13 @@ h1,h2,h3,h4,h5,h6,p,img {
     font-weight: normal;
 }
 
-#content {
-    margin: 0;
-    padding: 20px 0;
-    background: url(/img2/bg.png) repeat center top;
-}
-
-#error_content {
-    margin: 4em 0;
-}
-
-
-#dialog_box {
-    position: absolute;
-    border: 5px solid #ddd;
-    z-index: 999999;
-}
-#dialog_box b {
-    display: inline-block;
-    width: 12px;
-    height: 10px;
-    border: 1px solid white;
-    background: url(/img2/tool.png) 0 -19px;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
-#dialog_box b:hover {
-    border-color: #ccc;
-}
-#dialog_box div {
-    border: 1px solid #ccc;
-    padding: 5px 25px 5px 10px;
-    line-height: 22px;
-    color: #333;
-    background-color: white;
-}
-
-.sns-share b {
-    display: inline-block;
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    background-image: url(/img2/sns_icon.png);
-}
-b.sns-qq_zone    { background-position: 0 -96px; }
-b.sns-sina_weibo { background-position: 0 -144px; }
-b.sns-tencent_weibo { background-position: 0 -216px; }
-b.sns-renren     { background-position: 0 -240px; }
-b.sns-douban     { background-position: 0 -840px; }
-b.sns-kaixin     { background-position: 0 -264px; }
-b.sns-qq_haoyou  { background-position: 0 -3024px; }
-
-
-.item h2 a, .item .action, .item .post, .item .vip, .item .gai, .item .remai, 
-#pindao-button, #bookmark, #fankui, #gotop, #pindao-wrapper div i {
-    background-image: url(/img/button.png?v=20131119.0);
-}
-#pindao-button, #bookmark, #fankui, #gotop, #pindao-wrapper div i {
-    _background-image: url(/img/button-fs8.png?v=20131119.0);
-}
-
 #search, #search input, 
-#navbar, #navbar a, 
+#navbar, #navbar a, #qq-qun,
 #condition .lrc, #condition .rrc, 
 #pagination a, #pagination span
 {
-    behavior: url(/PIE.htc);
-    position: relative;
+    behavior: url(/PIE.htc)\9;
+    position: relative\9;
+    _behavior: none;
+    _position: static;
 }

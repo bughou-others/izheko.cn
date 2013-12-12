@@ -20,7 +20,7 @@
 
 #sns-share-wrapper, #footprints-wrapper {
     position: relative;
-    z-index: 999;
+    z-index: 100;
     text-align: left;
     white-space: normal;
     display: inline-block;
@@ -55,7 +55,7 @@
     top: 35px;
     _top: 30px;
     right: 0;
-    z-index: 999;
+    z-index: 100;
 }
 #sns-share {
     padding: 10px;
@@ -239,5 +239,20 @@
 }
 #navbar a.on {
     background-color: #4f8a00;
+}
+
+#qq-qun-container {
+    position: relative;
+}
+#qq-qun {
+    position: absolute;
+    top: 0;
+    right: 30%;
+    background-color: #010101;
+    padding: 10px 20px 5px 20px;
+    -moz-border-radius: 0 0 10px 10px;
+    -webkit-border-radius: 0 0 10px 10px;
+    border-radius: 0 0 10px 10px;
+    white-space: nowrap;
 }
 

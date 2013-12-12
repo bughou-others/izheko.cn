@@ -31,4 +31,5 @@
                 </form>
             </div>
 <?php require_once 'navbar.view.php'; ?>
+            <div id="qq-qun-container"><span id="qq-qun">爱折扣 用户交流QQ群：72250699</span></div>
         </div>
