@@ -322,7 +322,7 @@ Izheko.item_list_init = function() {
         var item = $(this);
         var time_left = item.children('div').children('h3');
         if(!item.attr('x')){ time_left
-        .prepend('<a data-itemid="' + item.children('h1').children('a:nth-child(2)').attr('data-itemid') + '" data-rd="2" class="remai" title="与这个宝贝相关的热卖宝贝" target="_blank"></a>')
+        .prepend('<a href="/item/' + item.children('h1').children('a:nth-child(2)').attr('data-itemid') + '" class="danpin" target="_blank"></a>')
         .next('p').prepend('<span>小编： </span>')
         .before('<h4 class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</h4>');
             item.attr('x', 'o');

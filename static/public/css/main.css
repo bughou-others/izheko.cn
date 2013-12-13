@@ -419,12 +419,12 @@ b.sns-kaixin     { background-position: 0 -264px; }
 b.sns-qq_haoyou  { background-position: 0 -3024px; }
 
 
-.item h2 a, .item .action, .item .post, .item .vip, .item .gai, .item .remai, 
+.item h2 a, .item .action, .item .post, .item .vip, .item .gai, .item .danpin, 
 #pindao-button, #bookmark, #fankui, #gotop, #pindao-wrapper div i {
-    background-image: url(/img/button.png?v=20131119.0);
+    background-image: url(/img/button.png?v=20131213.0);
 }
 #pindao-button, #bookmark, #fankui, #gotop, #pindao-wrapper div i {
-    _background-image: url(/img/button-fs8.png?v=20131119.0);
+    _background-image: url(/img/button-fs8.png?v=20131213.0);
 }
 
 
@@ -591,7 +591,7 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     background-position: 0 -102px;
 }
 
-.item .post, .item .vip, .item .gai, .item .remai {
+.item .post, .item .vip, .item .gai, .item .danpin {
     display: inline-block;
     height: 17px;
     margin-left: 5px;
@@ -609,19 +609,19 @@ b.sns-qq_haoyou  { background-position: 0 -3024px; }
     width: 34px;
     background-position: 0 -172px;
 }
-.item .remai {
-    width: 54px;
+.item .danpin {
+    width: 40px;
     background-position: 0 -190px;
 }
-.item div .remai {
+.item div .danpin {
     float: right;
     margin-right: 15px;
 }
-.item .right .remai {
+.item .right .danpin {
     margin-left: 30px;
     vertical-align: baseline;
 }
-.item .remai:hover {
+.item .danpin:hover {
     opacity: 0.8;
     filter: alpha(opacity=80);
 }

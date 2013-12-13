@@ -23,9 +23,9 @@ foreach(array(
                 </span>
                 <span id="sort">
 <?php if ($sort === 'newest') { ?>
-                    <a class="lrc" href="<?= $filter_url ?>">最热</a><span class="rrc">最新</span>
+                    <a class="lrc" title="最热排序" href="<?= $filter_url ?>">最热</a><span class="rrc" title="最新排序">最新</span>
 <?php } else { ?>
-                    <span class="lrc">最热</span><a class="rrc" href="<?= $filter_url ?>newest">最新</a>
+                    <span class="lrc" title="最热排序">最热</span><a class="rrc"  title="最新排序" href="<?= $filter_url ?>newest">最新</a>
 <?php } ?>
                 </span>
             </div>

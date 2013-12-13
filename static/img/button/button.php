@@ -28,7 +28,7 @@ function button_img($file)
     $y = 0;
     draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '频道',       'v');
     draw_hexagon($draw, $x, $y, 55, 15, 'r', '#cc0000', '收藏izheko', 'v');
-    draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '反馈',       'v');
+    draw_hexagon($draw, $x, $y, 55, 15, 'l', '#cc0000', '客服',       'v');
     draw_hexagon($draw, $x, $y, 55, 15, 'r', '#888',    '回到顶部',   'v');
 
     $draw->setFont('./msyh.ttf');
@@ -50,7 +50,7 @@ function button_img($file)
     draw_button($draw, $x, $y, 26, 17, 3, '#393',    '包邮',     13, 'v');
     draw_button($draw, $x, $y, 26, 17, 3, '#f39',    '拍改',     13, 'v');
     draw_button($draw, $x, $y, 34, 17, 3, '#ffa405', 'VIP价',    13, 'v');
-    draw_button($draw, $x, $y, 54, 17, 3, '#e33',    '相关热卖', 13, 'v');
+    draw_button($draw, $x, $y, 40, 17, 3, '#e33',    '单品页',   13, 'v');
 
     draw_arrow($draw, $x, $y, 7, 14, '#999' );
 
