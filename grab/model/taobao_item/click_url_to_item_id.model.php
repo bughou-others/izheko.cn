@@ -35,6 +35,10 @@ class ClickUrlToItemId
             parse_str(parse_url($url4, PHP_URL_QUERY), $params);
             if (isset($params['tar'])) $url4 = $params['tar'];
         }
+        if (preg_match('@^http://redirect\.simba\.taobao\.com/rd\?@', $url4)) {
+            parse_str(parse_url($url4, PHP_URL_QUERY), $params);
+            if (isset($params['f'])) $url4 = $params['f'];
+        }
         if (preg_match('@^http://re.taobao.com/@', $url4))
         {
             $page = self::$curl->get($url4);
