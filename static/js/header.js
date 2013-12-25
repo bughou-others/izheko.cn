@@ -54,7 +54,7 @@ Izheko.Footprints = {
     },
     init_record: function(te) {
         var o = this;
-        var s = 'h1 > a:last-child, a.pic, h2 > a';
+        var s = 'h1 > a:last-child, a.pic, h2 > a, a.action';
         (te || $('#item_list')).on('click mouseup contextmenu', s, function(e){
             if(e.type === 'mouseup' && e.which !== 2) return false;
             var item_id = $(this).closest('.item').attr('item-id');
