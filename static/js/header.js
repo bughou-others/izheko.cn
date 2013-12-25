@@ -54,10 +54,10 @@ Izheko.Footprints = {
     },
     init_record: function(te) {
         var o = this;
-        var s = '.title > a:nth-child(2), a.pic, a.action';
+        var s = 'h1 > a:last-child, a.pic, h2 > a';
         (te || $('#item_list')).on('click mouseup contextmenu', s, function(e){
             if(e.type === 'mouseup' && e.which !== 2) return false;
-            var item_id = $(this).closest('.item').find('a.pic').attr('data-itemid');
+            var item_id = $(this).closest('.item').attr('item-id');
             var a = [ ];
             if(m = document.cookie.match(/(^| )footprints=(\d{8,}(,\d{8,})*)(;|$)/)) {
                 a = m[2].split(',');
@@ -137,9 +137,9 @@ Izheko.Footprints = {
                 var item = items_data[num_iid];
                 if(item === undefined) continue;
                 count ++;
-                html += '<div class="footprints-item"><a data-rd="1" class="image" target="_blank" data-itemid="' + num_iid +
-                    '"><img src="' + item.pic_url + '" /></a><span class="desc"><a data-rd="1" target="_blank" data-itemid="' +
-                    num_iid + '">' + item.title   + '</a><b>￥' + item.now_price + '</b></span></div>';
+                html += '<div class="footprints-item"><a class="image" target="_blank" href="' + item.url +
+                    '"><img src="' + item.pic_url + '" /></a><span class="desc"><a target="_blank" href="' +
+                    item.url + '">' + item.title   + '</a><b>￥' + item.now_price + '</b></span></div>';
             }
         } else {
             html = '<center>亲，您还没有留下足迹哟。</center>';

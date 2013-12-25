@@ -30,9 +30,10 @@ class Footprints
                 unset($item_ids[$index]);
             $data[] = array(
                 'num_iid'   => $num_iid,
+                'url'       => $item->url(),
                 'pic_url'   => $item->pic_url(),
                 'title'     => $item->title(),
-                'now_price' => format_price($item->get('now_price')),
+                'now_price' => format_price($item->get('ref_price')),
             );
         }
         return $data;

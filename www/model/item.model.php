@@ -167,6 +167,15 @@ class Item extends ItemBase
             return '<b class="gai" title="拍下自动改价"></b>';
     }
 
+    function url()
+    {
+        if ($this->data['flags'] & self::FLAGS_MASK_TMALL) {
+            return 'http://detail.tmall.com/item.htm?id=' . $this->data['num_iid'];
+        } else {
+            return 'http://item.taobao.com/item.htm?id=' . $this->data['num_iid'];
+        }
+    }
+
     function jump_url()
     {
         return $this->data['detail_url'];

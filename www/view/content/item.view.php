@@ -1,7 +1,7 @@
-            <div  id="single-item" class="item">
-                <h1><?= $item->type_tag() ?><a target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>"><?= $item->title() ?></a></h1>
+            <div  id="single-item" class="item" item-id="<?= $item->get('num_iid') ?>">
+                <h1><?= $item->type_tag() ?><a target="_blank" href="<?= $item->url() ?>"><?= $item->title() ?></a></h1>
                 <span class="left">
-                    <a class="pic" target="_blank" href="#" data-itemid="<?= $item->get('num_iid') ?>">
+                    <a class="pic" target="_blank" href="<?= $item->url() ?>">
                         <!--[if IE 6]><span></span><![endif]-->
                         <img src="<?= $item->pic_url() ?>" />
                     </a>
@@ -16,7 +16,7 @@
                     </h2>
                     <h3><?= $item->time_left() ?></h3>
                     <p><?= $item->get('ref_tip') ?></p>
-                    <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="#" data-itemid="<?= $item->get('num_iid') ?>" target="_blank"><?= $item->action() ?></a>
+                    <a data-rd="1" class="action <?= $item->action_style() ?>" title="<?= $item->action_title() ?>" href="<?= $item->url() ?>" target="_blank"><?= $item->action() ?></a>
                 </span>
                 <script> Izheko.single_item_init(); </script>
             </div>

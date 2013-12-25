@@ -4,10 +4,10 @@ Izheko.item_list_init = function() {
     $("#item_list").on('mouseenter', '.item', function(){
         var item = $(this);
         var time_left = item.children('div').children('h3');
-        if(!item.attr('x')){ time_left
-        .prepend('<a href="/item/' + item.children('h1').children('a:nth-child(2)').attr('data-itemid') + '" class="danpin" target="_blank"></a>')
-        .next('p').prepend('<span>小编： </span>')
-        .before('<h4 class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</h4>');
+        if(!item.attr('x')){
+            time_left.prepend('<a href="/item/' + item.attr('item-id') + '" class="danpin" target="_blank"></a>')
+                .next('p').prepend('<span>小编： </span>')
+                .before('<h4 class="sns-share">分享：' + Izheko.SnsShareLib.icons_b + '</h4>');
             item.attr('x', 'o');
         }
         Izheko.TimeLeftUpdate.start(time_left.children('span'));
@@ -32,14 +32,15 @@ Izheko.lazy_img = (function(){
     var load_img = function(n){
             var item = $('#item' + n);
             if (item.length === 0) return;
+            var numiid = item.attr('item-id');
             var title = item.children('h1');
-            var numiid = title.children('a[data-itemid]').attr('data-itemid');
-            if (!numiid) return;
+            var href = title.children('a:last-child').attr('href');
+            if (!href) return;
             var img = $('<img/>').load(function(){
                 $(this).parent().parent().css('background-image', 'none');
             });
             title.before(
-                $('<a class="pic" data-itemid="' + numiid + '" href="#" target="_blank"></a>').prepend(img)
+                $('<a class="pic" href="' + href + '" target="_blank"></a>').prepend(img)
             ).css('margin-top', '0');
             var pic_url = item.attr('p') || 'http://static.izheko.cn/pic/' + numiid.substr(0, 4).split('').join('/') + '/' + numiid + '.jpg';
             img.attr('src', pic_url)
@@ -121,12 +122,11 @@ Izheko.TimeLeftUpdate = {
 Izheko.item_sns_share = function(){
     var $this = $(this);
     var item = $this.closest('.item');
-    var title = item.children('h1');
     Izheko.SnsShareLib.share($this, 
-            'http://' + location.host + '/item/' + title.children('a:nth-child(2)').attr('data-itemid'),
-            title.text(),
+            'http://' + location.host + '/item/' + item.attr('item-id'),
+            item.children('h1').text(),
             item.find('.pic').children('img').attr('src')
-            );
+    );
 };
 
 Izheko.taobao_search = function(word){
