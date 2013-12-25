@@ -75,13 +75,17 @@ Izheko.lazy_img = (function(){
         first_row_top -= 12;
         load_imgs_in_viewport();
     }
-    var timer;
-    $c.scroll(function(){
-        if (timer) clearTimeout(timer);
-        setTimeout(load_imgs_in_viewport, 1000);
-    }).resize(init_row_model);
 
-    return init_row_model;
+    return function(){
+        if (first_row_top === undefined) {
+            var timer;
+            $c.scroll(function(){
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(load_imgs_in_viewport, 1000);
+            }).resize(init_row_model);
+        }
+        init_row_model();
+    };
 })();
 
 Izheko.TimeLeftUpdate = {
