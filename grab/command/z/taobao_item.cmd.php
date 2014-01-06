@@ -21,7 +21,7 @@ class TaobaoItemCmd
             echo "unknow action: $type\n";
             return;
         }
-        print_r($result);
+        var_dump($result);
     }
 }
 TaobaoItemCmd::start();
