@@ -25,7 +25,7 @@ class DetailPage
         $tmall = preg_match('#^http://detail.tmall.com/#', $url) ? true : false;
         $info['tmall'] = $tmall;
 
-        $title = $response->query('//div[@id="detail"]//div[@class="tb-detail-hd"]//h3')->item(0);
+        $title = $response->query('//div[@id="detail"]//div[@class="tb-detail-hd" or @class="tb-detail-bd tb-clear"]//h3')->item(0);
         if ($title) $info['title'] = trim($title->nodeValue);
         $pic = $response->query('//*[@id="J_ImgBooth"]')->item(0);
         
